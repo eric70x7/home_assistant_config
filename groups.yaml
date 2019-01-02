@@ -1,0 +1,54 @@
+current_weather:
+  name: Current Weather
+  entities:
+    - sun.sun
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_wind_speed
+
+erics_phone:
+  name: Eric's Phone
+  entities:
+    - sensor.jonese_battery_level
+    - sensor.jonese_battery_state
+
+energy_usage:
+  name: Home Energy Usage
+  entities:
+    - sensor.energy_usage
+    - sensor.daily_usage
+    - sensor.weekly_usage
+    - sensor.monthly_usage
+    - sensor.yearly_usage
+
+energy_devices:
+  name: Home Energy Devices
+  entities:
+    - binary_sensor.always_on
+    - binary_sensor.coffee_maker
+    - binary_sensor.heat_3
+    - binary_sensor.fridge
+    - binary_sensor.dryer
+    - binary_sensor.big_garage_door
+    - binary_sensor.samsung_tv
+    - binary_sensor.heat_2
+    - binary_sensor.microwave
+    - binary_sensor.laser_printer
+    - binary_sensor.ac
+    - binary_sensor.other
+    - binary_sensor.blow_dryer
+    - binary_sensor.light_1
+    - binary_sensor.hvac_fan
+
+default_view:
+  name: Home
+  view: yes
+  entities:
+    - group.current_weather
+    - group.erics_phone
+
+energy:
+  view: yes
+  entities:
+    - group.energy_usage
+    - group.energy_devices

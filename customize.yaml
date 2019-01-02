@@ -1,0 +1,25 @@
+zone.home:
+  hidden: true
+  latitude: 33.4484
+
+sensor.dark_sky_summary:
+  friendly_name: Current
+
+sensor.dark_sky_temperature:
+  friendly_name: Current Temp
+
+sensor.dark_sky_wind_speed:
+  friendly_name: Current Wind
+
+# We don't have solar
+sensor.energy_production:
+  hidden: True
+sensor.daily_production:
+  hidden: True
+sensor.weekly_production:
+  hidden: True
+sensor.monthly_production:
+  hidden: True
+sensor.yearly_production:
+  hidden: True
+
