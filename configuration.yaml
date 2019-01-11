@@ -1,13 +1,13 @@
 homeassistant:
   # Name of the location where Home Assistant is running
-  name: Home
+  name: !secret home_name
 
   # Location required to calculate the time the sun rises and sets
-  latitude: 33.729467899999996
-  longitude: -112.1806141
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
 
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 445.008
+  elevation: !secret home_elevation
 
   # metric for Metric, imperial for Imperial
   unit_system: imperial
@@ -15,15 +15,8 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Phoenix
 
-#  auth_providers:
-#    - type: homeassistant
-#    - type: legacy_api_password
-
   # Customization file
   customize: !include customize.yaml
-
-# Show links to resources in log and frontend
-# introduction:
 
 # Enables the frontend
 frontend:
@@ -31,27 +24,7 @@ frontend:
 # Enables configuration UI
 config:
 
-duckdns:
-  domain: eric70x7
-  access_token: !secret duckdns_token
-
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-http:
-  # api_password: !secret http_password
-  server_port: !secret server_port
-  ssl_certificate: /etc/letsencrypt/live/eric70x7.duckdns.org/fullchain.pem
-  ssl_key: /etc/letsencrypt/live/eric70x7.duckdns.org/privkey.pem
-  base_url: eric70x7.duckdns.org
-  trusted_networks:
-    - 192.168.0.0/24
-  ip_ban_enabled: True
-  login_attempts_threshold: 5
-
 # Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   include_used_components: true
@@ -74,18 +47,6 @@ map:
 # Track the sun
 sun:
 
-# Sensors
-sensor:
-  # Weather prediction
-  - platform: darksky
-    api_key: !secret darksky_key
-#    forecast:
-#      - 0
-    monitored_conditions:
-      - summary
-      - temperature
-      - wind_speed
-
 # Text to speech
 tts:
   - platform: google
@@ -105,6 +66,16 @@ sense:
   email: !secret sense_email
   password: !secret sense_password
 
+# DNS service
+duckdns:
+  domain: eric70x7
+  access_token: !secret duckdns_token
+
+# Wink
+wink:
+
+http: !include http.yaml
+sensor: !include_dir_merge_list sensors/
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

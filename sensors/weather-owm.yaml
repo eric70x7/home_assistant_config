@@ -1,0 +1,19 @@
+# Weather prediction
+- platform: openweathermap
+  api_key: !secret openweathermap_key
+  monitored_conditions:
+    - weather
+    - temperature
+    - wind_speed
+    - wind_bearing
+
+# Unit conversions
+- platform: template
+  sensors:
+    owm_wind_mph:
+      friendly_name: OWM Wind Speed
+      unit_of_measurement: 'mph'
+      icon_template: "mdi:weather-windy"
+      value_template: "{{ (states('sensor.owm_wind_speed') | float) * 2.23694 }}"
+
+

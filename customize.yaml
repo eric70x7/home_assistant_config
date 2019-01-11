@@ -11,6 +11,12 @@ sensor.dark_sky_temperature:
 sensor.dark_sky_wind_speed:
   friendly_name: Current Wind
 
+sensor.owm_wind_speed:
+  icon: "mdi:weather-windy"
+
+sensor.owm_wind_bearing:
+  icon: "mdi:compass-outline"
+
 # We don't have solar
 sensor.energy_production:
   hidden: True
@@ -22,4 +28,3 @@ sensor.monthly_production:
   hidden: True
 sensor.yearly_production:
   hidden: True
-

@@ -1,0 +1,30 @@
+# Climate sensors from Sensi
+- platform: template
+  sensors:
+    upstairs_temp:
+      friendly_name: Upstairs Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.upstairs', 'current_temperature') }}"
+    upstairs_setpoint:
+      friendly_name: Upstairs Setpoint
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.upstairs', 'temperature') }}"
+    upstairs_humidity:
+      friendly_name: Upstairs Humidity
+      unit_of_measurement: '%'
+      icon_template: "mdi:water-percent"
+      value_template: "{{ state_attr('climate.upstairs', 'current_humidity') }}"
+    downstairs_temp:
+      friendly_name: Downstairs Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.downstairs', 'current_temperature') }}"
+    downstairs_setpoint:
+      friendly_name: Downstairs Setpoint
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.downstairs', 'temperature') }}"
+    downstairs_humidity:
+      friendly_name: Downstairs Humidity
+      unit_of_measurement: '%'
+      icon_template: "mdi:water-percent"
+      value_template: "{{ state_attr('climate.downstairs', 'current_humidity') }}"
+

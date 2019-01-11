@@ -1,0 +1,51 @@
+# Energy demands
+# See: https://www.home-assistant.io/components/sensor.filter
+
+# 1 hour
+- platform: filter
+  name: "1 hr usage"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 01:00
+      precision: 2
+- platform: template
+  sensors:
+    1_hr_demand:
+      friendly_name: 1 Hr Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.1_hr_usage') | float)/1000 }}"
+
+# 15 minute
+- platform: filter
+  name: "15 min usage"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:15
+      precision: 2
+- platform: template
+  sensors:
+    15_min_demand:
+      friendly_name: 15 Min Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.15_min_usage') | float)/1000 }}"
+
+# 5 minute
+- platform: filter
+  name: "5 min usage"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:05
+      precision: 2
+- platform: template
+  sensors:
+    5_min_demand:
+      friendly_name: 5 Min Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.5_min_usage') | float)/1000 }}"
+
