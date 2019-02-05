@@ -10,11 +10,12 @@ current_weather:
     - sensor.dark_sky_wind_speed
 
 owm_weather:
-  name: Current OpenWeatherMap Weather
+  name: Current Weather
   entities:
+    - sun.sun
     - sensor.owm_condition
-    - sensor.owm_temperature
-    - sensor.owm_wind_mph
+    - sensor.smooth_owm_temperature
+    - sensor.smooth_owm_wind_mph
     - sensor.owm_wind_bearing
 
 erics_phone:
@@ -73,9 +74,15 @@ default_view:
   name: Home
   view: yes
   entities:
-    - group.current_weather
+    - climate.upstairs
+    - climate.downstairs
     - group.owm_weather
-    - group.erics_phone
+
+weather:
+  name: Weather
+  view: yes
+  entities:
+    - group.owm_weather
 
 climate:
   name: Climate

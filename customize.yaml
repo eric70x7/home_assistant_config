@@ -1,7 +1,8 @@
 zone.home:
   hidden: true
-  latitude: 33.4484
+  latitude: !secret home_latitude
 
+# friendlier names
 sensor.dark_sky_summary:
   friendly_name: Current
 
@@ -11,11 +12,12 @@ sensor.dark_sky_temperature:
 sensor.dark_sky_wind_speed:
   friendly_name: Current Wind
 
-sensor.owm_wind_speed:
-  icon: "mdi:weather-windy"
-
 sensor.owm_wind_bearing:
   icon: "mdi:compass-outline"
+  friendly_name: Wind Bearing
+
+sensor.owm_condition:
+  friendly_name: Current
 
 # We don't have solar
 sensor.energy_production:
@@ -27,4 +29,14 @@ sensor.weekly_production:
 sensor.monthly_production:
   hidden: True
 sensor.yearly_production:
+  hidden: True
+
+# Intermediate values
+sensor.owm_temperature:
+  hidden: True
+sensor.owm_temperature_filter:
+  hidden: True
+sensor.owm_wind_speed:
+  hidden: True
+sensor.owm_wind_speed_filter:
   hidden: True

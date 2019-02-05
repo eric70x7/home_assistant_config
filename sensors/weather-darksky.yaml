@@ -1,7 +1,7 @@
 # Darksky weather service
-- platform: darksky
-  api_key: !secret darksky_key
-  monitored_conditions:
-    - summary
-    - temperature
-    - wind_speed
+#- platform: darksky
+#  api_key: !secret darksky_key
+#  monitored_conditions:
+#    - summary
+#    - temperature
+#    - wind_speed

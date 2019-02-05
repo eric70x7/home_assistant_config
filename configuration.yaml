@@ -51,6 +51,9 @@ sun:
 tts:
   - platform: google
 
+# Python
+python_script:
+
 # Cloud
 cloud:
 
