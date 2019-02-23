@@ -1,8 +1,9 @@
 # server settings
-server_port: !secret server_port
-ssl_certificate: /etc/letsencrypt/live/eric70x7.duckdns.org/fullchain.pem
-ssl_key: /etc/letsencrypt/live/eric70x7.duckdns.org/privkey.pem
-base_url: eric70x7.duckdns.org
+# server_port: !secret server_port
+ssl_certificate: /home/homeassistant/dehydrated/certs/eric70x7.duckdns.org/fullchain.pem
+ssl_key: /home/homeassistant/dehydrated/certs/eric70x7.duckdns.org/privkey.pem
+base_url: https://eric70x7.duckdns.org:8123
+
 trusted_networks:
   - 192.168.0.0/16
 ip_ban_enabled: True
