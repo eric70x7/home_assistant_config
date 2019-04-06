@@ -1,0 +1,48 @@
+# Ambient weather station and temperatures
+# see https://www.home-assistant.io/components/ambient_station/
+
+- platform: ambient_station
+  api_key: !secret ambient_api_key
+  app_key: !secret ambient_app_key
+  monitored_conditions:
+    - temp1f
+    - temp2f
+    - temp3f
+    - tempf
+    - humidity
+    - windspdmph_avg2m
+    - battout
+    - batt1
+    - batt2
+    - batt3
+    
+- platform: template
+  sensors:
+    downstairs_temperature:
+      friendly_name: Downstairs Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_1') }}"
+    upstairs_temperature:
+      friendly_name: Upstairs Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_2') }}"
+    backyard_temperature:
+      friendly_name: Backyard Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.stetson_jones_temp') }}"
+    backyard_humidity:
+      friendly_name: Backyard Humidity
+      unit_of_measurement: '%'
+      value_template: "{{ states('sensor.stetson_jones_humidity') }}"
+    backyard_wind_speed:
+      friendly_name: Backyard Wind Speed
+      unit_of_measurement: 'mph'
+      value_template: "{{ states('sensor.stetson_jones_wind_speed') }}"
+    backyard_wind_gust:
+      friendly_name: Backyard Wind Gust
+      unit_of_measurement: 'mph'
+      value_template: "{{ states('sensor.stetson_jones_wind_gust') }}"
+    backyard_solar:
+      friendly_name: Backyard Solar Radiation
+      unit_of_measurement: 'W/m^2'
+      value_template: "{{ states('sensor.stetson_jones_solar_rad') }}"

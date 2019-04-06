@@ -1,6 +1,16 @@
 ########################################################
 # Groups
 
+climate_energy:
+  name: Climate/Energy
+  entities:
+    - history_graph.upstairs
+    - history_graph.downstairs
+    - history_graph.demand
+    - input_number.kwh_limit
+    - input_number.hi_temp
+    - input_number.target_temp
+    
 current_weather:
   name: Current Weather
   entities:
@@ -9,14 +19,15 @@ current_weather:
     - sensor.dark_sky_temperature
     - sensor.dark_sky_wind_speed
 
-owm_weather:
+backyard_weather:
   name: Current Weather
   entities:
     - sun.sun
-    - sensor.owm_condition
-    - sensor.smooth_owm_temperature
-    - sensor.smooth_owm_wind_mph
-    - sensor.owm_wind_bearing
+    - sensor.backyard_solar
+    - sensor.backyard_temperature
+    - sensor.backyard_humidity
+    - sensor.backyard_wind_speed
+    - sensor.backyard_wind_gust
 
 erics_phone:
   name: Eric's Phone
@@ -36,27 +47,33 @@ energy_devices:
   name: Home Energy Devices
   entities:
     - binary_sensor.always_on
-    - binary_sensor.coffee_maker
-    - binary_sensor.heat_3
-    - binary_sensor.fridge
-    - binary_sensor.dryer
-    - binary_sensor.big_garage_door
-    - binary_sensor.samsung_tv
-    - binary_sensor.heat_2
-    - binary_sensor.microwave
-    - binary_sensor.laser_printer
     - binary_sensor.ac
-    - binary_sensor.other
-    - binary_sensor.blow_dryer
-    - binary_sensor.light_1
     - binary_sensor.hvac_fan
+    - binary_sensor.ac_2
+    - binary_sensor.ac_fan
+    - binary_sensor.heat_2
+    - binary_sensor.heat_3
+    - binary_sensor.coffee_maker
+    - binary_sensor.dishwasher
+    - binary_sensor.dishwasher_2
+    - binary_sensor.microwave
+    - binary_sensor.oven
+    - binary_sensor.washer
+    - binary_sensor.dryer
+    - binary_sensor.freezer
+    - binary_sensor.vacuum
+    - binary_sensor.vacuum_2
+    - binary_sensor.big_garage_door
+    - binary_sensor.big_garage_lights
+    - binary_sensor.laser_printer
+    - binary_sensor.blow_dryer
 
 upstairs_climate:
   name: Upstairs climate
   entities:
     - climate.upstairs
     - sensor.upstairs_setpoint
-    - sensor.upstairs_temp
+    - sensor.upstairs_temperature
     - sensor.upstairs_humidity
 
 downstairs_climate:
@@ -64,7 +81,7 @@ downstairs_climate:
   entities:
     - climate.downstairs
     - sensor.downstairs_setpoint
-    - sensor.downstairs_temp
+    - sensor.downstairs_temperature
     - sensor.downstairs_humidity
 
 ########################################################
@@ -76,13 +93,19 @@ default_view:
   entities:
     - climate.upstairs
     - climate.downstairs
-    - group.owm_weather
-
+    - group.backyard_weather
+    
+control:
+  name: Control
+  view: yes
+  entities:
+    - group.climate_energy
+    
 weather:
   name: Weather
   view: yes
   entities:
-    - group.owm_weather
+    - group.backyard_weather
 
 climate:
   name: Climate

@@ -48,4 +48,4 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: "{{ (states('sensor.5_min_usage') | float)/1000 }}"
-
+      

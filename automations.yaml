@@ -1,1 +1,9 @@
-[]
+# load controller
+- id: energy_update
+  alias: "energy_update"
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+  action:
+    service: python_script.load_control
+    

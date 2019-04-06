@@ -31,6 +31,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - directv
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -40,6 +42,12 @@ history:
 
 # View all events in a logbook
 logbook:
+
+# Log levels
+logger:
+  default: critical
+  logs:
+    homeassistant.components.python_script: info
 
 # Enables a map showing the location of tracked devices
 map:
@@ -77,8 +85,62 @@ duckdns:
 # Wink
 wink:
 
+system_health:
+
+#media_player:
+#  - platform: directv
+#    host: 192.168.0.61
+#    port: 8080
+#    name: DirecTV DVR
+#    device: 0
+    
+history_graph:
+  gr1:
+    name: Upstairs
+    entities:
+      - sensor.upstairs_temperature
+      - sensor.upstairs_setpoint
+      - sensor.upstairs_cooling
+    hours_to_show: 6
+  gr2:
+    name: Downstairs
+    entities:
+      - sensor.downstairs_temperature
+      - sensor.downstairs_setpoint
+      - sensor.downstairs_cooling
+    hours_to_show: 6
+  gr3:
+    name: Demand
+    entities:
+      - sensor.5_min_demand
+      - sensor.15_min_demand
+      - sensor.1_hr_demand
+      - sensor.backyard_temperature
+    hours_to_show: 6
+
+input_number:
+  kwh_limit:
+    name: Demand Limit
+    initial: 2.0
+    min: 0.5
+    max: 5.0
+    step: 0.1
+  hi_temp:
+    name: High Temperature Limit
+    initial: 80
+    min: 65
+    max: 85
+    step: 1
+  target_temp:
+    name: Target Temperature
+    initial: 70
+    min: 65
+    max: 85
+    step: 1
+
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+
