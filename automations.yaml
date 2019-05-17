@@ -1,9 +1,53 @@
-# load controller
 - id: energy_update
-  alias: "energy_update"
+  alias: energy_update
   trigger:
-    - platform: time_pattern
-      minutes: '/5'
+  - platform: time_pattern
+    minutes: /10
+  condition:
+  - condition: time
+    after: '15:09:00'
+    before: '19:59:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: python_script.load_control
-    
+    data_template:
+      debug: 0
+- id: precool
+  alias: precool
+  trigger:
+  - platform: time
+    at: '14:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: python_script.precool
+    data_template:
+      debug: 0
+- id: target_temp
+  alias: target_temp
+  trigger:
+  - platform: time
+    at: '20:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: python_script.target_temp
+    data_template:
+      debug: 0

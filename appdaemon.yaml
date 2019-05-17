@@ -1,0 +1,10 @@
+appdaemon:
+  threads: 10
+  plugins:
+    HASS:
+      type: hass
+      ha_url: https://eric70x7.duckdns.org:8123
+      token: !secret appdaemon_token
+      app_dir: /home/homeassistant/home_assistant_config/apps
+log:
+  logfile: /home/homeassistant/home_assistant_config/appdaemon.log

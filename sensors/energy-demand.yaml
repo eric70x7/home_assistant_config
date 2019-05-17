@@ -17,35 +17,50 @@
       icon_template: "mdi:flash"
       value_template: "{{ (states('sensor.1_hr_usage') | float)/1000 }}"
 
-# 15 minute
+# Medium time
 - platform: filter
-  name: "15 min usage"
+  name: "Medium usage"
   entity_id: sensor.energy_usage
   filters:
     - filter: time_simple_moving_average
-      window_size: 00:15
+      window_size: 00:20
       precision: 2
 - platform: template
   sensors:
-    15_min_demand:
-      friendly_name: 15 Min Demand
+    medium_demand:
+      friendly_name: 20 Min Demand
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
-      value_template: "{{ (states('sensor.15_min_usage') | float)/1000 }}"
+      value_template: "{{ (states('sensor.medium_usage') | float)/1000 }}"
 
-# 5 minute
+# Medium time
 - platform: filter
-  name: "5 min usage"
+  name: "Medium long usage"
   entity_id: sensor.energy_usage
   filters:
     - filter: time_simple_moving_average
-      window_size: 00:05
+      window_size: 00:40
       precision: 2
 - platform: template
   sensors:
-    5_min_demand:
-      friendly_name: 5 Min Demand
+    medium_long_demand:
+      friendly_name: 40 Min Demand
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
-      value_template: "{{ (states('sensor.5_min_usage') | float)/1000 }}"
-      
+      value_template: "{{ (states('sensor.medium_long_usage') | float)/1000 }}"
+
+# Fast time
+- platform: filter
+  name: "Fast usage"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:10
+      precision: 2
+- platform: template
+  sensors:
+    fast_demand:
+      friendly_name: 10 Min Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.fast_usage') | float)/1000 }}"

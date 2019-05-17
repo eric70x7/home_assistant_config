@@ -1,18 +1,28 @@
 ########################################################
 # Groups
 
-climate_energy:
-  name: Climate/Energy
+climate_energy_status:
+  name: Climate/Energy Status
+  control: hidden
   entities:
     - history_graph.upstairs
     - history_graph.downstairs
     - history_graph.demand
+
+climate_energy_control:
+  name: Climate/Energy Control
+  control: hidden
+  entities:
     - input_number.kwh_limit
     - input_number.hi_temp
     - input_number.target_temp
+    - input_number.precool_temp
+    - input_number.upstairs_setpoint
+    - input_number.downstairs_setpoint
     
 current_weather:
   name: Current Weather
+  control: hidden
   entities:
     - sun.sun
     - sensor.dark_sky_summary
@@ -21,6 +31,7 @@ current_weather:
 
 backyard_weather:
   name: Current Weather
+  control: hidden
   entities:
     - sun.sun
     - sensor.backyard_solar
@@ -31,20 +42,25 @@ backyard_weather:
 
 erics_phone:
   name: Eric's Phone
+  control: hidden
   entities:
     - sensor.jonese_battery_level
     - sensor.jonese_battery_state
 
 energy_usage:
   name: Home Energy Usage
+  control: hidden
   entities:
     - sensor.energy_usage
-    - sensor.5_min_demand
-    - sensor.15_min_demand
+    - sensor.fast_demand
+    - sensor.medium_demand
+    - sensor.medium_long_demand
     - sensor.1_hr_demand
+    - history_graph.detailed_demand
 
 energy_devices:
   name: Home Energy Devices
+  control: hidden
   entities:
     - binary_sensor.always_on
     - binary_sensor.ac
@@ -70,6 +86,7 @@ energy_devices:
 
 upstairs_climate:
   name: Upstairs climate
+  control: hidden
   entities:
     - climate.upstairs
     - sensor.upstairs_setpoint
@@ -78,6 +95,7 @@ upstairs_climate:
 
 downstairs_climate:
   name: Downstairs climate
+  control: hidden
   entities:
     - climate.downstairs
     - sensor.downstairs_setpoint
@@ -96,10 +114,21 @@ default_view:
     - group.backyard_weather
     
 control:
-  name: Control
+  name: Load Status
   view: yes
   entities:
-    - group.climate_energy
+    - group.climate_energy_status
+    
+energy:
+  view: yes
+  entities:
+    - group.energy_usage
+
+energy_control:
+  name: Energy control
+  view: yes
+  entities:
+    - group.climate_energy_control
     
 weather:
   name: Weather
@@ -114,8 +143,3 @@ climate:
     - group.upstairs_climate
     - group.downstairs_climate
 
-energy:
-  view: yes
-  entities:
-    - group.energy_usage
-    - group.energy_devices

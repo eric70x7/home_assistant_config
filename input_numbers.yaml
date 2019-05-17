@@ -1,0 +1,36 @@
+kwh_limit:
+  name: Demand Limit
+  unit_of_measurement: 'kWh'
+  min: 0.5
+  max: 5.0
+  step: 0.1
+hi_temp:
+  name: High Temperature Limit
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+target_temp:
+  name: Target Temperature
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+precool_temp:
+  name: Precool Temperature
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+upstairs_setpoint:
+  name: Saved US Setpoint
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+downstairs_setpoint:
+  name: Saved DS Setpoint
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1

@@ -57,7 +57,8 @@ sun:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Python
 python_script:
@@ -87,57 +88,8 @@ wink:
 
 system_health:
 
-#media_player:
-#  - platform: directv
-#    host: 192.168.0.61
-#    port: 8080
-#    name: DirecTV DVR
-#    device: 0
-    
-history_graph:
-  gr1:
-    name: Upstairs
-    entities:
-      - sensor.upstairs_temperature
-      - sensor.upstairs_setpoint
-      - sensor.upstairs_cooling
-    hours_to_show: 6
-  gr2:
-    name: Downstairs
-    entities:
-      - sensor.downstairs_temperature
-      - sensor.downstairs_setpoint
-      - sensor.downstairs_cooling
-    hours_to_show: 6
-  gr3:
-    name: Demand
-    entities:
-      - sensor.5_min_demand
-      - sensor.15_min_demand
-      - sensor.1_hr_demand
-      - sensor.backyard_temperature
-    hours_to_show: 6
-
-input_number:
-  kwh_limit:
-    name: Demand Limit
-    initial: 2.0
-    min: 0.5
-    max: 5.0
-    step: 0.1
-  hi_temp:
-    name: High Temperature Limit
-    initial: 80
-    min: 65
-    max: 85
-    step: 1
-  target_temp:
-    name: Target Temperature
-    initial: 70
-    min: 65
-    max: 85
-    step: 1
-
+history_graph: !include history_graphs.yaml
+input_number: !include input_numbers.yaml
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 group: !include groups.yaml

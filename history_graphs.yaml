@@ -1,0 +1,32 @@
+gr1:
+  name: Upstairs
+  entities:
+    - sensor.upstairs_temperature
+    - sensor.upstairs_setpoint
+    - sensor.upstairs_cooling
+  refresh: 60
+  hours_to_show: 24
+gr2:
+  name: Downstairs
+  entities:
+    - sensor.downstairs_temperature
+    - sensor.downstairs_setpoint
+    - sensor.downstairs_cooling
+  refresh: 60
+  hours_to_show: 24
+gr3:
+  name: Demand
+  entities:
+    - sensor.1_hr_demand
+    - sensor.backyard_temperature
+  refresh: 60
+  hours_to_show: 24
+gr4:
+  name: Detailed Demand
+  entities:
+    - sensor.fast_demand
+    - sensor.medium_demand
+    - sensor.medium_long_demand
+    - sensor.1_hr_demand
+  refresh: 60
+  hours_to_show: 8

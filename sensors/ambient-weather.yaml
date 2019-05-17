@@ -8,6 +8,8 @@
     - temp1f
     - temp2f
     - temp3f
+    - temp4f
+    - temp5f
     - tempf
     - humidity
     - windspdmph_avg2m
@@ -15,17 +17,31 @@
     - batt1
     - batt2
     - batt3
+    - batt4
+    - batt5
     
 - platform: template
   sensors:
-    downstairs_temperature:
-      friendly_name: Downstairs Temperature
-      unit_of_measurement: '°F'
-      value_template: "{{ states('sensor.ambient_temp_1') }}"
     upstairs_temperature:
       friendly_name: Upstairs Temperature
       unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_1') }}"
+    downstairs_temperature:
+      friendly_name: Downstairs Temperature
+      unit_of_measurement: '°F'
       value_template: "{{ states('sensor.ambient_temp_2') }}"
+    front_room_temperature:
+      friendly_name: Front Room Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_3') }}"
+    garage_temperature:
+      friendly_name: Garage Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_4') }}"
+    master_temperature:
+      friendly_name: Master BR Temperature
+      unit_of_measurement: '°F'
+      value_template: "{{ states('sensor.ambient_temp_5') }}"
     backyard_temperature:
       friendly_name: Backyard Temperature
       unit_of_measurement: '°F'
