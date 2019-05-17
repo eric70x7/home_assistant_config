@@ -2,25 +2,6 @@
 # load_control.py
 #
 
-#
-# Set the temperature and update the saved setpoint
-#
-def set_temp(name, saved, hass, logger, debug, setpoint):
-    if not debug:
-        # Make the adjustment
-        new_setpoint = setpoint
-        setpoint_arg = {'entity_id': saved,
-                        'value': new_setpoint}
-        hass.services.call('input_number', 'set_value', setpoint_arg)
-        logger.info('{} set to {}'.format(saved, new_setpoint))
-        new_setpoint_arg = {'entity_id': name, 'temperature': new_setpoint}
-        hass.services.call('climate', 'set_temperature', new_setpoint_arg)
-        saved_setpoint = new_setpoint
-        logger.info('{} set to {}'.format(name, saved_setpoint))
-        # hass.services.call('wink','refresh_state_from_wink',{})
-    else:
-        logger.info("Debug mode. No change made.")
-    
 def min(x,y):
     if x < y:
         return x
@@ -34,24 +15,37 @@ def max(x,y):
 #
 # Get the temperature but use the saved setpoint if there is a mismatch
 #
-def get_setpoint(name, saved, hass, logger):
-    saved_setpoint = int(float(hass.states.get(saved).state)) # 70
-    current_setpoint = hass.states.get(name).attributes['temperature']
-    if saved_setpoint <= 65:
-        logger.info("Initializing {} to {}.".format(name, current_setpoint))
-        # set input_number here
-        new_setpoint=current_setpoint
-        setpoint_arg = {'entity_id': saved,
-                        'value': new_setpoint}
-        hass.services.call('input_number', 'set_value', setpoint_arg)
-        saved_setpoint = new_setpoint
-        logger.info('{} set to {}'.format(saved, new_setpoint))
-        # end set input_number
-    elif saved_setpoint != current_setpoint:
-        # check for initialization
-        logger.warn("Saved temp for {} {} but current {}.".format(name,
-                                                                  saved_setpoint,
-                                                                  current_setpoint))
+def get_setpoint(location, hass, logger):
+    good=0
+    if location == 'upstairs':
+        name = 'climate.upstairs'
+        saved = 'input_number.upstairs_setpoint'
+        good=1
+    elif location == 'downstairs':
+        name = 'climate.downstairs'
+        saved = 'input_number.downstairs_setpoint'
+        good=1
+    else:
+        logger.error("Set temperature called for bad location {}.".format(location))
+
+    if good:
+        saved_setpoint = int(float(hass.states.get(saved).state)) # 70
+        current_setpoint = hass.states.get(name).attributes['temperature']
+        if saved_setpoint <= 65:
+            logger.info("Initializing {} to {}.".format(name, current_setpoint))
+            # set input_number here
+            new_setpoint=current_setpoint
+            setpoint_arg = {'entity_id': saved,
+                            'value': new_setpoint}
+            hass.services.call('input_number', 'set_value', setpoint_arg)
+            saved_setpoint = new_setpoint
+            logger.info('{} set to {}'.format(saved, new_setpoint))
+            # end set input_number
+        elif saved_setpoint != current_setpoint:
+            # check for initialization
+            logger.warn("Saved temp for {} {} but current {}.".format(name,
+                                                                      saved_setpoint,
+                                                                      current_setpoint))
     return saved_setpoint
     
 #
@@ -59,15 +53,6 @@ def get_setpoint(name, saved, hass, logger):
 #
 # debug mode is default
 debug = int(data.get('debug', 1))
-
-precool_temp = int(float(hass.states.get('input_number.precool_temp').state)) # 70
-target_hi = int(float(hass.states.get('input_number.hi_temp').state)) # 80
-target_temp = int(float(hass.states.get('input_number.target_temp').state)) # 70
-
-downstairs='climate.downstairs'
-ds = hass.states.get(downstairs)
-upstairs='climate.upstairs'
-us = hass.states.get(upstairs)
     
 kWH_limit = float(hass.states.get('input_number.kwh_limit').state) # 2.0
 
@@ -80,8 +65,8 @@ demand_10 = float(hass.states.get('sensor.fast_demand').state)
 logger.info("limit: {:.2f}, demand: 60: {:.2f}, 40: {:.2f}, 20: {:.2f}, 10: {:.2f}".format(kWH_limit, demand_60,demand_40,demand_20,demand_10))
 
 # Get thermostat settings
-us_setpoint=get_setpoint(upstairs,'input_number.upstairs_setpoint',hass,logger)
-ds_setpoint=get_setpoint(downstairs,'input_number.downstairs_setpoint',hass,logger)
+us_setpoint=get_setpoint('upstairs',hass,logger)
+ds_setpoint=get_setpoint('downstairs',hass,logger)
 
 logger.info("current setpoints: ds {}, us {}".format(ds_setpoint, us_setpoint))
 
@@ -109,12 +94,14 @@ else:
     # adjust one thermostat at a time, keeping the upstairs higher or equal
     if delta_t > 0:
         # Increment but not past the target_hi
+        target_hi = int(float(hass.states.get('input_number.hi_temp').state)) # 80
         if us_setpoint > ds_setpoint:
             new_ds_setpoint = min(ds_setpoint + delta_t, target_hi)
         else:
             new_us_setpoint = min(us_setpoint + delta_t, target_hi)
     else:
         # Decrement but not below the target_temp
+        target_temp = int(float(hass.states.get('input_number.target_temp').state)) # 70
         if us_setpoint > ds_setpoint:
             new_us_setpoint = max(us_setpoint + delta_t, target_temp)
         else:
@@ -122,15 +109,11 @@ else:
 
     logger.info("New settings: ds {}, us {}".format(new_ds_setpoint, new_us_setpoint))
 
-    set_temp(upstairs,
-             'input_number.upstairs_setpoint',
-             hass,
-             logger,
-             debug,
-             new_us_setpoint)
-    set_temp(downstairs,
-             'input_number.downstairs_setpoint',
-             hass,
-             logger,
-             debug,
-             new_ds_setpoint)
+    # Set the new temperatures
+    hass.services.call('python_script','set_temp',{'location':'upstairs',
+                                                   'setpoint':new_us_setpoint,
+                                                   'debug':debug})
+
+    hass.services.call('python_script','set_temp',{'location':'downstairs',
+                                                   'setpoint':new_ds_setpoint,
+                                                   'debug':debug})

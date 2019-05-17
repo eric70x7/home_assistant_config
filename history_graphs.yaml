@@ -1,7 +1,7 @@
 gr1:
   name: Upstairs
   entities:
-    - sensor.upstairs_temperature
+    - sensor.ambient_temp_1
     - sensor.upstairs_setpoint
     - sensor.upstairs_cooling
   refresh: 60
@@ -9,7 +9,7 @@ gr1:
 gr2:
   name: Downstairs
   entities:
-    - sensor.downstairs_temperature
+    - sensor.ambient_temp_2
     - sensor.downstairs_setpoint
     - sensor.downstairs_cooling
   refresh: 60
@@ -18,7 +18,7 @@ gr3:
   name: Demand
   entities:
     - sensor.1_hr_demand
-    - sensor.backyard_temperature
+    - sensor.stetson_jones_temp
   refresh: 60
   hours_to_show: 24
 gr4:
@@ -30,3 +30,16 @@ gr4:
     - sensor.1_hr_demand
   refresh: 60
   hours_to_show: 8
+gr5:
+  name: Indoor Temps
+  entities:
+    - sensor.ambient_temp_1
+    - sensor.ambient_temp_2
+    - sensor.ambient_temp_3
+# garage    - sensor.ambient_temp_4
+    - sensor.ambient_temp_5
+    - sensor.ambient_temp_6
+    - sensor.ambient_temp_7
+    - sensor.ambient_temp_8
+  refresh: 60
+  hours_to_show: 24

@@ -1,49 +1,49 @@
-# Weather prediction
-- platform: openweathermap
-  api_key: !secret openweathermap_key
-  monitored_conditions:
-    - weather
-    - temperature
-    - wind_speed
-    - wind_bearing
-
-# Unit conversions
-- platform: template
-  sensors:
-    owm_wind_mph:
-      friendly_name: OWM Wind Speed
-      unit_of_measurement: 'mph'
-      icon_template: "mdi:weather-windy"
-      value_template: "{{ (states('sensor.owm_wind_speed') | float) * 2.23694 }}"
-
-# temperature filter
-- platform: filter
-  name: "owm temperature filter"
-  entity_id: sensor.owm_temperature
-  filters:
-    - filter: time_simple_moving_average
-      window_size: 00:05
-      precision: 2
-- platform: template
-  sensors:
-    smooth_owm_temperature:
-      friendly_name: Outside Temperature
-      unit_of_measurement: '°F'
-      icon_template: "mdi:thermometer"
-      value_template: "{{ states('sensor.owm_temperature_filter') }}"
-
-# wind speed filter
-- platform: filter
-  name: "owm wind mph filter"
-  entity_id: sensor.owm_wind_mph
-  filters:
-    - filter: time_simple_moving_average
-      window_size: 00:15
-      precision: 2
-- platform: template
-  sensors:
-    smooth_owm_wind_mph:
-      friendly_name: Wind Speed
-      unit_of_measurement: 'mph'
-      icon_template: "mdi:weather-windy"
-      value_template: "{{ states('sensor.owm_wind_mph_filter') }}"
+## Weather prediction
+#- platform: openweathermap
+#  api_key: !secret openweathermap_key
+#  monitored_conditions:
+#    - weather
+#    - temperature
+#    - wind_speed
+#    - wind_bearing
+#
+## Unit conversions
+#- platform: template
+#  sensors:
+#    owm_wind_mph:
+#      friendly_name: OWM Wind Speed
+#      unit_of_measurement: 'mph'
+#      icon_template: "mdi:weather-windy"
+#      value_template: "{{ (states('sensor.owm_wind_speed') | float) * 2.23694 }}"
+#
+## temperature filter
+#- platform: filter
+#  name: "owm temperature filter"
+#  entity_id: sensor.owm_temperature
+#  filters:
+#    - filter: time_simple_moving_average
+#      window_size: 00:05
+#      precision: 2
+#- platform: template
+#  sensors:
+#    smooth_owm_temperature:
+#      friendly_name: Outside Temperature
+#      unit_of_measurement: '°F'
+#      icon_template: "mdi:thermometer"
+#      value_template: "{{ states('sensor.owm_temperature_filter') }}"
+#
+## wind speed filter
+#- platform: filter
+#  name: "owm wind mph filter"
+#  entity_id: sensor.owm_wind_mph
+#  filters:
+#    - filter: time_simple_moving_average
+#      window_size: 00:15
+#      precision: 2
+#- platform: template
+#  sensors:
+#    smooth_owm_wind_mph:
+#      friendly_name: Wind Speed
+#      unit_of_measurement: 'mph'
+#      icon_template: "mdi:weather-windy"
+#      value_template: "{{ states('sensor.owm_wind_mph_filter') }}"

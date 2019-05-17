@@ -86,7 +86,13 @@ duckdns:
 # Wink
 wink:
 
+# Turn on system health monitor
 system_health:
+
+# limit the database size
+recorder:
+  purge_keep_days: 10
+  purge_interval: 1
 
 history_graph: !include history_graphs.yaml
 input_number: !include input_numbers.yaml
