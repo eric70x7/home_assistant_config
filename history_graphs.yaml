@@ -29,7 +29,7 @@ gr4:
     - sensor.medium_long_demand
     - sensor.1_hr_demand
   refresh: 60
-  hours_to_show: 8
+  hours_to_show: 24
 gr5:
   name: Indoor Temps
   entities:

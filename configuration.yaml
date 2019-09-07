@@ -33,6 +33,7 @@ updater:
 discovery:
   ignore:
     - directv
+    - igd
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:

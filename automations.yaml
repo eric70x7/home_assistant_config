@@ -1,3 +1,5 @@
+# disable until Sensi/Wink is more reliable
+
 - id: energy_update
   alias: energy_update
   trigger:
@@ -17,11 +19,12 @@
     service: python_script.load_control
     data_template:
       debug: 0
+
 - id: precool
   alias: precool
   trigger:
   - platform: time
-    at: '14:00'
+    at: '13:30'
   condition:
   - condition: time
     weekday:
@@ -34,6 +37,25 @@
     service: python_script.precool
     data_template:
       debug: 0
+
+- id: start_peak_time
+  alias: start_peak_time
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: python_script.target_temp
+    data_template:
+      debug: 0
+
 - id: target_temp
   alias: target_temp
   trigger:
@@ -50,4 +72,4 @@
   action:
     service: python_script.target_temp
     data_template:
-      debug: 0
+     debug: 0

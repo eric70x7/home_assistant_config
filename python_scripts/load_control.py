@@ -31,17 +31,17 @@ def get_setpoint(location, hass, logger):
     if good:
         saved_setpoint = int(float(hass.states.get(saved).state)) # 70
         current_setpoint = hass.states.get(name).attributes['temperature']
-        if saved_setpoint <= 65:
-            logger.info("Initializing {} to {}.".format(name, current_setpoint))
-            # set input_number here
-            new_setpoint=current_setpoint
-            setpoint_arg = {'entity_id': saved,
-                            'value': new_setpoint}
-            hass.services.call('input_number', 'set_value', setpoint_arg)
-            saved_setpoint = new_setpoint
-            logger.info('{} set to {}'.format(saved, new_setpoint))
-            # end set input_number
-        elif saved_setpoint != current_setpoint:
+        #if saved_setpoint <= 65:
+        #    logger.info("Initializing {} to {}.".format(name, current_setpoint))
+        #    # set input_number here
+        #    new_setpoint=current_setpoint
+        #    setpoint_arg = {'entity_id': saved,
+        #                    'value': new_setpoint}
+        #    hass.services.call('input_number', 'set_value', setpoint_arg)
+        #    saved_setpoint = new_setpoint
+        #    logger.info('{} set to {}'.format(saved, new_setpoint))
+        #    # end set input_number
+        if saved_setpoint != current_setpoint:
             # check for initialization
             logger.warn("Saved temp for {} {} but current {}.".format(name,
                                                                       saved_setpoint,
@@ -95,17 +95,17 @@ else:
     if delta_t > 0:
         # Increment but not past the target_hi
         target_hi = int(float(hass.states.get('input_number.hi_temp').state)) # 80
-        if us_setpoint > ds_setpoint:
-            new_ds_setpoint = min(ds_setpoint + delta_t, target_hi)
-        else:
+        if us_setpoint < ds_setpoint:
             new_us_setpoint = min(us_setpoint + delta_t, target_hi)
+        else:
+            new_ds_setpoint = min(ds_setpoint + delta_t, target_hi)
     else:
         # Decrement but not below the target_temp
         target_temp = int(float(hass.states.get('input_number.target_temp').state)) # 70
-        if us_setpoint > ds_setpoint:
-            new_us_setpoint = max(us_setpoint + delta_t, target_temp)
-        else:
+        if us_setpoint < ds_setpoint:
             new_ds_setpoint = max(ds_setpoint + delta_t, target_temp)
+        else:
+            new_us_setpoint = max(us_setpoint + delta_t, target_temp)
 
     logger.info("New settings: ds {}, us {}".format(new_ds_setpoint, new_us_setpoint))
 
