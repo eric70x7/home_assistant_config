@@ -90,7 +90,7 @@ wink:
 # Z-wave
 zwave:
   usb_path: /dev/ttyACM0
-  device_config: zwave.yaml
+  device_config: !include zwave.yaml
     
   # Turn on system health monitor
 system_health:
