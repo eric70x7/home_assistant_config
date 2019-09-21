@@ -1,20 +1,23 @@
 # disable until Sensi/Wink is more reliable
 
+#########################################################
+# energy stuff
+
 - id: energy_update
   alias: energy_update
   trigger:
-  - platform: time_pattern
+    platform: time_pattern
     minutes: /10
   condition:
-  - condition: time
+    condition: time
     after: '15:09:00'
     before: '19:59:00'
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: python_script.load_control
     data_template:
@@ -23,16 +26,16 @@
 - id: precool
   alias: precool
   trigger:
-  - platform: time
+    platform: time
     at: '13:30'
   condition:
-  - condition: time
+    condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: python_script.precool
     data_template:
@@ -41,16 +44,16 @@
 - id: start_peak_time
   alias: start_peak_time
   trigger:
-  - platform: time
+    platform: time
     at: '15:00'
   condition:
-  - condition: time
+    condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: python_script.target_temp
     data_template:
@@ -59,17 +62,62 @@
 - id: target_temp
   alias: target_temp
   trigger:
-  - platform: time
+    platform: time
     at: '20:00'
   condition:
-  - condition: time
+    condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: python_script.target_temp
     data_template:
      debug: 0
+
+#########################################################
+# daily light control
+
+- id: front_lights_on
+  alias: 'Front yard lights on at sunset'
+  trigger:
+    platform: sun
+    event: sunset
+  condition: []
+  action:
+    service: switch.turn_on
+    entity_id: switch.zooz_zen21_switch_v2_0_switch
+
+- id: front_lights_off_weekday
+  alias: 'Front yard lights off for the night weekday'
+  trigger:
+    platform: time
+    at: "22:00"
+  condition:
+    condition: time
+    weekday:
+      - sun
+      - mon
+      - tue
+      - wed
+      - thu
+  action:
+    service: switch.turn_off
+    entity_id: switch.zooz_zen21_switch_v2_0_switch
+
+- id: front_lights_off_weekend
+  alias: 'Front yard lights off for the night weekend'
+  trigger:
+    platform: time
+    at: "23:59"
+  condition:
+    condition: time
+    weekday:
+      - fri
+      - sat
+  action:
+    service: switch.turn_off
+    entity_id: switch.zooz_zen21_switch_v2_0_switch
+

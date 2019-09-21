@@ -122,6 +122,12 @@ indoor_temp_graph:
   entities:
     - history_graph.indoor_temps
 
+all_lights:
+  name: Lights
+  control: hidden
+  entities:
+    - switch.zooz_zen21_switch_v2_0_switch
+      
 ########################################################
 # Views
 
@@ -139,6 +145,12 @@ default_view:
   entities:
     - group.climate_energy_status
     
+lights:
+  name: Lights
+  view: yes
+  entities:
+    - group.all_lights
+
 energy:
   view: yes
   entities:
@@ -164,3 +176,4 @@ climate:
     - group.downstairs_climate
     - group.indoor_temp_graph
     - group.all_temps
+    
