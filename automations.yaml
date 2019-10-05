@@ -18,6 +18,8 @@
       - wed
       - thu
       - fri
+      - sat
+      - sun
   action:
     service: python_script.load_control
     data_template:
@@ -36,6 +38,8 @@
       - wed
       - thu
       - fri
+      - sat
+      - sun
   action:
     service: python_script.precool
     data_template:
@@ -54,6 +58,8 @@
       - wed
       - thu
       - fri
+      - sat
+      - sun
   action:
     service: python_script.target_temp
     data_template:
@@ -72,6 +78,8 @@
       - wed
       - thu
       - fri
+      - sat
+      - sun
   action:
     service: python_script.target_temp
     data_template:

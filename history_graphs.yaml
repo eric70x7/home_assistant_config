@@ -3,7 +3,7 @@ gr1:
   entities:
     - sensor.ambient_temp_1
     - sensor.upstairs_setpoint
-    - sensor.upstairs_cooling
+    - sensor.upstairs_state
   refresh: 60
   hours_to_show: 24
 gr2:
@@ -11,7 +11,7 @@ gr2:
   entities:
     - sensor.ambient_temp_2
     - sensor.downstairs_setpoint
-    - sensor.downstairs_cooling
+    - sensor.downstairs_state
   refresh: 60
   hours_to_show: 24
 gr3:

@@ -10,11 +10,11 @@ setpoint = data.get('setpoint')
 
 good=0
 if location == 'upstairs':
-    name = 'climate.upstairs'
+    name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2'
     saved = 'input_number.upstairs_setpoint'
     good=1
 elif location == 'downstairs':
-    name = 'climate.downstairs'
+    name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1'
     saved = 'input_number.downstairs_setpoint'
     good=1
 else:

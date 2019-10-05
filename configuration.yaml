@@ -85,7 +85,7 @@ duckdns:
   access_token: !secret duckdns_token
 
 # Wink
-wink:
+# wink:
 
 # Z-wave
 zwave:
