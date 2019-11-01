@@ -71,8 +71,9 @@ ds_setpoint=get_setpoint('downstairs',hass,logger)
 logger.info("current setpoints: ds {}, us {}".format(ds_setpoint, us_setpoint))
 
 # Estimate what the hourly demand will be if we decrement a degree. Assume that
-# decrementing one thermostat will cost about 3 kWH
-bump_demand_20=3.0
+# decrementing one thermostat will cost about 3 kWH (changed to 5 with Trane
+# thermostats).
+bump_demand_20=5.0
 bump_demand=(2*demand_40+bump_demand_20)/3.0
 logger.info("Estimated bump demand: {:.2f}".format(bump_demand))
 

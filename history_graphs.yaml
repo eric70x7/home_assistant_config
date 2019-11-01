@@ -4,6 +4,7 @@ gr1:
     - sensor.ambient_temp_1
     - sensor.upstairs_setpoint
     - sensor.upstairs_state
+#    - sensor.upstairs_trane_temperature
   refresh: 60
   hours_to_show: 24
 gr2:
@@ -12,6 +13,7 @@ gr2:
     - sensor.ambient_temp_2
     - sensor.downstairs_setpoint
     - sensor.downstairs_state
+#    - sensor.upstairs_trane_temperature
   refresh: 60
   hours_to_show: 24
 gr3:

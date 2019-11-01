@@ -18,8 +18,8 @@
       - wed
       - thu
       - fri
-      - sat
-      - sun
+#      - sat
+#      - sun
   action:
     service: python_script.load_control
     data_template:
@@ -38,8 +38,8 @@
       - wed
       - thu
       - fri
-      - sat
-      - sun
+#      - sat
+#      - sun
   action:
     service: python_script.precool
     data_template:
@@ -58,8 +58,8 @@
       - wed
       - thu
       - fri
-      - sat
-      - sun
+#      - sat
+#      - sun
   action:
     service: python_script.target_temp
     data_template:
@@ -78,8 +78,8 @@
       - wed
       - thu
       - fri
-      - sat
-      - sun
+#      - sat
+#      - sun
   action:
     service: python_script.target_temp
     data_template:
@@ -128,4 +128,63 @@
   action:
     service: switch.turn_off
     entity_id: switch.zooz_zen21_switch_v2_0_switch
+
+- id: inside_lights_sunset
+  alias: 'Inside lights on at sunset'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:20:00"
+  condition: []
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.inside_lights
+    - service: homeassistant.turn_on
+      entity_id: group.back_yard_lights
+
+- id: inside_lights_off
+  alias: 'Inside lights off at night'
+  trigger:
+    platform: time
+    at: "21:30"
+  condition: []
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.inside_lights
+    - service: homeassistant.turn_off
+      entity_id: group.back_yard_lights
+    
+- id: inside_lights_morning_on
+  alias: 'Inside lights on in the morning'
+  trigger:
+    platform: time
+    at: "6:00"
+  condition:
+    condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: homeassistant.turn_on
+    entity_id: group.inside_lights
+
+- id: inside_lights_morning_off
+  alias: 'Inside lights off in the morning'
+  trigger:
+    platform: time
+    at: "7:00"
+  condition:
+    condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.inside_lights
 

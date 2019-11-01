@@ -4,6 +4,18 @@ zone.home:
 
 # friendlier names
 
+# Switches
+switch.zooz_zen21_switch_v2_0_switch:
+  friendly_name: Front Lights
+switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch:
+  friendly_name: Family Room Light
+switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2:
+  friendly_name: Dining Room Light
+switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3:
+  friendly_name: Loft Light
+switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4:
+  friendly_name: String Lights
+  
 # Ambient sensors
 sensor.ambient_temp_1:
   friendly_name: Upstairs Temperature

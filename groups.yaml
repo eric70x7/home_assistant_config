@@ -91,7 +91,7 @@ upstairs_climate:
     - climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2
     - sensor.upstairs_setpoint
     - sensor.ambient_temp_1
-#    - sensor.upstairs_humidity
+    - sensor.upstairs_trane_temperature
 
 downstairs_climate:
   name: Downstairs Climate
@@ -100,7 +100,7 @@ downstairs_climate:
     - climate.trane_corporation_model_tzemt524aa21ma_cooling_1
     - sensor.downstairs_setpoint
     - sensor.ambient_temp_2
-#    - sensor.downstairs_humidity
+    - sensor.downstairs_trane_temperature
 
 all_temps:
   name: All Temperatures
@@ -127,7 +127,27 @@ all_lights:
   control: hidden
   entities:
     - switch.zooz_zen21_switch_v2_0_switch
-      
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+
+inside_lights:
+  name: Inside Lights
+  entities:
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+    
+front_lights:
+  name: Front Yard Lights
+  entities:
+    - switch.zooz_zen21_switch_v2_0_switch
+
+back_yard_lights:
+  name: Back Yard Lights
+  entities:
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+
 ########################################################
 # Views
 
@@ -149,7 +169,9 @@ lights:
   name: Lights
   view: yes
   entities:
-    - group.all_lights
+    - group.front_lights
+    - group.inside_lights
+    - group.back_yard_lights
 
 energy:
   view: yes
