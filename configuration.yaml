@@ -18,12 +18,14 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-# Enables the frontend
-frontend:
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/16      
 
-# Enables configuration UI
-config:
-
+# Enable the default set of integrations:
+default_config:
+  
 # Checks for available updates
 updater:
   # Optional, allows Home Assistant developers to focus on popular components.
@@ -38,23 +40,11 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-# Enables support for tracking state changes over time
-history:
-
-# View all events in a logbook
-logbook:
-
 # Log levels
 logger:
   default: critical
   logs:
     homeassistant.components.python_script: info
-
-# Enables a map showing the location of tracked devices
-map:
-
-# Track the sun
-sun:
 
 # Text to speech
 tts:
@@ -63,9 +53,6 @@ tts:
 
 # Python
 python_script:
-
-# Cloud
-cloud:
 
 # ifttt
 ifttt:
@@ -79,20 +66,17 @@ sense:
   email: !secret sense_email
   password: !secret sense_password
 
-# DNS service
-duckdns:
-  domain: eric70x7
-  access_token: !secret duckdns_token
-
-# Wink
-# wink:
+# Ambient weather
+ambient_station:
+  api_key: !secret ambient_api_key
+  app_key: !secret ambient_app_key
 
 # Z-wave
 zwave:
   usb_path: /dev/ttyACM0
   device_config: !include zwave.yaml
     
-  # Turn on system health monitor
+# Turn on system health monitor
 system_health:
 
 # limit the database size

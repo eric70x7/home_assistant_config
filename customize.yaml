@@ -26,25 +26,25 @@ sensor.ambient_temp_3:
 sensor.ambient_temp_4:
   friendly_name: Garage Temperature
 sensor.ambient_temp_5:
-  friendly_name: Master BR Temperature
+  friendly_name: Master
 sensor.ambient_temp_6:
-  friendly_name: Beccas BR Temperature
+  friendly_name: Becca
 sensor.ambient_temp_7:
-  friendly_name: Neils BR Temperature
+  friendly_name: Neil
 sensor.ambient_temp_8:
-  friendly_name: Victorias BR Temperature
-sensor.stetson_jones_temp:
+  friendly_name: Victoria
+sensor.ambient_temp:
   friendly_name: Backyard Temperature
-sensor.stetson_jones_humidity:
+sensor.ambient_humidity:
   friendly_name: Backyard Humidity
   icon: mdi:water-percent
-sensor.stetson_jones_wind_speed:
+sensor.ambient_wind_speed:
   friendly_name: Backyard Wind Speed
   icon: mdi:weather-windy
-sensor.stetson_jones_wind_gust:
+sensor.ambient_wind_gust:
   friendly_name: Backyard Wind Gust
   icon: mdi:weather-windy
-sensor.stetson_jones_solar_rad:
+sensor.ambient_uv:
       friendly_name: Backyard Solar Radiation
       icon: mdi:weather-sunny
 

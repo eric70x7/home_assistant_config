@@ -20,25 +20,17 @@ climate_energy_control:
     - input_number.upstairs_setpoint
     - input_number.downstairs_setpoint
     
-current_weather:
-  name: Current Weather
-  control: hidden
-  entities:
-    - sun.sun
-    - sensor.dark_sky_summary
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_wind_speed
-
 backyard_weather:
   name: Current Weather
   control: hidden
   entities:
     - sun.sun
-    - sensor.stetson_jones_solar_rad
-    - sensor.stetson_jones_temp
-    - sensor.stetson_jones_humidity
-    - sensor.stetson_jones_wind_speed
-    - sensor.stetson_jones_wind_gust
+    - sensor.ambient_temp_1
+    - sensor.ambient_uv
+    - sensor.ambient_temp
+    - sensor.ambient_humidity
+    - sensor.ambient_wind_speed
+    - sensor.ambient_wind_gust
 
 erics_phone:
   name: Eric's Phone
@@ -114,7 +106,7 @@ all_temps:
     - sensor.ambient_temp_6
     - sensor.ambient_temp_7
     - sensor.ambient_temp_8
-    - sensor.stetson_jones_temp    
+    - sensor.ambient_temp    
 
 indoor_temp_graph:
   name: Indoor Temps

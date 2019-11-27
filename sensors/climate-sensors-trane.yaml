@@ -14,7 +14,7 @@
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2', 'temperature') }}"
     upstairs_state:
       friendly_name: Upstairs State
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2', 'operating_state') }}"
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2', 'hvac_action') }}"
     #
     # Downstairs
     #
@@ -28,5 +28,5 @@
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1', 'temperature') }}"
     downstairs_state:
       friendly_name: Downstairs State
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1', 'operating_state') }}"
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_cooling_1', 'hvac_action') }}"
 

@@ -20,7 +20,7 @@ gr3:
   name: Demand
   entities:
     - sensor.1_hr_demand
-    - sensor.stetson_jones_temp
+    - sensor.ambient_temp
   refresh: 60
   hours_to_show: 24
 gr4:
