@@ -15,6 +15,10 @@ switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3:
   friendly_name: Loft Light
 switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4:
   friendly_name: String Lights
+switch.zooz_zen21_switch_v2_0_switch_2:
+  friendly_name: Stair Lights
+switch.zooz_zen21_switch_v2_0_switch_3:
+  friendly_name: Breakfast Area Lights
   
 # Ambient sensors
 sensor.ambient_temp_1:

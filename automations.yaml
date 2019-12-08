@@ -129,8 +129,8 @@
     service: switch.turn_off
     entity_id: switch.zooz_zen21_switch_v2_0_switch
 
-- id: inside_lights_sunset
-  alias: 'Inside lights on at sunset'
+- id: ambient_lights_sunset
+  alias: 'Ambient lights on at sunset'
   trigger:
     platform: sun
     event: sunset
@@ -138,24 +138,24 @@
   condition: []
   action:
     - service: homeassistant.turn_on
-      entity_id: group.inside_lights
+      entity_id: group.ambient_lights
     - service: homeassistant.turn_on
       entity_id: group.back_yard_lights
 
-- id: inside_lights_off
-  alias: 'Inside lights off at night'
+- id: ambient_lights_off
+  alias: 'Ambient lights off at night'
   trigger:
     platform: time
     at: "21:30"
   condition: []
   action:
     - service: homeassistant.turn_off
-      entity_id: group.inside_lights
+      entity_id: group.ambient_lights
     - service: homeassistant.turn_off
       entity_id: group.back_yard_lights
     
-- id: inside_lights_morning_on
-  alias: 'Inside lights on in the morning'
+- id: ambient_lights_morning_on
+  alias: 'Ambient lights on in the morning'
   trigger:
     platform: time
     at: "6:00"
@@ -169,10 +169,10 @@
       - fri
   action:
     service: homeassistant.turn_on
-    entity_id: group.inside_lights
+    entity_id: group.ambient_lights
 
-- id: inside_lights_morning_off
-  alias: 'Inside lights off in the morning'
+- id: ambient_lights_morning_off
+  alias: 'Ambient lights off in the morning'
   trigger:
     platform: time
     at: "7:00"
@@ -186,5 +186,5 @@
       - fri
   action:
     service: homeassistant.turn_off
-    entity_id: group.inside_lights
+    entity_id: group.ambient_lights
 

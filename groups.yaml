@@ -114,17 +114,29 @@ indoor_temp_graph:
   entities:
     - history_graph.indoor_temps
 
-all_lights:
-  name: Lights
+all_the_lights:
+  name: All The Lights
   control: hidden
   entities:
     - switch.zooz_zen21_switch_v2_0_switch
     - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
     - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
     - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
-
-inside_lights:
-  name: Inside Lights
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+    - switch.zooz_zen21_switch_v2_0_switch_2
+    - switch.zooz_zen21_switch_v2_0_switch_3
+    
+all_inside_lights:
+  name: All Inside Lights
+  entities:
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+    - switch.zooz_zen21_switch_v2_0_switch_2
+    - switch.zooz_zen21_switch_v2_0_switch_3
+    
+ambient_lights:
+  name: Ambient Lights
   entities:
     - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
     - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
@@ -152,35 +164,12 @@ back_yard_lights:
 #    - group.backyard_weather
     
 default_view:
-  name: Load Status
-  view: yes
-  entities:
-    - group.climate_energy_status
-    
-lights:
   name: Lights
   view: yes
   entities:
     - group.front_lights
-    - group.inside_lights
+    - group.all_inside_lights
     - group.back_yard_lights
-
-energy:
-  view: yes
-  entities:
-    - group.energy_usage
-
-energy_control:
-  name: Energy control
-  view: yes
-  entities:
-    - group.climate_energy_control
-    
-weather:
-  name: Weather
-  view: yes
-  entities:
-    - group.backyard_weather
 
 climate:
   name: Climate
@@ -190,4 +179,22 @@ climate:
     - group.downstairs_climate
     - group.indoor_temp_graph
     - group.all_temps
+    - group.backyard_weather
+    
+energy:
+  view: yes
+  entities:
+    - group.energy_usage
+
+load_status:
+  name: Load Status
+  view: yes
+  entities:
+    - group.climate_energy_status
+    
+energy_control:
+  name: Energy control
+  view: yes
+  entities:
+    - group.climate_energy_control
     
