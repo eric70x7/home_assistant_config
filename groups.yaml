@@ -80,7 +80,8 @@ upstairs_climate:
   name: Upstairs Climate
   control: hidden
   entities:
-    - climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2
+    # - climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2
+    - climate.trane_corporation_model_tzemt524aa21ma_heating_1_2
     - sensor.upstairs_setpoint
     - sensor.ambient_temp_1
     - sensor.upstairs_trane_temperature
@@ -89,7 +90,8 @@ downstairs_climate:
   name: Downstairs Climate
   control: hidden
   entities:
-    - climate.trane_corporation_model_tzemt524aa21ma_cooling_1
+    # - climate.trane_corporation_model_tzemt524aa21ma_cooling_1
+    - climate.trane_corporation_model_tzemt524aa21ma_heating_1
     - sensor.downstairs_setpoint
     - sensor.ambient_temp_2
     - sensor.downstairs_trane_temperature

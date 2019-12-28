@@ -1,8 +1,3 @@
-# disable until Sensi/Wink is more reliable
-
-#########################################################
-# energy stuff
-
 - id: energy_update
   alias: energy_update
   trigger:
@@ -13,18 +8,15 @@
     after: '15:09:00'
     before: '19:59:00'
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-#      - sat
-#      - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: python_script.load_control
     data_template:
       debug: 0
-
 - id: precool
   alias: precool
   trigger:
@@ -33,18 +25,15 @@
   condition:
     condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-#      - sat
-#      - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: python_script.precool
     data_template:
       debug: 0
-
 - id: start_peak_time
   alias: start_peak_time
   trigger:
@@ -53,18 +42,15 @@
   condition:
     condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-#      - sat
-#      - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: python_script.target_temp
     data_template:
       debug: 0
-
 - id: target_temp
   alias: target_temp
   trigger:
@@ -73,23 +59,17 @@
   condition:
     condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-#      - sat
-#      - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: python_script.target_temp
     data_template:
-     debug: 0
-
-#########################################################
-# daily light control
-
+      debug: 0
 - id: front_lights_on
-  alias: 'Front yard lights on at sunset'
+  alias: Front yard lights on at sunset
   trigger:
     platform: sun
     event: sunset
@@ -97,94 +77,87 @@
   action:
     service: switch.turn_on
     entity_id: switch.zooz_zen21_switch_v2_0_switch
-
 - id: front_lights_off_weekday
-  alias: 'Front yard lights off for the night weekday'
+  alias: Front yard lights off for the night weekday
   trigger:
     platform: time
-    at: "22:00"
+    at: '22:00'
   condition:
     condition: time
     weekday:
-      - sun
-      - mon
-      - tue
-      - wed
-      - thu
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
   action:
     service: switch.turn_off
     entity_id: switch.zooz_zen21_switch_v2_0_switch
-
 - id: front_lights_off_weekend
-  alias: 'Front yard lights off for the night weekend'
+  alias: Front yard lights off for the night weekend
   trigger:
     platform: time
-    at: "23:59"
+    at: '23:59'
   condition:
     condition: time
     weekday:
-      - fri
-      - sat
+    - fri
+    - sat
   action:
     service: switch.turn_off
     entity_id: switch.zooz_zen21_switch_v2_0_switch
-
 - id: ambient_lights_sunset
-  alias: 'Ambient lights on at sunset'
+  alias: Ambient lights on at sunset
   trigger:
     platform: sun
     event: sunset
-    offset: "-00:20:00"
+    offset: -00:20:00
   condition: []
   action:
-    - service: homeassistant.turn_on
-      entity_id: group.ambient_lights
-    - service: homeassistant.turn_on
-      entity_id: group.back_yard_lights
-
+  - service: homeassistant.turn_on
+    entity_id: group.ambient_lights
+  - service: homeassistant.turn_on
+    entity_id: group.back_yard_lights
 - id: ambient_lights_off
-  alias: 'Ambient lights off at night'
+  alias: Ambient lights off at night
   trigger:
+  - at: '22:00'
     platform: time
-    at: "21:30"
   condition: []
   action:
-    - service: homeassistant.turn_off
-      entity_id: group.ambient_lights
-    - service: homeassistant.turn_off
-      entity_id: group.back_yard_lights
-    
+  - entity_id: group.ambient_lights
+    service: homeassistant.turn_off
+  - entity_id: group.back_yard_lights
+    service: homeassistant.turn_off
 - id: ambient_lights_morning_on
-  alias: 'Ambient lights on in the morning'
+  alias: Ambient lights on in the morning
   trigger:
     platform: time
-    at: "6:00"
+    at: '6:00'
   condition:
     condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: homeassistant.turn_on
     entity_id: group.ambient_lights
-
 - id: ambient_lights_morning_off
-  alias: 'Ambient lights off in the morning'
+  alias: Ambient lights off in the morning
   trigger:
     platform: time
-    at: "7:00"
+    at: '7:00'
   condition:
     condition: time
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: homeassistant.turn_off
     entity_id: group.ambient_lights
-
