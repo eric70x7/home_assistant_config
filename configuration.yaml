@@ -27,6 +27,10 @@ homeassistant:
 # Enable the default set of integrations:
 default_config:
   
+# Use lovelace YAML mode
+lovelace:
+  mode: yaml
+  
 # Checks for available updates
 updater:
   # Optional, allows Home Assistant developers to focus on popular components.
