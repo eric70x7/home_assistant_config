@@ -4,142 +4,243 @@ resources:
 title: The Jones House
 views:
   - badges: []
-    cards:
-      - entities:
-          - switch.zooz_zen21_switch_v2_0_switch
-        show_header_toggle: true
-        title: Front Yard Lights
-        type: entities
-      - entities:
-          - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
-          - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
-          - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
-          - switch.zooz_zen21_switch_v2_0_switch_2
-          - switch.zooz_zen21_switch_v2_0_switch_3
-        show_header_toggle: true
-        title: All Inside Lights
-        type: entities
-      - entities:
-          - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
-        show_header_toggle: true
-        title: Back Yard Lights
-        type: entities
-    path: default_view
+    #
+    # lighting control
+    #
     title: Lights
-  - badges: []
+    path: default_view
+    type: vertical-stack
     cards:
-      - entities:
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_cooling_1
-            type: cool
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_heating_1
-            type: heat
-        name: Downstairs
+      - title: Outside
+        type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: switch.zooz_zen21_switch_v2_0_switch
+          - type: entity-button
+            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+      - title: Inside
+        type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+          - type: entity-button
+            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+          - type: entity-button
+            entity: switch.zooz_zen21_switch_v2_0_switch_2
+          - type: entity-button
+            entity: switch.zooz_zen21_switch_v2_0_switch_3
+            name: Breakfast Area
+  - badges: []
+    #
+    # thermostat controls & temps
+    #
+    title: Air
+    path: air
+    cards:
+      #
+      # upstairs thermostat control
+      #
+      - name: Upstairs
         type: 'custom:dual-thermostat'
-      - entities:
+        fan_control: true
+        min_slider: 64
+        max_slider: 78
+        entities:
           - entity: climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2
             type: cool
           - entity: climate.trane_corporation_model_tzemt524aa21ma_heating_1_2
             type: heat
-        name: Upstairs
-        type: 'custom:dual-thermostat'
-      - entities:
-          - sensor.ambient_temp_1
-          - sensor.ambient_temp_2
-          - sensor.ambient_temp_3
-          - sensor.ambient_temp_5
-          - sensor.ambient_temp_6
-          - sensor.ambient_temp_7
-          - sensor.ambient_temp_8
+      - title: Upstairs state
+        type: history-graph
         hours_to_show: 24
         refresh_interval: 60
-        title: Indoor Temps
+        entities:
+          - sensor.upstairs_state
+      #
+      # downstairs thermostat control
+      #
+      - name: Downstairs
+        type: 'custom:dual-thermostat'
+        fan_control: true
+        min_slider: 64
+        max_slider: 78
+        entities:
+          - entity: climate.trane_corporation_model_tzemt524aa21ma_cooling_1
+            type: cool
+          - entity: climate.trane_corporation_model_tzemt524aa21ma_heating_1
+            type: heat
+      - title: Downstairs state
         type: history-graph
-      - entities:
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - sensor.downstairs_state
+  - badges: []
+    #
+    # thermostat controls & temps
+    #
+    title: Temps
+    path: temps
+    cards:
+      #
+      # indoor temperature values
+      #
+      - type: vertical-stack
+        title: Temperatures
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.ambient_temp_1
+                name: Upstairs
+              - type: sensor
+                entity: sensor.ambient_temp_2
+                name: Downstairs
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.ambient_temp_3
+                name: Hair
+              - type: sensor
+                entity: sensor.ambient_temp_4
+                name: Garage
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.ambient_temp_5
+              - type: sensor
+                entity: sensor.ambient_temp_6
+          - type: horizontal-stack
+            cards:
+              - type: sensor
+                entity: sensor.ambient_temp_7
+              - type: sensor
+                entity: sensor.ambient_temp_8
+          - type: sensor
+            entity: sensor.ambient_temp
+      #
+      # indoor temperature graphs
+      #
+      - title: Indoor Temps
+        type: history-graph
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
           - sensor.ambient_temp_1
           - sensor.ambient_temp_2
           - sensor.ambient_temp_3
-          - sensor.ambient_temp_4
           - sensor.ambient_temp_5
           - sensor.ambient_temp_6
           - sensor.ambient_temp_7
           - sensor.ambient_temp_8
-          - sensor.ambient_temp
-        show_header_toggle: false
-        title: All Temperatures
+      #
+      # weather
+      #
+      - title: Current Weather
         type: entities
-      - entities:
-          - sun.sun
-          - sensor.ambient_temp_1
+        show_header_toggle: false
+        entities:
           - sensor.ambient_uv
-          - sensor.ambient_temp
           - sensor.ambient_humidity
           - sensor.ambient_wind_speed
           - sensor.ambient_wind_gust
-        show_header_toggle: false
-        title: Current Weather
-        type: entities
-    path: climate
-    title: Climate
   - badges: []
+    #
+    # load status
+    #
+    title: Load
+    path: load
     cards:
-      - entities:
-          - sensor.energy_usage
-          - sensor.fast_demand
-          - sensor.medium_demand
-          - sensor.medium_long_demand
-          - sensor.1_hr_demand
-        show_header_toggle: false
-        title: Home Energy Usage
-        type: entities
-      - entities:
-          - sensor.fast_demand
-          - sensor.medium_demand
-          - sensor.medium_long_demand
-          - sensor.1_hr_demand
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            entity: sensor.energy_usage
+          - type: sensor
+            entity: sensor.1_hr_demand
+      #
+      # upstairs climate graph
+      #
+      - title: Upstairs
+        type: history-graph
         hours_to_show: 24
         refresh_interval: 60
-        title: Detailed Demand
-        type: history-graph
-    path: energy
-    title: energy
-  - badges: []
-    cards:
-      - entities:
+        entities:
           - sensor.ambient_temp_1
           - sensor.upstairs_setpoint
           - sensor.upstairs_state
-        hours_to_show: 24
-        refresh_interval: 60
-        title: Upstairs
-        type: history-graph
-      - entities:
-          - sensor.ambient_temp_2
-          - sensor.downstairs_setpoint
-          - sensor.downstairs_state
-        hours_to_show: 24
+      #
+      # downstairs climate graph
+      #
+      - hours_to_show: 24
         refresh_interval: 60
         title: Downstairs
         type: history-graph
-      - entities:
-          - sensor.1_hr_demand
-          - sensor.ambient_temp
+        entities:
+          - sensor.ambient_temp_2
+          - sensor.downstairs_setpoint
+          - sensor.downstairs_state
+      #
+      # demand/temperature graph
+      #
+      - title: Demand
+        type: history-graph
         hours_to_show: 24
         refresh_interval: 60
-        title: Demand
-        type: history-graph
-    path: load_status
-    title: Load Status
+        entities:
+          - sensor.1_hr_demand
+          - sensor.ambient_temp
   - badges: []
+    #
+    # energy control
+    #
+    title: Energy control
+    path: energy_control
     cards:
-      - entities:
+      #
+      # slider controls
+      #
+      - title: Climate/Energy Control
+        type: entities
+        show_header_toggle: false
+        entities:
           - input_number.kwh_limit
           - input_number.hi_temp
           - input_number.target_temp
           - input_number.precool_temp
           - input_number.upstairs_setpoint
           - input_number.downstairs_setpoint
-        show_header_toggle: false
-        title: Climate/Energy Control
-        type: entities
-    path: energy_control
-    title: Energy control
+#  - badges: []
+#    #
+#    # energy usage
+#    #
+#    title: Energy
+#    path: energy
+#    cards:
+#      #
+#      # demand values
+#      #
+#      - title: Home Energy Usage
+#        type: sensor
+#        show_header_toggle: false
+#        entities:
+#          - sensor.energy_usage
+#          - sensor.fast_demand
+#          - sensor.medium_demand
+#          - sensor.medium_long_demand
+#          - sensor.1_hr_demand
+#      #
+#      # demand graphs
+#      #
+#      - title: Detailed Demand
+#        type: history-graph
+#        hours_to_show: 24
+#        refresh_interval: 60
+#        entities:
+#          - sensor.fast_demand
+#          - sensor.medium_demand
+#          - sensor.medium_long_demand
+#          - sensor.1_hr_demand

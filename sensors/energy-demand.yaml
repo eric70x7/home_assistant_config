@@ -15,7 +15,7 @@
       friendly_name: 1 Hr Demand
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
-      value_template: "{{ (states('sensor.1_hr_usage') | float)/1000 }}"
+      value_template: "{{ ((states('sensor.1_hr_usage') | float)/1000) | round(3) }}"
 
 # Medium time
 - platform: filter
