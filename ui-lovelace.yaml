@@ -45,15 +45,8 @@ views:
       # upstairs thermostat control
       #
       - name: Upstairs
-        type: 'custom:dual-thermostat'
-        fan_control: true
-        min_slider: 64
-        max_slider: 78
-        entities:
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2
-            type: cool
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_heating_1_2
-            type: heat
+        type: 'thermostat'
+        entity: climate.trane_corporation_model_tzemt524aa21ma_mode_2
       - title: Upstairs state
         type: history-graph
         hours_to_show: 24
@@ -64,15 +57,8 @@ views:
       # downstairs thermostat control
       #
       - name: Downstairs
-        type: 'custom:dual-thermostat'
-        fan_control: true
-        min_slider: 64
-        max_slider: 78
-        entities:
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_cooling_1
-            type: cool
-          - entity: climate.trane_corporation_model_tzemt524aa21ma_heating_1
-            type: heat
+        type: 'thermostat'
+        entity: climate.trane_corporation_model_tzemt524aa21ma_mode
       - title: Downstairs state
         type: history-graph
         hours_to_show: 24
