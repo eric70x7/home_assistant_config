@@ -197,8 +197,6 @@ views:
           - input_number.hi_temp
           - input_number.target_temp
           - input_number.precool_temp
-          - input_number.upstairs_setpoint
-          - input_number.downstairs_setpoint
 #  - badges: []
 #    #
 #    # energy usage

@@ -8,30 +8,21 @@ debug = int(data.get('debug', 1))
 location = data.get('location')
 setpoint = data.get('setpoint')
 
-good=0
 if location == 'upstairs':
-    name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2'
-    saved = 'input_number.upstairs_setpoint'
-    good=1
+    thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode_2'
 elif location == 'downstairs':
-    name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1'
-    saved = 'input_number.downstairs_setpoint'
-    good=1
+    thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode'
 else:
     logger.error("Set temperature called for bad location {}.".format(location))
 
-if good:
-    # set the temperature
-    if not debug:
-        # Make the adjustment
-        new_setpoint = setpoint
-        setpoint_arg = {'entity_id': saved,
-                        'value': new_setpoint}
-        hass.services.call('input_number', 'set_value', setpoint_arg)
-        # logger.info('{} set to {}'.format(saved, new_setpoint))
-        new_setpoint_arg = {'entity_id': name, 'temperature': new_setpoint}
-        hass.services.call('climate', 'set_temperature', new_setpoint_arg)
-        saved_setpoint = new_setpoint
-        # logger.info('{} set to {}'.format(name, saved_setpoint))
-    else:
-        logger.info("Debug mode. No change made.")
+thermostat = hass.states.get(thermostat_id)
+attributes = thermostat.attributes.copy()
+attributes['target_temp_high'] = setpoint
+# logger.info('{}'.format(attributes))
+
+# set the temperature
+if not debug:
+    # Make the adjustment
+    hass.states.set(thermostat_id, thermostat.state, attributes)
+else:
+    logger.info("Debug mode. No change made.")

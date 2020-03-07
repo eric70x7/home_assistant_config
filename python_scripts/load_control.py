@@ -16,37 +16,14 @@ def max(x,y):
 # Get the temperature but use the saved setpoint if there is a mismatch
 #
 def get_setpoint(location, hass, logger):
-    good=0
     if location == 'upstairs':
-        name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2'
-        saved = 'input_number.upstairs_setpoint'
-        good=1
+        thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode_2'
     elif location == 'downstairs':
-        name = 'climate.trane_corporation_model_tzemt524aa21ma_cooling_1'
-        saved = 'input_number.downstairs_setpoint'
-        good=1
+        thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode'
     else:
-        logger.error("Set temperature called for bad location {}.".format(location))
+        logger.error("get_setpoint bad location {}.".format(location))
 
-    if good:
-        saved_setpoint = int(float(hass.states.get(saved).state)) # 70
-        current_setpoint = hass.states.get(name).attributes['temperature']
-        #if saved_setpoint <= 65:
-        #    logger.info("Initializing {} to {}.".format(name, current_setpoint))
-        #    # set input_number here
-        #    new_setpoint=current_setpoint
-        #    setpoint_arg = {'entity_id': saved,
-        #                    'value': new_setpoint}
-        #    hass.services.call('input_number', 'set_value', setpoint_arg)
-        #    saved_setpoint = new_setpoint
-        #    logger.info('{} set to {}'.format(saved, new_setpoint))
-        #    # end set input_number
-        if saved_setpoint != current_setpoint:
-            # check for initialization
-            logger.warn("Saved temp for {} {} but current {}.".format(name,
-                                                                      saved_setpoint,
-                                                                      current_setpoint))
-    return saved_setpoint
+    return hass.states.get(thermostat_id).attributes['target_temp_high']
     
 #
 # main
