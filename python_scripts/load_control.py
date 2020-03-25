@@ -23,7 +23,9 @@ def get_setpoint(location, hass, logger):
     else:
         logger.error("get_setpoint bad location {}.".format(location))
 
-    return hass.states.get(thermostat_id).attributes['target_temp_high']
+    attributes=hass.states.get(thermostat_id).attributes.copy()
+    logger.info('{}'.format(attributes))
+    return attributes['target_temp_high']
     
 #
 # main
