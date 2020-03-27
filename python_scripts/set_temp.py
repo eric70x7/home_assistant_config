@@ -1,6 +1,7 @@
 #
 # Set a temperature
 #
+# NOTE: this sets the target_temp_high (AC setpoint) and leaves the heat setpoint alone
 
 # debug mode is default
 debug = int(data.get('debug', 1))
@@ -15,14 +16,13 @@ elif location == 'downstairs':
 else:
     logger.error("Set temperature called for bad location {}.".format(location))
 
-thermostat = hass.states.get(thermostat_id)
-attributes = thermostat.attributes.copy()
-attributes['target_temp_high'] = setpoint
-# logger.info('{}'.format(attributes))
-
 # set the temperature
 if not debug:
+    # Get the current low setpoint
+    low_setpoint=hass.states.get(thermostat_id).attributes['target_temp_low']
     # Make the adjustment
-    hass.states.set(thermostat_id, thermostat.state, attributes)
+    hass.services.call('climate','set_temperature',{'entity_id':thermostat_id,
+                                                    'target_temp_high': setpoint,
+                                                    'target_temp_low': low_setpoint})
 else:
     logger.info("Debug mode. No change made.")
