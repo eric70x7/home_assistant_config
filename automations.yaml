@@ -48,9 +48,13 @@
     - thu
     - fri
   action:
-    service: python_script.target_temp
-    data_template:
-      debug: 0
+    - service: python_script.target_temp
+      data_template:
+        debug: 0
+    - service: switch.turn_off
+      entity_id: switch.downstairs_circulate
+    - service: switch.turn_off
+      entity_id: switch.upstairs_circulate
 - id: target_temp
   alias: target_temp
   trigger:
@@ -65,9 +69,13 @@
     - thu
     - fri
   action:
-    service: python_script.target_temp
-    data_template:
-      debug: 0
+    - service: python_script.target_temp
+      data_template:
+        debug: 0
+    - service: switch.turn_on
+      entity_id: switch.downstairs_circulate
+    - service: switch.turn_on
+      entity_id: switch.upstairs_circulate
 - id: front_lights_on
   alias: Front yard lights on at sunset
   trigger:

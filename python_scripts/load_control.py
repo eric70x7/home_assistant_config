@@ -13,21 +13,6 @@ def max(x,y):
     return y
 
 #
-# Get the temperature but use the saved setpoint if there is a mismatch
-#
-def get_setpoint(location, hass, logger):
-    if location == 'upstairs':
-        thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode_2'
-    elif location == 'downstairs':
-        thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode'
-    else:
-        logger.error("get_setpoint bad location {}.".format(location))
-
-    attributes=hass.states.get(thermostat_id).attributes.copy()
-    # logger.info('{}'.format(attributes))
-    return attributes['target_temp_high']
-    
-#
 # main
 #
 # debug mode is default
@@ -44,8 +29,8 @@ demand_10 = float(hass.states.get('sensor.fast_demand').state)
 logger.info("limit: {:.2f}, demand: 60: {:.2f}, 40: {:.2f}, 20: {:.2f}, 10: {:.2f}".format(kWH_limit, demand_60,demand_40,demand_20,demand_10))
 
 # Get thermostat settings
-us_setpoint=get_setpoint('upstairs',hass,logger)
-ds_setpoint=get_setpoint('downstairs',hass,logger)
+us_setpoint=float(hass.states.get('sensor.upstairs_cool_setpoint').state)
+ds_setpoint=float(hass.states.get('sensor.downstairs_cool_setpoint').state)
 
 logger.info("current setpoints: ds {}, us {}".format(ds_setpoint, us_setpoint))
 

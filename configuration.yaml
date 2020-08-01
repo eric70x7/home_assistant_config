@@ -84,15 +84,11 @@ zwave:
 # Turn on system health monitor
 system_health:
 
-# limit the database size
-recorder:
-  purge_keep_days: 10
-  purge_interval: 1
-
-history_graph: !include history_graphs.yaml
+recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
+switch: !include switches.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml

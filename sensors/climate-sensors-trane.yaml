@@ -8,10 +8,14 @@
       friendly_name: Upstairs Trane Temperature
       unit_of_measurement: '°F'
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'current_temperature') }}"
-    upstairs_setpoint:
-      friendly_name: Upstairs Setpoint
+    upstairs_cool_setpoint:
+      friendly_name: Upstairs Cool Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'temperature') }}"
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'target_temp_high') }}"
+    upstairs_heat_setpoint:
+      friendly_name: Upstairs Heat Setpoint
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'target_temp_low') }}"
     upstairs_state:
       friendly_name: Upstairs State
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'hvac_action') }}"
@@ -22,10 +26,14 @@
       friendly_name: Downstairs Trane Temperature
       unit_of_measurement: '°F'
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'current_temperature') }}"
-    downstairs_setpoint:
-      friendly_name: Downstairs Setpoint
+    downstairs_cool_setpoint:
+      friendly_name: Downstairs Cool Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'temperature') }}"
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'target_temp_high') }}"
+    downstairs_heat_setpoint:
+      friendly_name: Downstairs Heat Setpoint
+      unit_of_measurement: '°F'
+      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'target_temp_low') }}"
     downstairs_state:
       friendly_name: Downstairs State
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'hvac_action') }}"

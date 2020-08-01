@@ -1,6 +1,6 @@
-resources:
-  - url: /local/dual-thermostat/dual-thermostat.js?v=1
-    type: js
+#resources:
+#  - url: /local/dual-thermostat/dual-thermostat.js?v=1
+#    type: js
 title: The Jones House
 views:
   - badges: []
@@ -15,24 +15,28 @@ views:
         type: horizontal-stack
         cards:
           - type: entity-button
-            entity: switch.zooz_zen21_switch_v2_0_switch
+            entity: switch.front_lights
           - type: entity-button
-            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+            entity: switch.string_lights
       - title: Inside
         type: horizontal-stack
         cards:
           - type: entity-button
-            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+            entity: switch.dining_room_light
           - type: entity-button
-            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+            entity: switch.family_room_light
       - type: horizontal-stack
         cards:
           - type: entity-button
-            entity: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+            entity: switch.loft_light
           - type: entity-button
-            entity: switch.zooz_zen21_switch_v2_0_switch_2
+            entity: switch.desk_lights
+      - type: horizontal-stack
+        cards:
           - type: entity-button
-            entity: switch.zooz_zen21_switch_v2_0_switch_3
+            entity: switch.stair_lights
+          - type: entity-button
+            entity: switch.breakfast_area_light
             name: Breakfast Area
   - badges: []
     #
@@ -156,7 +160,7 @@ views:
         refresh_interval: 60
         entities:
           - sensor.ambient_temp_1
-          - sensor.upstairs_setpoint
+          - sensor.upstairs_cool_setpoint
           - sensor.upstairs_state
       #
       # downstairs climate graph
@@ -167,7 +171,7 @@ views:
         type: history-graph
         entities:
           - sensor.ambient_temp_2
-          - sensor.downstairs_setpoint
+          - sensor.downstairs_cool_setpoint
           - sensor.downstairs_state
       #
       # demand/temperature graph

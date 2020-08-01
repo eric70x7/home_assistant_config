@@ -1,0 +1,181 @@
+#
+# Rename switches and their friendly names
+#
+#    #
+#    # dst_friendly_name
+#    #
+#    dst_switch:
+#      friendly_name: dst_friendly_name
+#      icon_template: mdi:lightbulb
+#      value_template: "{{ is_state('switch.src_switch', 'on') }}"
+#      turn_on:
+#        service: switch.turn_on
+#        data:
+#          entity_id: switch.src_switch
+#      turn_off:
+#        service: switch.turn_off
+#        data:
+#          entity_id: switch.src_switch
+- platform: template
+  switches:
+    #
+    # Family Room Light
+    #
+    family_room_light:
+      friendly_name: Family Room Light
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
+    #
+    # Dining Room Light
+    #
+    dining_room_light:
+      friendly_name: Dining Room Light
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
+    #
+    # Front lights
+    #
+    front_lights:
+      friendly_name: Front Lights
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.zooz_zen21_switch_v2_0_switch', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch
+    #
+    # Loft light
+    #
+    loft_light:
+      friendly_name: Loft Light
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+    #
+    # String Lights
+    #
+    string_lights:
+      friendly_name: String Lights
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+    #
+    # Stair Lights
+    #
+    stair_lights:
+      friendly_name: Stair Lights
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.zooz_zen21_switch_v2_0_switch_2', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch_2
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch_2
+    #
+    # Breakfast Area Light
+    #
+    breakfast_area_light:
+      friendly_name: Breakfast Area Light
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.zooz_zen21_switch_v2_0_switch_3', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch_3
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.zooz_zen21_switch_v2_0_switch_3
+
+    #
+    # Desk Lights
+    #
+    desk_lights:
+      friendly_name: Eric's Desk Lights
+      icon_template: mdi:lightbulb
+      value_template: "{{ is_state('switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_5', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_5
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_5
+
+    #
+    # Climate control
+    #
+
+    #
+    # Downstairs Circulate
+    #
+    downstairs_circulate:
+      friendly_name: Downstairs Circulate
+      icon_template: mdi:fan
+      value_template: "{{ is_state('climate.trane_corporation_model_tzemt524aa21ma_mode.fan_mode', 'Circulate') }}"
+      turn_on:
+        service: climate.set_fan_mode
+        data:
+          entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode
+          fan_mode: 'Circulate'
+      turn_off:
+        service: climate.set_fan_mode
+        data:
+          entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode
+          fan_mode: 'Auto Low'
+    #
+    # Upstairs Circulate
+    #
+    upstairs_circulate:
+      friendly_name: Upstairs Circulate
+      icon_template: mdi:fan
+      value_template: "{{ is_state('climate.trane_corporation_model_tzemt524aa21ma_mode_2.fan_mode', 'Circulate') }}"
+      turn_on:
+        service: climate.set_fan_mode
+        data:
+          entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+          fan_mode: 'Circulate'
+      turn_off:
+        service: climate.set_fan_mode
+        data:
+          entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+          fan_mode: 'Auto Low'
+    
