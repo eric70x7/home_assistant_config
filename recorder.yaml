@@ -1,6 +1,5 @@
 # limit the database size
 purge_keep_days: 2
-purge_interval: 1
 exclude:
   entities:
     - sensor.shenzhen_neo_electronics_co_ltd_unknown_type_0100_id_1027_alarm_level

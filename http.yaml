@@ -1,5 +1,6 @@
 # server settings
 server_port: !secret server_port
-base_url: https://eric70x7.duckdns.org:8123
+# Can't connect to HA without these lines.
+# The DuckDNS addon is supposed to handle these but I still need them here
 ssl_certificate: /ssl/fullchain.pem
 ssl_key: /ssl/privkey.pem
