@@ -17,6 +17,8 @@ views:
           - type: entity-button
             entity: switch.front_lights
           - type: entity-button
+            entity: switch.christmas_lights
+          - type: entity-button
             entity: switch.string_lights
       - title: Inside
         type: horizontal-stack
@@ -201,6 +203,8 @@ views:
           - input_number.hi_temp
           - input_number.target_temp
           - input_number.precool_temp
+          - input_number.daytime_heat
+          - input_number.nighttime_heat
 #  - badges: []
 #    #
 #    # energy usage

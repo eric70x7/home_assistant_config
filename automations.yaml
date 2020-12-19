@@ -169,3 +169,80 @@
   action:
     service: homeassistant.turn_off
     entity_id: group.ambient_lights
+# Christmas lights
+- id: christmas_lights_on_evening
+  alias: Christmas yard lights on at sunset
+  trigger:
+    platform: sun
+    event: sunset
+  condition: []
+  action:
+    service: switch.turn_on
+    entity_id: switch.christmas_lights
+- id: christmas_lights_off_evening
+  alias: Christmans yard lights off for the night
+  trigger:
+    platform: time
+    at: '23:00'
+  condition: []
+  action:
+    service: switch.turn_off
+    entity_id: switch.christmas_lights
+- id: christmas_lights_on_morning
+  alias: Christmas yard lights on in the morning
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00'
+  condition: []
+  action:
+    service: switch.turn_on
+    entity_id: switch.christmas_lights
+- id: christmas_lights_off_morning
+  alias: Christmans yard lights off in the morning
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+0:30'
+  condition: []
+  action:
+    service: switch.turn_off
+    entity_id: switch.christmas_lights
+- id: set_nighttime_heat
+  alias: Set nighttime heat
+  trigger:
+    platform: time
+    at: '19:00'
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+    service: python_script.nighttime_heat
+    data_template:
+      debug: 0
+- id: set_daytime_heat
+  alias: Set daytime heat
+  trigger:
+    platform: time
+    at: '5:30'
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+    service: python_script.daytime_heat
+    data_template:
+      debug: 0

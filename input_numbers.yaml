@@ -22,6 +22,18 @@ precool_temp:
   min: 65
   max: 85
   step: 1
+daytime_heat:
+  name: Daytime Heat
+  unit_of_measurement: '°F'
+  min: 62
+  max: 72
+  step: 1
+nighttime_heat:
+  name: Nighttime Heat
+  unit_of_measurement: '°F'
+  min: 62
+  max: 72
+  step: 1
 upstairs_setpoint:
   name: Saved US Setpoint
   unit_of_measurement: '°F'
