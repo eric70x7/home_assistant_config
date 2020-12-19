@@ -163,6 +163,7 @@ views:
         entities:
           - sensor.ambient_temp_1
           - sensor.upstairs_cool_setpoint
+          - sensor.upstairs_heat_setpoint
           - sensor.upstairs_state
       #
       # downstairs climate graph
@@ -174,6 +175,7 @@ views:
         entities:
           - sensor.ambient_temp_2
           - sensor.downstairs_cool_setpoint
+          - sensor.downstairs_heat_setpoint
           - sensor.downstairs_state
       #
       # demand/temperature graph
