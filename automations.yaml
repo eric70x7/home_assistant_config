@@ -227,8 +227,8 @@
     service: python_script.nighttime_heat
     data_template:
       debug: 0
-- id: set_daytime_heat
-  alias: Set daytime heat
+- id: set_daytime_heat_weekday
+  alias: Set daytime heat weekdays
   trigger:
     platform: time
     at: '5:30'
@@ -240,6 +240,18 @@
     - wed
     - thu
     - fri
+  action:
+    service: python_script.daytime_heat
+    data_template:
+      debug: 0
+- id: set_daytime_heat_weekend
+  alias: Set daytime heat weekends
+  trigger:
+    platform: time
+    at: '7:00'
+  condition:
+    condition: time
+    weekday:
     - sat
     - sun
   action:
