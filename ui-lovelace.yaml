@@ -9,37 +9,38 @@ views:
     #
     title: Lights
     path: default_view
-    type: vertical-stack
     cards:
-      - title: Outside
-        type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - type: entity-button
-            entity: switch.front_lights
-          - type: entity-button
-            entity: switch.christmas_lights
-          - type: entity-button
-            entity: switch.string_lights
-      - title: Inside
-        type: horizontal-stack
-        cards:
-          - type: entity-button
-            entity: switch.dining_room_light
-          - type: entity-button
-            entity: switch.family_room_light
-      - type: horizontal-stack
-        cards:
-          - type: entity-button
-            entity: switch.loft_light
-          - type: entity-button
-            entity: switch.desk_lights
-      - type: horizontal-stack
-        cards:
-          - type: entity-button
-            entity: switch.stair_lights
-          - type: entity-button
-            entity: switch.breakfast_area_light
-            name: Breakfast Area
+          - type: horizontal-stack
+            title: Outside
+            cards:
+              - type: entity-button
+                entity: switch.front_lights
+              - type: entity-button
+                entity: switch.christmas_lights
+              - type: entity-button
+                entity: switch.string_lights
+          - type: horizontal-stack
+            title: Inside
+            cards:
+              - type: entity-button
+                entity: switch.dining_room_light
+              - type: entity-button
+                entity: switch.family_room_light
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: switch.loft_light
+              - type: entity-button
+                entity: switch.desk_lights
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: switch.stair_lights
+              - type: entity-button
+                entity: switch.breakfast_area_light
+                name: Breakfast Area
   - badges: []
     #
     # thermostat controls & temps
@@ -47,30 +48,32 @@ views:
     title: Air
     path: air
     cards:
-      #
-      # upstairs thermostat control
-      #
-      - name: Upstairs
-        type: 'thermostat'
-        entity: climate.trane_corporation_model_tzemt524aa21ma_mode_2
-      - title: Upstairs state
-        type: history-graph
-        hours_to_show: 24
-        refresh_interval: 60
-        entities:
-          - sensor.upstairs_state
-      #
-      # downstairs thermostat control
-      #
-      - name: Downstairs
-        type: 'thermostat'
-        entity: climate.trane_corporation_model_tzemt524aa21ma_mode
-      - title: Downstairs state
-        type: history-graph
-        hours_to_show: 24
-        refresh_interval: 60
-        entities:
-          - sensor.downstairs_state
+      - type: vertical-stack
+        cards:
+          #
+          # upstairs thermostat control
+          #
+          - name: Upstairs
+            type: 'thermostat'
+            entity: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+          - title: Upstairs state
+            type: history-graph
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - sensor.upstairs_state
+          #
+          # downstairs thermostat control
+          #
+          - name: Downstairs
+            type: 'thermostat'
+            entity: climate.trane_corporation_model_tzemt524aa21ma_mode
+          - title: Downstairs state
+            type: history-graph
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - sensor.downstairs_state
   - badges: []
     #
     # thermostat controls & temps

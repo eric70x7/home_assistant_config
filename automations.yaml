@@ -212,7 +212,7 @@
   alias: Set nighttime heat
   trigger:
     platform: time
-    at: '19:00'
+    at: '18:00'
   condition:
     condition: time
     weekday:
