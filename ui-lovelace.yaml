@@ -266,27 +266,6 @@ views:
                   tap_action:
                     action: call-service
                     service: script.pentair_lights_royal
-  #    cards:
-  #    - type: vertical-stack
-  #      title: Pool
-  #      cards:
-  #        - type: horizontal-stack
-  #          cards:
-  #            - type: entity-button
-  #              icon: mdi:pump
-  #              entity: switch.pentair_water_feature
-  #            - type: entity-button
-  #              icon: mdi:lightbulb
-  #              entity: switch.pentair_pool_light
-  #        - type: horizontal-stack
-  #          cards:
-  #            - type: entity-button
-  #              icon: mdi:pump
-  #              entity: switch.pentair_floor_cleaner
-  #            - type: entity-button
-  #              icon: mdi:pump
-  #              entity: switch.pentair_high_speed
-
   - badges: []
     #
     # load status
