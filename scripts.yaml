@@ -1,0 +1,79 @@
+# Pentair scripts
+pentair_lights_off:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 0
+pentair_lights_on:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 1
+pentair_lights_party:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 5
+pentair_lights_romance:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 6
+pentair_lights_caribbean:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 7
+pentair_lights_american:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 8
+pentair_lights_california_sunset:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 9
+pentair_lights_royal:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 10
+pentair_lights_blue:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 13
+pentair_lights_green:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 14
+pentair_lights_red:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 15
+pentair_lights_white:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 16
+pentair_lights_purple:
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: pentair/light/command
+        payload: 17

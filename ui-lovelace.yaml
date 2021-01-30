@@ -145,6 +145,148 @@ views:
           - sensor.ambient_wind_gust
   - badges: []
     #
+    # pool control
+    #
+    title: Pool
+    path: pool
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: horizontal-stack
+          title: Controls
+          cards:
+            - type: entity-button
+              icon: mdi:pump
+              entity: switch.pentair_water_feature
+            - type: entity-button
+              icon: mdi:lightbulb
+              entity: switch.pentair_pool_light
+        - type: horizontal-stack
+          cards:
+            - type: entity-button
+              icon: mdi:pump
+              entity: switch.pentair_floor_cleaner
+            - type: entity-button
+              icon: mdi:pump
+              entity: switch.pentair_high_speed
+        - type: horizontal-stack
+          title: Light Colors
+          cards:
+            - type: vertical-stack
+              cards:
+                - type: entity-button
+                  entity: script.pentair_lights_red
+                  name: Red
+                  icon: mdi:radiobox-marked
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_red
+                - type: entity-button
+                  entity: script.pentair_lights_purple
+                  name: Purple
+                  icon: mdi:radiobox-marked
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_purple
+            - type: vertical-stack
+              cards:
+                - type: entity-button
+                  entity: script.pentair_lights_green
+                  name: Green
+                  icon: mdi:radiobox-marked
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_green
+                - type: entity-button
+                  entity: script.pentair_lights_white
+                  name: White
+                  icon: mdi:radiobox-marked
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_white
+            - type: vertical-stack
+              cards:
+                - type:  entity-button
+                  entity: script.pentair_lights_blue
+                  name: Blue
+                  icon: mdi:radiobox-marked
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_blue
+        - type: horizontal-stack
+          title: Light Modes
+          cards:
+            - type: vertical-stack
+              cards:
+                - type: entity-button
+                  entity: script.pentair_lights_party
+                  name: Party
+                  icon: mdi:party-popper
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_party
+                - type: entity-button
+                  entity: script.pentair_lights_american
+                  name: American
+                  icon: mdi:flag
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_american
+            - type: vertical-stack
+              cards:
+                - type: entity-button
+                  entity: script.pentair_lights_romance
+                  name: Romance
+                  icon: mdi:heart
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_romance
+                - type: entity-button
+                  entity: script.pentair_lights_california_sunset
+                  name: California Sunset
+                  icon: mdi:weather-sunset
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_california_sunset
+            - type: vertical-stack
+              cards:
+                - type: entity-button
+                  entity: script.pentair_lights_caribbean
+                  name: Caribbean
+                  icon: mdi:palm-tree
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_caribbean
+                - type: entity-button
+                  entity: script.pentair_lights_royal
+                  name: Royal
+                  icon: mdi:crown
+                  tap_action:
+                    action: call-service
+                    service: script.pentair_lights_royal
+  #    cards:
+  #    - type: vertical-stack
+  #      title: Pool
+  #      cards:
+  #        - type: horizontal-stack
+  #          cards:
+  #            - type: entity-button
+  #              icon: mdi:pump
+  #              entity: switch.pentair_water_feature
+  #            - type: entity-button
+  #              icon: mdi:lightbulb
+  #              entity: switch.pentair_pool_light
+  #        - type: horizontal-stack
+  #          cards:
+  #            - type: entity-button
+  #              icon: mdi:pump
+  #              entity: switch.pentair_floor_cleaner
+  #            - type: entity-button
+  #              icon: mdi:pump
+  #              entity: switch.pentair_high_speed
+
+  - badges: []
+    #
     # load status
     #
     title: Load

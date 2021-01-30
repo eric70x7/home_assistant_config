@@ -86,6 +86,7 @@ switch: !include switches.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+# !include pentair-configuration-entries.yaml
 
 # Themes
 # enable mobile component
