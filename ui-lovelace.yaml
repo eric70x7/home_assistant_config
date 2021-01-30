@@ -156,7 +156,7 @@ views:
           title: Controls
           cards:
             - type: entity-button
-              icon: mdi:pump
+              icon: mdi:waves
               entity: switch.pentair_water_feature
             - type: entity-button
               icon: mdi:lightbulb
@@ -169,6 +169,8 @@ views:
             - type: entity-button
               icon: mdi:pump
               entity: switch.pentair_high_speed
+        - type: sensor
+          entity: sensor.pentair_pooltemp
         - type: horizontal-stack
           title: Light Colors
           cards:

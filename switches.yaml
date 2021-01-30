@@ -197,22 +197,22 @@
 
 # Pentair switches
 - platform: mqtt
-  name: pentair_water_feature
+  unique_id:  pentair_water_feature
   command_topic: pentair/circuit/500/command
   state_topic: pentair/circuit/500/state
 
 - platform: mqtt
-  name: pentair_pool_light
+  unique_id: pentair_pool_light
   command_topic: pentair/circuit/501/command
   state_topic: pentair/circuit/501/state
 
 - platform: mqtt
-  name: pentair_floor_cleaner
+  unique_id: pentair_floor_cleaner
   command_topic: pentair/circuit/502/command
   state_topic: pentair/circuit/502/state
 
 - platform: mqtt
-  name: pentair_high_speed
+  unique_id: pentair_high_speed
   command_topic: pentair/circuit/503/command
   state_topic: pentair/circuit/503/state
 

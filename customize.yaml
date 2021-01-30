@@ -49,3 +49,15 @@ sensor.monthly_production:
   hidden: True
 sensor.yearly_production:
   hidden: True
+
+# Pool
+sensor.pentair_pooltemp:
+  friendly_name: "Pool Temperature"
+switch.pentair_pool_light:
+  friendly_name: "Pool Lights"
+switch.pentair_water_feature:
+  friendly_name: "Waterfalls"
+switch.pentair_floor_cleaner:
+  friendly_name: "Floor cleaner"
+switch.pentair_high_speed:
+  friendly_name: "High speed pump"
