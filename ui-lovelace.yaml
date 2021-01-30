@@ -153,24 +153,24 @@ views:
       - type: vertical-stack
         cards:
         - type: horizontal-stack
-          title: Controls
+          title: Pool
           cards:
+            - type: sensor
+              entity: sensor.pentair_pooltemp
             - type: entity-button
-              icon: mdi:waves
-              entity: switch.pentair_water_feature
-            - type: entity-button
-              icon: mdi:lightbulb
               entity: switch.pentair_pool_light
         - type: horizontal-stack
           cards:
             - type: entity-button
-              icon: mdi:pump
+              entity: switch.pentair_pool
+            - type: entity-button
+              entity: switch.pentair_water_feature
+        - type: horizontal-stack
+          cards:
+            - type: entity-button
               entity: switch.pentair_floor_cleaner
             - type: entity-button
-              icon: mdi:pump
               entity: switch.pentair_high_speed
-        - type: sensor
-          entity: sensor.pentair_pooltemp
         - type: horizontal-stack
           title: Light Colors
           cards:
