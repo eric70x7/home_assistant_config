@@ -72,20 +72,16 @@ switch.pentair_pool:
 # zwave - 
 # rename the entity_id from the UI in configuration->entities
 # then add other customizations here
+
+# Inside lights
 switch.family_room_light:
   friendly_name: "Family Room Light"
   icon: mdi:lightbulb
 switch.dining_room_light:
   friendly_name: "Dining Room Light"
   icon: mdi:lightbulb
-switch.front_lights:
-  friendly_name: "Front Lights"
-  icon: mdi:lightbulb
 switch.loft_light:
   friendly_name: "Loft Light"
-  icon: mdi:lightbulb
-switch.string_lights:
-  friendly_name: "String Lights"
   icon: mdi:lightbulb
 switch.stair_lights:
   friendly_name: "Stair Lights"
@@ -96,6 +92,16 @@ switch.breakfast_area_light:
 switch.desk_lights:
   friendly_name: "Eric's Desk Lights"
   icon: mdi:lightbulb
+
+# Front yard lights
+switch.front_lights:
+  friendly_name: "Front Lights"
+  icon: mdi:lightbulb
 switch.christmas_lights:
   friendly_name: "Christmas Lights"
+  icon: mdi:lightbulb
+
+# Back yard lights
+switch.string_lights:
+  friendly_name: "String Lights"
   icon: mdi:lightbulb

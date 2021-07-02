@@ -171,6 +171,8 @@ views:
               entity: switch.pentair_floor_cleaner
             - type: entity-button
               entity: switch.pentair_high_speed
+#        - type: entity-button
+#          entity: switch.aerate_the_pool
         - type: horizontal-stack
           title: Light Colors
           cards:
@@ -333,34 +335,31 @@ views:
           - input_number.precool_temp
           - input_number.daytime_heat
           - input_number.nighttime_heat
-#  - badges: []
-#    #
-#    # energy usage
-#    #
-#    title: Energy
-#    path: energy
-#    cards:
-#      #
-#      # demand values
-#      #
-#      - title: Home Energy Usage
-#        type: sensor
-#        show_header_toggle: false
-#        entities:
-#          - sensor.energy_usage
-#          - sensor.fast_demand
-#          - sensor.medium_demand
-#          - sensor.medium_long_demand
-#          - sensor.1_hr_demand
-#      #
-#      # demand graphs
-#      #
-#      - title: Detailed Demand
-#        type: history-graph
-#        hours_to_show: 24
-#        refresh_interval: 60
-#        entities:
-#          - sensor.fast_demand
-#          - sensor.medium_demand
-#          - sensor.medium_long_demand
-#          - sensor.1_hr_demand
+  - badges: []
+    #
+    # Activity monitor
+    #
+    title: Activity
+    path: activity
+    cards:
+      #
+      # doggie door
+      #
+      - title: Doggie Door
+        type: history-graph
+        hours_to_show: 1
+        refresh_interval: 60
+        entities:
+          - sensor.doggie_door_motion
+      - title: Stair Lights
+        type: history-graph
+        hours-to-show: 1
+        refresh_interval: 60
+        entities:
+          - switch.stair_lights
+      - title: Dog Timer
+        type: history-graph
+        hours-to-show: 1
+        refresh_interval: 60
+        entities:
+          - timer.dog_lights          

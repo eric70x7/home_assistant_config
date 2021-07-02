@@ -24,3 +24,17 @@
   command_topic: pentair/circuit/505/command
   state_topic: pentair/circuit/505/state
 
+- platform: template
+  switches:
+    aerate_the_pool:
+      friendly_name: Pool Aeration
+      icon_template: mdi:chart-bubble
+      # value_template: "{{ is_state_attr('switch.pentair_floor_cleaner', 'sensor_state', 'on') and is_state_attr('switch.pentair_water_feature', 'sensor_state', 'on') and is_state_attr('switch.pentair_high_speed', 'sensor_state', 'on') }}"
+      turn_on:
+        service: homeassistant.turn_on
+        data: 
+          entity_id: group.pool_aeration
+      turn_off:
+        service: homeassistant.turn_off
+        data:
+          entity_id: group.pool_aeration

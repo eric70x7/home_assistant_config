@@ -37,4 +37,3 @@
     downstairs_state:
       friendly_name: Downstairs State
       value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'hvac_action') }}"
-

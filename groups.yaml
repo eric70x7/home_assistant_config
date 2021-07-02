@@ -4,36 +4,36 @@
 all_the_lights:
   name: All The Lights
   entities:
-    - switch.zooz_zen21_switch_v2_0_switch
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
-    - switch.zooz_zen21_switch_v2_0_switch_2
-    - switch.zooz_zen21_switch_v2_0_switch_3
-    
-all_inside_lights:
-  name: All Inside Lights
-  entities:
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
-    - switch.zooz_zen21_switch_v2_0_switch_2
-    - switch.zooz_zen21_switch_v2_0_switch_3
+    - switch.family_room_light 
+    - switch.dining_room_light 
+    - switch.loft_light 
+    - switch.stair_lights 
+    - switch.breakfast_area_light 
+    - switch.desk_lights 
     
 ambient_lights:
   name: Ambient Lights
   entities:
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_2
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_3
+    - switch.loft_light
+    - switch.family_room_light
+    - switch.dining_room_light
     
 front_lights:
   name: Front Yard Lights
   entities:
-    - switch.zooz_zen21_switch_v2_0_switch
+    - switch.front_lights
+    - switch.christmas_lights
 
 back_yard_lights:
   name: Back Yard Lights
   entities:
-    - switch.shenzhen_neo_electronics_co_ltd_power_plug_12a_switch_4
+    - switch.string_lights
+
+pool_aeration:
+  name: Pool Aeration
+  icon: mdk:chart-bubble
+  all: true
+  entities:
+    - switch.pentair_floor_cleaner
+    - switch.pentair_water_feature
+    - switch.pentair_high_speed

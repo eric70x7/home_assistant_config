@@ -78,6 +78,11 @@ zwave:
 # Turn on system health monitor
 system_health:
 
+# Timers
+timer:
+  dog_lights:
+    duration: "00:05:00"
+
 recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 http: !include http.yaml

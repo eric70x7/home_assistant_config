@@ -17,6 +17,7 @@
     service: python_script.load_control
     data_template:
       debug: 0
+
 - id: precool
   alias: precool
   trigger:
@@ -34,6 +35,7 @@
     service: python_script.precool
     data_template:
       debug: 0
+
 - id: start_peak_time
   alias: start_peak_time
   trigger:
@@ -48,20 +50,21 @@
     - thu
     - fri
   action:
-    - service: python_script.target_temp
-      data_template:
-        debug: 0
-    - service: switch.turn_off
-      entity_id: switch.downstairs_circulate
-    - service: switch.turn_off
-      entity_id: switch.upstairs_circulate
+  - service: python_script.target_temp
+    data_template:
+      debug: 0
+  - service: switch.turn_off
+    entity_id: switch.downstairs_circulate
+  - service: switch.turn_off
+    entity_id: switch.upstairs_circulate
+
 - id: target_temp
   alias: target_temp
   trigger:
-    platform: time
+  - platform: time
     at: '20:00'
   condition:
-    condition: time
+  - condition: time
     weekday:
     - mon
     - tue
@@ -69,29 +72,29 @@
     - thu
     - fri
   action:
-    - service: python_script.target_temp
-      data_template:
-        debug: 0
-    - service: switch.turn_on
-      entity_id: switch.downstairs_circulate
-    - service: switch.turn_on
-      entity_id: switch.upstairs_circulate
+  - service: python_script.target_temp
+    data_template:
+      debug: 0
+  mode: single
+
 - id: front_lights_on
   alias: Front yard lights on at sunset
   trigger:
-    platform: sun
+  - platform: sun
     event: sunset
   condition: []
   action:
-    service: switch.turn_on
-    entity_id: switch.zooz_zen21_switch_v2_0_switch
+  - service: switch.turn_on
+    entity_id: switch.front_lights
+  mode: single
+
 - id: front_lights_off_weekday
   alias: Front yard lights off for the night weekday
   trigger:
-    platform: time
+  - platform: time
     at: '22:00'
   condition:
-    condition: time
+  - condition: time
     weekday:
     - sun
     - mon
@@ -99,21 +102,25 @@
     - wed
     - thu
   action:
-    service: switch.turn_off
-    entity_id: switch.zooz_zen21_switch_v2_0_switch
+  - service: switch.turn_off
+    entity_id: switch.front_lights
+  mode: single
+
 - id: front_lights_off_weekend
   alias: Front yard lights off for the night weekend
   trigger:
-    platform: time
+  - platform: time
     at: '23:59'
   condition:
-    condition: time
+  - condition: time
     weekday:
     - fri
     - sat
   action:
-    service: switch.turn_off
-    entity_id: switch.zooz_zen21_switch_v2_0_switch
+  - service: switch.turn_off
+    entity_id: switch.front_lights
+  mode: single
+
 - id: ambient_lights_sunset
   alias: Ambient lights on at sunset
   trigger:
@@ -126,6 +133,7 @@
     entity_id: group.ambient_lights
   - service: homeassistant.turn_on
     entity_id: group.back_yard_lights
+
 - id: ambient_lights_off
   alias: Ambient lights off at night
   trigger:
@@ -137,6 +145,7 @@
     service: homeassistant.turn_off
   - entity_id: group.back_yard_lights
     service: homeassistant.turn_off
+
 - id: ambient_lights_morning_on
   alias: Ambient lights on in the morning
   trigger:
@@ -153,6 +162,7 @@
   action:
     service: homeassistant.turn_on
     entity_id: group.ambient_lights
+
 - id: ambient_lights_morning_off
   alias: Ambient lights off in the morning
   trigger:
@@ -169,7 +179,7 @@
   action:
     service: homeassistant.turn_off
     entity_id: group.ambient_lights
-# Christmas lights
+
 - id: christmas_lights_on_evening
   alias: Christmas yard lights on at sunset
   trigger:
@@ -179,6 +189,7 @@
   action:
     service: switch.turn_on
     entity_id: switch.christmas_lights
+
 - id: christmas_lights_off_evening
   alias: Christmans yard lights off for the night
   trigger:
@@ -188,33 +199,36 @@
   action:
     service: switch.turn_off
     entity_id: switch.christmas_lights
+
 - id: christmas_lights_on_morning
   alias: Christmas yard lights on in the morning
   trigger:
     platform: sun
     event: sunrise
-    offset: '-01:00'
+    offset: -01:00
   condition: []
   action:
     service: switch.turn_on
     entity_id: switch.christmas_lights
+
 - id: christmas_lights_off_morning
   alias: Christmans yard lights off in the morning
   trigger:
     platform: sun
     event: sunrise
-    offset: '+0:30'
+    offset: +0:30
   condition: []
   action:
     service: switch.turn_off
     entity_id: switch.christmas_lights
+
 - id: set_nighttime_heat
   alias: Set nighttime heat
   trigger:
-    platform: time
-    at: '18:00'
+  - platform: time
+    at: '14:00'
   condition:
-    condition: time
+  - condition: time
     weekday:
     - mon
     - tue
@@ -224,9 +238,11 @@
     - sat
     - sun
   action:
-    service: python_script.nighttime_heat
+  - service: python_script.nighttime_heat
     data_template:
       debug: 0
+  mode: single
+
 - id: set_daytime_heat_weekday
   alias: Set daytime heat weekdays
   trigger:
@@ -244,6 +260,7 @@
     service: python_script.daytime_heat
     data_template:
       debug: 0
+
 - id: set_daytime_heat_weekend
   alias: Set daytime heat weekends
   trigger:
@@ -258,3 +275,31 @@
     service: python_script.daytime_heat
     data_template:
       debug: 0
+
+- id: dog_lights_off
+  alias: Turn lights off when the doggie door motion timer expires
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.dog_lights
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.stair_lights
+
+- id: dog_lights_on
+  alias: Turn lights on when there is motion at the doggie door
+  trigger:
+    platform: state
+    entity_id: sensor.doggie_door_motion
+    from: "0"
+    to: "8"
+  condition:
+    - condition: time
+      after: '22:00:00'
+      before: '05:30:00'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.stair_lights
+    - service: timer.start
+      entity_id: timer.dog_lights
