@@ -2,7 +2,28 @@
   alias: energy_update
   trigger:
     platform: time_pattern
-    minutes: /10
+    minutes: /5
+  condition:
+    condition: time
+    after: '15:09:00'
+    before: '19:59:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: python_script.simple_load_control
+    data_template:
+      debug: 0
+      kWH_limit: "{{ states('input_number.kwh_limit') }}"
+
+- id: energy_update_legacy
+  alias: energy_update_legacy
+  trigger:
+    platform: time_pattern
+    minutes: /5
   condition:
     condition: time
     after: '15:09:00'
@@ -276,6 +297,8 @@
     data_template:
       debug: 0
 
+#######################################################################
+# Doggie door
 - id: dog_lights_off
   alias: Turn lights off when the doggie door motion timer expires
   trigger:
@@ -290,16 +313,86 @@
 - id: dog_lights_on
   alias: Turn lights on when there is motion at the doggie door
   trigger:
-    platform: state
+  - platform: state
     entity_id: sensor.doggie_door_motion
-    from: "0"
-    to: "8"
+    from: '0'
+    to: '8'
   condition:
-    - condition: time
-      after: '22:00:00'
-      before: '05:30:00'
+  - condition: time
+    after: '22:30:00'
+    before: 05:30:00
   action:
-    - service: homeassistant.turn_on
-      entity_id: switch.stair_lights
-    - service: timer.start
+  - service: homeassistant.turn_on
+    entity_id: switch.stair_lights
+  - service: timer.start
+    data:
+      duration: '0'
+    target:
       entity_id: timer.dog_lights
+  mode: single
+
+#######################################################################
+# Only allow one AC on at a time
+# Unfortunately you can't set the temp when the unit is off.
+# And I'm not sure it saves much because the upstairs stays on twice 
+# as long as with both of them.
+#
+#- id: downstairs_ac_on
+#  alias: Turn off upstairs AC when downstairs AC turns on
+#  trigger:
+#  - platform: state
+#    entity_id: sensor.downstairs_cooling
+#    from: '0'
+#    to: '1'
+#  condition:
+#  - condition: time
+#    after: '15:00:00'
+#    before: '20:00:00'
+#  action:
+#  - service: climate.turn_off
+#    entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+#
+#- id: downstairs_ac_off
+#  alias: Turn on upstairs AC when downstairs AC turns off
+#  trigger:
+#  - platform: state
+#    entity_id: sensor.downstairs_cooling
+#    from: '1'
+#    to: '0'
+#  condition:
+#  - condition: time
+#    after: '15:00:00'
+#    before: '20:00:00'
+#  action:
+#  - service: climate.turn_on
+#    entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+
+#- id: upstairs_ac_on
+#  alias: Turn off downstairs AC when upstairs AC turns on
+#  trigger:
+#  - platform: state
+#    entity_id: sensor.upstairs_cooling
+#    from: '0'
+#    to: '1'
+#  condition:
+#  - condition: time
+#    after: '15:00:00'
+#    before: '20:00:00'
+#  action:
+#  - service: climate.turn_off
+#    entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode
+
+#- id: upstairs_ac_off
+#  alias: Turn on downstairs AC when upstairs AC turns off
+#  trigger:
+#  - platform: state
+#    entity_id: sensor.upstairs_cooling
+#    from: '1'
+#    to: '0'
+#  condition:
+#  - condition: time
+#    after: '15:00:00'
+#    before: '20:00:00'
+#  action:
+#  - service: climate.turn_on
+#    entity_id: climate.trane_corporation_model_tzemt524aa21ma_mode

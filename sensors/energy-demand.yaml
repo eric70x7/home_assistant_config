@@ -64,3 +64,107 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: "{{ (states('sensor.fast_usage') | float)/1000 }}"
+
+#
+# Peak interval usages
+#
+# Usage during peak time, zero otherwise
+- platform: template
+  sensors:
+    peak_time_usage:
+      friendly_name: "Peak Time Usage"
+      unit_of_measurement: 'W'
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ states('sensor.energy_usage') }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+
+# 1 hour
+- platform: filter
+  name: "1 hr peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 01:00
+      precision: 2
+- platform: template
+  sensors:
+    1_hr_peak_time_demand:
+      friendly_name: 1 Hr Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}"
+
+# Medium time
+- platform: filter
+  name: "Medium peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:20
+      precision: 2
+- platform: template
+  sensors:
+    medium_peak_time_demand:
+      friendly_name: 20 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.medium_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ (states('sensor.medium_peak_time_usage') | float)/1000 }}"
+
+# Medium time
+- platform: filter
+  name: "Medium long peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:40
+      precision: 2
+- platform: template
+  sensors:
+    medium_long_peak_time_demand:
+      friendly_name: 40 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.medium_long_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ (states('sensor.medium_long_peak_time_usage') | float)/1000 }}"
+
+# Fast time
+- platform: filter
+  name: "Fast peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:10
+      precision: 2
+- platform: template
+  sensors:
+    fast_peak_time_demand:
+      friendly_name: 10 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.fast_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ (states('sensor.fast_peak_time_usage') | float)/1000 }}"

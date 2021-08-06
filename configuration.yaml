@@ -91,6 +91,26 @@ switch: !include switches.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+
+influxdb:
+  api_version: 1
+  host: 192.168.0.84 # js1
+  include:
+    domains:
+      - sensor
+#    entities:
+#      - sensor.energy_usage
+#      - sensor.1_hr_demand
+#      - sensor.fast_demand
+#      - sensor.medium_demand
+#      - sensor.medium_long_demand
+#      - sensor.ambient_temp
+#      - sensor.ambient_uv
+#      - sensor.ambient_temp_1 # Upstairs
+#      - sensor.ambient_temp_2 # Downstairs
+#      - sensor.ambient_temp_6 # Becca
+#      - sensor.ambient_temp_7 # Neil
+
 # !include pentair-configuration-entries.yaml
 
 # Themes

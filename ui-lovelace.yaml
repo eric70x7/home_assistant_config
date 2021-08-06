@@ -314,7 +314,11 @@ views:
         refresh_interval: 60
         entities:
           - sensor.1_hr_demand
+          - sensor.1_hr_peak_time_demand
+          - sensor.energy_usage
           - sensor.ambient_temp
+          - sensor.upstairs_cooling
+          - sensor.downstairs_cooling
   - badges: []
     #
     # energy control
@@ -363,3 +367,9 @@ views:
         refresh_interval: 60
         entities:
           - timer.dog_lights          
+      - title: Peak Energy Demand
+        type: history-graph
+        hours-to-show: 1
+        refresh_interval: 60
+        entities:
+          - sensor.peak_time_usage               
