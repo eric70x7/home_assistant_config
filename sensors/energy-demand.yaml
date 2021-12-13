@@ -17,6 +17,22 @@
       icon_template: "mdi:flash"
       value_template: "{{ ((states('sensor.1_hr_usage') | float)/1000) | round(3) }}"
 
+# 50 min
+- platform: filter
+  name: "50 min usage"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:50
+      precision: 2
+- platform: template
+  sensors:
+    50_min_demand:
+      friendly_name: 50 Min Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.50_min_usage') | float)/1000 }}"
+
 # Medium time
 - platform: filter
   name: "Medium usage"
@@ -32,6 +48,22 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: "{{ (states('sensor.medium_usage') | float)/1000 }}"
+
+# Medium time
+- platform: filter
+  name: "Usage 25"
+  entity_id: sensor.energy_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:25
+      precision: 2
+- platform: template
+  sensors:
+    demand_25:
+      friendly_name: 25 Min Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: "{{ (states('sensor.usage_25') | float)/1000 }}"
 
 # Medium time
 - platform: filter
@@ -65,7 +97,7 @@
       icon_template: "mdi:flash"
       value_template: "{{ (states('sensor.fast_usage') | float)/1000 }}"
 
-#
+###############################################################################
 # Peak interval usages
 #
 # Usage during peak time, zero otherwise
@@ -103,7 +135,117 @@
         {% endif %}
 #        value_template: "{{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}"
 
-# Medium time
+# 55 minute
+- platform: filter
+  name: "55 min peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 0:55
+      precision: 2
+- platform: template
+  sensors:
+    55_min_peak_time_demand:
+      friendly_name: 55 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.55_min_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.55_min_peak_time_usage') | float)/1000) }}"
+
+# 50 minute
+- platform: filter
+  name: "50 min peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 0:50
+      precision: 2
+- platform: template
+  sensors:
+    50_min_peak_time_demand:
+      friendly_name: 50 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.50_min_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.50_min_peak_time_usage') | float)/1000) }}"
+
+# 25 minute
+- platform: filter
+  name: "25 min peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 0:25
+      precision: 2
+- platform: template
+  sensors:
+    25_min_peak_time_demand:
+      friendly_name: 25 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.25_min_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.25_min_peak_time_usage') | float)/1000) }}"
+
+# 15 minute
+- platform: filter
+  name: "15 min peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 0:15
+      precision: 2
+- platform: template
+  sensors:
+    15_min_peak_time_demand:
+      friendly_name: 15 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.15_min_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.15_min_peak_time_usage') | float)/1000) }}"
+
+# 5 minute
+- platform: filter
+  name: "5 min peak time usage"
+  entity_id: sensor.peak_time_usage
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 0:05
+      precision: 2
+- platform: template
+  sensors:
+    5_min_peak_time_demand:
+      friendly_name: 5 Min Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if now().hour >= 15 and now().hour < 20 %}
+          {{ ((states('sensor.5_min_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
+#        value_template: "{{ ((states('sensor.5_min_peak_time_usage') | float)/1000) }}"
+
+# 20 min
 - platform: filter
   name: "Medium peak time usage"
   entity_id: sensor.peak_time_usage
@@ -125,7 +267,7 @@
         {% endif %}
 #        value_template: "{{ (states('sensor.medium_peak_time_usage') | float)/1000 }}"
 
-# Medium time
+# 40 min
 - platform: filter
   name: "Medium long peak time usage"
   entity_id: sensor.peak_time_usage
@@ -147,7 +289,7 @@
         {% endif %}
 #        value_template: "{{ (states('sensor.medium_long_peak_time_usage') | float)/1000 }}"
 
-# Fast time
+# 10 min
 - platform: filter
   name: "Fast peak time usage"
   entity_id: sensor.peak_time_usage
@@ -168,3 +310,41 @@
           {{ 0 | float }}
         {% endif %}
 #        value_template: "{{ (states('sensor.fast_peak_time_usage') | float)/1000 }}"
+
+- platform: template
+  sensors:
+    ac_timer_active:
+      friendly_name: AC Timer Active
+      value_template: >
+        {% if is_state('timer.ac_run_timer', 'idle') %}
+          {{ 0 | int }}
+        {% else %}
+          {{ 1 | int }}
+        {% endif %}
+
+- platform: template
+  sensors:
+    ac_timer_remaining:
+      friendly_name: "AC Timer Remaining"
+      value_template: >-
+        {%- if (states['timer.ac_run_timer'].attributes.duration == "none") or (states['timer.ac_run_timer'].state == "idle") -%}
+        {{ 0 | int }}
+        {%- else -%}
+        {{ ((((states['timer.ac_run_timer'].attributes.duration).split(':')[0] |int * 60 * 60) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[1] |int * 60 ) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[2] |int)) - (as_timestamp(now()) | float - states['sensor.timer_start_ac_run'].state | float) ) | int }}
+        {%- endif -%}
+      entity_id: 
+        - timer.ac_run_timer
+
+- platform: template
+  sensors:
+    predicted_demand_50:
+      friendly_name: "Predicted 1 hr demand"
+      value_template: "{{ states('input_number.predicted_demand_50') }}"
+      unit_of_measurement: 'kWh'
+
+- platform: template
+  sensors:
+    predicted_demand_30:
+      friendly_name: "Predicted 30 min demand"
+      value_template: "{{ states('input_number.predicted_demand_30') }}"
+      unit_of_measurement: 'kWh'

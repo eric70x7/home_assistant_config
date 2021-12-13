@@ -43,6 +43,22 @@ views:
                 name: Breakfast Area
   - badges: []
     #
+    # Activity monitor
+    #
+    title: Media
+    path: media
+    cards:
+      - type: media-control
+        entity: media_player.family_room_tv
+      - type: media-control
+        entity: media_player.living_room_un65ju639d
+      - type: media-control
+        entity: media_player.family_room_firestick
+      - type: media-control
+        entity: media_player.loft_firestick
+        
+  - badges: []
+    #
     # thermostat controls & temps
     #
     title: Air

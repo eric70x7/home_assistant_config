@@ -7,7 +7,7 @@ debug = int(data.get('debug', 1))
 
 target_temp = int(float(hass.states.get('input_number.hi_temp').state)) # 70
 
-# logger.info("Setting target to {}.".format(target_temp))
+logger.info("hi_temp: Setting target to {}.".format(target_temp))
 
 hass.services.call('python_script','set_temp',{'location':'downstairs',
                                                'setpoint':target_temp,

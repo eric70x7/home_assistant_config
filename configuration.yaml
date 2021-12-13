@@ -82,6 +82,20 @@ system_health:
 timer:
   dog_lights:
     duration: "00:05:00"
+  ac_run_timer:
+
+# media
+media_player:
+  - platform: samsungtv
+    name: family_room_tv
+  - platform: samsungtv
+    name: living_room_un65ju639d
+  - platform: androidtv
+    name: family_room_firestick
+    host: 192.168.0.3
+  - platform: androidtv
+    name: loft_firestick
+    host: 192.168.0.13
 
 recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
@@ -94,10 +108,11 @@ script: !include scripts.yaml
 
 influxdb:
   api_version: 1
-  host: 192.168.0.84 # js1
+  host: 192.168.0.2 # js1
   include:
     domains:
       - sensor
+      - input_number
 #    entities:
 #      - sensor.energy_usage
 #      - sensor.1_hr_demand

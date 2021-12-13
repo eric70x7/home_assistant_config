@@ -46,3 +46,15 @@ downstairs_setpoint:
   min: 65
   max: 85
   step: 1
+predicted_demand_50:
+  name: Predicted 1 hr demand based on 1 hour usage
+  unit_of_measurement: 'kWH'
+  min: 0
+  max: 30
+  step: 0.01
+predicted_demand_30:
+  name: Predicted 30 min demand based on 30 min usage
+  unit_of_measurement: 'kWH'
+  min: 0
+  max: 30
+  step: 0.01
