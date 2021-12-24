@@ -344,9 +344,8 @@
   alias: Turn lights on when there is motion at the doggie door
   trigger:
   - platform: state
-    entity_id: sensor.doggie_door_motion
-    from: '0'
-    to: '8'
+    entity_id: binary_sensor.doggie_door_motion
+    to: 'on'
   condition:
   - condition: time
     after: '22:30:00'

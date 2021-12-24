@@ -71,9 +71,10 @@ ambient_station:
   app_key: !secret ambient_app_key
 
 # Z-wave
-zwave:
-  usb_path: /dev/ttyACM0
-  device_config: !include zwave.yaml
+# commented out after upgrading to zwave JS
+# zwave:
+#   usb_path: /dev/ttyACM0
+#   device_config: !include zwave.yaml
     
 # Turn on system health monitor
 system_health:

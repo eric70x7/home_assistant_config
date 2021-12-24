@@ -372,7 +372,7 @@ views:
         hours_to_show: 1
         refresh_interval: 60
         entities:
-          - sensor.doggie_door_motion
+          - binary_sensor.doggie_door_motion
       - title: Stair Lights
         type: history-graph
         hours-to-show: 1
