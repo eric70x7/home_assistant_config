@@ -77,8 +77,8 @@ switch.pentair_pool:
 switch.family_room_light:
   friendly_name: "Family Room Light"
   icon: mdi:lightbulb
-switch.dining_room_light:
-  friendly_name: "Dining Room Light"
+switch.front_room_light:
+  friendly_name: "Front Room Light"
   icon: mdi:lightbulb
 switch.loft_light:
   friendly_name: "Loft Light"
@@ -91,6 +91,9 @@ switch.breakfast_area_light:
   icon: mdi:lightbulb
 switch.desk_lights:
   friendly_name: "Eric's Desk Lights"
+  icon: mdi:lightbulb
+switch.master_light:
+  friendly_name: "Master Light"
   icon: mdi:lightbulb
 
 # Front yard lights

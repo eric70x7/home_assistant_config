@@ -5,18 +5,19 @@ all_the_lights:
   name: All The Lights
   entities:
     - switch.family_room_light 
-    - switch.dining_room_light 
+    - switch.front_room_light 
     - switch.loft_light 
     - switch.stair_lights 
     - switch.breakfast_area_light 
     - switch.desk_lights 
+    - switch.master_lights 
     
 ambient_lights:
   name: Ambient Lights
   entities:
     - switch.loft_light
     - switch.family_room_light
-    - switch.dining_room_light
+    - switch.front_room_light
     
 front_lights:
   name: Front Yard Lights
