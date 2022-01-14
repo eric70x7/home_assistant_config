@@ -359,3 +359,28 @@
     target:
       entity_id: timer.dog_lights
   mode: single
+
+# ios actions for Apple watch
+- id: toggle_desk_light
+  alias: Toggle desk lights with watch
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Desk lights"
+  action:
+    - service: switch.toggle
+      entity_id: switch.desk_lights
+
+- id: toggle_master_light
+  alias: Toggle master light with watch
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: "Master light"
+  action:
+    - service: switch.toggle
+      entity_id: switch.master_light

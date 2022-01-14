@@ -10,7 +10,7 @@ all_the_lights:
     - switch.stair_lights 
     - switch.breakfast_area_light 
     - switch.desk_lights 
-    - switch.master_lights 
+    - switch.master_light 
     
 ambient_lights:
   name: Ambient Lights

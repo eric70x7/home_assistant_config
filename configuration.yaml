@@ -98,6 +98,20 @@ media_player:
     name: loft_firestick
     host: 192.168.0.13
 
+# ios actions for Apple Watch
+ios:
+  actions:
+    - name: "Desk lights"
+      icon:
+        icon: lightbulb
+      label:
+        text: "Desk lights"
+    - name: "Master light"
+      icon:
+        icon: lightbulb
+      label:
+        text: "Master light"
+
 recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 http: !include http.yaml
