@@ -7,22 +7,22 @@
     upstairs_trane_temperature:
       friendly_name: Upstairs Trane Temperature
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'current_temperature') }}"
+      value_template: "{{ state_attr('climate.upstairs_trane_thermostat', 'current_temperature') }}"
     upstairs_cool_setpoint:
       friendly_name: Upstairs Cool Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'target_temp_high') }}"
+      value_template: "{{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_high') }}"
     upstairs_heat_setpoint:
       friendly_name: Upstairs Heat Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'target_temp_low') }}"
+      value_template: "{{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_low') }}"
     upstairs_state:
       friendly_name: Upstairs State
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'hvac_action') }}"
+      value_template: "{{ state_attr('climate.upstairs_trane_thermostat', 'hvac_action') }}"
     upstairs_cooling:
       friendly_name: Upstairs is cooling
       value_template: >
-        {% if is_state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode_2', 'hvac_action', 'cooling') %}
+        {% if is_state_attr('climate.upstairs_trane_thermostat', 'hvac_action', 'cooling') %}
           {{ 1 | int }}
         {% else %}
           {{ 0 | int }}
@@ -34,22 +34,22 @@
     downstairs_trane_temperature:
       friendly_name: Downstairs Trane Temperature
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'current_temperature') }}"
+      value_template: "{{ state_attr('climate.downstairs_trane_thermostat', 'current_temperature') }}"
     downstairs_cool_setpoint:
       friendly_name: Downstairs Cool Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'target_temp_high') }}"
+      value_template: "{{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_high') }}"
     downstairs_heat_setpoint:
       friendly_name: Downstairs Heat Setpoint
       unit_of_measurement: '°F'
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'target_temp_low') }}"
+      value_template: "{{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_low') }}"
     downstairs_state:
       friendly_name: Downstairs State
-      value_template: "{{ state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'hvac_action') }}"
+      value_template: "{{ state_attr('climate.downstairs_trane_thermostat', 'hvac_action') }}"
     downstairs_cooling:
       friendly_name: Downstairs is cooling
       value_template: >
-        {% if is_state_attr('climate.trane_corporation_model_tzemt524aa21ma_mode', 'hvac_action', 'cooling') %}
+        {% if is_state_attr('climate.downstairs_trane_thermostat', 'hvac_action', 'cooling') %}
           {{ 1 | int }}
         {% else %}
           {{ 0 | int }}

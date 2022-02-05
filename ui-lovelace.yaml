@@ -43,21 +43,21 @@ views:
               - type: entity-button
                 entity: switch.breakfast_area_light
                 name: Breakfast Area
-  - badges: []
-    #
-    # Activity monitor
-    #
-    title: Media
-    path: media
-    cards:
-      - type: media-control
-        entity: media_player.family_room_tv
-      - type: media-control
-        entity: media_player.living_room_un65ju639d
-      - type: media-control
-        entity: media_player.family_room_firestick
-      - type: media-control
-        entity: media_player.loft_firestick
+#  - badges: []
+#    #
+#    # Activity monitor
+#    #
+#    title: Media
+#    path: media
+#    cards:
+#      - type: media-control
+#        entity: media_player.family_room_tv
+#      - type: media-control
+#        entity: media_player.living_room_un65ju639d
+#      - type: media-control
+#        entity: media_player.family_room_firestick
+#      - type: media-control
+#        entity: media_player.loft_firestick
         
   - badges: []
     #
@@ -73,7 +73,7 @@ views:
           #
           - name: Upstairs
             type: 'thermostat'
-            entity: climate.trane_corporation_model_tzemt524aa21ma_mode_2
+            entity: climate.upstairs_trane_thermostat
           - title: Upstairs state
             type: history-graph
             hours_to_show: 24
@@ -85,7 +85,7 @@ views:
           #
           - name: Downstairs
             type: 'thermostat'
-            entity: climate.trane_corporation_model_tzemt524aa21ma_mode
+            entity: climate.downstairs_trane_thermostat
           - title: Downstairs state
             type: history-graph
             hours_to_show: 24
