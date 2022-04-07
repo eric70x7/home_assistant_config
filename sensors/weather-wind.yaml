@@ -1,0 +1,8 @@
+# Keep track of peak winds
+
+- platform: statistics
+  name: "Peak wind gust"
+  entity_id: sensor.ambient_wind_gust
+  state_characteristic: value_max
+  max_age:
+    minutes: 10

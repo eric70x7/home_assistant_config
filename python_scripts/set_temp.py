@@ -11,9 +11,9 @@ setpoint = data.get('setpoint')
 set_heat = data.get('set_heat', 0)
 
 if location == 'upstairs':
-    thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode_2'
+    thermostat_id = 'climate.upstairs_trane_thermostat'
 elif location == 'downstairs':
-    thermostat_id = 'climate.trane_corporation_model_tzemt524aa21ma_mode'
+    thermostat_id = 'climate.downstairs_trane_thermostat'
 else:
     logger.error("Set temperature called for bad location {}.".format(location))
 

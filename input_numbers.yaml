@@ -58,3 +58,8 @@ predicted_demand_30:
   min: 0
   max: 30
   step: 0.01
+wind_threshold:
+  name: Wind threshold
+  unit_of_measurement: 'mph'
+  min: 4
+  max: 12

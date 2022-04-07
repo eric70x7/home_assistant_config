@@ -21,6 +21,8 @@ views:
                 entity: switch.christmas_lights
               - type: entity-button
                 entity: switch.string_lights
+#              - type: entity-button
+#                entity: switch.back_tree_lights
               - type: entity-button
                 entity: switch.pentair_pool_light
           - type: horizontal-stack
@@ -43,6 +45,22 @@ views:
               - type: entity-button
                 entity: switch.breakfast_area_light
                 name: Breakfast Area
+      #
+      # Patio screens
+      #
+      - type: vertical-stack
+        title: Patio Screens
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: cover.back_patio_screens
+              - type: entity-button
+                entity: cover.west_patio_screen
+              - type: entity-button
+                entity: cover.middle_patio_screen
+              - type: entity-button
+                entity: cover.east_patio_screen
       #
       # Thermostats
       #
@@ -175,6 +193,14 @@ views:
               - input_number.precool_temp
               - input_number.daytime_heat
               - input_number.nighttime_heat
+      - type: vertical-stack
+        title: Wind Settings
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - input_number.wind_threshold
+
 #  - badges: []
 #    #
 #    # lighting control
@@ -339,6 +365,14 @@ views:
           - sensor.ambient_humidity
           - sensor.ambient_wind_speed
           - sensor.ambient_wind_gust
+      - title: Backyard Wind
+        type: history-graph
+        hours_to_show: 1
+        refresh_interval: 10
+        entities:
+          - sensor.ambient_wind_speed
+          - sensor.ambient_wind_gust
+          - sensor.peak_wind_gust
 #  - badges: []
 #    #
 #    # pool control

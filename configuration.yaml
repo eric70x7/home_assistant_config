@@ -120,10 +120,11 @@ switch: !include switches.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+cover: !include covers.yaml
 
 influxdb:
   api_version: 1
-  host: 192.168.0.2 # js1
+  host: 192.168.0.3 # js1
   include:
     domains:
       - sensor

@@ -1,0 +1,10 @@
+#
+# Back yard screens
+#
+
+- platform: group
+  name: "Back patio screens"
+  entities:
+    - cover.west_patio_screen
+    - cover.middle_patio_screen
+    - cover.east_patio_screen

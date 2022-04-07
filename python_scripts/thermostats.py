@@ -7,8 +7,8 @@ class Thermostats:
     def __init__(self):
         self.target_temp = int(float(hass.states.get('input_number.target_temp').state)) # 70
         self.target_hi = int(float(hass.states.get('input_number.hi_temp').state)) # 80
-        self.ds = hass.states.get('climate.trane_corporation_model_tzemt524aa21ma_cooling_1')
-        self.us = hass.states.get('climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2')
+        self.ds = hass.states.get('climate.downstairs_trane_thermostat')
+        self.us = hass.states.get('climate.upstairs_trane_thermostat')
     
     def us_setpoint(self):
         return self.us.attributes['temperature']
@@ -28,13 +28,13 @@ class Thermostats:
     def set_us(self, t):
         new_setpoint=self.limit(t)
         logger.info("Setting upstairs to {}".format(new_setpoint))
-        us_temp = {'entity_id': climate.trane_corporation_model_tzemt524aa21ma_cooling_1_2, 'temperature': new_setpoint}
+        us_temp = {'entity_id': 'climate.upstairs_trane_thermostat', 'temperature': new_setpoint}
         # hass.services.call('climate', 'set_temperature', us_temp)
         
     def set_ds(self, t):
         new_setpoint=self.limit(t)
         logger.info("Setting downstairs to {}".format(new_setpoint))
-        ds_temp = {'entity_id': trane_corporation_model_tzemt524aa21ma_cooling_1, 'temperature': new_setpoint}
+        ds_temp = {'entity_id': 'climate.downstairs_trane_thermostat', 'temperature': new_setpoint}
         # hass.services.call('climate', 'set_temperature', ds_temp)
         
     def adjust(self, delta_t) :

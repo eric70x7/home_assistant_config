@@ -95,6 +95,10 @@ switch.desk_lights:
 switch.master_light:
   friendly_name: "Master Light"
   icon: mdi:lightbulb
+#switch.back_tree_lights:
+#  friendly_name: "Back Tree Lights"
+#  icon: mdi:lightbulb
+
 
 # Front yard lights
 switch.front_lights:

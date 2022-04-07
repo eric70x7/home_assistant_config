@@ -360,6 +360,7 @@
       entity_id: timer.dog_lights
   mode: single
 
+#######################################################################
 # ios actions for Apple watch
 - id: toggle_desk_light
   alias: Toggle desk lights with watch
@@ -384,3 +385,24 @@
   action:
     - service: switch.toggle
       entity_id: switch.master_light
+
+#######################################################################
+# automations for backyard screens
+- id: raise_back_patio_screens_at_sunset
+  alias: Raise back patio screens at sunset
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: cover.open_cover
+      entity_id: cover.back_patio_screens
+
+- id: raise_back_patio_screens_due_to_wind
+  alias: Rase back patio screens due to wind
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.peak_wind_gust
+      above: "{{ states('input_number.wind_threshold') }}"
+  action:
+    - service: cover.open_cover
+      entity_id: cover.back_patio_screens

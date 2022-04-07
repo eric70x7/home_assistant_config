@@ -43,9 +43,9 @@ if demand_55 > kWH_limit or demand_25 > kWH_limit:
     new_ds_setpoint = target_hi
 else:
     logger.info("Cooling ON")
-    precool_temp = int(float(hass.states.get('input_number.precool_temp').state)) # 70
-    new_us_setpoint = precool_temp
-    new_ds_setpoint = precool_temp
+    target_temp = int(float(hass.states.get('input_number.target_temp').state)) # 70
+    new_us_setpoint = target_temp
+    new_ds_setpoint = target_temp
 
 logger.info("New settings: ds {}, us {}".format(new_ds_setpoint, new_us_setpoint))
 
