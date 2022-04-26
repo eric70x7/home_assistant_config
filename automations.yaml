@@ -388,21 +388,69 @@
 
 #######################################################################
 # automations for backyard screens
+- id: lower_west_patio_screen_in_the_afternoon
+  alias: Lower west patio screen in the afternoon
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: azimuth
+      above: 222
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  action:
+    - service: cover.close_cover
+      entity_id: cover.west_patio_screen
+
+- id: lower_middle_patio_screen_in_the_afternoon
+  alias: Lower middle patio screen in the afternoon
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: azimuth
+      above: 235
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  action:
+    - service: cover.close_cover
+      entity_id: cover.middle_patio_screen
+
+- id: lower_east_patio_screen_in_the_afternoon
+  alias: Lower east patio screen in the afternoon
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 26
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  action:
+    - service: cover.close_cover
+      entity_id: cover.east_patio_screen
+
 - id: raise_back_patio_screens_at_sunset
   alias: Raise back patio screens at sunset
   trigger:
-    - platform: sun
-      event: sunset
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 2
   action:
     - service: cover.open_cover
       entity_id: cover.back_patio_screens
 
 - id: raise_back_patio_screens_due_to_wind
-  alias: Rase back patio screens due to wind
+  alias: Raise back patio screens due to wind
   trigger:
     - platform: numeric_state
-      entity_id: sensor.peak_wind_gust
-      above: "{{ states('input_number.wind_threshold') }}"
+      entity_id: sensor.ambient_wind_gust
+      above: input_number.wind_threshold
   action:
     - service: cover.open_cover
       entity_id: cover.back_patio_screens
+

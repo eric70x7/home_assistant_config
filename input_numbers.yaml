@@ -62,4 +62,4 @@ wind_threshold:
   name: Wind threshold
   unit_of_measurement: 'mph'
   min: 4
-  max: 12
+  max: 16
