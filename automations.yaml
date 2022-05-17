@@ -1,5 +1,5 @@
 - id: energy_update
-  alias: energy_update
+  alias: "Energy: update"
   trigger:
     platform: time_pattern
     minutes: /5
@@ -25,7 +25,7 @@
 #      kWH_limit: "{{ states('input_number.kwh_limit') }}"
 
 - id: ac_run_timer_end
-  alias: Set high AC setpoint when the ac_timer expires
+  alias: "Energy: Set high AC setpoint when the ac_timer expires"
   trigger:
     platform: event
     event_type: timer.finished
@@ -37,7 +37,7 @@
       debug: 0
 
 - id: energy_update_legacy
-  alias: energy_update_legacy
+  alias: "Energy: energy_update_legacy"
   trigger:
     platform: time_pattern
     minutes: /5
@@ -57,7 +57,7 @@
       debug: 0
 
 - id: precool
-  alias: precool
+  alias: "Energy: precool"
   trigger:
     platform: time
     at: '13:30'
@@ -75,7 +75,7 @@
       debug: 0
 
 - id: start_peak_time
-  alias: start_peak_time
+  alias: "Energy: start peak time"
   trigger:
     platform: time
     at: '15:00'
@@ -97,7 +97,7 @@
     entity_id: switch.upstairs_circulate
 
 - id: target_temp
-  alias: target_temp
+  alias: "Energy: set target temp at end of peak time"
   trigger:
   - platform: time
     at: '20:00'
@@ -128,8 +128,71 @@
       value: 0
   mode: single
 
+#######################################################################
+# Scheduled target temps
+#
+- id: set_sleep_temp
+  alias: "Thermostat: Set bedtime temperature"
+  trigger:
+  - platform: time
+    at: '20:30'
+  action:
+  - service: python_script.set_temp
+    data_template:
+      location: "upstairs"
+      setpoint: "{{ states.input_number.sleep_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+  - service: python_script.set_temp
+    data_template:
+      location: "downstairs"
+      setpoint: "{{ states.input_number.sleep_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+
+- id: set_wake_temp
+  alias: "Thermostat: Set wake temperature"
+  trigger:
+  - platform: time
+    at: '05:00'
+  action:
+  - service: python_script.set_temp
+    data_template:
+      location: "upstairs"
+      setpoint: "{{ states.input_number.wake_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+  - service: python_script.set_temp
+    data_template:
+      location: "downstairs"
+      setpoint: "{{ states.input_number.wake_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+
+- id: set_daytime_temp
+  alias: "Thermostat: Set daytime temperature"
+  trigger:
+  - platform: time
+    at: '08:00'
+  action:
+  - service: python_script.set_temp
+    data_template:
+      location: "upstairs"
+      setpoint: "{{ states.input_number.target_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+  - service: python_script.set_temp
+    data_template:
+      location: "downstairs"
+      setpoint: "{{ states.input_number.target_temp.state|float }}"
+      set_heat: 0
+      debug: 0
+
+#######################################################################
+# Lights
+#
 - id: front_lights_on
-  alias: Front yard lights on at sunset
+  alias: "Lights: Front yard lights on at sunset"
   trigger:
   - platform: sun
     event: sunset
@@ -140,7 +203,7 @@
   mode: single
 
 - id: front_lights_off_weekday
-  alias: Front yard lights off for the night weekday
+  alias: "Lights: Front yard lights off for the night weekday"
   trigger:
   - platform: time
     at: '22:00'
@@ -158,7 +221,7 @@
   mode: single
 
 - id: front_lights_off_weekend
-  alias: Front yard lights off for the night weekend
+  alias: "Lights: Front yard lights off for the night weekend"
   trigger:
   - platform: time
     at: '23:59'
@@ -173,7 +236,7 @@
   mode: single
 
 - id: ambient_lights_sunset
-  alias: Ambient lights on at sunset
+  alias: "Lights: Ambient lights on at sunset"
   trigger:
     platform: sun
     event: sunset
@@ -186,7 +249,7 @@
   #  entity_id: group.back_yard_lights
 
 - id: ambient_lights_off
-  alias: Ambient lights off at night
+  alias: "Lights: Ambient lights off at night"
   trigger:
   - at: '22:00'
     platform: time
@@ -198,7 +261,7 @@
   #  service: homeassistant.turn_off
 
 - id: ambient_lights_morning_on
-  alias: Ambient lights on in the morning
+  alias: "Lights: Ambient lights on in the morning"
   trigger:
     platform: time
     at: '6:00'
@@ -215,7 +278,7 @@
     entity_id: group.ambient_lights
 
 - id: ambient_lights_morning_off
-  alias: Ambient lights off in the morning
+  alias: "Lights: Ambient lights off in the morning"
   trigger:
     platform: time
     at: '7:00'
@@ -232,7 +295,7 @@
     entity_id: group.ambient_lights
 
 - id: christmas_lights_on_evening
-  alias: Christmas yard lights on at sunset
+  alias: "Lights: Christmas yard lights on at sunset"
   trigger:
     platform: sun
     event: sunset
@@ -242,7 +305,7 @@
     entity_id: switch.christmas_lights
 
 - id: christmas_lights_off_evening
-  alias: Christmans yard lights off for the night
+  alias: "Lights: Christmans yard lights off for the night"
   trigger:
     platform: time
     at: '23:00'
@@ -252,7 +315,7 @@
     entity_id: switch.christmas_lights
 
 - id: christmas_lights_on_morning
-  alias: Christmas yard lights on in the morning
+  alias: "Lights: Christmas yard lights on in the morning"
   trigger:
     platform: sun
     event: sunrise
@@ -263,7 +326,7 @@
     entity_id: switch.christmas_lights
 
 - id: christmas_lights_off_morning
-  alias: Christmans yard lights off in the morning
+  alias: "Lights: Christmans yard lights off in the morning"
   trigger:
     platform: sun
     event: sunrise
@@ -274,7 +337,7 @@
     entity_id: switch.christmas_lights
 
 - id: set_nighttime_heat
-  alias: Set nighttime heat
+  alias: "Thermostat: Set nighttime heat"
   trigger:
   - platform: time
     at: '14:00'
@@ -295,7 +358,7 @@
   mode: single
 
 - id: set_daytime_heat_weekday
-  alias: Set daytime heat weekdays
+  alias: "Thermostat: Set daytime heat weekdays"
   trigger:
     platform: time
     at: '5:30'
@@ -313,7 +376,7 @@
       debug: 0
 
 - id: set_daytime_heat_weekend
-  alias: Set daytime heat weekends
+  alias: "Thermostat: Set daytime heat weekends"
   trigger:
     platform: time
     at: '7:00'
@@ -330,7 +393,7 @@
 #######################################################################
 # Doggie door
 - id: dog_lights_off
-  alias: Turn lights off when the doggie door motion timer expires
+  alias: "Doggie door: Turn lights off when the doggie door motion timer expires"
   trigger:
     platform: event
     event_type: timer.finished
@@ -341,7 +404,7 @@
     entity_id: switch.breakfast_area_light
 
 - id: dog_lights_on
-  alias: Turn lights on when there is motion at the doggie door
+  alias: "Doggie door: Turn lights on when there is motion at the doggie door"
   trigger:
   - platform: state
     entity_id: binary_sensor.doggie_door_motion
@@ -363,7 +426,7 @@
 #######################################################################
 # ios actions for Apple watch
 - id: toggle_desk_light
-  alias: Toggle desk lights with watch
+  alias: "Lights: Toggle desk lights with watch"
   initial_state: true
   trigger:
     - platform: event
@@ -375,7 +438,7 @@
       entity_id: switch.desk_lights
 
 - id: toggle_master_light
-  alias: Toggle master light with watch
+  alias: "Lights: Toggle master light with watch"
   initial_state: true
   trigger:
     - platform: event
@@ -389,7 +452,7 @@
 #######################################################################
 # automations for backyard screens
 - id: lower_west_patio_screen_in_the_afternoon
-  alias: Lower west patio screen in the afternoon
+  alias: "Screens: Lower west patio screen in the afternoon"
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
@@ -404,7 +467,7 @@
       entity_id: cover.west_patio_screen
 
 - id: lower_middle_patio_screen_in_the_afternoon
-  alias: Lower middle patio screen in the afternoon
+  alias: "Screens: Lower middle patio screen in the afternoon"
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
@@ -419,7 +482,7 @@
       entity_id: cover.middle_patio_screen
 
 - id: lower_east_patio_screen_in_the_afternoon
-  alias: Lower east patio screen in the afternoon
+  alias: "Screens: Lower east patio screen in the afternoon"
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
@@ -434,7 +497,7 @@
       entity_id: cover.east_patio_screen
 
 - id: raise_back_patio_screens_at_sunset
-  alias: Raise back patio screens at sunset
+  alias: "Screens: Raise back patio screens at sunset"
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
@@ -445,7 +508,7 @@
       entity_id: cover.back_patio_screens
 
 - id: raise_back_patio_screens_due_to_wind
-  alias: Raise back patio screens due to wind
+  alias: "Screens: Raise back patio screens due to wind"
   trigger:
     - platform: numeric_state
       entity_id: sensor.ambient_wind_gust
@@ -453,4 +516,3 @@
   action:
     - service: cover.open_cover
       entity_id: cover.back_patio_screens
-

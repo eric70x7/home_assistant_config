@@ -11,7 +11,19 @@ hi_temp:
   max: 85
   step: 1
 target_temp:
-  name: Target Temperature
+  name: Daytime Target Temperature
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+wake_temp:
+  name: Morning Target Temperature
+  unit_of_measurement: '°F'
+  min: 65
+  max: 85
+  step: 1
+sleep_temp:
+  name: Bedtime Target Temperature
   unit_of_measurement: '°F'
   min: 65
   max: 85

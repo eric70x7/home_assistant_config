@@ -191,6 +191,8 @@ views:
               - input_number.hi_temp
               - input_number.target_temp
               - input_number.precool_temp
+              - input_number.sleep_temp
+              - input_number.wake_temp
               - input_number.daytime_heat
               - input_number.nighttime_heat
       - type: vertical-stack
