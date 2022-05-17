@@ -18,11 +18,6 @@
     data_template:
       debug: 0
       kWH_limit: "{{ states('input_number.kwh_limit') }}"
-#    service: python_script.time_based_load_control
-#    data_template:
-#      debug: 0
-#      # kWH_limit: 4
-#      kWH_limit: "{{ states('input_number.kwh_limit') }}"
 
 - id: ac_run_timer_end
   alias: "Energy: Set high AC setpoint when the ac_timer expires"
@@ -188,6 +183,60 @@
       set_heat: 0
       debug: 0
 
+- id: set_nighttime_heat
+  alias: "Thermostat: Set nighttime heat"
+  trigger:
+  - platform: time
+    at: '14:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+  - service: python_script.nighttime_heat
+    data_template:
+      debug: 0
+  mode: single
+
+- id: set_daytime_heat_weekday
+  alias: "Thermostat: Set daytime heat weekdays"
+  trigger:
+    platform: time
+    at: '5:30'
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: python_script.daytime_heat
+    data_template:
+      debug: 0
+
+- id: set_daytime_heat_weekend
+  alias: "Thermostat: Set daytime heat weekends"
+  trigger:
+    platform: time
+    at: '7:00'
+  condition:
+    condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+    service: python_script.daytime_heat
+    data_template:
+      debug: 0
+
 #######################################################################
 # Lights
 #
@@ -335,60 +384,6 @@
   action:
     service: switch.turn_off
     entity_id: switch.christmas_lights
-
-- id: set_nighttime_heat
-  alias: "Thermostat: Set nighttime heat"
-  trigger:
-  - platform: time
-    at: '14:00'
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    - sat
-    - sun
-  action:
-  - service: python_script.nighttime_heat
-    data_template:
-      debug: 0
-  mode: single
-
-- id: set_daytime_heat_weekday
-  alias: "Thermostat: Set daytime heat weekdays"
-  trigger:
-    platform: time
-    at: '5:30'
-  condition:
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  action:
-    service: python_script.daytime_heat
-    data_template:
-      debug: 0
-
-- id: set_daytime_heat_weekend
-  alias: "Thermostat: Set daytime heat weekends"
-  trigger:
-    platform: time
-    at: '7:00'
-  condition:
-    condition: time
-    weekday:
-    - sat
-    - sun
-  action:
-    service: python_script.daytime_heat
-    data_template:
-      debug: 0
 
 #######################################################################
 # Doggie door
