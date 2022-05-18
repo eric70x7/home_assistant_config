@@ -294,8 +294,6 @@
   action:
   - service: homeassistant.turn_on
     entity_id: group.ambient_lights
-  #- service: homeassistant.turn_on
-  #  entity_id: group.back_yard_lights
 
 - id: ambient_lights_off
   alias: "Lights: Ambient lights off at night"
@@ -306,8 +304,6 @@
   action:
   - entity_id: group.ambient_lights
     service: homeassistant.turn_off
-  #- entity_id: group.back_yard_lights
-  #  service: homeassistant.turn_off
 
 - id: ambient_lights_morning_on
   alias: "Lights: Ambient lights on in the morning"
