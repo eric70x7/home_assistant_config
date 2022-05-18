@@ -31,11 +31,6 @@ default_config:
 lovelace:
   mode: yaml
   
-# Checks for available updates
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  include_used_components: true
-
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
