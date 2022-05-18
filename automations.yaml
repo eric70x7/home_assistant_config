@@ -343,6 +343,8 @@
     service: homeassistant.turn_off
     entity_id: group.ambient_lights
 
+#######################################################################
+# Doggie door
 - id: christmas_lights_on_evening
   alias: "Lights: Christmas yard lights on at sunset"
   trigger:
