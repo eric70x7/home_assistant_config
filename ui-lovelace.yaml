@@ -188,9 +188,9 @@ views:
             show_header_toggle: false
             entities:
               - input_number.kwh_limit
+              - input_number.precool_temp
               - input_number.hi_temp
               - input_number.target_temp
-              - input_number.precool_temp
               - input_number.sleep_temp
               - input_number.wake_temp
               - input_number.daytime_heat
