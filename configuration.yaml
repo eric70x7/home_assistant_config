@@ -113,7 +113,7 @@ http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 switch: !include switches.yaml
 group: !include groups.yaml
-automation: !include automations.yaml
+automation: !include my_automations.yaml
 script: !include scripts.yaml
 cover: !include covers.yaml
 
