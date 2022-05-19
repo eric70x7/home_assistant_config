@@ -67,19 +67,20 @@ set_heat = data.get('set_heat', 0)
 
 # Get the thermostat state object
 # See https://www.home-assistant.io/docs/configuration/state_object/
-thermostat=None
+thermostats=[]
 
-if location == 'upstairs':
-    thermostat = hass.states.get('climate.upstairs_trane_thermostat')
-elif location == 'downstairs':
-    thermostat = hass.states.get('climate.downstairs_trane_thermostat')
-else:
+if location == 'all' or location == 'upstairs':
+    thermostats.append(hass.states.get('climate.upstairs_trane_thermostat'))
+if location == 'all' or location == 'downstairs':
+    thermostats.append(hass.states.get('climate.downstairs_trane_thermostat'))
+
+if not thermostats:
     logger.error(f"Set temperature called for bad location {location}.")
-
-set_temp=get_temp_setter(thermostat, set_heat)
 
 # set the temperature
 if not debug:
-    set_temp(thermostat, setpoint)
+    for t in thermostats:
+        c=get_temp_setter(t, set_heat)
+        c(t,setpoint)
 else:
-    logger.info("Debug mode or bad entity state. No change made.")
+    logger.info("Debug mode. No change made.")
