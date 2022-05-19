@@ -17,7 +17,7 @@
     service: python_script.simple_load_control
     data_template:
       debug: 0
-      kWH_limit: "{{ states('input_number.kwh_limit') }}"
+      kWH_limit: '{{ states("input_number.kwh_limit") }}'
 
 - id: ac_run_timer_end
   alias: "Energy: Set high AC setpoint when the ac_timer expires"
@@ -27,9 +27,9 @@
     event_data:
       entity_id: timer.ac_run_timer
   action:
-    service: python_script.hi_temp
+    service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.hi_temp") }}'
 
 - id: energy_update_legacy
   alias: "Energy: energy_update_legacy"
@@ -65,9 +65,9 @@
     - thu
     - fri
   action:
-    service: python_script.precool
+    service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.precool_temp") }}'
 
 - id: start_peak_time
   alias: "Energy: start peak time"
@@ -83,9 +83,9 @@
     - thu
     - fri
   action:
-  - service: python_script.target_temp
+  - service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.target_temp") }}'
   - service: switch.turn_off
     entity_id: switch.downstairs_circulate
   - service: switch.turn_off
@@ -108,9 +108,9 @@
   - service: timer.cancel
     target:
       entity_id: timer.ac_run_timer
-  - service: python_script.target_temp
+  - service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.target_temp") }}'
   - service: input_number.set_value
     target:
       entity_id: input_number.predicted_demand_50
@@ -132,18 +132,9 @@
   - platform: time
     at: '20:30'
   action:
-  - service: python_script.set_temp
+    service: python_script.set_temp
     data_template:
-      location: "upstairs"
-      setpoint: "{{ states.input_number.sleep_temp.state|float }}"
-      set_heat: 0
-      debug: 0
-  - service: python_script.set_temp
-    data_template:
-      location: "downstairs"
-      setpoint: "{{ states.input_number.sleep_temp.state|float }}"
-      set_heat: 0
-      debug: 0
+      setpoint: '{{ states("input_number.sleep_temp") }}'
 
 - id: set_wake_temp
   alias: "Thermostat: Set wake temperature"
@@ -151,18 +142,9 @@
   - platform: time
     at: '05:00'
   action:
-  - service: python_script.set_temp
+    service: python_script.set_temp
     data_template:
-      location: "upstairs"
-      setpoint: "{{ states.input_number.wake_temp.state|float }}"
-      set_heat: 0
-      debug: 0
-  - service: python_script.set_temp
-    data_template:
-      location: "downstairs"
-      setpoint: "{{ states.input_number.wake_temp.state|float }}"
-      set_heat: 0
-      debug: 0
+      setpoint: '{{ states("input_number.wake_temp") }}'
 
 - id: set_daytime_temp
   alias: "Thermostat: Set daytime temperature"
@@ -170,18 +152,9 @@
   - platform: time
     at: '08:00'
   action:
-  - service: python_script.set_temp
+    service: python_script.set_temp
     data_template:
-      location: "upstairs"
-      setpoint: "{{ states.input_number.target_temp.state|float }}"
-      set_heat: 0
-      debug: 0
-  - service: python_script.set_temp
-    data_template:
-      location: "downstairs"
-      setpoint: "{{ states.input_number.target_temp.state|float }}"
-      set_heat: 0
-      debug: 0
+      setpoint: '{{ states("input_number.target_temp") }}'
 
 - id: set_nighttime_heat
   alias: "Thermostat: Set nighttime heat"
@@ -199,9 +172,10 @@
     - sat
     - sun
   action:
-  - service: python_script.nighttime_heat
+    service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.nighttime_heat") }}'
+      set_heat: 1
   mode: single
 
 - id: set_daytime_heat_weekday
@@ -218,9 +192,10 @@
     - thu
     - fri
   action:
-    service: python_script.daytime_heat
+    service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.daytime_heat") }}'
+      set_heat: 1
 
 - id: set_daytime_heat_weekend
   alias: "Thermostat: Set daytime heat weekends"
@@ -233,9 +208,10 @@
     - sat
     - sun
   action:
-    service: python_script.daytime_heat
+    service: python_script.set_temp
     data_template:
-      debug: 0
+      setpoint: '{{ states("input_number.daytime_heat") }}'
+      set_heat: 1
 
 #######################################################################
 # Lights

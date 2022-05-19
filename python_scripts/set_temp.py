@@ -57,11 +57,9 @@ def get_temp_setter(thermostat, set_heat):
 # Set the temperature main code
 #
 
-# debug mode is default
-debug = int(data.get('debug', 1))
-
-# name can be upstairs or downstairs
-location = data.get('location')
+# Default is no debug set cool setting on all thermostats
+debug    = int(data.get('debug', 0))
+location = data.get('location', 'all')
 setpoint = data.get('setpoint')
 set_heat = data.get('set_heat', 0)
 
@@ -74,13 +72,15 @@ if location == 'all' or location == 'upstairs':
 if location == 'all' or location == 'downstairs':
     thermostats.append(hass.states.get('climate.downstairs_trane_thermostat'))
 
+# set the temperature
 if not thermostats:
     logger.error(f"Set temperature called for bad location {location}.")
-
-# set the temperature
-if not debug:
+elif not isinstance(setpoint, int) and not isinstance(setpoint, float):
+    logger.error(f"Bad setpoint: {setpoint}")
+elif debug:
+    logger.info("Debug mode. No change made.")
+else:
+    # make the change
     for t in thermostats:
         c=get_temp_setter(t, set_heat)
         c(t,setpoint)
-else:
-    logger.info("Debug mode. No change made.")
