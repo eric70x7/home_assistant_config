@@ -133,7 +133,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}"
 
 # 55 minute
 - platform: filter
@@ -155,7 +154,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.55_min_peak_time_usage') | float)/1000) }}"
 
 # 50 minute
 - platform: filter
@@ -177,7 +175,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.50_min_peak_time_usage') | float)/1000) }}"
 
 # 25 minute
 - platform: filter
@@ -199,7 +196,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.25_min_peak_time_usage') | float)/1000) }}"
 
 # 15 minute
 - platform: filter
@@ -221,7 +217,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.15_min_peak_time_usage') | float)/1000) }}"
 
 # 5 minute
 - platform: filter
@@ -243,7 +238,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ ((states('sensor.5_min_peak_time_usage') | float)/1000) }}"
 
 # 20 min
 - platform: filter
@@ -265,7 +259,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ (states('sensor.medium_peak_time_usage') | float)/1000 }}"
 
 # 40 min
 - platform: filter
@@ -287,7 +280,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ (states('sensor.medium_long_peak_time_usage') | float)/1000 }}"
 
 # 10 min
 - platform: filter
@@ -309,7 +301,6 @@
         {% else %}
           {{ 0 | float }}
         {% endif %}
-#        value_template: "{{ (states('sensor.fast_peak_time_usage') | float)/1000 }}"
 
 - platform: template
   sensors:
@@ -328,9 +319,9 @@
       friendly_name: "AC Timer Remaining"
       value_template: >-
         {%- if (states['timer.ac_run_timer'].attributes.duration == "none") or (states['timer.ac_run_timer'].state == "idle") -%}
-        {{ 0 | int }}
+          {{ 0 | int }}
         {%- else -%}
-        {{ ((((states['timer.ac_run_timer'].attributes.duration).split(':')[0] |int * 60 * 60) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[1] |int * 60 ) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[2] |int)) - (as_timestamp(now()) | float - states['sensor.timer_start_ac_run'].state | float) ) | int }}
+          {{ ((((states['timer.ac_run_timer'].attributes.duration).split(':')[0] |int * 60 * 60) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[1] |int * 60 ) + ((states['timer.ac_run_timer'].attributes.duration).split(':')[2] |int)) - (as_timestamp(now()) | float - states['sensor.timer_start_ac_run'].state | float) ) | int }}
         {%- endif -%}
       entity_id: 
         - timer.ac_run_timer
