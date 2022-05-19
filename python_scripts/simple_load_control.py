@@ -34,7 +34,7 @@ logger.info("limit: {:.2f}, demand: 60: {:.2f}, 55: {:.2f}, 25: {:.2f}, 5: {:.2f
 # Get thermostat settings
 us_setpoint=float(hass.states.get('sensor.upstairs_cool_setpoint').state)
 ds_setpoint=float(hass.states.get('sensor.downstairs_cool_setpoint').state)
-logger.info("current setpoints: ds {}, us {}".format(ds_setpoint, us_setpoint))
+logger.info(f"Current setpoints: ds {ds_setpoint}, us {us_setpoint}")
 
 if demand_55 > kWH_limit or demand_25 > kWH_limit:
     logger.info("Cooling OFF")
