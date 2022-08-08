@@ -113,7 +113,6 @@ http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 switch: !include switches.yaml
 group: !include groups.yaml
-# These are automations added in the UI:
 automation: !include automations.yaml
 automation: !include my_automations.yaml
 script: !include scripts.yaml
