@@ -107,7 +107,7 @@
       friendly_name: "Peak Time Usage"
       unit_of_measurement: 'W'
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ states('sensor.energy_usage') }}
         {% else %}
           {{ 0 | float }}
@@ -128,7 +128,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -149,7 +149,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.55_min_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -170,7 +170,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.50_min_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -191,7 +191,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.25_min_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -212,7 +212,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.15_min_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -233,7 +233,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.5_min_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -254,7 +254,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.medium_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -275,7 +275,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.medium_long_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}
@@ -296,7 +296,7 @@
       unit_of_measurement: 'kWh'
       icon_template: "mdi:flash"
       value_template: >
-        {% if now().hour >= 15 and now().hour < 20 %}
+        {% if now().hour >= 16 and now().hour < 19 %}
           {{ ((states('sensor.fast_peak_time_usage') | float)/1000) }}
         {% else %}
           {{ 0 | float }}

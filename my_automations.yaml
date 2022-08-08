@@ -5,8 +5,8 @@
     minutes: /5
   condition:
     condition: time
-    after: '15:04:00'
-    before: '19:59:00'
+    after: '16:04:00'
+    before: '18:59:00'
     weekday:
     - mon
     - tue
@@ -35,7 +35,7 @@
   alias: "Energy: precool"
   trigger:
     platform: time
-    at: '13:30'
+    at: '14:30'
   condition:
     condition: time
     weekday:
@@ -53,7 +53,7 @@
   alias: "Energy: start peak time"
   trigger:
     platform: time
-    at: '15:00'
+    at: '16:00'
   condition:
     condition: time
     weekday:
@@ -75,7 +75,7 @@
   alias: "Energy: set target temp at end of peak time"
   trigger:
   - platform: time
-    at: '20:00'
+    at: '19:00'
   condition:
   - condition: time
     weekday:
@@ -296,7 +296,7 @@
     entity_id: group.ambient_lights
 
 #######################################################################
-# Doggie door
+# Christmas lights
 - id: christmas_lights_on_evening
   alias: "Lights: Christmas yard lights on at sunset"
   trigger:
@@ -400,13 +400,14 @@
 
 #######################################################################
 # automations for backyard screens
+# WEST screen
 - id: lower_west_patio_screen_in_the_afternoon
   alias: "Screens: Lower west patio screen in the afternoon"
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
       attribute: azimuth
-      above: 222
+      above: 156
   condition:
     - condition: numeric_state
       entity_id: sensor.peak_wind_gust
@@ -415,6 +416,27 @@
     - service: cover.close_cover
       entity_id: cover.west_patio_screen
 
+- id: lower_west_patio_screen_if_the_wind_dies_down
+  alias: "Screens: Lower west patio screen if the wind dies down"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  condition:
+    - and:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 156
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 2
+  action:
+    - service: cover.close_cover
+      entity_id: cover.west_patio_screen
+
+# MIDDLE screen
 - id: lower_middle_patio_screen_in_the_afternoon
   alias: "Screens: Lower middle patio screen in the afternoon"
   trigger:
@@ -430,6 +452,27 @@
     - service: cover.close_cover
       entity_id: cover.middle_patio_screen
 
+- id: lower_middle_patio_screen_if_the_wind_dies_down
+  alias: "Screens: Lower middle patio screen if the wind dies down"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  condition:
+    - and:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 235
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 2
+  action:
+    - service: cover.close_cover
+      entity_id: cover.middle_patio_screen
+
+# EAST screen
 - id: lower_east_patio_screen_in_the_afternoon
   alias: "Screens: Lower east patio screen in the afternoon"
   trigger:
@@ -445,6 +488,31 @@
     - service: cover.close_cover
       entity_id: cover.east_patio_screen
 
+- id: lower_east_patio_screen_if_the_wind_dies_down
+  alias: "Screens: Lower east patio screen if the wind dies down"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+  condition:
+    - and:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 235
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: 26
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 2
+  action:
+    - service: cover.close_cover
+      entity_id: cover.east_patio_screen
+
+# ALL screens
 - id: raise_back_patio_screens_at_sunset
   alias: "Screens: Raise back patio screens at sunset"
   trigger:
