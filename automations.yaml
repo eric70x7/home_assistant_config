@@ -47,4 +47,5 @@
       - service: cover.toggle
         data: {}
         target:
-          entity_id: cover.east_patio_screen
+          entity_id:
+          - cover.west_patio_screen
