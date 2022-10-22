@@ -1,0 +1,50 @@
+- id: '1666459332521'
+  alias: ZEN32 (Z-Wave JS)
+  description: Back Patio Scene Controller
+  use_blueprint:
+    path: fxlt/zen32-scene-controller-z-wave-js.yaml
+    input:
+      zooz_switch: 07246240d9419e3d49565c2c0a75d8ef
+      scene_1:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id:
+          - switch.string_lights
+      scene_2:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id:
+          - switch.pentair_pool_light
+      scene_3:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.pentair_water_feature
+      scene_4:
+      - service: cover.open_cover
+        data: {}
+        target:
+          entity_id: cover.back_patio_screens
+      scene_32:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.pentair_floor_cleaner
+      scene_42:
+      - service: cover.toggle
+        data: {}
+        target:
+          entity_id:
+          - cover.east_patio_screen
+      scene_43:
+      - service: cover.toggle
+        data: {}
+        target:
+          entity_id: cover.middle_patio_screen
+      scene_44:
+      - service: cover.toggle
+        data: {}
+        target:
+          entity_id: cover.east_patio_screen

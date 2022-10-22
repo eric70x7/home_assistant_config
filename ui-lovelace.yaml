@@ -17,19 +17,22 @@ views:
             cards:
               - type: entity-button
                 entity: switch.front_lights
+#              - type: entity-button
+#                entity: switch.christmas_lights
               - type: entity-button
-                entity: switch.christmas_lights
+                entity: switch.back_patio_lights
               - type: entity-button
                 entity: switch.string_lights
-#              - type: entity-button
-#                entity: switch.back_tree_lights
               - type: entity-button
                 entity: switch.pentair_pool_light
           - type: horizontal-stack
             title: Inside Lights
             cards:
               - type: entity-button
-                entity: switch.master_light
+                entity: switch.kitchen_lights
+              - type: entity-button
+                entity: switch.breakfast_area_light
+                name: Breakfast Area
               - type: entity-button
                 entity: switch.front_room_light
               - type: entity-button
@@ -37,14 +40,13 @@ views:
           - type: horizontal-stack
             cards:
               - type: entity-button
+                entity: switch.master_light
+              - type: entity-button
                 entity: switch.loft_light
               - type: entity-button
                 entity: switch.desk_lights
               - type: entity-button
                 entity: switch.stair_lights
-              - type: entity-button
-                entity: switch.breakfast_area_light
-                name: Breakfast Area
       #
       # Patio screens
       #

@@ -24,6 +24,8 @@ homeassistant:
       trusted_networks:
         - 192.168.0.0/16      
 
+  external_url: https://eric70x7.duckdns.org
+
 # Enable the default set of integrations:
 default_config:
   
@@ -113,8 +115,8 @@ http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 switch: !include switches.yaml
 group: !include groups.yaml
-automation: !include automations.yaml
-automation: !include my_automations.yaml
+automation ui: !include automations.yaml
+automation mine: !include my_automations.yaml
 script: !include scripts.yaml
 cover: !include covers.yaml
 
