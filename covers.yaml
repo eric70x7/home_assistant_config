@@ -8,3 +8,12 @@
     - cover.west_patio_screen
     - cover.middle_patio_screen
     - cover.east_patio_screen
+
+#
+# Garage doors
+
+- platform: group
+  name: "Garage doors"
+  entities:
+    - cover.large_garage_door_controller
+    - cover.small_garage_door_controller

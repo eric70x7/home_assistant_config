@@ -19,17 +19,17 @@
       kWH_limit: '{{ states("input_number.kwh_limit") }}'
       debug: 0
 
-- id: ac_run_timer_end
-  alias: "Energy: Set high AC setpoint when the ac_timer expires"
-  trigger:
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.ac_run_timer
-  action:
-    service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.hi_temp") }}'
+#- id: ac_run_timer_end
+#  alias: "Energy: Set high AC setpoint when the ac_timer expires"
+#  trigger:
+#    platform: event
+#    event_type: timer.finished
+#    event_data:
+#      entity_id: timer.ac_run_timer
+#  action:
+#    service: python_script.set_temp
+#    data_template:
+#      setpoint: '{{ states("input_number.hi_temp") }}'
 
 - id: precool
   alias: "Energy: precool"
@@ -104,62 +104,10 @@
   mode: single
 
 #######################################################################
-# Scheduled target temps
+# Scheduled climate settings
 #
-- id: set_sleep_temp
-  alias: "Thermostat: Set bedtime temperature"
-  trigger:
-  - platform: time
-    at: '20:30'
-  action:
-    service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.sleep_temp") }}'
-
-- id: set_wake_temp
-  alias: "Thermostat: Set wake temperature"
-  trigger:
-  - platform: time
-    at: '05:00'
-  action:
-    service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.wake_temp") }}'
-
-- id: set_daytime_temp
-  alias: "Thermostat: Set daytime temperature"
-  trigger:
-  - platform: time
-    at: '08:00'
-  action:
-    service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.target_temp") }}'
-
-- id: set_nighttime_heat
-  alias: "Thermostat: Set nighttime heat"
-  trigger:
-  - platform: time
-    at: '14:00'
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    - sat
-    - sun
-  action:
-    service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.nighttime_heat") }}'
-      set_heat: 1
-  mode: single
-
-- id: set_daytime_heat_weekday
-  alias: "Thermostat: Set daytime heat weekdays"
+- id: set_wake_temp_weekday
+  alias: "Thermostat: Set wake temp weekdays"
   trigger:
     platform: time
     at: '5:30'
@@ -174,11 +122,11 @@
   action:
     service: python_script.set_temp
     data_template:
-      setpoint: '{{ states("input_number.daytime_heat") }}'
+      setpoint: '{{ states("input_number.wake_temp") }}'
       set_heat: 1
 
-- id: set_daytime_heat_weekend
-  alias: "Thermostat: Set daytime heat weekends"
+- id: set_wake_temp_weekend
+  alias: "Thermostat: Set wake temp weekends"
   trigger:
     platform: time
     at: '7:00'
@@ -190,8 +138,61 @@
   action:
     service: python_script.set_temp
     data_template:
-      setpoint: '{{ states("input_number.daytime_heat") }}'
+      setpoint: '{{ states("input_number.wake_temp") }}'
       set_heat: 1
+
+- id: set_daytime_temp
+  alias: "Thermostat: Set daytime temperature"
+  trigger:
+  - platform: time
+    at: '08:00'
+  action:
+    service: python_script.set_temp
+    data_template:
+      setpoint: '{{ states("input_number.target_temp") }}'
+
+- id: set_sleep_temp
+  alias: "Thermostat: Set bedtime temperature"
+  trigger:
+  - platform: time
+    at: '20:30'
+  action:
+    service: python_script.set_temp
+    data_template:
+      setpoint: '{{ states("input_number.sleep_temp") }}'
+
+#- id: set_wake_temp
+#  alias: "Thermostat: Set wake temperature"
+#  trigger:
+#  - platform: time
+#    at: '05:00'
+#  action:
+#    service: python_script.set_temp
+#    data_template:
+#      setpoint: '{{ states("input_number.wake_temp") }}'
+
+#- id: set_nighttime_heat
+#  alias: "Thermostat: Set nighttime heat"
+#  trigger:
+#  - platform: time
+#    at: '14:00'
+#  condition:
+#  - condition: time
+#    weekday:
+#    - mon
+#    - tue
+#    - wed
+#    - thu
+#    - fri
+#    - sat
+#    - sun
+#  action:
+#    service: python_script.set_temp
+#    data_template:
+#      setpoint: '{{ states("input_number.nighttime_heat") }}'
+#      set_heat: 1
+#  mode: single
+
 
 #######################################################################
 # Lights

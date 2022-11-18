@@ -64,6 +64,18 @@ views:
               - type: entity-button
                 entity: cover.east_patio_screen
       #
+      # Garage doors
+      #
+      - type: vertical-stack
+        title: Garage Doors
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                entity: cover.large_garage_door_controller
+              - type: entity-button
+                entity: cover.small_garage_door_controller
+      #
       # Thermostats
       #
       - type: vertical-stack
@@ -192,11 +204,11 @@ views:
               - input_number.kwh_limit
               - input_number.precool_temp
               - input_number.hi_temp
+              - input_number.wake_temp
               - input_number.target_temp
               - input_number.sleep_temp
-              - input_number.wake_temp
-              - input_number.daytime_heat
-              - input_number.nighttime_heat
+#              - input_number.daytime_heat
+#              - input_number.nighttime_heat
       - type: vertical-stack
         title: Wind Settings
         cards:

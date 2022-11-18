@@ -5,31 +5,31 @@ kwh_limit:
   max: 5.0
   step: 0.1
 hi_temp:
-  name: High Temperature Limit
+  name: High Limit
   unit_of_measurement: '°F'
   min: 65
   max: 85
   step: 1
 target_temp:
-  name: Daytime Target Temperature
+  name: Target Temp
   unit_of_measurement: '°F'
   min: 65
   max: 85
   step: 1
 wake_temp:
-  name: Morning Target Temperature
+  name: Wake Temp
   unit_of_measurement: '°F'
   min: 65
   max: 85
   step: 1
 sleep_temp:
-  name: Bedtime Target Temperature
+  name: Sleep Temp
   unit_of_measurement: '°F'
   min: 65
   max: 85
   step: 1
 precool_temp:
-  name: Precool Temperature
+  name: Precool Temp
   unit_of_measurement: '°F'
   min: 65
   max: 85
