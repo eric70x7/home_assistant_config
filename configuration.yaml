@@ -41,7 +41,9 @@ logger:
   default: critical
   logs:
     homeassistant.components.python_script: info
-
+    pybalboa: debug
+    homeassistant.components.balboa: debug
+    
 # Text to speech
 tts:
   - platform: google_translate

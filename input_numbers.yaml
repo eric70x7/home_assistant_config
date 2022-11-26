@@ -75,3 +75,13 @@ wind_threshold:
   unit_of_measurement: 'mph'
   min: 4
   max: 16
+hot_tub_run_temp:
+  name: Hot tub run temp
+  unit_of_measurement: '°F'
+  min: 80
+  max: 104
+hot_tub_rest_temp:
+  name: Hot tub rest temp
+  unit_of_measurement: '°F'
+  min: 80
+  max: 104

@@ -17,8 +17,8 @@ views:
             cards:
               - type: entity-button
                 entity: switch.front_lights
-#              - type: entity-button
-#                entity: switch.christmas_lights
+              - type: entity-button
+                entity: switch.christmas_lights
               - type: entity-button
                 entity: switch.back_patio_lights
               - type: entity-button
@@ -216,6 +216,21 @@ views:
             show_header_toggle: false
             entities:
               - input_number.wind_threshold
+      - type: vertical-stack
+        title: Hot Tub Settings
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - climate.hot_tub
+              - input_number.hot_tub_run_temp
+              - input_number.hot_tub_rest_temp
+#        - type: horizontal-stack
+#          cards:
+#            - type: entity-button
+#              entity: binary_sensor.hot_tub_pump_1
+#            - type: entity-button
+#              entity: binary_sensor.hot_tub_pump_2
 
 #  - badges: []
 #    #
