@@ -576,3 +576,34 @@
   action:
     - service: cover.open_cover
       entity_id: cover.back_patio_screens
+
+#######################################################################
+# Notifications
+#
+- id: notify_when_large_garage_door_has_been_left_open
+  alias: "Notification: Large Garage Door Left Open"
+  trigger:
+    - platform: state
+      entity_id: cover.large_garage_door_controller
+      from: "closed"
+      to: "open"
+      for:
+        minutes: 15
+  action:
+    - service: notify.mobile_app_jonesey
+      data:
+        message: "Large garage door is open."
+
+- id: notify_when_small_garage_door_has_been_left_open
+  alias: "Notification: Small Garage Door Left Open"
+  trigger:
+    - platform: state
+      entity_id: cover.small_garage_door_controller
+      from: "closed"
+      to: "open"
+      for:
+        minutes: 15
+  action:
+    - service: notify.mobile_app_jonesey
+      data:
+        message: "Small garage door is open."

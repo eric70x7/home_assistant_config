@@ -567,6 +567,16 @@ views:
           - sensor.downstairs_heat_setpoint
           - sensor.downstairs_state
       #
+      # hot tub climate graph
+      #
+      - title: Hot tub
+        type: history-graph
+        hours_to_show: 24
+        refresh_interval: 60
+        entities:
+          - climate.hot_tub
+
+      #
       # demand/temperature graph
       #
       - title: Demand
