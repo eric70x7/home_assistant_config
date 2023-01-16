@@ -9,11 +9,13 @@ homeassistant:
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: !secret home_elevation
 
-  # metric for Metric, imperial for Imperial
+    # metric for Metric, imperial for Imperial
   unit_system: imperial
 
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Phoenix
+  country: US
+  currency: USD
 
   # Customization file
   customize: !include customize.yaml
@@ -115,7 +117,7 @@ recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
-switch: !include switches.yaml
+# switch: !include switches.yaml
 group: !include groups.yaml
 automation ui: !include automations.yaml
 automation mine: !include my_automations.yaml

@@ -51,21 +51,21 @@ sensor.yearly_production:
   hidden: True
 
 # Pool
-sensor.pentair_pooltemp:
-  friendly_name: "Pool Temperature"
-switch.pentair_pool_light:
+light.pentair_fb_bb_80_pool_light:
+  friendly_name: "Pool Light"
+switch.pentair_fb_bb_80_pool_light:
   friendly_name: "Pool Lights"
   icon: mdi:lightbulb
-switch.pentair_water_feature:
+switch.pentair_fb_bb_80_water_feature:
   friendly_name: "Waterfalls"
   icon: mdi:waves
-switch.pentair_floor_cleaner:
+switch.pentair_fb_bb_80_floor_cleaner:
   friendly_name: "Floor cleaner"
   icon: mdi:pump
-switch.pentair_high_speed:
+switch.pentair_fb_bb_80_high_speed:
   friendly_name: "High speed pump"
   icon: mdi:pump
-switch.pentair_pool:
+switch.pentair_fb_bb_80_pool:
   friendly_name: "Pool"
   icon: mdi:waves
 

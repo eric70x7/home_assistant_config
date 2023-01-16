@@ -24,7 +24,7 @@ views:
               - type: entity-button
                 entity: switch.string_lights
               - type: entity-button
-                entity: switch.pentair_pool_light
+                entity: light.pentair_fb_bb_80_pool_light
           - type: horizontal-stack
             title: Inside Lights
             cards:
@@ -57,12 +57,16 @@ views:
             cards:
               - type: entity-button
                 entity: cover.back_patio_screens
+                state_color: false
               - type: entity-button
                 entity: cover.west_patio_screen
+                state_color: false
               - type: entity-button
                 entity: cover.middle_patio_screen
+                state_color: false
               - type: entity-button
                 entity: cover.east_patio_screen
+                state_color: false
       #
       # Garage doors
       #
@@ -96,13 +100,14 @@ views:
           - type: horizontal-stack
             cards:
               - type: entity-button
-                entity: switch.pentair_pool
+                entity: switch.pentair_fb_bb_80_pool
               - type: entity-button
-                entity: switch.pentair_water_feature
+                entity: switch.pentair_fb_bb_80_water_feature
               - type: entity-button
-                entity: switch.pentair_floor_cleaner
+                entity: switch.pentair_fb_bb_80_floor_cleaner
               - type: entity-button
-                entity: switch.pentair_high_speed
+                # entity: switch.pentair_high_speed
+                entity: switch.pentair_fb_bb_80_high_speed
       #
       # Pool Lights
       #
@@ -366,7 +371,7 @@ views:
               - type: sensor
                 entity: sensor.ambient_temp
               - type: sensor
-                entity: sensor.pentair_pooltemp
+                entity: sensor.pool_temperature
 
       #
       # indoor temperature graphs
