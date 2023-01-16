@@ -121,7 +121,7 @@ sensor: !include_dir_merge_list sensors/
 group: !include groups.yaml
 automation ui: !include automations.yaml
 automation mine: !include my_automations.yaml
-script: !include scripts.yaml
+script: !include_dir_merge_named scripts/
 cover: !include covers.yaml
 
 influxdb:
@@ -143,8 +143,6 @@ influxdb:
 #      - sensor.ambient_temp_2 # Downstairs
 #      - sensor.ambient_temp_6 # Becca
 #      - sensor.ambient_temp_7 # Neil
-
-# !include pentair-configuration-entries.yaml
 
 # Themes
 # enable mobile component
