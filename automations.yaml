@@ -12,40 +12,40 @@
           entity_id:
           - switch.string_lights
       scene_2:
-      - service: switch.toggle
+      - service: light.toggle
         data: {}
         target:
-          entity_id:
-          - switch.pentair_pool_light
+          entity_id: light.pentair_fb_bb_80_pool_light
       scene_3:
       - service: switch.toggle
         data: {}
         target:
-          entity_id: switch.pentair_water_feature
+          entity_id: switch.pentair_fb_bb_80_water_feature
       scene_4:
-      - service: cover.open_cover
-        data: {}
-        target:
-          entity_id: cover.back_patio_screens
-      scene_32:
       - service: switch.toggle
         data: {}
         target:
-          entity_id: switch.pentair_floor_cleaner
+          entity_id: switch.pentair_fb_bb_80_floor_cleaner
+      scene_32:
+      - service: cover.toggle
+        data: {}
+        target:
+          entity_id: cover.middle_patio_screen
       scene_42:
       - service: cover.toggle
         data: {}
         target:
           entity_id:
           - cover.east_patio_screen
-      scene_43:
+      scene_43: []
+      scene_44: []
+      scene_12:
       - service: cover.toggle
         data: {}
         target:
-          entity_id: cover.middle_patio_screen
-      scene_44:
+          entity_id: cover.back_patio_screens
+      scene_22:
       - service: cover.toggle
         data: {}
         target:
-          entity_id:
-          - cover.west_patio_screen
+          entity_id: cover.west_patio_screen

@@ -371,7 +371,7 @@ views:
               - type: sensor
                 entity: sensor.ambient_temp
               - type: sensor
-                entity: sensor.pool_temperature
+                entity: sensor.pool_temp
 
       #
       # indoor temperature graphs

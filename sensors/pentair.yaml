@@ -1,25 +1,34 @@
 # Pentair sensors
-- platform: mqtt
-  name: pentair_pooltemp
-  state_topic: pentair/pooltemp/state
-- platform: mqtt
-  name: pentair_airtemp
-  state_topic: pentair/airtemp/state
-- platform: mqtt
-  name: pentair_pump0watts
-  state_topic: pentair/pump/0/watts/state
-- platform: mqtt
-  name: pentair_pump0rpm
-  state_topic: pentair/pump/0/rpm/state
-- platform: mqtt
-  name: pentair_pump0gpm
-  state_topic: pentair/pump/0/gpm/state
-- platform: mqtt
-  name: pentair_pump1watts
-  state_topic: pentair/pump/1/watts/state
-- platform: mqtt
-  name: pentair_pump1rpm
-  state_topic: pentair/pump/1/rpm/state
-- platform: mqtt
-  name: pentair_pump1gpm
-  state_topic: pentair/pump/1/gpm/state
+
+- platform: template
+  sensors:
+    pool_temp:
+      friendly_name: Pool Temp
+      unit_of_measurement: '°F'
+      value_template: >
+        {{ state_attr('climate.pentair_fb_bb_80_pool_heat', 'current_temperature') }}
+
+#- platform: mqtt
+#  name: pentair_pooltemp
+#  state_topic: pentair/pooltemp/state
+#- platform: mqtt
+#  name: pentair_airtemp
+#  state_topic: pentair/airtemp/state
+#- platform: mqtt
+#  name: pentair_pump0watts
+#  state_topic: pentair/pump/0/watts/state
+#- platform: mqtt
+#  name: pentair_pump0rpm
+#  state_topic: pentair/pump/0/rpm/state
+#- platform: mqtt
+#  name: pentair_pump0gpm
+#  state_topic: pentair/pump/0/gpm/state
+#- platform: mqtt
+#  name: pentair_pump1watts
+#  state_topic: pentair/pump/1/watts/state
+#- platform: mqtt
+#  name: pentair_pump1rpm
+#  state_topic: pentair/pump/1/rpm/state
+#- platform: mqtt
+#  name: pentair_pump1gpm
+#  state_topic: pentair/pump/1/gpm/state
