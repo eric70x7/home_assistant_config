@@ -7,44 +7,44 @@ kwh_limit:
 hi_temp:
   name: High Limit
   unit_of_measurement: '°F'
-  min: 65
-  max: 85
+  min: 72
+  max: 78
   step: 1
 target_temp:
   name: Target Temp
   unit_of_measurement: '°F'
-  min: 65
-  max: 85
+  min: 68
+  max: 73
   step: 1
 wake_temp:
   name: Wake Temp
   unit_of_measurement: '°F'
-  min: 65
-  max: 85
+  min: 68
+  max: 73
   step: 1
 sleep_temp:
   name: Sleep Temp
   unit_of_measurement: '°F'
-  min: 65
-  max: 85
+  min: 68
+  max: 73
   step: 1
 precool_temp:
   name: Precool Temp
   unit_of_measurement: '°F'
-  min: 65
-  max: 85
+  min: 68
+  max: 73
   step: 1
 daytime_heat:
   name: Daytime Heat
   unit_of_measurement: '°F'
-  min: 62
-  max: 72
+  min: 68
+  max: 73
   step: 1
 nighttime_heat:
   name: Nighttime Heat
   unit_of_measurement: '°F'
-  min: 62
-  max: 72
+  min: 68
+  max: 73
   step: 1
 upstairs_setpoint:
   name: Saved US Setpoint

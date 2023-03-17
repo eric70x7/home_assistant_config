@@ -17,8 +17,8 @@ views:
             cards:
               - type: entity-button
                 entity: switch.front_lights
-              - type: entity-button
-                entity: switch.christmas_lights
+#              - type: entity-button
+#                entity: switch.christmas_lights
               - type: entity-button
                 entity: switch.back_patio_lights
               - type: entity-button
