@@ -70,13 +70,18 @@
     entity_id: switch.downstairs_circulate
   - service: switch.turn_off
     entity_id: switch.upstairs_circulate
-  - service: climate.set_temperature
-    entity_id: climate.hot_tub
-    data_template:
-      temperature: '{{ states("input_number.hot_tub_rest_temp") }}'
+  - service: input_number.set_value
+    target:
+      entity_id: input_number.daily_demand
+    data:
+      value: 0.0
+#  - service: climate.set_temperature
+#    entity_id: climate.hot_tub
+#    data_template:
+#      temperature: '{{ states("input_number.hot_tub_rest_temp") }}'
 
-- id: target_temp
-  alias: "Energy: set target temp at end of peak time"
+- id: end_peak_time
+  alias: "Energy: end of peak time"
   trigger:
   - platform: time
     at: '19:00'
@@ -89,22 +94,22 @@
     - thu
     - fri
   action:
-  - service: timer.cancel
-    target:
-      entity_id: timer.ac_run_timer
   - service: python_script.set_temp
     data_template:
       setpoint: '{{ states("input_number.target_temp") }}'
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.predicted_demand_50
+#  - service: input_number.set_value
+#    target:
+#      entity_id: input_number.predicted_demand_50
+#    data:
+#      value: 0
+#  - service: input_number.set_value
+#    target:
+#      entity_id: input_number.predicted_demand_30
+#    data:
+#      value: 0
+  - service: notify.mobile_app_jonesey
     data:
-      value: 0
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.predicted_demand_30
-    data:
-      value: 0
+      message: "Peak electric demand today was {{ states.input_number.daily_demand.state_with_unit }}"
   mode: single
 
 - id: start_peak_time_hot_tub
@@ -144,6 +149,22 @@
     entity_id: climate.hot_tub
     data_template:
       temperature: '{{ states("input_number.hot_tub_run_temp") }}'
+
+- id: update_daily_peak_demand
+  alias: "Energy: update daily peak demand"
+  trigger: 
+  - platform: state
+    entity_id: sensor.1_hr_peak_time_demand
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.1_hr_peak_time_demand
+    above: input_number.daily_demand
+  action:
+  - service: input_number.set_value
+    target:
+      entity_id: input_number.daily_demand
+    data:
+      value: '{{ states("sensor.1_hr_peak_time_demand") }}'
 
 #######################################################################
 # Scheduled climate settings
@@ -452,9 +473,13 @@
       attribute: azimuth
       above: 156
   condition:
-    - condition: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
+    - and:
+      - condition: numeric_state
+        entity_id: sensor.peak_wind_gust
+        below: input_number.wind_threshold
+      - condition: state
+        entity_id: timer.wind_watchdog
+        state: 'active'
   action:
     - service: cover.close_cover
       entity_id: cover.west_patio_screen
@@ -488,9 +513,13 @@
       attribute: azimuth
       above: 235
   condition:
-    - condition: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
+    - and:
+      - condition: numeric_state
+        entity_id: sensor.peak_wind_gust
+        below: input_number.wind_threshold
+      - condition: state
+        entity_id: timer.wind_watchdog
+        state: 'active'
   action:
     - service: cover.close_cover
       entity_id: cover.middle_patio_screen
@@ -524,9 +553,13 @@
       attribute: elevation
       below: 26
   condition:
-    - condition: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
+    - and:
+      - condition: numeric_state
+        entity_id: sensor.peak_wind_gust
+        below: input_number.wind_threshold
+      - condition: state
+        entity_id: timer.wind_watchdog
+        state: 'active'
   action:
     - service: cover.close_cover
       entity_id: cover.east_patio_screen
@@ -577,6 +610,25 @@
     - service: cover.open_cover
       entity_id: cover.back_patio_screens
 
+- id: reset_wind_watchdog
+  alias: "Watchdog: Reset watchdog timer when wind changes"
+  trigger:
+  - platform: state
+    entity_id: sensor.ambient_wind_speed
+  action:
+  - service: timer.start
+    data_template:
+      entity_id: timer.wind_watchdog
+      # Use a shorter timeout if the wind is non-zero
+      # Need to handle error case
+      duration: >
+        {% set w = states('sensor.ambient_wind_speed') | float(-1) %}
+        {% if w < 0.0 %}   00:01:00 {# error #}
+        {% elif w > 0.0 %} 00:10:00 {# timeout for non-zero wind speed #}
+        {% else %}         01:00:00 {# timeout for zero wind speed #}
+        {% endif %}
+  mode: single
+
 #######################################################################
 # Notifications
 #
@@ -607,3 +659,26 @@
     - service: notify.mobile_app_jonesey
       data:
         message: "Small garage door is open."
+
+- id: notify_when_wind_stops_changing
+  alias: "Notification: Ambient wind is not updating"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.wind_watchdog
+  action:
+    - service: notify.mobile_app_jonesey
+      data:
+        message: "Wind has stopped. Check Ambient Weather system."
+
+- id: notify_when_peak_demand_is_high
+  alias: "Notification: High peak demand"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.50_min_peak_time_demand
+    above: input_number.demand_warning_level
+  action:
+    - service: notify.mobile_app_jonesey
+      data:
+        message: "Peak electric demand is above {{ states.input_number.demand_warning_level.state_with_unit }}!"

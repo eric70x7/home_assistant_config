@@ -207,6 +207,7 @@ views:
             show_header_toggle: false
             entities:
               - input_number.kwh_limit
+              - input_number.demand_warning_level
               - input_number.precool_temp
               - input_number.hi_temp
               - input_number.wake_temp
@@ -547,6 +548,7 @@ views:
             entity: sensor.energy_usage
           - type: sensor
             entity: sensor.1_hr_demand
+      
       #
       # upstairs climate graph
       #

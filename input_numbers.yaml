@@ -58,18 +58,18 @@ downstairs_setpoint:
   min: 65
   max: 85
   step: 1
-predicted_demand_50:
-  name: Predicted 1 hr demand based on 1 hour usage
-  unit_of_measurement: 'kWH'
-  min: 0
-  max: 30
-  step: 0.01
-predicted_demand_30:
-  name: Predicted 30 min demand based on 30 min usage
-  unit_of_measurement: 'kWH'
-  min: 0
-  max: 30
-  step: 0.01
+#predicted_demand_50:
+#  name: Predicted 1 hr demand based on 1 hour usage
+#  unit_of_measurement: 'kWH'
+#  min: 0
+#  max: 30
+#  step: 0.01
+#predicted_demand_30:
+#  name: Predicted 30 min demand based on 30 min usage
+#  unit_of_measurement: 'kWH'
+#  min: 0
+#  max: 30
+#  step: 0.01
 wind_threshold:
   name: Wind threshold
   unit_of_measurement: 'mph'
@@ -85,3 +85,17 @@ hot_tub_rest_temp:
   unit_of_measurement: '°F'
   min: 80
   max: 104
+
+demand_warning_level:
+  name: Demand Warn
+  unit_of_measurement: 'kWh'
+  min: 2.0
+  max: 5.0
+  step: 0.1
+
+daily_demand:
+  name: Daily Demand
+  unit_of_measurement: 'kWh'
+  min: 0.0
+  max: 8.0
+  step: 0.1  

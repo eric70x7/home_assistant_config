@@ -62,9 +62,9 @@ ifttt:
 alexa:
 
 # Sense energy monitor
-sense:
-  email: !secret sense_email
-  password: !secret sense_password
+# sense:
+#  email: !secret sense_email
+#  password: !secret sense_password
 
 # Ambient weather
 ambient_station:
@@ -84,20 +84,21 @@ system_health:
 timer:
   dog_lights:
     duration: "00:05:00"
-  ac_run_timer:
+  wind_watchdog:
+    duration: "00:15:00"
 
 # media
-media_player:
-  - platform: samsungtv
-    name: family_room_tv
-  - platform: samsungtv
-    name: living_room_un65ju639d
-  - platform: androidtv
-    name: family_room_firestick
-    host: 192.168.0.3
-  - platform: androidtv
-    name: loft_firestick
-    host: 192.168.0.13
+# media_player:
+#  - platform: samsungtv
+#    name: family_room_tv
+#  - platform: samsungtv
+#    name: living_room_un65ju639d
+#  - platform: androidtv
+#    name: family_room_firestick
+#    host: 192.168.0.3
+#  - platform: androidtv
+#    name: loft_firestick
+#    host: 192.168.0.13
 
 # ios actions for Apple Watch
 ios:
@@ -115,8 +116,10 @@ ios:
 
 recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
+# input_booleans: !include input_booleans.yaml
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
+binary_sensor: !include_dir_merge_list binary_sensors/
 # switch: !include switches.yaml
 group: !include groups.yaml
 automation ui: !include automations.yaml
