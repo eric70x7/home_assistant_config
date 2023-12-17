@@ -13,19 +13,19 @@ hi_temp:
 target_temp:
   name: Target Temp
   unit_of_measurement: '°F'
-  min: 68
+  min: 65
   max: 73
   step: 1
 wake_temp:
   name: Wake Temp
   unit_of_measurement: '°F'
-  min: 68
+  min: 65
   max: 73
   step: 1
 sleep_temp:
   name: Sleep Temp
   unit_of_measurement: '°F'
-  min: 68
+  min: 65
   max: 73
   step: 1
 precool_temp:
@@ -34,18 +34,29 @@ precool_temp:
   min: 68
   max: 73
   step: 1
-daytime_heat:
-  name: Daytime Heat
-  unit_of_measurement: '°F'
-  min: 68
-  max: 73
-  step: 1
-nighttime_heat:
-  name: Nighttime Heat
-  unit_of_measurement: '°F'
-  min: 68
-  max: 73
-  step: 1
+#summer_mode:
+#  name: Summer HVAC Mode
+#  min: 0
+#  max: 1
+#  step: 1
+#summer_screen_mode:
+#  name: Summer Screen Mode
+#  min: 0
+#  max: 1
+#  step: 1
+
+#daytime_heat:
+#  name: Daytime Heat
+#  unit_of_measurement: '°F'
+#  min: 68
+#  max: 73
+#  step: 1
+#nighttime_heat:
+#  name: Nighttime Heat
+#  unit_of_measurement: '°F'
+#  min: 68
+#  max: 73
+#  step: 1
 upstairs_setpoint:
   name: Saved US Setpoint
   unit_of_measurement: '°F'

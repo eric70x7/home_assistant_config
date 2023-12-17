@@ -17,8 +17,8 @@ views:
             cards:
               - type: entity-button
                 entity: switch.front_lights
-#              - type: entity-button
-#                entity: switch.christmas_lights
+              - type: entity-button
+                entity: switch.christmas_lights
               - type: entity-button
                 entity: switch.back_patio_lights
               - type: entity-button
@@ -206,6 +206,8 @@ views:
           - type: entities
             show_header_toggle: false
             entities:
+              - input_boolean.summer_energy_mode
+              - input_boolean.summer_screen_mode
               - input_number.kwh_limit
               - input_number.demand_warning_level
               - input_number.precool_temp

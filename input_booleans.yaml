@@ -1,2 +1,8 @@
-peak_time:
-  name: Is it peak time?
+#peak_time:
+#  name: Is it peak time?
+
+summer_energy_mode:
+  name: Summer energy control
+
+summer_screen_mode:
+  name: Summer screen control

@@ -4,15 +4,19 @@
     platform: time_pattern
     minutes: /5
   condition:
-    condition: time
-    after: '16:04:00'
-    before: '18:59:00'
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    - and:
+      - condition: state
+        entity_id: input_number.summer_mode
+        state: '1.0'
+      - condition: time
+        after: '16:04:00'
+        before: '18:59:00'
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
     service: python_script.simple_load_control
     data_template:
@@ -37,13 +41,17 @@
     platform: time
     at: '14:30'
   condition:
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    - and:
+      - condition: state
+        entity_id: input_number.summer_mode
+        state: '1.0'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
     service: python_script.set_temp
     data_template:
@@ -55,13 +63,17 @@
     platform: time
     at: '16:00'
   condition:
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    - and:
+      - condition: state
+        entity_id: input_number.summer_mode
+        state: '1.0'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
   - service: python_script.set_temp
     data_template:
@@ -86,13 +98,17 @@
   - platform: time
     at: '19:00'
   condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    - and:
+      - condition: state
+        entity_id: input_number.summer_mode
+        state: '1.0'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
   - service: python_script.set_temp
     data_template:
@@ -474,6 +490,9 @@
       above: 156
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -492,6 +511,9 @@
       below: input_number.wind_threshold
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth
@@ -514,6 +536,9 @@
       above: 235
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -532,6 +557,9 @@
       below: input_number.wind_threshold
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth
@@ -554,6 +582,9 @@
       below: 26
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -572,6 +603,9 @@
       below: input_number.wind_threshold
   condition:
     - and:
+      - condition: state
+        entity_id: input_number.summer_screen_mode
+        state: '1.0'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth
