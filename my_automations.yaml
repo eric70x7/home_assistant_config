@@ -6,8 +6,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_energy_mode
+        state: 'on'
       - condition: time
         after: '16:04:00'
         before: '18:59:00'
@@ -23,18 +23,6 @@
       kWH_limit: '{{ states("input_number.kwh_limit") }}'
       debug: 0
 
-#- id: ac_run_timer_end
-#  alias: "Energy: Set high AC setpoint when the ac_timer expires"
-#  trigger:
-#    platform: event
-#    event_type: timer.finished
-#    event_data:
-#      entity_id: timer.ac_run_timer
-#  action:
-#    service: python_script.set_temp
-#    data_template:
-#      setpoint: '{{ states("input_number.hi_temp") }}'
-
 - id: precool
   alias: "Energy: precool"
   trigger:
@@ -43,8 +31,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_energy_mode
+        state: 'on'
       - condition: time
         weekday:
         - mon
@@ -65,8 +53,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_energy_mode
+        state: 'on'
       - condition: time
         weekday:
         - mon
@@ -100,8 +88,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_energy_mode
+        state: 'on'
       - condition: time
         weekday:
         - mon
@@ -113,16 +101,6 @@
   - service: python_script.set_temp
     data_template:
       setpoint: '{{ states("input_number.target_temp") }}'
-#  - service: input_number.set_value
-#    target:
-#      entity_id: input_number.predicted_demand_50
-#    data:
-#      value: 0
-#  - service: input_number.set_value
-#    target:
-#      entity_id: input_number.predicted_demand_30
-#    data:
-#      value: 0
   - service: notify.mobile_app_jonesey
     data:
       message: "Peak electric demand today was {{ states.input_number.daily_demand.state_with_unit }}"
@@ -491,8 +469,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -512,8 +490,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth
@@ -537,8 +515,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -558,8 +536,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth
@@ -583,8 +561,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sensor.peak_wind_gust
         below: input_number.wind_threshold
@@ -604,8 +582,8 @@
   condition:
     - and:
       - condition: state
-        entity_id: input_number.summer_screen_mode
-        state: '1.0'
+        entity_id: input_boolean.summer_screen_mode
+        state: 'on'
       - condition: numeric_state
         entity_id: sun.sun
         attribute: azimuth

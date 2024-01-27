@@ -25,27 +25,42 @@
       - service: switch.toggle
         data: {}
         target:
-          entity_id: switch.pentair_fb_bb_80_floor_cleaner
-      scene_32:
-      - service: cover.toggle
-        data: {}
-        target:
-          entity_id: cover.middle_patio_screen
-      scene_42:
-      - service: cover.toggle
-        data: {}
-        target:
-          entity_id:
-          - cover.east_patio_screen
+          entity_id: switch.kitchen_lights
+      scene_32: []
+      scene_42: []
       scene_43: []
       scene_44: []
-      scene_12:
-      - service: cover.toggle
-        data: {}
-        target:
-          entity_id: cover.back_patio_screens
-      scene_22:
-      - service: cover.toggle
-        data: {}
-        target:
-          entity_id: cover.west_patio_screen
+      scene_12: []
+      scene_22: []
+- id: '1704472961581'
+  alias: 'Lights: Turn kitchen light on when breakfast area is turned on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.breakfast_area_light
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.kitchen_lights
+    data: {}
+  mode: single
+- id: '1704473187617'
+  alias: 'Lights: Turn kitchen lights off when breakfast area light turns off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.breakfast_area_light
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.kitchen_lights
+    data: {}
+  mode: single
