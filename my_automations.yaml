@@ -694,3 +694,13 @@
     - service: notify.mobile_app_jonesey
       data:
         message: "Peak electric demand is above {{ states.input_number.demand_warning_level.state_with_unit }}!"
+
+#######################################################################
+# Backups
+- alias: "Backups: Backup Home Assistant every night at 3 AM"
+  trigger:
+    platform: time
+    at: "03:00:00"
+  action:
+    alias: "Create backup now"
+    service: backup.create
