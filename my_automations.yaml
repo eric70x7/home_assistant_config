@@ -703,4 +703,4 @@
     at: "03:00:00"
   action:
     alias: "Create backup now"
-    service: backup.create
+    service: hassio.backup_full
