@@ -408,7 +408,7 @@
       entity_id: timer.dog_lights
   action:
     service: homeassistant.turn_off
-    entity_id: switch.breakfast_area_light
+    entity_id: switch.stair_lights
 
 - id: dog_lights_on
   alias: "Doggie door: Turn lights on when there is motion at the doggie door"
@@ -417,12 +417,14 @@
     entity_id: binary_sensor.doggie_door_motion
     to: 'on'
   condition:
-  - condition: time
-    after: '22:30:00'
-    before: 06:00:00
+  - condition: sun
+    after: sunset
+    after_offset: "-01:00:00"
+    before: sunrise
+    before_offset: "01:00:00"
   action:
   - service: homeassistant.turn_on
-    entity_id: switch.breakfast_area_light
+    entity_id: switch.stair_lights
   - service: timer.start
     data:
       duration: '0'
@@ -637,7 +639,7 @@
         {% set w = states('sensor.ambient_wind_speed') | float(-1) %}
         {% if w < 0.0 %}   00:01:00 {# error #}
         {% elif w > 0.0 %} 00:10:00 {# timeout for non-zero wind speed #}
-        {% else %}         01:00:00 {# timeout for zero wind speed #}
+        {% else %}         02:00:00 {# timeout for zero wind speed #}
         {% endif %}
   mode: single
 

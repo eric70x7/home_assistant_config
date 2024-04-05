@@ -32,7 +32,6 @@ views:
                 entity: switch.kitchen_lights
               - type: entity-button
                 entity: switch.breakfast_area_light
-                name: Breakfast Area
               - type: entity-button
                 entity: switch.front_room_light
               - type: entity-button
@@ -208,15 +207,74 @@ views:
             entities:
               - input_boolean.summer_energy_mode
               - input_boolean.summer_screen_mode
-              - input_number.kwh_limit
-              - input_number.demand_warning_level
-              - input_number.precool_temp
-              - input_number.hi_temp
-              - input_number.wake_temp
-              - input_number.target_temp
-              - input_number.sleep_temp
+              #- input_number.kwh_limit
+              #- input_number.demand_warning_level
+              #- input_number.precool_temp
+              #- input_number.hi_temp
+              #- input_number.wake_temp
+              #- input_number.target_temp
+              #- input_number.sleep_temp
 #              - input_number.daytime_heat
 #              - input_number.nighttime_heat
+              - type: custom:numberbox-card
+                entity: input_number.target_temp
+                name: false
+                card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:14px;content:"Target Temperature";display:block!important}
+          - type: horizontal-stack
+            cards:
+            - type: custom:numberbox-card
+              entity: input_number.precool_temp
+              name: false
+              icon: false
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"Precool";display:block!important}
+            - type: custom:numberbox-card
+              entity: input_number.hi_temp
+              name: false
+              icon: false
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"High Limit";display:block!important}
+          - type: horizontal-stack
+            cards:
+            - type: custom:numberbox-card
+              name: false
+              entity: input_number.sleep_temp
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"Wake";display:block!important}
+            - type: custom:numberbox-card
+              name: false
+              entity: input_number.wake_temp
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"Sleep";display:block!important}
+          - type: horizontal-stack
+            cards:
+            - type: custom:numberbox-card
+              entity: input_number.kwh_limit
+              name: false
+              icon: false
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"Demand Limit";display:block!important}
+            - type: custom:numberbox-card
+              entity: input_number.demand_warning_level
+              name: false
+              icon: false
+              card_mod:
+                  style: |
+                    .body{display:block!important}
+                    .body::after{text-align:center;font-size:10px;content:"Warn Level";display:block!important}
       - type: vertical-stack
         title: Wind Settings
         cards:

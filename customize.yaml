@@ -7,14 +7,16 @@ zone.home:
 # Switches - moved to switches.yaml
   
 # Ambient sensors
+
+# Indoor Temperatures
 sensor.ambient_temp_1:
-  friendly_name: Upstairs Temperature
+  friendly_name: Upstairs
 sensor.ambient_temp_2:
-  friendly_name: Downstairs Temperature
+  friendly_name: Downstairs
 sensor.ambient_temp_3:
-  friendly_name: Hair Room Temperature
+  friendly_name: Hair Room
 sensor.ambient_temp_4:
-  friendly_name: Garage Temperature
+  friendly_name: Garage
 sensor.ambient_temp_5:
   friendly_name: Master
 sensor.ambient_temp_6:
@@ -23,19 +25,39 @@ sensor.ambient_temp_7:
   friendly_name: Neil
 sensor.ambient_temp_8:
   friendly_name: Victoria
+
+# Indoor Humidities
+sensor.ambient_humidity_1:
+  friendly_name: Upstairs
+sensor.ambient_humidity_2:
+  friendly_name: Downstairs
+sensor.ambient_humidity_3:
+  friendly_name: Hair Room
+sensor.ambient_humidity_4:
+  friendly_name: Garage
+sensor.ambient_humidity_5:
+  friendly_name: Master
+sensor.ambient_humidity_6:
+  friendly_name: Becca
+sensor.ambient_humidity_7:
+  friendly_name: Neil
+sensor.ambient_humidity_8:
+  friendly_name: Victoria
+
+# Backyard
 sensor.ambient_temp:
-  friendly_name: Backyard Temperature
+  friendly_name: Backyard
 sensor.ambient_humidity:
-  friendly_name: Backyard Humidity
+  friendly_name: Backyard
   icon: mdi:water-percent
 sensor.ambient_wind_speed:
-  friendly_name: Backyard Wind Speed
+  friendly_name: Backyard
   icon: mdi:weather-windy
 sensor.ambient_wind_gust:
-  friendly_name: Backyard Wind Gust
+  friendly_name: Backyard
   icon: mdi:weather-windy
 sensor.ambient_uv:
-      friendly_name: Backyard Solar Radiation
+      friendly_name: Backyard
       icon: mdi:weather-sunny
 
 # We don't have solar
@@ -75,25 +97,28 @@ switch.pentair_fb_bb_80_pool:
 
 # Inside lights
 switch.family_room_light:
-  friendly_name: "Family Room Light"
+  friendly_name: "Family Room"
   icon: mdi:lightbulb
 switch.front_room_light:
-  friendly_name: "Front Room Light"
+  friendly_name: "Front Room"
   icon: mdi:lightbulb
 switch.loft_light:
-  friendly_name: "Loft Light"
+  friendly_name: "Loft"
   icon: mdi:lightbulb
 switch.stair_lights:
-  friendly_name: "Stair Lights"
+  friendly_name: "Stair"
   icon: mdi:lightbulb
 switch.breakfast_area_light:
-  friendly_name: "Breakfast Area Light"
+  friendly_name: "Breakfast Area"
+  icon: mdi:lightbulb
+switch.kitchen_lights:
+  friendly_name: "Kitchen"
   icon: mdi:lightbulb
 switch.desk_lights:
-  friendly_name: "Eric's Desk Lights"
+  friendly_name: "Eric's Desk"
   icon: mdi:lightbulb
 switch.master_light:
-  friendly_name: "Master Light"
+  friendly_name: "Master"
   icon: mdi:lightbulb
 #switch.back_tree_lights:
 #  friendly_name: "Back Tree Lights"
@@ -102,13 +127,13 @@ switch.master_light:
 
 # Front yard lights
 switch.front_lights:
-  friendly_name: "Front Lights"
+  friendly_name: "Front"
   icon: mdi:lightbulb
 switch.christmas_lights:
-  friendly_name: "Christmas Lights"
+  friendly_name: "Christmas"
   icon: mdi:lightbulb
 
 # Back yard lights
 switch.string_lights:
-  friendly_name: "String Lights"
+  friendly_name: "String"
   icon: mdi:lightbulb

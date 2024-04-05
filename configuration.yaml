@@ -34,6 +34,15 @@ default_config:
 # Use lovelace YAML mode
 lovelace:
   mode: yaml
+  resources:
+    - url: /local/numberbox-card.js?v=1
+      type: module  
+#    - url: /local/card-mod.js
+#      type: module  
+
+frontend:
+  extra_module_url: 
+    - /local/card-mod.js
   
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -83,7 +92,7 @@ system_health:
 # Timers
 timer:
   dog_lights:
-    duration: "00:05:00"
+    duration: "00:10:00"
   wind_watchdog:
     duration: "00:15:00"
 
@@ -130,6 +139,11 @@ cover: !include covers.yaml
 influxdb:
   api_version: 1
   host: 192.168.0.3 # js1
+  database: homeassistant
+  username: homeassistant
+  password: !secret influxdb_password
+  tags_attributes:
+    - friendly_name
   include:
     domains:
       - sensor

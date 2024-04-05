@@ -4,59 +4,56 @@ kwh_limit:
   min: 0.5
   max: 5.0
   step: 0.1
+
+demand_warning_level:
+  name: Demand Warn
+  unit_of_measurement: 'kWh'
+  min: 2.0
+  max: 5.0
+  step: 0.1
+
+daily_demand:
+  name: Daily Demand
+  unit_of_measurement: 'kWh'
+  min: 0.0
+  max: 8.0
+  step: 0.1  
+
 hi_temp:
   name: High Limit
   unit_of_measurement: '°F'
   min: 72
   max: 78
   step: 1
+
 target_temp:
   name: Target Temp
   unit_of_measurement: '°F'
   min: 65
-  max: 73
+  max: 75
   step: 1
+
 wake_temp:
   name: Wake Temp
   unit_of_measurement: '°F'
   min: 65
-  max: 73
+  max: 75
   step: 1
+
 sleep_temp:
   name: Sleep Temp
   unit_of_measurement: '°F'
   min: 65
-  max: 73
+  max: 75
   step: 1
+
 precool_temp:
   name: Precool Temp
   unit_of_measurement: '°F'
   min: 68
   max: 73
   step: 1
-#summer_mode:
-#  name: Summer HVAC Mode
-#  min: 0
-#  max: 1
-#  step: 1
-#summer_screen_mode:
-#  name: Summer Screen Mode
-#  min: 0
-#  max: 1
-#  step: 1
 
-#daytime_heat:
-#  name: Daytime Heat
-#  unit_of_measurement: '°F'
-#  min: 68
-#  max: 73
-#  step: 1
-#nighttime_heat:
-#  name: Nighttime Heat
-#  unit_of_measurement: '°F'
-#  min: 68
-#  max: 73
-#  step: 1
 upstairs_setpoint:
   name: Saved US Setpoint
   unit_of_measurement: '°F'
@@ -97,16 +94,3 @@ hot_tub_rest_temp:
   min: 80
   max: 104
 
-demand_warning_level:
-  name: Demand Warn
-  unit_of_measurement: 'kWh'
-  min: 2.0
-  max: 5.0
-  step: 0.1
-
-daily_demand:
-  name: Daily Demand
-  unit_of_measurement: 'kWh'
-  min: 0.0
-  max: 8.0
-  step: 0.1  
