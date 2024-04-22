@@ -31,6 +31,9 @@ homeassistant:
 # Enable the default set of integrations:
 default_config:
   
+# Activate the configuration editor
+config:
+
 # Use lovelace YAML mode
 lovelace:
   mode: yaml
@@ -135,6 +138,7 @@ automation ui: !include automations.yaml
 automation mine: !include my_automations.yaml
 script: !include_dir_merge_named scripts/
 cover: !include covers.yaml
+scene: !include scenes.yaml
 
 influxdb:
   api_version: 1

@@ -16,36 +16,38 @@ views:
             title: Outside Lights
             cards:
               - type: entity-button
-                entity: switch.front_lights
+                entity: light.front_outside # switch.front_lights
 #              - type: entity-button
 #                entity: switch.christmas_lights
               - type: entity-button
-                entity: switch.back_patio_lights
+                entity: light.back_patio # switch.back_patio_lights
               - type: entity-button
-                entity: switch.string_lights
+                entity: light.back_string # switch.string_lights
               - type: entity-button
                 entity: light.pentair_fb_bb_80_pool_light
           - type: horizontal-stack
             title: Inside Lights
             cards:
               - type: entity-button
-                entity: switch.kitchen_lights
+                entity: light.family_room_floor_lamp # switch.family_room_light
               - type: entity-button
-                entity: switch.breakfast_area_light
+                entity: light.family_room
               - type: entity-button
-                entity: switch.front_room_light
+                entity: light.breakfast_area
               - type: entity-button
-                entity: switch.family_room_light
+                entity: light.kitchen # switch.kitchen_lights
           - type: horizontal-stack
             cards:
               - type: entity-button
-                entity: switch.master_light
+                entity: light.front_room_lamp # switch.front_room_light
               - type: entity-button
-                entity: switch.loft_light
+                entity: light.master_floor_lamp # switch.master_light
               - type: entity-button
-                entity: switch.desk_lights
+                entity: light.loft_floor_lamp # switch.loft_light
               - type: entity-button
-                entity: switch.stair_lights
+                entity: light.desk # switch.desk_lights
+              - type: entity-button
+                entity: light.stairs # switch.stair_lights
       #
       # Patio screens
       #
@@ -76,8 +78,10 @@ views:
             cards:
               - type: entity-button
                 entity: cover.large_garage_door_controller
+                icon: mdi:garage-variant
               - type: entity-button
                 entity: cover.small_garage_door_controller
+                icon: mdi:garage
       #
       # Thermostats
       #
@@ -90,7 +94,18 @@ views:
         - name: Downstairs
           type: thermostat
           entity: climate.downstairs_trane_thermostat
-      #
+        - name: false
+          type: custom:numberbox-card
+          entity: input_number.target_temp
+          # name: false
+          card_mod:
+            style: |
+              .cur-box ha-icon{ transform:scale(2); }
+              .body .cur-num { font-size:30px }
+              .body{display:block!important}
+              .body::after{text-align:center;font-size:20px;content:"Target Temperature";display:block!important}
+
+#
       # Pool filter
       #
       - type: vertical-stack
@@ -216,13 +231,6 @@ views:
               #- input_number.sleep_temp
 #              - input_number.daytime_heat
 #              - input_number.nighttime_heat
-              - type: custom:numberbox-card
-                entity: input_number.target_temp
-                name: false
-                card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:14px;content:"Target Temperature";display:block!important}
           - type: horizontal-stack
             cards:
             - type: custom:numberbox-card

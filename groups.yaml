@@ -4,33 +4,38 @@
 all_the_lights:
   name: All The Lights
   entities:
-    - switch.family_room_light 
-    - switch.front_room_light 
-    - switch.loft_light 
-    - switch.stair_lights 
-    - switch.breakfast_area_light 
-    - switch.desk_lights 
-    - switch.master_light 
-    - switch.kitchen_lights
-    
+    - light.back_patio
+    - light.back_string
+    - light.desk
+    - light.family_room
+    - light.front_outside
+    - light.front_room_lamp
+    - light.family_room_floor_lamp
+    - light.loft_floor_lamp
+    - light.master_floor_lamp
+    - light.stairs
+    - light.kitchen
+    - light.breakfast_area
+    - light.family_room
+
 ambient_lights:
   name: Ambient Lights
   entities:
-    - switch.loft_light
-    - switch.family_room_light
-    - switch.front_room_light
+    - light.loft_floor_lamp
+    - light.front_room_lamp
+    - light.family_room_floor_lamp
     
 front_lights:
   name: Front Yard Lights
   entities:
-    - switch.front_lights
+    - light.front_outside
     - switch.christmas_lights
 
 back_yard_lights:
   name: Back Yard Lights
   entities:
-    - switch.string_lights
-    - switch.back_patio_lights
+    - light.back_string
+    - light.back_patio
 
 pool_aeration:
   name: Pool Aeration

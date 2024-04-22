@@ -91,49 +91,79 @@ switch.pentair_fb_bb_80_pool:
   friendly_name: "Pool"
   icon: mdi:waves
 
+# Patio screens
+cover.west_patio_screen:
+  friendly_name: West
+  icon_template: |
+    {% if is_state("cover.west_patio_screen", "closed") %}
+      mdi:blinds
+    {% else %}
+      mdi:blinds-open
+    {% endif %}
+
+cover.middle_patio_screen:
+  friendly_name: Middle
+  icon_template: |
+    {% if is_state("cover.middle_patio_screen", "closed") %}
+      mdi:blinds
+    {% else %}
+      mdi:blinds-open
+    {% endif %}
+
+cover.east_patio_screen:
+  friendly_name: East
+  icon_template: |
+    {% if is_state("cover.east_patio_screen", "closed") %}
+      mdi:blinds
+    {% else %}
+      mdi:blinds-open
+    {% endif %}
+
 # zwave - 
 # rename the entity_id from the UI in configuration->entities
 # then add other customizations here
 
+# Switched to using UI for these:
+
 # Inside lights
-switch.family_room_light:
-  friendly_name: "Family Room"
-  icon: mdi:lightbulb
-switch.front_room_light:
-  friendly_name: "Front Room"
-  icon: mdi:lightbulb
-switch.loft_light:
-  friendly_name: "Loft"
-  icon: mdi:lightbulb
-switch.stair_lights:
-  friendly_name: "Stair"
-  icon: mdi:lightbulb
-switch.breakfast_area_light:
-  friendly_name: "Breakfast Area"
-  icon: mdi:lightbulb
-switch.kitchen_lights:
-  friendly_name: "Kitchen"
-  icon: mdi:lightbulb
-switch.desk_lights:
-  friendly_name: "Eric's Desk"
-  icon: mdi:lightbulb
-switch.master_light:
-  friendly_name: "Master"
-  icon: mdi:lightbulb
+#switch.family_room_light:
+#  friendly_name: "TV"
+#  icon: mdi:floor-lamp
+#switch.front_room_light:
+#  friendly_name: "Front"
+#  icon: mdi:floor-lamp
+#switch.loft_light:
+#  friendly_name: "Loft"
+#  icon: mdi:floor-lamp
+#switch.stair_lights:
+#  friendly_name: "Stairs"
+#  icon: mdi:wall-sconce-flat
+#switch.breakfast_area_light:
+#  friendly_name: "Breakfast Area"
+#  icon: mdi:light-recessed
+#switch.kitchen_lights:
+#  friendly_name: "Kitchen"
+#  icon: mdi:light-recessed
+#switch.desk_lights:
+#  friendly_name: "Desk"
+#  icon: mdi:lamp
+#switch.master_light:
+#  friendly_name: "Master"
+#  icon: mdi:floor-lamp
 #switch.back_tree_lights:
 #  friendly_name: "Back Tree Lights"
 #  icon: mdi:lightbulb
 
 
 # Front yard lights
-switch.front_lights:
-  friendly_name: "Front"
-  icon: mdi:lightbulb
-switch.christmas_lights:
-  friendly_name: "Christmas"
-  icon: mdi:lightbulb
+#switch.front_lights:
+#  friendly_name: "Front"
+#  icon: mdi:coach-lamp
+#switch.christmas_lights:
+#  friendly_name: "Christmas"
+#  icon: mdi:lightbulb
 
 # Back yard lights
-switch.string_lights:
-  friendly_name: "String"
-  icon: mdi:lightbulb
+#switch.string_lights:
+#  friendly_name: "String"
+#  icon: mdi:string-lights
