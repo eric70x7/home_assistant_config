@@ -31,15 +31,23 @@ views:
               - type: entity-button
                 entity: light.family_room_floor_lamp # switch.family_room_light
               - type: entity-button
+                entity: switch.family_room_ceiling_fan
+              - type: entity-button
+                entity: switch.family_room_ceiling_light
+              - type: entity-button
                 entity: light.family_room
+          - type: horizontal-stack
+            cards:
               - type: entity-button
                 entity: light.breakfast_area
               - type: entity-button
                 entity: light.kitchen # switch.kitchen_lights
-          - type: horizontal-stack
-            cards:
+              - type: entity-button
+                entity: light.under_cabinets
               - type: entity-button
                 entity: light.front_room_lamp # switch.front_room_light
+          - type: horizontal-stack
+            cards:
               - type: entity-button
                 entity: light.master_floor_lamp # switch.master_light
               - type: entity-button

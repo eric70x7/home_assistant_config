@@ -28,6 +28,15 @@
       friendly_name: TV
       supported_features: 32
       state: 'on'
+    light.under_cabinets:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 62
+      icon: mdi:wall-sconce-flat
+      friendly_name: Counters
+      supported_features: 32
+      state: 'on'
   icon: mdi:youtube-tv
   metadata:
     light.kitchen:
@@ -35,6 +44,8 @@
     light.breakfast_area:
       entity_only: true
     light.family_room:
+      entity_only: true
+    light.under_cabinets:
       entity_only: true
 - id: '1713657596182'
   name: 20 percent
@@ -74,6 +85,15 @@
       friendly_name: TV
       supported_features: 0
       state: 'off'
+    light.under_cabinets:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 52
+      icon: mdi:wall-sconce-flat
+      friendly_name: Counters
+      supported_features: 32
+      state: 'on'
   icon: mdi:youtube-tv
   metadata:
     light.kitchen:
@@ -83,6 +103,8 @@
     light.family_room:
       entity_only: true
     light.family_room_floor_lamp:
+      entity_only: true
+    light.under_cabinets:
       entity_only: true
 - id: '1713658004206'
   name: 100 percent
@@ -122,6 +144,15 @@
       friendly_name: TV
       supported_features: 0
       state: 'on'
+    light.under_cabinets:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 203
+      icon: mdi:wall-sconce-flat
+      friendly_name: Counters
+      supported_features: 32
+      state: 'on'
   icon: mdi:youtube-tv
   metadata:
     light.kitchen:
@@ -131,4 +162,6 @@
     light.breakfast_area:
       entity_only: true
     light.family_room_floor_lamp:
+      entity_only: true
+    light.under_cabinets:
       entity_only: true

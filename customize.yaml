@@ -93,31 +93,19 @@ switch.pentair_fb_bb_80_pool:
 
 # Patio screens
 cover.west_patio_screen:
-  friendly_name: West
-  icon_template: |
-    {% if is_state("cover.west_patio_screen", "closed") %}
-      mdi:blinds
-    {% else %}
-      mdi:blinds-open
-    {% endif %}
+  friendly_name: "West"
+  device_class: shade
+  state_color: false
 
 cover.middle_patio_screen:
-  friendly_name: Middle
-  icon_template: |
-    {% if is_state("cover.middle_patio_screen", "closed") %}
-      mdi:blinds
-    {% else %}
-      mdi:blinds-open
-    {% endif %}
+  friendly_name: "Middle"
+  device_class: shade
+  state_color: false
 
 cover.east_patio_screen:
-  friendly_name: East
-  icon_template: |
-    {% if is_state("cover.east_patio_screen", "closed") %}
-      mdi:blinds
-    {% else %}
-      mdi:blinds-open
-    {% endif %}
+  friendly_name: "East"
+  device_class: shade
+  state_color: false
 
 # zwave - 
 # rename the entity_id from the UI in configuration->entities

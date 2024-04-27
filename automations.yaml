@@ -64,3 +64,65 @@
       entity_id: switch.kitchen_lights
     data: {}
   mode: single
+- id: '1714247307062'
+  alias: 'Switch: Turn on family room ceiling fan when switch turns on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ceiling_fan_wall
+    from: 'off'
+  condition: []
+  action:
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.family_room_ceiling_fan
+  mode: single
+- id: '1714247668584'
+  alias: 'Switch: Turn off family room ceiling fan when switch turns off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ceiling_fan_wall
+    from: 'on'
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.family_room_ceiling_fan
+    data: {}
+  mode: single
+- id: '1714248744883'
+  alias: 'Switch: Turn off family room ceiling light when switch turns off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.dimmer_dry_contact_relay
+    from: 'on'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.family_room_ceiling_light
+  mode: single
+- id: '1714248955585'
+  alias: 'Switch: Turn on family room ceiling light when switch turns on'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.dimmer_dry_contact_relay
+    from: 'off'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.family_room_ceiling_light
+  mode: single
