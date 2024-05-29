@@ -453,3 +453,34 @@ views:
           - sensor.ambient_temp
           - sensor.upstairs_cooling
           - sensor.downstairs_cooling
+    #
+    # audio control
+    #
+  - badges: []
+    title: Audio
+    path: audio
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.xantech8_front
+        max_volume: 38
+        group: true
+        hide:
+          controls: true
+      - type: custom:mini-media-player
+        entity: media_player.xantech8_center
+        max_volume: 38
+        group: true
+        hide:
+          controls: true
+      - type: custom:mini-media-player
+        entity: media_player.xantech8_rear
+        max_volume: 38
+        group: true
+        hide:
+          controls: true
+      - type: custom:mini-media-player
+        entity: media_player.xantech8_patio
+        max_volume: 38
+        group: true
+        hide:
+          controls: true

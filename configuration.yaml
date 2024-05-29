@@ -40,8 +40,8 @@ lovelace:
   resources:
     - url: /local/numberbox-card.js?v=1
       type: module  
-#    - url: /local/card-mod.js
-#      type: module  
+    - url: /local/mini-media-player-bundle.js?v=1.16.9
+      type: module
 
 frontend:
   extra_module_url: 
@@ -99,18 +99,30 @@ timer:
   wind_watchdog:
     duration: "00:15:00"
 
-# media
-# media_player:
-#  - platform: samsungtv
-#    name: family_room_tv
-#  - platform: samsungtv
-#    name: living_room_un65ju639d
-#  - platform: androidtv
-#    name: family_room_firestick
-#    host: 192.168.0.3
-#  - platform: androidtv
-#    name: loft_firestick
-#    host: 192.168.0.13
+# Whole house audio
+media_player:
+  - platform: xantech
+    type: dax88
+    port: socket://192.168.0.88:8888
+    zones:
+      11:
+        name: "Patio"
+      14:
+        name: "Front"
+      15:
+        name: "Rear"
+      16:
+        name: "Center"
+    sources:
+      1:
+        name: "Front"
+      2:
+        name: "Rear"
+      3:
+        name: "Center"
+      6:
+        name: "Sonos"
+
 
 # ios actions for Apple Watch
 ios:
