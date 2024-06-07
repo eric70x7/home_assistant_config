@@ -165,3 +165,168 @@
       entity_only: true
     light.under_cabinets:
       entity_only: true
+- id: '1717723387463'
+  name: TV Audio On
+  entities:
+    media_player.xantech8_front:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Front
+      supported_features: 3468
+      volume_level: 0.7894736842105263
+      is_volume_muted: false
+      source: Front
+      state: 'on'
+    media_player.xantech8_center:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Center
+      supported_features: 3468
+      volume_level: 0.7894736842105263
+      is_volume_muted: false
+      source: Center
+      state: 'on'
+    media_player.xantech8_rear:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Rear
+      supported_features: 3468
+      volume_level: 0.7894736842105263
+      is_volume_muted: false
+      source: Rear
+      state: 'on'
+  icon: mdi:speaker
+  metadata:
+    media_player.xantech8_front:
+      entity_only: true
+    media_player.xantech8_center:
+      entity_only: true
+    media_player.xantech8_rear:
+      entity_only: true
+- id: '1717723571396'
+  name: Audio Off
+  entities:
+    media_player.xantech8_front:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker-off
+      friendly_name: Front
+      supported_features: 3468
+      state: 'off'
+    media_player.xantech8_center:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker-off
+      friendly_name: Center
+      supported_features: 3468
+      state: 'off'
+    media_player.xantech8_rear:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker-off
+      friendly_name: Rear
+      supported_features: 3468
+      state: 'off'
+    media_player.xantech8_patio:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker-off
+      friendly_name: Patio
+      supported_features: 3468
+      state: 'off'
+  icon: mdi:speaker
+  metadata:
+    media_player.xantech8_front:
+      entity_only: true
+    media_player.xantech8_center:
+      entity_only: true
+    media_player.xantech8_rear:
+      entity_only: true
+    media_player.xantech8_patio:
+      entity_only: true
+- id: '1717724385709'
+  name: Party Audio On
+  entities:
+    media_player.xantech8_rear:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Rear
+      supported_features: 3468
+      volume_level: 0.4
+      is_volume_muted: false
+      source: Sonos
+      state: 'on'
+    media_player.xantech8_patio:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Patio
+      supported_features: 3468
+      volume_level: 1
+      is_volume_muted: false
+      source: Sonos
+      state: 'on'
+    media_player.xantech8_center:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker-off
+      friendly_name: Center
+      supported_features: 3468
+      state: 'off'
+    media_player.xantech8_front:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Sonos
+      icon: mdi:speaker
+      friendly_name: Front
+      supported_features: 3468
+      volume_level: 0.7894736842105263
+      is_volume_muted: false
+      source: Sonos
+      state: 'on'
+  icon: mdi:party-popper
+  metadata:
+    media_player.xantech8_rear:
+      entity_only: true
+    media_player.xantech8_patio:
+      entity_only: true
+    media_player.xantech8_center:
+      entity_only: true
+    media_player.xantech8_front:
+      entity_only: true

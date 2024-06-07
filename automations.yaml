@@ -126,3 +126,35 @@
     target:
       entity_id: switch.family_room_ceiling_light
   mode: single
+- id: '1717255351839'
+  alias: 'Media: TV Audio Power On'
+  description: Turn on audio when TV turns on
+  trigger:
+  - platform: device
+    device_id: ba9913ecc8e7a11050ca5d064df0160a
+    domain: media_player
+    entity_id: 1b6f6bd2e67a76d8e4ec51c0279dadce
+    type: turned_on
+  condition: []
+  action:
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.tv_audio
+  mode: single
+- id: '1717255483592'
+  alias: 'Media: TV Audio power Off'
+  description: Turn off audio when TV turns off
+  trigger:
+  - platform: device
+    device_id: ba9913ecc8e7a11050ca5d064df0160a
+    domain: media_player
+    entity_id: 1b6f6bd2e67a76d8e4ec51c0279dadce
+    type: turned_off
+  condition: []
+  action:
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.tv_audio_off
+  mode: single

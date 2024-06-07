@@ -457,30 +457,61 @@ views:
     # audio control
     #
   - badges: []
-    title: Audio
+    title: A/V
     path: audio
     cards:
       - type: custom:mini-media-player
         entity: media_player.xantech8_front
-        max_volume: 38
+        max_volume: 100
         group: true
         hide:
           controls: true
       - type: custom:mini-media-player
         entity: media_player.xantech8_center
-        max_volume: 38
+        max_volume: 100
         group: true
         hide:
           controls: true
       - type: custom:mini-media-player
         entity: media_player.xantech8_rear
-        max_volume: 38
+        max_volume: 100
         group: true
         hide:
           controls: true
       - type: custom:mini-media-player
         entity: media_player.xantech8_patio
-        max_volume: 38
+        max_volume: 100
         group: true
         hide:
           controls: true
+      - type: custom:mini-media-player
+        entity: media_player.fire_tv_192_168_0_45
+        artwork: cover
+      - type: custom:mini-media-player
+        entity: media_player.fire_tv_192_168_0_91
+        artwork: cover
+      - type: horizontal-stack
+        title: Audio
+        cards:
+          - type: button
+            entity: scene.tv_audio
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.tv_audio
+          - type: button
+            entity: scene.party_audio_on
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.party_audio_on
+      - type: button
+        entity: scene.tv_audio_off
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.tv_audio_off
+
