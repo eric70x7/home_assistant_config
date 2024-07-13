@@ -1,0 +1,49 @@
+turn_on_family_room_fire_tv:
+  alias: Turn on family room Fire TV
+  sequence:
+  - service: media_player.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: c7146a827124d02905ce4ec19e993bc2
+  mode: single
+  icon: mdi:television
+turn_on_youtube_tv:
+  alias: Turn on YouTube TV
+  sequence:
+  - service: media_player.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: c7146a827124d02905ce4ec19e993bc2
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.20_percent
+    enabled: true
+  - service: media_player.select_source
+    metadata: {}
+    data:
+      source: YouTubeTV
+    target:
+      device_id: c7146a827124d02905ce4ec19e993bc2
+  mode: single
+  icon: mdi:youtube-tv
+turn_on_youtube_tv_loft:
+  alias: Turn on YouTube TV Loft
+  sequence:
+  - service: media_player.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - 7bb4b88b39e3eb98cf54f13f276d6afd
+  - service: media_player.select_source
+    metadata: {}
+    data:
+      source: com.amazon.firetv.youtube.tv
+    target:
+      device_id:
+      - 7bb4b88b39e3eb98cf54f13f276d6afd
+  mode: single
+  icon: mdi:youtube-tv

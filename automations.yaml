@@ -158,3 +158,36 @@
     target:
       entity_id: scene.tv_audio_off
   mode: single
+- id: '1717880805166'
+  alias: DS Bathroom Light On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ds_bathroom_paddle
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: 984c38439b259b91d4e2e830df6ec337
+  mode: single
+- id: '1717880924305'
+  alias: 'Lights: DS Bathroom Off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.ds_bathroom_paddle
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      device_id: 984c38439b259b91d4e2e830df6ec337
+    data: {}
+  mode: single

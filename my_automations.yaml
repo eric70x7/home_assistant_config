@@ -399,38 +399,6 @@
 
 #######################################################################
 # Doggie door
-- id: dog_lights_off
-  alias: "Doggie door: Turn lights off when the doggie door motion timer expires"
-  trigger:
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.dog_lights
-  action:
-    service: homeassistant.turn_off
-    entity_id: switch.stair_lights
-
-- id: dog_lights_on
-  alias: "Doggie door: Turn lights on when there is motion at the doggie door"
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.doggie_door_motion
-    to: 'on'
-  condition:
-  - condition: sun
-    after: sunset
-    after_offset: "-01:00:00"
-    before: sunrise
-    before_offset: "01:00:00"
-  action:
-  - service: homeassistant.turn_on
-    entity_id: switch.stair_lights
-  - service: timer.start
-    data:
-      duration: '0'
-    target:
-      entity_id: timer.dog_lights
-  mode: single
 
 #######################################################################
 # ios actions for Apple watch
@@ -643,6 +611,17 @@
         {% endif %}
   mode: single
 
+- id: reset_energy_watchdog
+  alias: "Watchdog: Reset watchdog timer when energy consumption changes"
+  trigger:
+  - platform: state
+    entity_id: sensor.energy_usage
+  action:
+  - service: timer.start
+    data_template:
+      entity_id: timer.energy_watchdog
+  mode: single
+
 #######################################################################
 # Notifications
 #
@@ -696,6 +675,18 @@
     - service: notify.mobile_app_jonesey
       data:
         message: "Peak electric demand is above {{ states.input_number.demand_warning_level.state_with_unit }}!"
+
+- id: notify_when_energy_stops_updating
+  alias: "Notification: Notify when energy usage gets stuck"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.energy_watchdog
+  action:
+    - service: notify.mobile_app_jonesey
+      data:
+        message: 'Energy usage is stuck at {{ states("sensor.energy_usage") }} kW!'
 
 #######################################################################
 # Backups

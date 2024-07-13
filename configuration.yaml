@@ -98,12 +98,15 @@ timer:
     duration: "00:10:00"
   wind_watchdog:
     duration: "00:15:00"
+  energy_watchdog:
+    duration: "00:05:00"
 
 # Whole house audio
 media_player:
   - platform: xantech
     type: dax88
     port: socket://192.168.0.88:8888
+    # port: socket://192.168.0.61:8888 # Port forwarded through ASUS router
     zones:
       11:
         name: "Patio"
@@ -148,13 +151,14 @@ binary_sensor: !include_dir_merge_list binary_sensors/
 group: !include groups.yaml
 automation ui: !include automations.yaml
 automation mine: !include my_automations.yaml
-script: !include_dir_merge_named scripts/
+script ui: !include scripts.yaml
+script mine: !include_dir_merge_named scripts/
 cover: !include covers.yaml
 scene: !include scenes.yaml
 
 influxdb:
   api_version: 1
-  host: 192.168.0.3 # js1
+  host: 192.168.0.51 # js3
   database: homeassistant
   username: homeassistant
   password: !secret influxdb_password
@@ -164,6 +168,7 @@ influxdb:
     domains:
       - sensor
       - input_number
+      - media_player
 #    entities:
 #      - sensor.energy_usage
 #      - sensor.1_hr_demand

@@ -485,10 +485,12 @@ views:
         hide:
           controls: true
       - type: custom:mini-media-player
-        entity: media_player.fire_tv_192_168_0_45
+        # Family room
+        entity: media_player.fire_tv_192_168_0_11
         artwork: cover
       - type: custom:mini-media-player
-        entity: media_player.fire_tv_192_168_0_91
+        # Loft
+        entity: media_player.fire_tv_192_168_0_15
         artwork: cover
       - type: horizontal-stack
         title: Audio
