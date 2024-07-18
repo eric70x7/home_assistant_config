@@ -677,7 +677,7 @@
         message: "Peak electric demand is above {{ states.input_number.demand_warning_level.state_with_unit }}!"
 
 - id: notify_when_energy_stops_updating
-  alias: "Notification: Notify when energy usage gets stuck"
+  alias: "Notification: Energy usage is stuck"
   trigger:
     platform: event
     event_type: timer.finished
@@ -686,7 +686,7 @@
   action:
     - service: notify.mobile_app_jonesey
       data:
-        message: 'Energy usage is stuck at {{ states("sensor.energy_usage") }} kW!'
+        message: 'Energy usage is stuck at {{ float(states("sensor.energy_usage")) / 1000}} kW!'
 
 #######################################################################
 # Backups
