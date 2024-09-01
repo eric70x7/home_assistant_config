@@ -9,7 +9,7 @@ homeassistant:
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: !secret home_elevation
 
-    # metric for Metric, imperial for Imperial
+  # metric for Metric, imperial for Imperial
   unit_system: imperial
 
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -52,11 +52,12 @@ conversation:
 
 # Log levels
 logger:
-  default: critical
+  default: info
   logs:
-    homeassistant.components.python_script: info
-    pybalboa: debug
-    homeassistant.components.balboa: debug
+    # homeassistant.components.python_script: info
+    # pybalboa: debug
+    # homeassistant.components.balboa: debug
+    custom_components.pyscript: debug
     
 # Text to speech
 tts:
@@ -123,6 +124,8 @@ media_player:
         name: "Rear"
       3:
         name: "Center"
+      5:
+        name: "Echo Dot"
       6:
         name: "Sonos"
 
@@ -169,25 +172,25 @@ influxdb:
       - sensor
       - input_number
       - media_player
-#    entities:
-#      - sensor.energy_usage
-#      - sensor.1_hr_demand
-#      - sensor.fast_demand
-#      - sensor.medium_demand
-#      - sensor.medium_long_demand
-#      - sensor.ambient_temp
-#      - sensor.ambient_uv
-#      - sensor.ambient_temp_1 # Upstairs
-#      - sensor.ambient_temp_2 # Downstairs
-#      - sensor.ambient_temp_6 # Becca
-#      - sensor.ambient_temp_7 # Neil
+      - select
 
-# Themes
-# enable mobile component
-# mobile_app:
-  
-# Enables a map showing the location of tracked devices
-# map:
-
-# Track the sun
-# sun:
+utility_meter:
+  daily_energy:
+    source: sensor.energy_usage
+    name: Daily Energy Meter
+    # cycle: daily
+    # Hack: cycle 1 min before midnight to 
+    # keep the timestamp on the current day
+    cron: "59 23 * * *"
+    tariffs:
+      - peak
+      - offpeak
+  monthly_energy:
+    source: sensor.energy_usage
+    name: Monthly Energy Meter
+    cycle: monthly
+    offset:
+      days: 5
+    tariffs:
+      - peak
+      - offpeak

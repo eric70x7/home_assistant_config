@@ -70,11 +70,12 @@
     entity_id: switch.downstairs_circulate
   - service: switch.turn_off
     entity_id: switch.upstairs_circulate
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.daily_demand
-    data:
-      value: 0.0
+# Changed this to happen at midnight for grafana compatibility
+#  - service: input_number.set_value
+#    target:
+#      entity_id: input_number.daily_demand
+#    data:
+#      value: 0.0
 #  - service: climate.set_temperature
 #    entity_id: climate.hot_tub
 #    data_template:
@@ -105,6 +106,37 @@
     data:
       message: "Peak electric demand today was {{ states.input_number.daily_demand.state_with_unit }}"
   mode: single
+
+- id: toggle_power_meter_tariff
+  alias: "Toggle on/off peak on power meter"
+  trigger:
+    - platform: time
+      at: "16:00:00"
+      variables:
+        tariff: "peak"
+    - platform: time
+      at: "19:00:00"
+      variables:
+        tariff: "offpeak"
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: select.select_option
+      target:
+        entity_id: select.daily_energy
+      data:
+        option: "{{ tariff }}"
+    - service: select.select_option
+      target:
+        entity_id: select.monthly_energy
+      data:
+        option: "{{ tariff }}"
 
 - id: start_peak_time_hot_tub
   alias: "Energy: set hot tub rest temp at peak time"
@@ -159,6 +191,18 @@
       entity_id: input_number.daily_demand
     data:
       value: '{{ states("sensor.1_hr_peak_time_demand") }}'
+
+- id: reset_daily_peak_demand
+  alias: "Energy: reset daily peak demand before tomorrow"
+  trigger:
+    platform: time
+    at: '23:59'
+  action:
+  - service: input_number.set_value
+    target:
+      entity_id: input_number.daily_demand
+    data:
+      value: 0.0
 
 #######################################################################
 # Scheduled climate settings
