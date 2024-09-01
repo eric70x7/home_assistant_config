@@ -57,7 +57,7 @@ logger:
     # homeassistant.components.python_script: info
     # pybalboa: debug
     # homeassistant.components.balboa: debug
-    custom_components.pyscript: debug
+    # custom_components.pyscript: debug
     
 # Text to speech
 tts:

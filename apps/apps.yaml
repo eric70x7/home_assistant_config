@@ -2,3 +2,7 @@
 hello_world:
   module: hello
   class: HelloWorld
+
+report_thermostats:
+  module: report_thermostats
+  class: ReportThermostats
