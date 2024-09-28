@@ -53,7 +53,7 @@ conversation:
 # Log levels
 logger:
   default: info
-  logs:
+  # logs:
     # homeassistant.components.python_script: info
     # pybalboa: debug
     # homeassistant.components.balboa: debug

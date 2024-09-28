@@ -330,3 +330,24 @@
       entity_only: true
     media_player.xantech8_front:
       entity_only: true
+- id: '1725747501030'
+  name: TV Audio On (Duplicate)
+  entities:
+    media_player.xantech8_patio:
+      source_list:
+      - Front
+      - Rear
+      - Center
+      - Echo Dot
+      - Sonos
+      volume_level: 1
+      is_volume_muted: false
+      source: Echo Dot
+      icon: mdi:speaker
+      friendly_name: Patio
+      supported_features: 3468
+      state: 'on'
+  icon: mdi:speaker
+  metadata:
+    media_player.xantech8_patio:
+      entity_only: true

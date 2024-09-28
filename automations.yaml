@@ -191,3 +191,19 @@
       device_id: 984c38439b259b91d4e2e830df6ec337
     data: {}
   mode: single
+- id: '1725747666470'
+  alias: 'Media: Turn on Patio Speakers when Patio TV turns on'
+  description: Turn on audio when TV turns on
+  trigger:
+  - platform: device
+    device_id: fec97e513df33ac2fb7a8799b5fa51d0
+    domain: media_player
+    entity_id: c39f118ecb466d2a324526ed24229a29
+    type: playing
+  condition: []
+  action:
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.patio_tv_audio_on
+  mode: single
