@@ -6,3 +6,9 @@ summer_energy_mode:
 
 summer_screen_mode:
   name: Summer screen control
+
+family_room_tv_volume_up:
+  name: Family room TV volume up
+
+family_room_tv_volume_down:
+  name: Family room TV volume down

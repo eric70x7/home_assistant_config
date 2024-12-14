@@ -129,34 +129,36 @@
 - id: '1717255351839'
   alias: 'Media: TV Audio Power On'
   description: Turn on audio when TV turns on
-  trigger:
-  - platform: device
-    device_id: ba9913ecc8e7a11050ca5d064df0160a
+  triggers:
+  - device_id: ba9913ecc8e7a11050ca5d064df0160a
     domain: media_player
     entity_id: 1b6f6bd2e67a76d8e4ec51c0279dadce
     type: turned_on
-  condition: []
-  action:
-  - service: scene.turn_on
+    trigger: device
+  conditions: []
+  actions:
+  - action: media_player.turn_on
     metadata: {}
+    data: {}
     target:
-      entity_id: scene.tv_audio
+      entity_id: media_player.family_room_tv_audio
   mode: single
 - id: '1717255483592'
   alias: 'Media: TV Audio power Off'
   description: Turn off audio when TV turns off
-  trigger:
-  - platform: device
-    device_id: ba9913ecc8e7a11050ca5d064df0160a
+  triggers:
+  - device_id: ba9913ecc8e7a11050ca5d064df0160a
     domain: media_player
     entity_id: 1b6f6bd2e67a76d8e4ec51c0279dadce
     type: turned_off
-  condition: []
-  action:
-  - service: scene.turn_on
+    trigger: device
+  conditions: []
+  actions:
+  - action: media_player.turn_off
     metadata: {}
+    data: {}
     target:
-      entity_id: scene.tv_audio_off
+      entity_id: media_player.family_room_tv_audio
   mode: single
 - id: '1717880805166'
   alias: DS Bathroom Light On
@@ -206,4 +208,48 @@
     metadata: {}
     target:
       entity_id: scene.patio_tv_audio_on
+  mode: single
+- id: '1734192737016'
+  alias: 'Keyfob: TV Volume Up'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.keyfob_scene_006
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: event.keyfob_scene_006
+        attribute: event_type
+        state: KeyPressed
+      sequence:
+      - action: input_boolean.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.family_room_tv_volume_up
+  mode: single
+- id: '1734192859778'
+  alias: 'Keyfob: TV Volume Down'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.keyfob_scene_005
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: event.keyfob_scene_005
+        attribute: event_type
+        state: KeyPressed
+      sequence:
+      - action: input_boolean.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.family_room_tv_volume_down
   mode: single

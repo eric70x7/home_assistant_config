@@ -1,0 +1,35 @@
+volume_up:
+  fields:
+    which_player:
+      description: "The media player whose volume to adjust"
+  variables:
+    inc: 0.05
+  sequence:
+    action: media_player.volume_set
+    target:
+      entity_id: "{{ which_player }}"
+    data:
+      volume_level: |
+        {% if state_attr(which_player, 'volume_level') | float < (1.0 - inc) %}
+          {{ ((state_attr(which_player, 'volume_level') + inc) / inc) | int | float * inc}}
+        {% else %}
+          1.0
+        {% endif %}
+
+volume_down:
+  fields:
+    which_player:
+      description: "The media player whose volume to adjust"
+  variables:
+    inc: 0.05
+  sequence:
+    action: media_player.volume_set
+    target:
+      entity_id: "{{ which_player }}"
+    data:
+      volume_level: |
+        {% if state_attr(which_player, 'volume_level') | float >= inc %}
+          {{ ((state_attr(which_player, 'volume_level') - inc) / inc) | int | float * inc}}
+        {% else %}
+          0.0
+        {% endif %}

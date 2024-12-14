@@ -1,0 +1,14 @@
+- platform: template
+  sensors:
+    center_volume:
+      friendly_name: Center Volume
+      value_template: >
+        {{ state_attr('media_player.xantech8_center', 'volume_level') | round(2)}}
+    front_volume:
+      friendly_name: Front Volume
+      value_template: >
+        {{ state_attr('media_player.xantech8_front', 'volume_level') | round(2)}}
+    rear_volume:
+      friendly_name: Rear Volume
+      value_template: >
+        {{ state_attr('media_player.xantech8_rear', 'volume_level') | round(2)}}

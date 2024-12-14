@@ -388,6 +388,52 @@ views:
     title: A/V
     path: audio
     cards:
+      - type: horizontal-stack
+        title: Audio
+        cards:
+          - type: vertical-stack
+            cards:
+            - type: button
+              entity: scene.tv_audio
+              tap_action:
+                action: call-service
+                service: scene.turn_on
+                service_data:
+                  entity_id: scene.tv_audio
+            - type: entity-button
+              icon: mdi:arrow-up
+              entity: input_boolean.family_room_tv_volume_up
+            - type: entity-button
+              icon: mdi:arrow-down
+              entity: input_boolean.family_room_tv_volume_down
+            - type: button
+              entity: scene.tv_audio_off
+              tap_action:
+                action: call-service
+                service: scene.turn_on
+                service_data:
+                  entity_id: scene.tv_audio_off
+          - type: custom:custom-mixer-card
+            faderWidth: 50px
+            faderHeight: 232px
+            borderRadius: 12px
+            faderTheme: modern
+            faders:
+              - entity_id: media_player.family_room_tv_audio
+                active_entity_id: media_player.family_room_tv_audio
+                value_entity_id: media_player.family_room_tv_audio
+#      - type: custom:custom-mixer-card
+#        faderWidth: 50px
+#        faderHeight: 200px
+#        borderRadius: 12px
+#        faderTheme: modern
+#        faders:
+#          - entity_id: media_player.xantech8_front
+#            value_entity_id: sensor.front_volume
+#          - entity_id: media_player.xantech8_center
+#            value_entity_id: sensor.center_volume
+#          - entity_id: media_player.xantech8_rear
+#            value_entity_id: sensor.rear_volume
       - type: custom:mini-media-player
         entity: media_player.xantech8_front
         max_volume: 100
@@ -428,13 +474,6 @@ views:
         title: Audio
         cards:
           - type: button
-            entity: scene.tv_audio
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data:
-                entity_id: scene.tv_audio
-          - type: button
             entity: scene.party_audio_on
             tap_action:
               action: call-service
@@ -448,13 +487,6 @@ views:
               service: scene.turn_on
               service_data:
                 entity_id: scene.patio_tv_audio_on
-      - type: button
-        entity: scene.tv_audio_off
-        tap_action:
-          action: call-service
-          service: scene.turn_on
-          service_data:
-            entity_id: scene.tv_audio_off
 
   - badges: []
     title: EM
@@ -534,3 +566,8 @@ views:
                   style: |
                     .body{display:block!important}
                     .body::after{text-align:center;font-size:10px;content:"Warn Level";display:block!important}
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - input_boolean.family_room_tv_volume_up
+              - input_boolean.family_room_tv_volume_down
