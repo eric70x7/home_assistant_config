@@ -38,7 +38,7 @@ class ReportVolume(hass.Hass):
     if nv >= 0.0 and nv <= 1.0:
       for e in self.entities:
         cv = self.get_state(entity_id=e, attribute='volume_level')
-        self.log(f"Setting {e}: {cv} -> {nv}")
+        # self.log(f"Setting {e}: {cv} -> {nv}")
         ''' Set the volume level to the new value '''
         self.call_service("media_player/volume_set", entity_id=e, volume_level=nv)
     
@@ -60,9 +60,7 @@ class ReportVolume(hass.Hass):
       ''' Round to nearest volume increment'''
       inc = self.volume_increment
       cv = self.current_volume()
-      self.log(f"DOWN: cv = {cv}")
       if cv != None:
-        # nv = math.ceil(cv / inc) * inc - inc
         nv = cv - inc
         self.set_vols(nv)
 
@@ -78,9 +76,7 @@ class ReportVolume(hass.Hass):
       ''' Round to nearest volume increment'''
       inc = self.volume_increment
       cv = self.current_volume()
-      self.log(f"UP: cv = {cv}")
       if cv != None:
-        # nv = math.floor(cv / inc) * inc + inc
         nv = cv + inc
         self.set_vols(nv)
 
