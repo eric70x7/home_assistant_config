@@ -7,6 +7,6 @@ report_thermostats:
   module: report_thermostats
   class: ReportThermostats
 
-report_volume:
-  module: report_volume
-  class: ReportVolume
+volume_controller:
+  module: volume_controller
+  class: VolumeController

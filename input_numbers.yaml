@@ -94,3 +94,8 @@ hot_tub_rest_temp:
   min: 80
   max: 104
 
+family_room_tv_volume_knob:
+  name: Family room TV volume knob
+  initial: 0.0
+  min: 0.0
+  max: 1.0

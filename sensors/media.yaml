@@ -12,3 +12,6 @@
       friendly_name: Rear Volume
       value_template: >
         {{ state_attr('media_player.xantech8_rear', 'volume_level') | round(2)}}
+#    family_room_tv_volume:
+#      friendly_name: TV Volume
+#      value_template: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"

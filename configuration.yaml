@@ -46,6 +46,8 @@ lovelace:
       type: module
     - url: /hacsfiles/mixer-card/mixer-card.js
       type: module
+    - url: /hacsfiles/my-cards/my-cards.js
+      type: module
                 
 frontend:
   extra_module_url: 
@@ -170,6 +172,11 @@ script ui: !include scripts.yaml
 script mine: !include_dir_merge_named scripts/
 cover: !include covers.yaml
 scene: !include scenes.yaml
+
+#template:
+#  - number:
+#    - name: Family room TV volume
+#      state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
 
 influxdb:
   api_version: 1
