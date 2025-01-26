@@ -3,10 +3,33 @@
 #  module: hello
 #  class: HelloWorld
 
-report_thermostats:
-  module: report_thermostats
-  class: ReportThermostats
+climate_controller:
+  module: climate_controller
+  class: ClimateController
 
 volume_controller:
   module: volume_controller
   class: VolumeController
+
+energy_controller:
+  module: energy_controller
+  class: EnergyController
+
+family_room_log_light:
+  module: log_light
+  class: LogLight
+  log_light_entity: light.family_room_log_light
+  real_light_entity: light.family_room
+
+breakfast_area_log_light:
+  module: log_light
+  class: LogLight
+  log_light_entity: light.breakfast_area_log_light
+  real_light_entity: light.breakfast_area
+
+kitchen_log_light:
+  module: log_light
+  class: LogLight
+  log_light_entity: light.kitchen_log_light
+  real_light_entity: light.kitchen
+

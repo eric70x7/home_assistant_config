@@ -459,12 +459,48 @@ views:
 #        group: true
 #        hide:
 #          controls: true
-#      - type: custom:mini-media-player
-#        entity: media_player.xantech8_patio
-#        max_volume: 100
-#        group: true
-#        hide:
-#          controls: true
+      - type: custom:mini-media-player
+        entity: media_player.xantech8_patio
+        max_volume: 100
+        group: true
+        hide:
+          controls: true
+      - type: horizontal-stack
+        title: Whole house channels
+        cards:
+          - type: button
+            entity: media_player.xantech8_front
+            icon: mdi:power
+            state_color: true
+            tap_action:
+              action: call-service
+              service: media_player.toggle
+              service_data:
+                entity_id: media_player.xantech8_front
+          - type: button
+            entity: media_player.xantech8_rear
+            icon: mdi:power
+            tap_action:
+              action: call-service
+              service: media_player.toggle
+              service_data:
+                entity_id: media_player.xantech8_rear
+          - type: button
+            entity: media_player.xantech8_center
+            icon: mdi:power
+            tap_action:
+              action: call-service
+              service: media_player.toggle
+              service_data:
+                entity_id: media_player.xantech8_center
+          - type: button
+            entity: media_player.xantech8_patio
+            icon: mdi:power
+            tap_action:
+              action: call-service
+              service: media_player.toggle
+              service_data:
+                entity_id: media_player.xantech8_patio
 #      - type: custom:mini-media-player
 #        # Family room
 #        entity: media_player.fire_tv_192_168_0_11
@@ -578,3 +614,362 @@ views:
             entities:
               - input_boolean.family_room_tv_volume_up
               - input_boolean.family_room_tv_volume_down
+
+# from ha-mobile-dashboard
+  - title: ''
+    path: home
+    icon: mdi:home
+    type: sections
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: user
+                    users:
+                      - c115752b1aaa487484dc6ebda8b7dcf3 # Eric
+                card:
+                  type: custom:mushroom-title-card
+                  title: Hi, {{ user }}!
+                  subtitle: >
+                    You are currently at {{ states.person.eric_jones.state
+                    }}.
+                  alignment: center
+                  card_mod:
+                    style: |
+                      ha-card {
+                        font-family: Comfortaa !important;
+                        margin-bottom: -0px !important;
+                        margin-top: -1rem !important;
+                        margin-left: 10px !important;
+                      }
+                      .subtitle {
+                        color: var(--contrast13) !important;
+                      }
+          - type: custom:swipe-card
+            parameters:
+              spaceBetween: 7
+              slidesPerView: auto
+              centeredSlides: false
+              grabCursor: true
+            cards:
+              # Upstairs thermostat button
+              - type: custom:button-card
+                entity: climate.upstairs_trane_thermostat
+                name: Upstairs
+                show_name: false
+                show_icon: false
+                styles:
+                  card:
+                    - position: relative
+                    - height: 110px
+                    - width: 180px
+                    - border-radius: 25px
+                    - overflow: hidden
+                    - background: rgba(255, 255, 255, 0.2) !important;
+                    - backdrop-filter: blur(10px);
+                    - border-radius: px;
+                    - box-shadow: var(--ha-card-box-shadow);
+                    - background-size: cover
+                    - background-position: center
+                    - background-repeat: no-repeat
+                    - '--mdc-ripple-color': var(--primary-text-color)
+                    - '--mdc-ripple-press-opacity': 0.2
+                  custom_fields:
+                    status:
+                      - position: absolute
+                      - top: 35%
+                      - left: 50%
+                      - transform: translate(-50%, -150%)
+                      - font-size: 14px
+                      - font-family: Comfortaa
+                      - color: white
+                    temperature:
+                      - position: absolute
+                      - top: 50%
+                      - left: 50%
+                      - transform: translate(-50%, -50%)
+                      - font-size: 32px
+                      - font-family: Comfortaa
+                      - color: white
+                    set_temperatures:
+                      - position: absolute
+                      - top: 75%
+                      - left: 50%
+                      - transform: translate(-50%, 0)
+                      - font-size: 14px
+                      - font-family: Comfortaa
+                      - color: white
+                    circle_1:
+                      - position: absolute
+                      - bottom: '-58px'
+                      - left: 14px
+                      - transform: translate(0, 0)
+                      - font-size: 190px
+                      - font-family: Comfortaa
+                      - color: rgba(255, 255, 255, 0.3)
+                custom_fields:
+                  circle_1: |
+                    [[[
+                      return `<div>◯</div>`;
+                    ]]]
+                  status: |
+                    [[[
+                      return `<div>${entity.attributes.hvac_action || 'idle'}</div>`;
+                    ]]]
+                  temperature: |
+                    [[[
+                      return `<div>${entity.attributes.current_temperature}°F</div>`;
+                    ]]]
+                  set_temperatures: |
+                    [[[
+                      const hvacMode = entity.state;
+                      const targetTemp = entity.attributes.temperature;
+                      const targetTempHigh = entity.attributes.target_temp_high;
+                      const targetTempLow = entity.attributes.target_temp_low;
+                      
+                      if (hvacMode === 'cool') {
+                        return `
+                          <div>
+                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
+                          </div>
+                        `;
+                      } else if (hvacMode === 'heat') {
+                        return `
+                          <div>
+                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
+                          </div>
+                        `;
+                      } else {
+                        return `
+                          <div>
+                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTempHigh}°F &nbsp;&nbsp;&nbsp;
+                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTempLow}°F
+                          </div>
+                        `;
+                      }
+                    ]]]
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/home#upstairs_thermostat
+          # Upstairs thermostat pop-up
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                button_type: name
+                name: Upstairs Thermostat
+                icon: mdi:thermostat
+                scrolling_effect: true
+                show_icon: true
+                tap_action:
+                  action: none
+                hash: '#upstairs_thermostat'
+                show_name: true
+                styles: |2-
+                      .bubble-header {
+                        font-family: Comfortaa !important;
+                      }
+                      .bubble-button-background {
+                        background-color: var(--secondary-background-color) !important;
+                      }
+                      .bubble-close-button {
+                        background-color: var(--secondary-background-color) !important;
+                      }
+                sub_button:
+                  - entity: climate.upstairs_trane_thermostat
+                    show_state: true
+                    show_name: false
+                    show_icon: false
+                    show_background: false
+                    show_last_changed: false
+                    show_attribute: false
+                    attribute: current_temperature
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                bg_opacity: '0'
+                bg_color: '#000000'
+                shadow_opacity: '100'
+                hide_backdrop: true
+              - type: thermostat
+                entity: climate.upstairs_trane_thermostat
+                features:
+                  - type: climate-hvac-modes
+                  - style: icons
+                    type: climate-fan-modes
+                  - style: icons
+                    type: climate-preset-modes
+                  - type: custom:service-call
+                    entries:
+                      - type: button
+                        entity_id: sensor.downstairs_trane_temperature
+                        label: >-
+                          Downstairs: {{
+                          state_attr('climate.downstairs_trane_thermostat',
+                          'current_temperature') }} °F
+                        styles: |-
+                          :host {
+                            flex-basis: 100%;
+                            flex-flow: row;
+                          }
+                          .background {
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
+                            background: rgba(0, 255, 255, 0.3);
+                            {% endif %};
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
+                            background: rgba(127, 255, 0, 0.3);
+                            {% endif %};
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
+                            background: rgba(220, 20, 60, 0.3);
+                            {% endif %};
+                          }
+                          .icon {
+                            left: 10px;
+                          }
+                        tap_action:
+                          action: more-info
+                          target:
+                            entity_id: sensor.downstairs_trane_temperature
+                          data: {}
+                        icon: mdi:thermometer
+                      - type: button
+                        entity_id: sensor.loft_temperature_temperature
+                        label: >-
+                          Loft: {{ states('sensor.loft_temperature_temperature')
+                          | round(0) | int }} °F
+                        styles: |-
+                          :host {
+                            flex-basis: 100%;
+                            flex-flow: row;
+                          }
+                          .background {
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
+                            background: rgba(0, 255, 255, 0.3);
+                            {% endif %};
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
+                            background: rgba(127, 255, 0, 0.3);
+                            {% endif %};
+                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
+                            background: rgba(220, 20, 60, 0.3);
+                            {% endif %};
+                          }
+                          .icon {
+                            left: 10px;
+                            margin-right: -10px;
+                          }
+                        tap_action:
+                          action: more-info
+                          target:
+                            entity_id: sensor.loft_temperature_temperature
+                          data: {}
+                        icon: mdi:thermometer
+                  - type: custom:service-call
+                    entries:
+                      - type: button
+                        entity_id: sensor.dining_room_thermostat_humidity
+                        label: >-
+                          Downstairs: {{
+                          states('sensor.dining_room_thermostat_humidity') }} %
+                        icon: mdi:water-percent
+                        tap_action:
+                          action: more-info
+                          target:
+                            entity_id: sensor.dining_room_thermostat_humidity
+                          data: {}
+                        haptics: true
+                        styles: |-
+                          :host {
+                            flex-basis: 100%;
+                            flex-flow: row;
+                          }
+                          .background {
+                            {% if states('sensor.dining_room_thermostat_humidity') < 30 %}
+                            background: rgba(0, 255, 255, 0.3);
+                            {% endif %};
+                            {% if states('sensor.dining_room_thermostat_humidity') < 51 %}
+                            background: rgba(127, 255, 0, 0.3);
+                            {% endif %};
+                            {% if states('sensor.dining_room_thermostat_humidity') > 50 %}
+                            background: rgba(220, 20, 60, 0.3);
+                            {% endif %};
+                          }
+                          .icon {
+                            left: 10px;
+                          }
+                      - type: button
+                        entity_id: sensor.loft_temperature_humidity
+                        label: >-
+                          Loft: {{ states('sensor.loft_temperature_humidity') |
+                          round(0) | int  }} %
+                        icon: mdi:water-percent
+                        tap_action:
+                          action: more-info
+                          target:
+                            entity_id: sensor.dining_room_thermostat_humidity
+                          data: {}
+                        haptics: true
+                        styles: |-
+                          :host {
+                            flex-basis: 100%;
+                            flex-flow: row;
+                          }
+                          .background {
+                            {% if states('sensor.loft_temperature_humidity') < 30 %}
+                            background: rgba(0, 255, 255, 0.3);
+                            {% endif %};
+                            {% if states('sensor.loft_temperature_humidity') < 51 %}
+                            background: rgba(127, 255, 0, 0.3);
+                            {% endif %};
+                            {% if states('sensor.loft_temperature_humidity') > 50 %}
+                            background: rgba(220, 20, 60, 0.3);
+                            {% endif %};
+                          }
+                          .icon {
+                            left: 10px;
+                          }
+                grid_options:
+                  columns: 12
+                  rows: 8
+                show_current_as_primary: false
+                name: ' '
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: rgba(0, 0, 0, 0) !important;
+                      backdrop-filter: blur(10px);
+                      border-radius: 30px;
+                      box-shadow: var(--ha-card-box-shadow);
+                      font-family: Comfortaa !important;
+                    }
+                    .content {
+                      background: inherit !important;
+                    }
+              - type: custom:weather-card
+                entity: weather.pirateweather
+                hourly_forecast: false
+                current: true
+                details: true
+                forecast: false
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-family: Comfortaa !important;
+                      background: transparent !important;
+                    }
+              - show_current: false
+                show_forecast: true
+                type: weather-forecast
+                forecast_type: daily
+                entity: weather.pirateweather
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-family: Comfortaa !important;
+                      background: transparent !important;
+                      margin-top: -30px !important;
+                    }

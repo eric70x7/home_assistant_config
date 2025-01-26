@@ -99,3 +99,4 @@ family_room_tv_volume_knob:
   initial: 0.0
   min: 0.0
   max: 1.0
+  step: 0.05263157894736842

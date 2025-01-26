@@ -10,7 +10,7 @@ homeassistant:
   elevation: !secret home_elevation
 
   # metric for Metric, imperial for Imperial
-  unit_system: imperial
+  unit_system: us_customary
 
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Phoenix
@@ -36,19 +36,14 @@ config:
 
 # Use lovelace YAML mode
 lovelace:
-  mode: yaml
-  resources:
-    - url: /local/numberbox-card.js?v=1
-      type: module  
-    - url: /local/mini-media-player-bundle.js?v=1.16.9
-      type: module
-    - url: /local/bubble-card.js?v=2023.9.0
-      type: module
-    - url: /hacsfiles/mixer-card/mixer-card.js
-      type: module
-    - url: /hacsfiles/my-cards/my-cards.js
-      type: module
-                
+  mode: storage
+  dashboards:
+    lovelace-yaml:
+      mode: yaml
+      title: Jones
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: lovelace.yaml
 frontend:
   extra_module_url: 
     - /local/card-mod.js
@@ -172,6 +167,26 @@ script ui: !include scripts.yaml
 script mine: !include_dir_merge_named scripts/
 cover: !include covers.yaml
 scene: !include scenes.yaml
+
+light:
+  - platform: template
+    lights:
+      family_room_log_light:
+        turn_on:
+        turn_off:
+        set_level:
+  - platform: template
+    lights:
+      breakfast_area_log_light:
+        turn_on:
+        turn_off:
+        set_level:
+  - platform: template
+    lights:
+      kitchen_log_light:
+        turn_on:
+        turn_off:
+        set_level:
 
 #template:
 #  - number:
