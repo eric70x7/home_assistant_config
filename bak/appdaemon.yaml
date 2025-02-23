@@ -1,0 +1,29 @@
+---
+secrets: /homeassistant/secrets.yaml
+
+appdaemon:
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  time_zone: America/Phoenix
+  app_dir: /homeassistant/apps
+  logs:
+    main_log: 
+      filename: /homeassistant/appdaemon/main.log
+    error_log: 
+      filename: /homeassistant/appdaemon/error.log
+    diag_log: 
+      filename: /homeassistant/appdaemon/diag.log
+    access_log: 
+      filename: /homeassistant/appdaemon/access.log
+  plugins:
+    HASS:
+      type: hass
+  namespaces:
+    energy_namespace:
+      writeback: safe
+http:
+  url: http://127.0.0.1:5050
+admin:
+api:
+hadashboard:
