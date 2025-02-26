@@ -32,38 +32,6 @@
       scene_44: []
       scene_12: []
       scene_22: []
-- id: '1704472961581'
-  alias: 'Lights: Turn kitchen light on when breakfast area is turned on'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - switch.breakfast_area_light
-    from: 'off'
-    to: 'on'
-  condition: []
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.kitchen_lights
-    data: {}
-  mode: single
-- id: '1704473187617'
-  alias: 'Lights: Turn kitchen lights off when breakfast area light turns off'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - switch.breakfast_area_light
-    from: 'on'
-    to: 'off'
-  condition: []
-  action:
-  - service: switch.turn_off
-    target:
-      entity_id: switch.kitchen_lights
-    data: {}
-  mode: single
 - id: '1714247307062'
   alias: 'Switch: Turn on family room ceiling fan when switch turns on'
   description: ''

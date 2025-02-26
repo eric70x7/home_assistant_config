@@ -1,10 +1,6 @@
 import appdaemon.plugins.hass.hassapi as hass
-# import math
-# from pint import UnitRegistry
-# from datetime import datetime
 import json
 import numpy as np
-# import pandas as pd
 """ 
 import pytz
 """

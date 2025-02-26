@@ -33,3 +33,7 @@ kitchen_log_light:
   log_light_entity: light.kitchen_log_light
   real_light_entity: light.kitchen
 
+cooling_logger:
+  module: cooling_logger
+  class: CoolingLogger
+

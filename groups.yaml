@@ -36,12 +36,3 @@ back_yard_lights:
   entities:
     - light.back_string
     - light.back_patio
-
-pool_aeration:
-  name: Pool Aeration
-  icon: mdk:chart-bubble
-  all: true
-  entities:
-    - switch.pentair_floor_cleaner
-    - switch.pentair_water_feature
-    - switch.pentair_high_speed

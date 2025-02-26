@@ -66,10 +66,10 @@
   - service: python_script.set_temp
     data_template:
       setpoint: '{{ states("input_number.target_temp") }}'
-  - service: switch.turn_off
-    entity_id: switch.downstairs_circulate
-  - service: switch.turn_off
-    entity_id: switch.upstairs_circulate
+#  - service: switch.turn_off
+#    entity_id: switch.downstairs_circulate
+#  - service: switch.turn_off
+#    entity_id: switch.upstairs_circulate
 # Changed this to happen at midnight for grafana compatibility
 #  - service: input_number.set_value
 #    target:
