@@ -54,7 +54,7 @@ class EnergyController(hass.Hass):
     if self.te != []:
       delta_t=t1-self.te[0][0]
       e=p*delta_t/np.timedelta64(1,'h') # watt*hours
-      self.log(f"delta_t = {delta_t}, p = {p}, e = {e}")
+      # self.log(f"delta_t = {delta_t}, p = {p}, e = {e}")
       
       ''' Accumulate energy history '''
       self.te.insert(0,(t1, 0))
@@ -73,7 +73,7 @@ class EnergyController(hass.Hass):
       ''' x must be increasing '''
       interp_samples = np.flip(np.interp(np.flip(ma_times), np.flip(sample_times), np.flip(samples)))
 
-      self.log(f'{interp_samples}')
+      # self.log(f'{interp_samples}')
 
       ''' Update moving average sensors '''
       for t,v in zip(self.ma_times,interp_samples):

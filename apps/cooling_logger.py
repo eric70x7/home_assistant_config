@@ -8,18 +8,26 @@ import numpy as np
 
 class CoolingLogger(hass.Hass):
     def initialize(self):
+        # Thermostats
         self.upstairs_entity = "climate.upstairs_trane_thermostat"
+        self.upstairs_thermometer = "sensor.ambient_temp_1"
         self.downstairs_entity = "climate.downstairs_trane_thermostat"
-        self.outdoor_entity = "sensor.ambient_temp"
-        self.log_file = "/config/appdaemon/cooling_model_log.json"
+        self.downstairs_thermometer = "sensor.ambient_temp_2"
+        
+        # Outside temperature
+        self.outdoor_entity = "sensor.ambient_temp" 
+
+        self.log_file = "/homeassistant/appdaemon/cooling_model_log.json"
+
+        # Model parameters
         self.model_entity_up = "sensor.cooling_model_upstairs"
         self.model_entity_down = "sensor.cooling_model_downstairs"
         
         # Track state for each unit
-        self.last_state_up = "off"
+        self.last_state_up = "idle"
         self.last_time_up = None
         self.last_temp_up = None
-        self.last_state_down = "off"
+        self.last_state_down = "idle"
         self.last_time_down = None
         self.last_temp_down = None
         
@@ -28,8 +36,14 @@ class CoolingLogger(hass.Hass):
         self.cooling_log_up = logs.get("upstairs", [])
         self.cooling_log_down = logs.get("downstairs", [])
         
-        self.listen_state(self.track_cooling_up, self.upstairs_entity)
-        self.listen_state(self.track_cooling_down, self.downstairs_entity)
+        self.listen_state(self.track_cooling_up, self.upstairs_entity, attribute='hvac_action')
+        self.listen_state(self.track_cooling_down, self.downstairs_entity, attribute='hvac_action')
+
+    '''
+    Generic log for state listeners
+    '''
+    def logit(self, entity, old, new):
+      self.log(f"{entity}: Was {old}, changed to {new}.")
 
     def load_log(self):
         try:
@@ -44,25 +58,28 @@ class CoolingLogger(hass.Hass):
             json.dump(logs, f)
 
     def get_temperatures(self):
-        upstairs_temp = float(self.get_state(self.upstairs_entity, attribute="current_temperature") or 68.0)
-        downstairs_temp = float(self.get_state(self.downstairs_entity, attribute="current_temperature") or 68.0)
+        upstairs_temp = float(self.get_state(self.upstairs_thermometer) or 68.0)
+        downstairs_temp = float(self.get_state(self.downstairs_thermometer) or 68.0)
         outdoor_temp = float(self.get_state(self.outdoor_entity) or 77.0)
         return upstairs_temp, downstairs_temp, outdoor_temp
 
+    def log_update(self, pfx: str, odt: float, stt: float, fnt: float, rt: float):
+      self.log(f"{pfx}: O: {odt:.1}, T:{stt:.1}->{fnt:.1}, R:{rt:.1f}")
+
     def track_cooling_up(self, entity, attribute, old, new, kwargs):
+        self.logit(entity, old, new)
         now = datetime.datetime.now()
         upstairs_temp, _, outdoor_temp = self.get_temperatures()
         
         if self.last_time_up and self.last_temp_up:
             runtime = (now - self.last_time_up).seconds / 60
-            if old == "cool" and new == "off" and runtime > 0:
+            if old == "cooling" and new == "idle" and runtime > 0:
                 temp_drop = self.last_temp_up - upstairs_temp
                 if temp_drop > 0:
                     minutes_per_degree = runtime / temp_drop
                     self.cooling_log_up.append([outdoor_temp, self.last_temp_up, minutes_per_degree])
+                    self.log_update('U', outdoor_temp, self.last_temp_up, upstairs_temp, minutes_per_degree)
                     self.save_log()
-                    self.log(f"Upstairs: Outdoor={outdoor_temp}°F, Start={self.last_temp_up}°F, "
-                             f"Minutes/°F={minutes_per_degree:.1f}")
                     self.train_model("upstairs")
 
         self.last_state_up = new
@@ -70,19 +87,19 @@ class CoolingLogger(hass.Hass):
         self.last_temp_up = upstairs_temp
 
     def track_cooling_down(self, entity, attribute, old, new, kwargs):
+        self.logit(entity, old, new)
         now = datetime.datetime.now()
         _, downstairs_temp, outdoor_temp = self.get_temperatures()
         
         if self.last_time_down and self.last_temp_down:
             runtime = (now - self.last_time_down).seconds / 60
-            if old == "cool" and new == "off" and runtime > 0:
+            if old == "cooling" and new == "idle" and runtime > 0:
                 temp_drop = self.last_temp_down - downstairs_temp
                 if temp_drop > 0:
                     minutes_per_degree = runtime / temp_drop
                     self.cooling_log_down.append([outdoor_temp, self.last_temp_down, minutes_per_degree])
                     self.save_log()
-                    self.log(f"Downstairs: Outdoor={outdoor_temp}°F, Start={self.last_temp_down}°F, "
-                             f"Minutes/°F={minutes_per_degree:.1f}")
+                    self.log_update('D', outdoor_temp, self.last_temp_down, downstairs_temp, minutes_per_degree)
                     self.train_model("downstairs")
 
         self.last_state_down = new

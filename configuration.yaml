@@ -22,11 +22,18 @@ homeassistant:
 
   auth_providers:
     - type: homeassistant
-    - type: trusted_networks
       trusted_networks:
         - 192.168.0.0/16      
 
   external_url: https://eric70x7.duckdns.org
+
+# For doorbell live streaming
+ffmpeg:
+
+#amcrest:
+#  - host: 192.168.0.22
+#    username: default
+#    password: !secret doorbell_password#
 
 # Enable the default set of integrations:
 default_config:

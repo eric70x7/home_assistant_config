@@ -13,13 +13,13 @@ class ClimateController(hass.Hass):
 
   def initialize(self):
     # Listen for temperature changes on both thermostats
-    self.listen_state(self.therm_changed, entity_id='climate.downstairs_trane_thermostat', attribute='temperature')
-    self.listen_state(self.therm_changed, entity_id='climate.upstairs_trane_thermostat', attribute='temperature')
+    # self.listen_state(self.therm_changed, entity_id='climate.downstairs_trane_thermostat', attribute='hvac_action')
+    # self.listen_state(self.therm_changed, entity_id='climate.upstairs_trane_thermostat', attribute='hvac_action')
     self.log(f"ClimateController initialized")
 
-  def therm_changed(self, entity, attribute, old, new, cb_args):
-    # self.log(f"Entity:   {entity}:")
-    # self.log(f"Was {old}, changed to {new}.")
+  # def therm_changed(self, entity, attribute, old, new, cb_args):
+  #   self.log(f"Entity:   {entity}:")
+  #   self.log(f"Was {old}, changed to {new}.")
 
     """ 
     lr = datetime.fromisoformat(self.get_state(entity, attribute='last_reported'))

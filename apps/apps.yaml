@@ -3,9 +3,9 @@
 #  module: hello
 #  class: HelloWorld
 
-climate_controller:
-  module: climate_controller
-  class: ClimateController
+# climate_controller:
+#   module: climate_controller
+#   class: ClimateController
 
 volume_controller:
   module: volume_controller
@@ -36,4 +36,9 @@ kitchen_log_light:
 cooling_logger:
   module: cooling_logger
   class: CoolingLogger
+
+doorbell_entity_listener:
+  module: entity_listener
+  class: EntityListener
+  substr: "front_door"
 
