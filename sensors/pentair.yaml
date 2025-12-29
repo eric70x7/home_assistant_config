@@ -1,12 +1,12 @@
 # Pentair sensors
 
-- platform: template
-  sensors:
-    pool_temp:
-      friendly_name: Pool Temp
-      unit_of_measurement: '°F'
-      value_template: >
-        {{ state_attr('climate.pentair_fb_bb_80_pool_heat', 'current_temperature') }}
+#- platform: template
+#  sensors:
+#    pool_temp:
+#      friendly_name: Pool Temp
+#      unit_of_measurement: '°F'
+#      value_template: >
+#        {{ state_attr('climate.pentair_fb_bb_80_pool_heat', 'current_temperature') }}
 
 #- platform: mqtt
 #  name: pentair_pooltemp

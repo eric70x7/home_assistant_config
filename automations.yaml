@@ -221,3 +221,34 @@
         target:
           entity_id: input_boolean.family_room_tv_volume_down
   mode: single
+- id: '1742593937472'
+  alias: 'Alert:  Doorbell'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.front_door_button_pressed
+  conditions: []
+  actions:
+  - action: media_player.volume_set
+    metadata: {}
+    data:
+      volume_level: 0.8
+    target:
+      entity_id: media_player.big_sonos
+  - action: media_player.play_media
+    metadata:
+      title: doorbell-223669.mp3
+      thumbnail:
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://media_source
+    data:
+      media_content_id: media-source://media_source/local/doorbell-223669.mp3
+      media_content_type: audio/mpeg
+    target:
+      entity_id: media_player.big_sonos
+  mode: single

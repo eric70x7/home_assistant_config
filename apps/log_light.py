@@ -37,6 +37,8 @@ class LogLight(hass.Hass):
   Keep the states in sync
   '''
   def update_real_state(self, entity, attribute, old, new, cb_args):
+    self.log(f'update_real_state')
+    self.logit(entity, attribute, old, new)
     if not new == self.real_light.get_state():
       if new == "off":
         self.real_light.call_service("turn_off")
@@ -47,6 +49,8 @@ class LogLight(hass.Hass):
   Keep the states in sync
   '''
   def update_log_state(self, entity, attribute, old, new, cb_args):
+    self.log(f'update_log_state')
+    self.logit(entity, attribute, old, new)
     if not new == self.log_light.get_state():
       if new == "off":
         self.log_light.call_service("turn_off")
@@ -57,6 +61,8 @@ class LogLight(hass.Hass):
   Adjust the brightness
   '''
   def update_brightness(self, entity, attribute, old, new, cb_args):
+    self.log(f'update_brightness')
+    self.logit(entity, attribute, old, new)
     # self.logit(entity, attribute, old, new)
     if(new == None or new <= 0):
       output=0

@@ -357,3 +357,41 @@
   metadata:
     media_player.xantech8_patio:
       entity_only: true
+- id: '1757128122850'
+  name: Watch TV
+  entities:
+    light.family_room_log_light:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 113
+      assumed_state: true
+      friendly_name: family_room_log_light
+      supported_features: 0
+      state: 'on'
+    light.breakfast_area_log_light:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 114
+      assumed_state: true
+      friendly_name: breakfast_area_log_light
+      supported_features: 0
+      state: 'on'
+    light.kitchen_log_light:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      assumed_state: true
+      friendly_name: kitchen_log_light
+      supported_features: 0
+      state: 'off'
+  icon: mdi:television
+  metadata:
+    light.family_room_log_light:
+      entity_only: true
+    light.breakfast_area_log_light:
+      entity_only: true
+    light.kitchen_log_light:
+      entity_only: true

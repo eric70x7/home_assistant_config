@@ -30,11 +30,6 @@ homeassistant:
 # For doorbell live streaming
 ffmpeg:
 
-#amcrest:
-#  - host: 192.168.0.22
-#    username: default
-#    password: !secret doorbell_password#
-
 # Enable the default set of integrations:
 default_config:
   
@@ -82,22 +77,11 @@ ifttt:
 # Alexa
 alexa:
 
-# Sense energy monitor
-# sense:
-#  email: !secret sense_email
-#  password: !secret sense_password
-
 # Ambient weather
-ambient_station:
-  api_key: !secret ambient_api_key
-  app_key: !secret ambient_app_key
+# ambient_station:
+#   api_key: !secret ambient_api_key
+#   app_key: !secret ambient_app_key
 
-# Z-wave
-# commented out after upgrading to zwave JS
-# zwave:
-#   usb_path: /dev/ttyACM0
-#   device_config: !include zwave.yaml
-    
 # Turn on system health monitor
 system_health:
 
@@ -108,14 +92,13 @@ timer:
   wind_watchdog:
     duration: "00:15:00"
   energy_watchdog:
-    duration: "00:05:00"
+    duration: "00:10:00"
 
 # Whole house audio
 media_player:
   - platform: xantech
     type: dax88
-    port: socket://192.168.0.88:8888
-    # port: socket://192.168.0.61:8888 # Port forwarded through ASUS router
+    port: socket://192.168.0.122:8888 # js2 via lan
     zones:
       11:
         name: "Patio"
@@ -165,7 +148,7 @@ input_number: !include input_numbers.yaml
 input_boolean: !include input_booleans.yaml
 http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
-binary_sensor: !include_dir_merge_list binary_sensors/
+# binary_sensor: !include_dir_merge_list binary_sensors/
 # switch: !include switches.yaml
 group: !include groups.yaml
 automation ui: !include automations.yaml
@@ -175,25 +158,223 @@ script mine: !include_dir_merge_named scripts/
 cover: !include covers.yaml
 scene: !include scenes.yaml
 
-light:
-  - platform: template
-    lights:
-      family_room_log_light:
-        turn_on:
-        turn_off:
-        set_level:
-  - platform: template
-    lights:
-      breakfast_area_log_light:
-        turn_on:
-        turn_off:
-        set_level:
-  - platform: template
-    lights:
-      kitchen_log_light:
-        turn_on:
-        turn_off:
-        set_level:
+template:
+- sensor:
+  # Upstairs climate
+  - name: Upstairs Trane Temperature
+    unit_of_measurement: '°F'
+    state: >
+      {{ state_attr('climate.upstairs_trane_thermostat', 'current_temperature') }}
+  - name: Upstairs Cool Setpoint
+    unit_of_measurement: '°F'
+    state: >
+      {% if state_attr('climate.upstairs_trane_thermostat.target_temp_high', 'target_temp_high') == None %}
+        {{ state_attr('climate.upstairs_trane_thermostat', 'temperature') }}
+      {% else %}
+        {{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_high') }}
+      {% endif %}
+  - name: Upstairs Heat Setpoint
+    unit_of_measurement: '°F'
+    state: >
+      {% if state_attr('climate.upstairs_trane_thermostat.target_temp_high', 'target_temp_low') == None %}
+        {{ state_attr('climate.upstairs_trane_thermostat', 'temperature') }}
+      {% else %}
+        {{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_low') }}
+      {% endif %}
+  - name: Upstairs State
+    state: >
+      {{ state_attr('climate.upstairs_trane_thermostat', 'hvac_action') }}
+  - name: Upstairs cooling
+    state: >
+      {% if is_state_attr('climate.upstairs_trane_thermostat', 'hvac_action', 'cooling') %}
+        {{ 1 | int }}
+      {% else %}
+        {{ 0 | int }}
+      {% endif %}
+  # Downstairs climate
+  - name: Downstairs Trane Temperature
+    unit_of_measurement: '°F'
+    state: >
+      {{ state_attr('climate.downstairs_trane_thermostat', 'current_temperature') }}
+  - name: Downstairs Cool Setpoint
+    unit_of_measurement: '°F'
+    state: >
+      {% if state_attr('climate.downstairs_trane_thermostat.target_temp_high', 'target_temp_high') == None %}
+        {{ state_attr('climate.downstairs_trane_thermostat', 'temperature') }}
+      {% else %}
+        {{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_high') }}
+      {% endif %}
+  - name: Downstairs Heat Setpoint
+    unit_of_measurement: '°F'
+    state: >
+      {% if state_attr('climate.downstairs_trane_thermostat.target_temp_high', 'target_temp_low') == None %}
+        {{ state_attr('climate.downstairs_trane_thermostat', 'temperature') }}
+      {% else %}
+        {{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_low') }}
+      {% endif %}
+  - name: Downstairs State
+    state: >
+      {{ state_attr('climate.downstairs_trane_thermostat', 'hvac_action') }}
+  - name: Downstairs cooling
+    state: >
+      {% if is_state_attr('climate.downstairs_trane_thermostat', 'hvac_action', 'cooling') %}
+        {{ 1 | int }}
+      {% else %}
+        {{ 0 | int }}
+      {% endif %}
+  - name: Pool Temp
+    unit_of_measurement: '°F'
+    state: >
+      {{ state_attr('climate.pentair_fb_bb_80_pool_heat', 'current_temperature') }}
+  - name: Center Volume
+    state: >
+      {{ state_attr('media_player.xantech8_center', 'volume_level') | round(2)}}
+  - name: Front Volume
+    state: >
+      {{ state_attr('media_player.xantech8_front', 'volume_level') | round(2)}}
+  - name: Rear Volume
+    state: >
+        {{ state_attr('media_player.xantech8_rear', 'volume_level') | round(2)}}
+  - name: 1 Hr Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ ((states('sensor.1_hr_usage') | float)/1000) | round(3) }}"
+  - name: 50 Min Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ (states('sensor.50_min_usage') | float)/1000 }}"
+  - name: 20 Min Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ (states('sensor.medium_usage') | float)/1000 }}"
+  - name: 25 Min Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ (states('sensor.usage_25') | float)/1000 }}"
+  - name: 40 Min Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ (states('sensor.medium_long_usage') | float)/1000 }}"
+  - name: 10 Min Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: "{{ (states('sensor.fast_usage') | float)/1000 }}"
+  - name: "Peak Time Usage"
+    unit_of_measurement: 'W'
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ states('sensor.energy_usage') }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 1 Hr Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 55 Min Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.55_min_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 50 Min Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.50_min_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 25 Min Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.25_min_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 15 Min Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.15_min_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: 5 Min Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.5_min_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: Medium Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.medium_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: Medium Long Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.medium_long_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+  - name: Fast Peak Time Demand
+    unit_of_measurement: 'kWh'
+    icon: "mdi:flash"
+    state: >
+      {% if is_state("binary_sensor.is_peak_time", "on") %}
+        {{ ((states('sensor.fast_peak_time_usage') | float)/1000) }}
+      {% else %}
+        {{ 0 | float }}
+      {% endif %}
+
+- binary_sensor:
+  - name: is_peak_time
+    default_entity_id: binary_sensor.is_peak_time
+    state: >
+      {# all days set below to test on a sunday #}
+      {% if now().weekday() in (0,1,2,3,4) and now().hour >= 16 and now().hour < 19 %}
+        on
+      {% else %}
+        off
+      {% endif %}
+- light:
+  - name: family_room_log_light
+    default_entity_id: light.family_room_log_light
+    turn_on: []
+    turn_off: []
+    set_level: []
+  - name: breakfast_area_log_light
+    default_entity_id: light.breakfast_area_log_light
+    turn_on: []
+    turn_off: []
+    set_level: []
+  - name: kitchen_log_light
+    default_entity_id: light.kitchen_log_light
+    turn_on: []
+    turn_off: []
+    set_level: []
 
 #template:
 #  - number:
@@ -202,7 +383,7 @@ light:
 
 influxdb:
   api_version: 1
-  host: 192.168.0.51 # js3
+  host: 192.168.0.123 # js3
   database: homeassistant
   username: homeassistant
   password: !secret influxdb_password

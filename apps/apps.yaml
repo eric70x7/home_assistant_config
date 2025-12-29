@@ -42,3 +42,12 @@ doorbell_entity_listener:
   class: EntityListener
   substr: "front_door"
 
+doorbell:
+  module: doorbell
+  class: Doorbell
+  doorbell: binary_sensor.front_door_button_pressed
+  chime: media-source://media_source/local/trimmed_doorbell.wav
+  speakers: 
+    - media_player.big_sonos
+    - media_player.little_sonos
+
