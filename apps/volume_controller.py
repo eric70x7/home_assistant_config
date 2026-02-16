@@ -17,9 +17,9 @@ class VolumeController(hass.Hass):
     self.volume_remote='media_player.family_room_tv'
     self.volume_up_trigger='input_boolean.family_room_tv_volume_up'
     self.volume_down_trigger='input_boolean.family_room_tv_volume_down'
-    self.audio_channels= ['media_player.xantech8_center',
-                          'media_player.xantech8_front',
-                          'media_player.xantech8_rear']
+    self.audio_channels= ['media_player.xantech_dax88_center',
+                          'media_player.xantech_dax88_front',
+                          'media_player.xantech_dax88_rear']
     self.volume_increment = float(self.get_state(self.volume_knob, attribute='step'))
     # self.log(f"step = {self.volume_increment}")
     self.volume_limit = 0.75
