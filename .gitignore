@@ -1,1 +1,34 @@
 secrets.yaml
+
+# Home Assistant internals / ephemeral files
+.storage/
+.cloud/
+.google.token
+*.db-shm
+*.db-wal
+*.log
+__pycache__/
+*.pyc
+tts/
+www/
+bak/
+trash/
+home-assistant.log*
+.HA_VERSION
+.ha_run.lock
+FLUME_TOKEN_FILE*
+appdaemon/
+blueprints/
+custom_components
+home-assistant*.db
+
+# Editor / IDE files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Optional: backups, temp files
+backups/
+tmp/
