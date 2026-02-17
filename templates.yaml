@@ -68,13 +68,13 @@
       {{ state_attr('climate.pentair_fb_bb_80_pool_heat', 'current_temperature') }}
   - name: Center Volume
     state: >
-      {{ state_attr('media_player.xantech8_center', 'volume_level') | round(2)}}
+      {{ state_attr('media_player.xantech_dax88_center', 'volume_level') | round(2)}}
   - name: Front Volume
     state: >
-      {{ state_attr('media_player.xantech8_front', 'volume_level') | round(2)}}
+      {{ state_attr('media_player.xantech_dax88_front', 'volume_level') | round(2)}}
   - name: Rear Volume
     state: >
-        {{ state_attr('media_player.xantech8_rear', 'volume_level') | round(2)}}
+        {{ state_attr('media_player.xantech_dax88_rear', 'volume_level') | round(2)}}
   - name: 1 Hr Demand
     unit_of_measurement: 'kWh'
     icon: "mdi:flash"
@@ -199,22 +199,30 @@
         off
       {% endif %}
 - light:
-  - name: family_room_log_light
-    default_entity_id: light.family_room_log_light
+  - unique_id: family_room_log_light
+    name: Family Room Log Light
+    # No state/level templates needed since it's purely virtual/optimistic
+    # AppDaemon handles all logic via listeners
+    optimistic: true  # HA assumes state/brightness internally (your empty actions already imply this)
+    turn_on:
+      []  # empty → no real action
+    turn_off:
+      []
+    set_level:
+      []  # or omit if not using set_level
+  - unique_id: breakfast_area_log_light
+    name: Breakfast Area Log Light
+    optimistic: true
     turn_on: []
     turn_off: []
     set_level: []
-  - name: breakfast_area_log_light
-    default_entity_id: light.breakfast_area_log_light
+  - unique_id: kitchen_log_light
+    name: Kitchen Log Light
+    optimistic: true
     turn_on: []
     turn_off: []
     set_level: []
-  - name: kitchen_log_light
-    default_entity_id: light.kitchen_log_light
-    turn_on: []
-    turn_off: []
-    set_level: []
-  - number:
-    - name: Family room TV volume
-      state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
-
+- number:
+  - name: Family room TV volume
+    state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
+    set_value: []
