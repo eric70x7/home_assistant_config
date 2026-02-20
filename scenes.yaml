@@ -364,18 +364,18 @@
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 113
+      brightness: 57
       assumed_state: true
-      friendly_name: family_room_log_light
+      friendly_name: Family Room Log Light
       supported_features: 0
       state: 'on'
     light.breakfast_area_log_light:
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 114
+      brightness: 57
       assumed_state: true
-      friendly_name: breakfast_area_log_light
+      friendly_name: Breakfast Area Log Light
       supported_features: 0
       state: 'on'
     light.kitchen_log_light:
@@ -384,7 +384,7 @@
       color_mode:
       brightness:
       assumed_state: true
-      friendly_name: kitchen_log_light
+      friendly_name: Kitchen Log Light
       supported_features: 0
       state: 'off'
   icon: mdi:television

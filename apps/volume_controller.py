@@ -1,105 +1,120 @@
 import appdaemon.plugins.hass.hassapi as hass
-import math
 import datetime
-""" 
-import pytz
-"""
-#
-# Control TV and associated media player volumes
-#
-# Args:
-#
 
 class VolumeController(hass.Hass):
+    def initialize(self):
+        # Configurable via apps.yaml
+        self.knob = self.args.get('knob', 'input_number.family_room_tv_volume_knob')
+        self.tv_media_player = self.args.get('tv_media_player', 'media_player.family_room_tv')
+        self.up_trigger = self.args.get('up_trigger', 'input_boolean.family_room_tv_volume_up')
+        self.down_trigger = self.args.get('down_trigger', 'input_boolean.family_room_tv_volume_down')
+        self.volume_limit = self.args.get('volume_limit', 0.75)
+        self.debounce_sec = 0.8
 
-  def initialize(self):
-    self.volume_knob='input_number.family_room_tv_volume_knob'
-    self.volume_remote='media_player.family_room_tv'
-    self.volume_up_trigger='input_boolean.family_room_tv_volume_up'
-    self.volume_down_trigger='input_boolean.family_room_tv_volume_down'
-    self.audio_channels= ['media_player.xantech_dax88_center',
-                          'media_player.xantech_dax88_front',
-                          'media_player.xantech_dax88_rear']
-    self.volume_increment = float(self.get_state(self.volume_knob, attribute='step'))
-    # self.log(f"step = {self.volume_increment}")
-    self.volume_limit = 0.75
+        self.source_map = self.args.get('source_map', {
+            'media_player.xantech_dax88_front':  'Family Room TV',
+            'media_player.xantech_dax88_center': 'Family Room TV',
+            'media_player.xantech_dax88_rear':   'Family Room TV'
+        })
 
-    self.listen_state(self.volume_up,              entity_id=self.volume_up_trigger)
-    self.listen_state(self.volume_down,            entity_id=self.volume_down_trigger)
-    self.listen_state(self.set_entity_vols,        entity_id=self.volume_knob)
-    self.listen_state(self.track_tv_remote_volume, entity_id=self.volume_remote, attribute='volume_level')
-#    for e in self.audio_channels:
-#      self.listen_state(self.log_volume_change,    entity_id=e, attribute='volume_level')
-    ''' Show all available services '''
-#    ss = self.list_services()
-#    for s in ss:
-#      self.log(f"{s}")
-    self.log(f"VolumeController initialized")
+        # Cache step size
+        self.step = float(self.get_state(self.knob, attribute='step') or 0.01)
+        self.last_set_time = None
 
-  '''
-  Generic log for state listeners
-  '''
-  def logit(self, entity, old, new):
-    self.log(f"{entity}: Was {old}, changed to {new}.")
+        # Listeners
+        self.listen_state(self.handle_tv_power_state, self.tv_media_player, attribute='state')
+        self.listen_state(self.handle_up, self.up_trigger)
+        self.listen_state(self.handle_down, self.down_trigger)
+        self.listen_state(self.handle_knob_change, self.knob)
+        self.listen_state(self.handle_tv_volume_change, self.tv_media_player, attribute='volume_level')
 
-  '''
-  Show volume changes
-  '''
-  def log_volume_change(self, entity, attribute, old, new, cb_args):
-    self.logit(entity, old, new)
+        self.log(f"VolumeController initialized | Knob: {self.knob} | TV: {self.tv_media_player} | Zones: {len(self.source_map)}")
 
-  '''
-  Adjust volume setting based on remote
-  '''
-  def track_tv_remote_volume(self, entity, attribute, old, new, cb_args):
-    # self.logit(entity, old, new)
-    self.set_volume_knob(new)
+    def _should_apply_change(self, old, new):
+        if old is None or new is None:
+            return False
+        old_f, new_f = float(old), float(new)
+        return round(old_f / self.step) != round(new_f / self.step)
 
-  '''
-  When the volume setting changes, change the volume
-  '''
-  def set_entity_vols(self, entity, attribute, old, new, cb_args):
-    '''
-    Only apply the volume if it crosses a multiple of the volume_increment.
-    Increments smaller than the volume resolution of the entity have no effect
-    and applying them just increases the latency.
-    '''
-    if (float(old)//self.volume_increment != float(new)//self.volume_increment):
-#      self.log(f"Applying volume change {old} -> {new} ({float(old)//self.volume_increment} != {float(new)//self.volume_increment})")
-      nv = max(0.0, min(float(new),self.volume_limit))
-      for e in self.audio_channels:
-        self.call_service("media_player/volume_set", entity_id=e, volume_level=nv)
-#    else:
-#      self.log(f"Inhibiting volume change {old} -> {new} ({float(old)//self.volume_increment} == {float(new)//self.volume_increment})" )
+    def _apply_volume_to_channels(self, vol: float):
+        now = datetime.datetime.now()
+        if self.last_set_time and (now - self.last_set_time).total_seconds() < self.debounce_sec:
+            self.log(f"Debouncing volume set to {vol:.3f}")
+            return
+        self.last_set_time = now
 
-  '''
-  Change the volume setting.  Changes to this entity trigger setting of the 
-  audio entities
-  '''
-  def set_volume_knob(self, nv):
-    if nv != None:
-      self.call_service("input_number/set_value", entity_id=self.volume_knob, value=nv)
+        clamped_vol = max(0.0, min(vol, self.volume_limit))
+        self.log(f"Applying volume {clamped_vol:.3f} to {len(self.source_map)} DAX channels")
 
-  '''
-  Get the current volume setting
-  '''
-  def get_volume_knob(self):
-    return float(self.get_state(self.volume_knob))
+        for entity in self.source_map.keys():
+            if self.entity_exists(entity):
+                self.call_service("media_player/volume_set", entity_id=entity, volume_level=clamped_vol)
+            else:
+                self.log(f"Warning: Channel entity missing - {entity}")
 
-  '''
-  Increment the volume setting down
-  '''
-  def volume_down(self, entity, attribute, old, new, cb_args):
-    if new == "on":
-      self.turn_off(entity)
-      ''' input_number/decrement is not available '''
-      self.set_volume_knob(self.get_volume_knob() - self.volume_increment)
+    def _power_dax_zones(self, turn_on: bool):
+        service = "media_player/turn_on" if turn_on else "media_player/turn_off"
+        for entity in self.source_map.keys():
+            if self.entity_exists(entity):
+                self.call_service(service, entity_id=entity)
+                self.log(f"{service.replace('/', ' ')} called on {entity}")
+            else:
+                self.log(f"Skipping {entity} - not found")
 
-  '''
-  Increment the volume setting up
-  '''
-  def volume_up(self, entity, attribute, old, new, cb_args):
-    if new == "on":
-      self.turn_off(entity)
-      ''' input_number/increment is not available '''
-      self.set_volume_knob(self.get_volume_knob() + self.volume_increment)
+    def _set_dax_sources(self):
+        self.log("Setting DAX sources from source_map")
+        applied = 0
+        for entity, src in self.source_map.items():
+            if self.entity_exists(entity):
+                self.call_service("media_player/select_source", entity_id=entity, source=src)
+                self.log(f"Set source to '{src}' on {entity}")
+                applied += 1
+            else:
+                self.log(f"Skipping source set on {entity} - missing")
+        if applied == 0:
+            self.log("Warning: No sources applied - check source_map entity names")
+
+    def handle_tv_power_state(self, entity, attribute, old, new, kwargs):
+        if new == 'on' and old != 'on':
+            self.log("TV turned ON - powering on DAX zones and applying source map")
+            self._power_dax_zones(True)
+            self.run_in(self._delayed_set_sources, 2)  # small delay for reliability
+
+        elif new == 'off' and old != 'off':
+            self.log("TV turned OFF - powering off DAX zones")
+            self._power_dax_zones(False)
+
+    def _delayed_set_sources(self, kwargs):
+        self._set_dax_sources()
+
+    def handle_up(self, entity, attribute, old, new, kwargs):
+        if new == "on":
+            self.turn_off(entity)
+            current = self.get_state(self.knob)
+            if current is not None:
+                self.call_service("input_number/set_value", entity_id=self.knob,
+                                  value=min(float(current) + self.step, 1.0))
+
+    def handle_down(self, entity, attribute, old, new, kwargs):
+        if new == "on":
+            self.turn_off(entity)
+            current = self.get_state(self.knob)
+            if current is not None:
+                self.call_service("input_number/set_value", entity_id=self.knob,
+                                  value=max(float(current) - self.step, 0.0))
+
+    def handle_knob_change(self, entity, attribute, old, new, kwargs):
+        if self._should_apply_change(old, new):
+            self._apply_volume_to_channels(float(new))
+
+    def handle_tv_volume_change(self, entity, attribute, old, new, kwargs):
+        if new is None:
+            return
+        new_val = float(new)
+        current_knob = self.get_state(self.knob)
+        if current_knob is None or abs(float(current_knob) - new_val) > 0.005:
+            self.log(f"TV remote changed volume to {new_val:.3f} → updating knob")
+            self.call_service("input_number/set_value", entity_id=self.knob, value=new_val)
+
+    def entity_exists(self, entity_id):
+        return self.get_state(entity_id) is not None
