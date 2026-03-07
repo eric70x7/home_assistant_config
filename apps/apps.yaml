@@ -15,9 +15,9 @@ volume_controller:
   up_trigger: input_boolean.family_room_tv_volume_up
   down_trigger: input_boolean.family_room_tv_volume_down
   source_map:
-    media_player.xantech_dax88_front:  Family Room TV
-    media_player.xantech_dax88_center: Family Room TV
-    media_player.xantech_dax88_rear:   Family Room TV  
+    media_player.xantech_dax88_front:  Front
+    media_player.xantech_dax88_center: Center
+    media_player.xantech_dax88_rear:   Rear  
   volume_limit: 0.75
 
 energy_controller:

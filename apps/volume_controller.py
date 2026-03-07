@@ -20,6 +20,9 @@ class VolumeController(hass.Hass):
         # Cache step size
         self.step = float(self.get_state(self.knob, attribute='step') or 0.01)
         self.last_set_time = None
+        
+        # Control log output
+        self.debug = True
 
         # Listeners
         self.listen_state(self.handle_tv_power_state, self.tv_media_player, attribute='state')
@@ -51,6 +54,10 @@ class VolumeController(hass.Hass):
                 self.call_service("media_player/volume_set", entity_id=entity, volume_level=clamped_vol)
             else:
                 self.log(f"Warning: Channel entity missing - {entity}")
+
+    def log(self, txt):
+        if self.debug:
+            super().log(txt)
 
     def _power_dax_zones(self, turn_on: bool):
         service = "media_player/turn_on" if turn_on else "media_player/turn_off"
@@ -113,7 +120,7 @@ class VolumeController(hass.Hass):
         new_val = float(new)
         current_knob = self.get_state(self.knob)
         if current_knob is None or abs(float(current_knob) - new_val) > 0.005:
-            self.log(f"TV remote changed volume to {new_val:.3f} → updating knob")
+            self.log(f"TV remote changed volume to {new_val:.3f}: updating knob")
             self.call_service("input_number/set_value", entity_id=self.knob, value=new_val)
 
     def entity_exists(self, entity_id):
