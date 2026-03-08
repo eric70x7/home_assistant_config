@@ -47,3 +47,26 @@ turn_on_youtube_tv_loft:
       - 7bb4b88b39e3eb98cf54f13f276d6afd
   mode: single
   icon: mdi:youtube-tv
+fire_tv_decoder_audio_handshake_reset:
+  alias: Reset Family Room TV Audio
+  description: Briefly force PCM then back to Best Available to reset decoder sync
+  sequence:
+  - target:
+      entity_id: media_player.fire_tv_192_168_0_11
+    data:
+      command: settings put global encoded_surround_output 5
+    action: androidtv.adb_command
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+    enabled: false
+  - target:
+      entity_id: media_player.fire_tv_192_168_0_11
+    data:
+      command: settings put global encoded_surround_output 0
+    action: androidtv.adb_command
+    enabled: false
+  mode: single
+  icon: mdi:volume-restore

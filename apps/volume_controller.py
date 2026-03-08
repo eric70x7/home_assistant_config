@@ -1,8 +1,14 @@
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
 
+class VolumeController(hass.Hass):import appdaemon.plugins.hass.hassapi as hass
+import datetime
+
 class VolumeController(hass.Hass):
     def initialize(self):
+        # Control log output
+        self.debug = False
+
         # Configurable via apps.yaml
         self.knob = self.args.get('knob', 'input_number.family_room_tv_volume_knob')
         self.tv_media_player = self.args.get('tv_media_player', 'media_player.family_room_tv')
@@ -11,19 +17,24 @@ class VolumeController(hass.Hass):
         self.volume_limit = self.args.get('volume_limit', 0.75)
         self.debounce_sec = 0.8
 
-        self.source_map = self.args.get('source_map', {
-            'media_player.xantech_dax88_front':  'Family Room TV',
-            'media_player.xantech_dax88_center': 'Family Room TV',
-            'media_player.xantech_dax88_rear':   'Family Room TV'
+        raw_map = self.args.get('source_map', {
+            'media_player.xantech_dax88_front':  {'source': 'Front',  'scale': 0.8},
+            'media_player.xantech_dax88_center': {'source': 'Center', 'scale': 1.0},
+            'media_player.xantech_dax88_rear':   {'source': 'Rear',   'scale': 0.8}
         })
+
+        # Normalize to consistent dict format + extract zones
+        self.source_map = {}
+        for entity, data in raw_map.items():
+            self.source_map[entity] = {
+                  'source': data.get('source', 'Family Room TV'),
+                  'scale': float(data.get('scale', 1.0))
+              }
 
         # Cache step size
         self.step = float(self.get_state(self.knob, attribute='step') or 0.01)
         self.last_set_time = None
         
-        # Control log output
-        self.debug = True
-
         # Listeners
         self.listen_state(self.handle_tv_power_state, self.tv_media_player, attribute='state')
         self.listen_state(self.handle_up, self.up_trigger)
@@ -46,14 +57,23 @@ class VolumeController(hass.Hass):
             return
         self.last_set_time = now
 
-        clamped_vol = max(0.0, min(vol, self.volume_limit))
-        self.log(f"Applying volume {clamped_vol:.3f} to {len(self.source_map)} DAX channels")
+        clamped_master = max(0.0, min(vol, self.volume_limit))
+        self.log(f"Master volume {clamped_master:.3f} -> applying scaled volumes to {len(self.source_map)} channels")
 
-        for entity in self.source_map.keys():
-            if self.entity_exists(entity):
-                self.call_service("media_player/volume_set", entity_id=entity, volume_level=clamped_vol)
-            else:
-                self.log(f"Warning: Channel entity missing - {entity}")
+        for entity, config in self.source_map.items():
+            if not self.entity_exists(entity):
+                if self.debug:
+                    self.log(f"Warning: Channel entity missing - {entity}")
+                continue
+
+            scaled_vol = clamped_master * config['scale']
+            # Optional: also clamp per-channel if you want to prevent >1.0
+            scaled_vol = max(0.0, min(scaled_vol, 1.0))
+
+            self.call_service("media_player/volume_set",
+                              entity_id=entity,
+                              volume_level=scaled_vol)
+            self.log(f"  -> {entity}: scale {config['scale']:.2f} -> {scaled_vol:.3f}")
 
     def log(self, txt):
         if self.debug:
@@ -71,10 +91,12 @@ class VolumeController(hass.Hass):
     def _set_dax_sources(self):
         self.log("Setting DAX sources from source_map")
         applied = 0
-        for entity, src in self.source_map.items():
+        for entity, config in self.source_map.items():
+            src = config['source']
             if self.entity_exists(entity):
                 self.call_service("media_player/select_source", entity_id=entity, source=src)
-                self.log(f"Set source to '{src}' on {entity}")
+                if self.debug:
+                    self.log(f"Set source to '{src}' on {entity}")
                 applied += 1
             else:
                 self.log(f"Skipping source set on {entity} - missing")
