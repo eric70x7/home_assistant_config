@@ -134,11 +134,6 @@ scene: !include scenes.yaml
 template: !include templates.yaml
 
 influxdb:
-  api_version: 1
-  host: 192.168.0.123 # js3
-  database: homeassistant
-  username: homeassistant
-  password: !secret influxdb_password
   tags_attributes:
     - friendly_name
   include:

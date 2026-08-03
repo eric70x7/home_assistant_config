@@ -22,15 +22,15 @@ daily_demand:
 hi_temp:
   name: High Limit
   unit_of_measurement: '°F'
-  min: 72
-  max: 78
+  min: 75
+  max: 85
   step: 1
 
 target_temp:
   name: Target Temp
   unit_of_measurement: '°F'
-  min: 65
-  max: 75
+  min: 70
+  max: 76
   step: 1
 
 wake_temp:
@@ -50,8 +50,8 @@ sleep_temp:
 precool_temp:
   name: Precool Temp
   unit_of_measurement: '°F'
-  min: 68
-  max: 73
+  min: 69
+  max: 75
   step: 1
 
 upstairs_setpoint:

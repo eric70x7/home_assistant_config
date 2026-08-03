@@ -44,12 +44,12 @@ class Thermostats:
         new_ds_setpoint=self.ds_setpoint()
         # adjust one thermostat at a time, keeping the upstairs higher
         if delta_t > 0:
-            if us_setpoint() > ds_setpoint():
+            if self.us_setpoint() > self.ds_setpoint():
                 new_ds_setpoint += delta_t
             else:
                 new_us_setpoint += delta_t
         else:
-            if (us_setpoint() > ds_setpoint()):
+            if (self.us_setpoint() > self.ds_setpoint()):
                 new_us_setpoint += delta_t
             else:
                 new_ds_setpoint += delta_t
