@@ -120,7 +120,6 @@ ios:
 recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 input_boolean: !include input_booleans.yaml
-http: !include http.yaml
 sensor: !include_dir_merge_list sensors/
 # binary_sensor: !include_dir_merge_list binary_sensors/
 # switch: !include switches.yaml

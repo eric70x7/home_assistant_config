@@ -94,7 +94,6 @@
     target:
       entity_id: switch.family_room_ceiling_light
   mode: single
-  mode: single
 - id: '1717880805166'
   alias: DS Bathroom Light On
   description: ''
@@ -202,20 +201,94 @@
     data:
       volume_level: 0.8
     target:
-      entity_id: media_player.big_sonos
+      entity_id: media_player.unnamed_room_2
   - action: media_player.play_media
-    metadata:
-      title: doorbell-223669.mp3
-      thumbnail:
-      media_class: music
-      children_media_class:
-      navigateIds:
-      - {}
-      - media_content_type: app
-        media_content_id: media-source://media_source
     data:
-      media_content_id: media-source://media_source/local/doorbell-223669.mp3
-      media_content_type: audio/mpeg
+      media:
+        media_content_id: media-source://media_source/local/doorbell-223669.mp3
+        media_content_type: audio/mpeg
+        metadata:
+          title: doorbell-223669.mp3
+          thumbnail:
+          media_class: music
+          children_media_class:
+          navigateIds:
+          - {}
+          - media_content_type: app
+            media_content_id: media-source://media_source
     target:
-      entity_id: media_player.big_sonos
+      entity_id: media_player.unnamed_room_2
+  mode: single
+- id: '1785889185581'
+  alias: Turn on sonos_patio
+  description: ''
+  triggers: []
+  conditions: []
+  actions:
+  - action: media_player.turn_on
+    metadata: {}
+    target:
+      entity_id: media_player.sonos_patio
+    data: {}
+  mode: single
+- id: '1787243361567'
+  alias: 'Music: Stop playing'
+  description: ''
+  triggers: []
+  conditions: []
+  actions:
+  - action: media_player.media_stop
+    metadata: {}
+    data: {}
+    target:
+      entity_id: media_player.ma_all_sonos
+  - action: media_player.turn_off
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_patio
+      - media_player.xantech_dax88_center
+      - media_player.xantech_dax88_rear
+    data: {}
+  mode: single
+- id: '1787344122724'
+  alias: 'Music: Play selected playlist'
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.playlists
+    options: {}
+  conditions: []
+  actions:
+  - action: media_player.turn_on
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_patio
+    data: {}
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_patio
+    data:
+      source: Sonos
+  - action: music_assistant.play_media
+    metadata: {}
+    data:
+      media_id: '{{ states(''input_select.playlists'') }}'
+      media_type: playlist
+      enqueue: replace
+    target:
+      entity_id: media_player.ma_all_sonos
+  - action: media_player.shuffle_set
+    metadata: {}
+    data:
+      shuffle: true
+    target:
+      entity_id: media_player.ma_all_sonos
   mode: single
