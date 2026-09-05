@@ -3,7 +3,6 @@ import appdaemon.plugins.hass.hassapi as hass
 import datetime
 import json
 import os
-from sklearn.linear_model import LinearRegression
 import numpy as np
 
 class CoolingLogger(hass.Hass):
@@ -109,19 +108,21 @@ class CoolingLogger(hass.Hass):
     def train_model(self, zone):
         log = self.cooling_log_up if zone == "upstairs" else self.cooling_log_down
         entity = self.model_entity_up if zone == "upstairs" else self.model_entity_down
-        
+
         if len(log) < 10:
             return
-        
+
         data = np.array(log)
         X = data[:, :2]  # outdoor_temp, indoor_start
         y = data[:, 2]   # minutes_per_degree
-        
-        model = LinearRegression()
-        model.fit(X, y)
-        
-        coeffs = {"a": model.coef_[0], "b": model.coef_[1], "c": model.intercept_}
+
+        # Augment with a column of ones so we get an intercept term,
+        # exactly matching sklearn's LinearRegression behavior
+        X_aug = np.column_stack([X, np.ones(len(X))])
+        a, b, c = np.linalg.lstsq(X_aug, y, rcond=None)[0]
+
         self.set_state(entity, state="trained",
-                      attributes={"a": coeffs["a"], "b": coeffs["b"], "c": coeffs["c"],
+                      attributes={"a": a, "b": b, "c": c,
                                  "sample_size": len(log)})
-        self.log(f"{zone} model: a={coeffs['a']:.3f}, b={coeffs['b']:.3f}, c={coeffs['c']:.3f}")
+        self.log(f"{zone} model: a={a:.3f}, b={b:.3f}, c={c:.3f}")
+
