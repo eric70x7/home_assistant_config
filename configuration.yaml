@@ -37,15 +37,15 @@ default_config:
 config:
 
 # Use lovelace YAML mode
-lovelace:
-  mode: storage
-  dashboards:
-    lovelace-yaml:
-      mode: yaml
-      title: Jones
-      icon: mdi:script
-      show_in_sidebar: true
-      filename: lovelace.yaml
+#lovelace:
+#  mode: storage
+#  dashboards:
+#    lovelace-yaml:
+#      mode: yaml
+#      title: Jones
+#      icon: mdi:script
+#      show_in_sidebar: true
+#      filename: lovelace.yaml
 frontend:
   extra_module_url: 
     - /local/card-mod.js

@@ -1,975 +1,975 @@
 #resources:
 #  - url: /local/dual-thermostat/dual-thermostat.js?v=1
 #    type: js
-title: The Jones House
-views:
-  - badges: []
-    #
-    # lighting control
-    #
-    title: Control
-    path: default_view
-    cards:
-      - type: vertical-stack
-        cards:
-          - type: horizontal-stack
-            title: Outside Lights
-            cards:
-              - type: entity-button
-                entity: light.front_outside # switch.front_lights
+#title: The Jones House
+#views:
+#  - badges: []
+#    #
+#    # lighting control
+#    #
+#    title: Control
+#    path: default_view
+#    cards:
+#      - type: vertical-stack
+#        cards:
+#          - type: horizontal-stack
+#            title: Outside Lights
+#            cards:
 #              - type: entity-button
-#                entity: switch.christmas_lights
-              - type: entity-button
-                entity: light.back_patio # switch.back_patio_lights
-              - type: entity-button
-                entity: light.back_string # switch.string_lights
-              - type: entity-button
-                entity: light.pentair_fb_bb_80_pool_light
-          - type: horizontal-stack
-            title: Inside Lights
-            cards:
-              - type: entity-button
-                entity: light.family_room_floor_lamp # switch.family_room_light
-              - type: entity-button
-                entity: switch.family_room_ceiling_fan
-              - type: entity-button
-                entity: switch.family_room_ceiling_light
-              - type: entity-button
-                entity: light.family_room
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: light.breakfast_area
-              - type: entity-button
-                entity: light.kitchen # switch.kitchen_lights
-              - type: entity-button
-                entity: light.under_cabinets
-              - type: entity-button
-                entity: light.front_room_lamp # switch.front_room_light
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: light.master_floor_lamp # switch.master_light
-              - type: entity-button
-                entity: light.loft_floor_lamp # switch.loft_light
-              - type: entity-button
-                entity: light.desk # switch.desk_lights
-              - type: entity-button
-                entity: light.stairs # switch.stair_lights
-      #
-      # Patio screens
-      #
-      - type: vertical-stack
-        title: Patio Screens
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: cover.back_patio_screens
-                state_color: false
-              - type: entity-button
-                entity: cover.west_patio_screen
-                state_color: false
-              - type: entity-button
-                entity: cover.middle_patio_screen
-                state_color: false
-              - type: entity-button
-                entity: cover.east_patio_screen
-                state_color: false
-      #
-      # Garage doors
-      #
-      - type: vertical-stack
-        title: Garage Doors
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: cover.large_garage_door_controller
-                icon: mdi:garage-variant
-              - type: entity-button
-                entity: cover.small_garage_door_controller
-                icon: mdi:garage
-      #
-      # Thermostats
-      #
-      - type: vertical-stack
-        title: Thermostats
-        cards:
-        - name: Upstairs
-          type: thermostat
-          entity: climate.upstairs_trane_thermostat
-        - name: Downstairs
-          type: thermostat
-          entity: climate.downstairs_trane_thermostat
-        - name: false
-          type: custom:numberbox-card
-          entity: input_number.target_temp
-          # name: false
-          card_mod:
-            style: |
-              .cur-box ha-icon{ transform:scale(2); }
-              .body .cur-num { font-size:30px }
-              .body{display:block!important}
-              .body::after{text-align:center;font-size:20px;content:"Target Temperature";display:block!important}
-
+#                entity: light.front_outside # switch.front_lights
+##              - type: entity-button
+##                entity: switch.christmas_lights
+#              - type: entity-button
+#                entity: light.back_patio # switch.back_patio_lights
+#              - type: entity-button
+#                entity: light.back_string # switch.string_lights
+#              - type: entity-button
+#                entity: light.pentair_fb_bb_80_pool_light
+#          - type: horizontal-stack
+#            title: Inside Lights
+#            cards:
+#              - type: entity-button
+#                entity: light.family_room_floor_lamp # switch.family_room_light
+#              - type: entity-button
+#                entity: switch.family_room_ceiling_fan
+#              - type: entity-button
+#                entity: switch.family_room_ceiling_light
+#              - type: entity-button
+#                entity: light.family_room
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: light.breakfast_area
+#              - type: entity-button
+#                entity: light.kitchen # switch.kitchen_lights
+#              - type: entity-button
+#                entity: light.under_cabinets
+#              - type: entity-button
+#                entity: light.front_room_lamp # switch.front_room_light
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: light.master_floor_lamp # switch.master_light
+#              - type: entity-button
+#                entity: light.loft_floor_lamp # switch.loft_light
+#              - type: entity-button
+#                entity: light.desk # switch.desk_lights
+#              - type: entity-button
+#                entity: light.stairs # switch.stair_lights
+#      #
+#      # Patio screens
+#      #
+#      - type: vertical-stack
+#        title: Patio Screens
+#        cards:
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: cover.back_patio_screens
+#                state_color: false
+#              - type: entity-button
+#                entity: cover.west_patio_screen
+#                state_color: false
+#              - type: entity-button
+#                entity: cover.middle_patio_screen
+#                state_color: false
+#              - type: entity-button
+#                entity: cover.east_patio_screen
+#                state_color: false
+#      #
+#      # Garage doors
+#      #
+#      - type: vertical-stack
+#        title: Garage Doors
+#        cards:
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: cover.large_garage_door_controller
+#                icon: mdi:garage-variant
+#              - type: entity-button
+#                entity: cover.small_garage_door_controller
+#                icon: mdi:garage
+#      #
+#      # Thermostats
+#      #
+#      - type: vertical-stack
+#        title: Thermostats
+#        cards:
+#        - name: Upstairs
+#          type: thermostat
+#          entity: climate.upstairs_trane_thermostat
+#        - name: Downstairs
+#          type: thermostat
+#          entity: climate.downstairs_trane_thermostat
+#        - name: false
+#          type: custom:numberbox-card
+#          entity: input_number.target_temp
+#          # name: false
+#          card_mod:
+#            style: |
+#              .cur-box ha-icon{ transform:scale(2); }
+#              .body .cur-num { font-size:30px }
+#              .body{display:block!important}
+#              .body::after{text-align:center;font-size:20px;content:"Target Temperature";display:block!important}
 #
-      # Pool filter
-      #
-      - type: vertical-stack
-        title: Pool
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: switch.pentair_fb_bb_80_pool
-              - type: entity-button
-                entity: switch.pentair_fb_bb_80_water_feature
-              - type: entity-button
-                entity: switch.pentair_fb_bb_80_floor_cleaner
-              - type: entity-button
-                # entity: switch.pentair_high_speed
-                entity: switch.pentair_fb_bb_80_high_speed
-      #
-      # Pool Lights
-      #
-      - type: vertical-stack
-        title: Pool Light Colors
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: entity-button
-                entity: script.pentair_lights_red
-                name: Red
-                icon: mdi:radiobox-marked
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_red
-              - type: entity-button
-                entity: script.pentair_lights_purple
-                name: Purple
-                icon: mdi:radiobox-marked
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_purple
-              - type: entity-button
-                entity: script.pentair_lights_green
-                name: Green
-                icon: mdi:radiobox-marked
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_green
-              - type: entity-button
-                entity: script.pentair_lights_white
-                name: White
-                icon: mdi:radiobox-marked
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_white
-              - type:  entity-button
-                entity: script.pentair_lights_blue
-                name: Blue
-                icon: mdi:radiobox-marked
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_blue
-          - type: horizontal-stack
-            title: Pool Light Modes
-            cards:
-              - type: entity-button
-                entity: script.pentair_lights_party
-                name: Party
-                icon: mdi:party-popper
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_party
-              - type: entity-button
-                entity: script.pentair_lights_american
-                name: American
-                icon: mdi:flag
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_american
-              - type: entity-button
-                entity: script.pentair_lights_romance
-                name: Romance
-                icon: mdi:heart
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_romance
-              - type: entity-button
-                entity: script.pentair_lights_california_sunset
-                name: California Sunset
-                icon: mdi:weather-sunset
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_california_sunset
-              - type: entity-button
-                entity: script.pentair_lights_caribbean
-                name: Caribbean
-                icon: mdi:palm-tree
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_caribbean
-              - type: entity-button
-                entity: script.pentair_lights_royal
-                name: Royal
-                icon: mdi:crown
-                tap_action:
-                  action: call-service
-                  service: script.pentair_lights_royal
-
-      - type: vertical-stack
-        title: Wind Settings
-        cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - input_number.wind_threshold
-      - type: vertical-stack
-        title: Hot Tub Settings
-        cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - climate.hot_tub
-              - input_number.hot_tub_run_temp
-              - input_number.hot_tub_rest_temp
-  - badges: []
-    #
-    # Temps
-    #
-    title: Data
-    path: data
-    cards:
-      #
-      # indoor temperature values
-      #
-      - type: vertical-stack
-        title: Temperatures
-        cards:
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.ambient_temp_1
-                name: Upstairs
-              - type: sensor
-                entity: sensor.ambient_temp_2
-                name: Downstairs
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.ambient_temp_3
-                name: Hair
-              - type: sensor
-                entity: sensor.ambient_temp_4
-                name: Garage
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.ambient_temp_5
-              - type: sensor
-                entity: sensor.ambient_temp_6
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.ambient_temp_7
-              - type: sensor
-                entity: sensor.ambient_temp_8
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.ambient_temp
-              - type: sensor
-                entity: sensor.pool_temp
-
-      #
-      # indoor temperature graphs
-      #
-      - type: vertical-stack
-        title: Temperatures
-        cards:
-          - type: history-graph
-            hours_to_show: 24
-            refresh_interval: 60
-            entities:
-              - sensor.ambient_temp_1
-              - sensor.ambient_temp_2
-              - sensor.ambient_temp_3
-              - sensor.ambient_temp_5
-              - sensor.ambient_temp_6
-              - sensor.ambient_temp_7
-              - sensor.ambient_temp_8
-      #
-      # weather
-      #
-      - title: Current Weather
-        type: entities
-        show_header_toggle: false
-        entities:
-          - sensor.ambient_uv
-          - sensor.ambient_humidity
-          - sensor.ambient_wind_speed
-          - sensor.ambient_wind_gust
-      - title: Backyard Wind
-        type: history-graph
-        hours_to_show: 1
-        refresh_interval: 10
-        entities:
-          - sensor.ambient_wind_speed
-          - sensor.ambient_wind_gust
-          - sensor.peak_wind_gust
-  - badges: []
-    #
-    # load status
-    #
-    title: Load
-    path: load
-    cards:
-      - type: horizontal-stack
-        cards:
-          - type: sensor
-            entity: sensor.energy_usage
-          - type: sensor
-            entity: sensor.1_hr_demand
-      
-      #
-      # upstairs climate graph
-      #
-      - title: Upstairs
-        type: history-graph
-        hours_to_show: 24
-        refresh_interval: 60
-        entities:
-          - sensor.ambient_temp_1
-          - sensor.upstairs_cool_setpoint
-          - sensor.upstairs_heat_setpoint
-          - sensor.upstairs_state
-      #
-      # downstairs climate graph
-      #
-      - hours_to_show: 24
-        refresh_interval: 60
-        title: Downstairs
-        type: history-graph
-        entities:
-          - sensor.ambient_temp_2
-          - sensor.downstairs_cool_setpoint
-          - sensor.downstairs_heat_setpoint
-          - sensor.downstairs_state
-      #
-      # hot tub climate graph
-      #
-      - title: Hot tub
-        type: history-graph
-        hours_to_show: 24
-        refresh_interval: 60
-        entities:
-          - climate.hot_tub
-
-      #
-      # demand/temperature graph
-      #
-      - title: Demand
-        type: history-graph
-        hours_to_show: 24
-        refresh_interval: 60
-        entities:
-          - sensor.1_hr_demand
-          - sensor.1_hr_peak_time_demand
-          - sensor.energy_usage
-          - sensor.ambient_temp
-          - sensor.upstairs_cooling
-          - sensor.downstairs_cooling
-    #
-    # audio control
-    #
-  - badges: []
-    title: A/V
-    path: audio
-    cards:
-      - type: horizontal-stack
-        title: Family Room TV
-        cards:
-          - type: vertical-stack
-            cards:
-            - type: button
-              entity: scene.tv_audio
-              tap_action:
-                action: call-service
-                service: scene.turn_on
-                service_data:
-                  entity_id: scene.tv_audio
-            - type: entity-button
-              icon: mdi:arrow-up
-              show_name: false
-              entity: input_boolean.family_room_tv_volume_up
-            - type: entity-button
-              icon: mdi:arrow-down
-              show_name: false
-              entity: input_boolean.family_room_tv_volume_down
-            - type: button
-              entity: scene.tv_audio_off
-              tap_action:
-                action: call-service
-                service: scene.turn_on
-                service_data:
-                  entity_id: scene.tv_audio_off
-          - type: custom:my-slider-v2
-            entity: input_number.family_room_tv_volume_knob
-            mode: volume
-            vertical: true
-            step: "0.05"
-            styles:
-              card:
-                height: 457px
-                width: 150px
-              progress:
-                background: green
-              thumb:
-                background: white
-#            borderRadius: 12px
-#            faderTheme: modern
-#            faders:
-#              - entity_id: media_player.family_room_tv_audio
-#                value_entity_id: sensor.family_room_tv_volume
-#          - type: custom:custom-mixer-card
-#            faderWidth: 50px
-#            faderHeight: 217px
-#            borderRadius: 12px
-#            faderTheme: modern
-#            faders:
-#              - entity_id: media_player.family_room_tv_audio
-#                value_entity_id: sensor.family_room_tv_volume
+##
+#      # Pool filter
+#      #
+#      - type: vertical-stack
+#        title: Pool
+#        cards:
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: switch.pentair_fb_bb_80_pool
+#              - type: entity-button
+#                entity: switch.pentair_fb_bb_80_water_feature
+#              - type: entity-button
+#                entity: switch.pentair_fb_bb_80_floor_cleaner
+#              - type: entity-button
+#                # entity: switch.pentair_high_speed
+#                entity: switch.pentair_fb_bb_80_high_speed
+#      #
+#      # Pool Lights
+#      #
+#      - type: vertical-stack
+#        title: Pool Light Colors
+#        cards:
+#          - type: horizontal-stack
+#            cards:
+#              - type: entity-button
+#                entity: script.pentair_lights_red
+#                name: Red
+#                icon: mdi:radiobox-marked
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_red
+#              - type: entity-button
+#                entity: script.pentair_lights_purple
+#                name: Purple
+#                icon: mdi:radiobox-marked
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_purple
+#              - type: entity-button
+#                entity: script.pentair_lights_green
+#                name: Green
+#                icon: mdi:radiobox-marked
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_green
+#              - type: entity-button
+#                entity: script.pentair_lights_white
+#                name: White
+#                icon: mdi:radiobox-marked
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_white
+#              - type:  entity-button
+#                entity: script.pentair_lights_blue
+#                name: Blue
+#                icon: mdi:radiobox-marked
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_blue
+#          - type: horizontal-stack
+#            title: Pool Light Modes
+#            cards:
+#              - type: entity-button
+#                entity: script.pentair_lights_party
+#                name: Party
+#                icon: mdi:party-popper
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_party
+#              - type: entity-button
+#                entity: script.pentair_lights_american
+#                name: American
+#                icon: mdi:flag
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_american
+#              - type: entity-button
+#                entity: script.pentair_lights_romance
+#                name: Romance
+#                icon: mdi:heart
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_romance
+#              - type: entity-button
+#                entity: script.pentair_lights_california_sunset
+#                name: California Sunset
+#                icon: mdi:weather-sunset
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_california_sunset
+#              - type: entity-button
+#                entity: script.pentair_lights_caribbean
+#                name: Caribbean
+#                icon: mdi:palm-tree
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_caribbean
+#              - type: entity-button
+#                entity: script.pentair_lights_royal
+#                name: Royal
+#                icon: mdi:crown
+#                tap_action:
+#                  action: call-service
+#                  service: script.pentair_lights_royal
+#
+#      - type: vertical-stack
+#        title: Wind Settings
+#        cards:
+#          - type: entities
+#            show_header_toggle: false
+#            entities:
+#              - input_number.wind_threshold
+#      - type: vertical-stack
+#        title: Hot Tub Settings
+#        cards:
+#          - type: entities
+#            show_header_toggle: false
+#            entities:
+#              - climate.hot_tub
+#              - input_number.hot_tub_run_temp
+#              - input_number.hot_tub_rest_temp
+#  - badges: []
+#    #
+#    # Temps
+#    #
+#    title: Data
+#    path: data
+#    cards:
+#      #
+#      # indoor temperature values
+#      #
+#      - type: vertical-stack
+#        title: Temperatures
+#        cards:
+#          - type: horizontal-stack
+#            cards:
+#              - type: sensor
+#                entity: sensor.ambient_temp_1
+#                name: Upstairs
+#              - type: sensor
+#                entity: sensor.ambient_temp_2
+#                name: Downstairs
+#          - type: horizontal-stack
+#            cards:
+#              - type: sensor
+#                entity: sensor.ambient_temp_3
+#                name: Hair
+#              - type: sensor
+#                entity: sensor.ambient_temp_4
+#                name: Garage
+#          - type: horizontal-stack
+#            cards:
+#              - type: sensor
+#                entity: sensor.ambient_temp_5
+#              - type: sensor
+#                entity: sensor.ambient_temp_6
+#          - type: horizontal-stack
+#            cards:
+#              - type: sensor
+#                entity: sensor.ambient_temp_7
+#              - type: sensor
+#                entity: sensor.ambient_temp_8
+#          - type: horizontal-stack
+#            cards:
+#              - type: sensor
+#                entity: sensor.ambient_temp
+#              - type: sensor
+#                entity: sensor.pool_temp
+#
+#      #
+#      # indoor temperature graphs
+#      #
+#      - type: vertical-stack
+#        title: Temperatures
+#        cards:
+#          - type: history-graph
+#            hours_to_show: 24
+#            refresh_interval: 60
+#            entities:
+#              - sensor.ambient_temp_1
+#              - sensor.ambient_temp_2
+#              - sensor.ambient_temp_3
+#              - sensor.ambient_temp_5
+#              - sensor.ambient_temp_6
+#              - sensor.ambient_temp_7
+#              - sensor.ambient_temp_8
+#      #
+#      # weather
+#      #
+#      - title: Current Weather
+#        type: entities
+#        show_header_toggle: false
+#        entities:
+#          - sensor.ambient_uv
+#          - sensor.ambient_humidity
+#          - sensor.ambient_wind_speed
+#          - sensor.ambient_wind_gust
+#      - title: Backyard Wind
+#        type: history-graph
+#        hours_to_show: 1
+#        refresh_interval: 10
+#        entities:
+#          - sensor.ambient_wind_speed
+#          - sensor.ambient_wind_gust
+#          - sensor.peak_wind_gust
+#  - badges: []
+#    #
+#    # load status
+#    #
+#    title: Load
+#    path: load
+#    cards:
+#      - type: horizontal-stack
+#        cards:
+#          - type: sensor
+#            entity: sensor.energy_usage
+#          - type: sensor
+#            entity: sensor.1_hr_demand
+#      
+#      #
+#      # upstairs climate graph
+#      #
+#      - title: Upstairs
+#        type: history-graph
+#        hours_to_show: 24
+#        refresh_interval: 60
+#        entities:
+#          - sensor.ambient_temp_1
+#          - sensor.upstairs_cool_setpoint
+#          - sensor.upstairs_heat_setpoint
+#          - sensor.upstairs_state
+#      #
+#      # downstairs climate graph
+#      #
+#      - hours_to_show: 24
+#        refresh_interval: 60
+#        title: Downstairs
+#        type: history-graph
+#        entities:
+#          - sensor.ambient_temp_2
+#          - sensor.downstairs_cool_setpoint
+#          - sensor.downstairs_heat_setpoint
+#          - sensor.downstairs_state
+#      #
+#      # hot tub climate graph
+#      #
+#      - title: Hot tub
+#        type: history-graph
+#        hours_to_show: 24
+#        refresh_interval: 60
+#        entities:
+#          - climate.hot_tub
+#
+#      #
+#      # demand/temperature graph
+#      #
+#      - title: Demand
+#        type: history-graph
+#        hours_to_show: 24
+#        refresh_interval: 60
+#        entities:
+#          - sensor.1_hr_demand
+#          - sensor.1_hr_peak_time_demand
+#          - sensor.energy_usage
+#          - sensor.ambient_temp
+#          - sensor.upstairs_cooling
+#          - sensor.downstairs_cooling
+#    #
+#    # audio control
+#    #
+#  - badges: []
+#    title: A/V
+#    path: audio
+#    cards:
+#      - type: horizontal-stack
+#        title: Family Room TV
+#        cards:
+#          - type: vertical-stack
+#            cards:
+#            - type: button
+#              entity: scene.tv_audio
+#              tap_action:
+#                action: call-service
+#                service: scene.turn_on
+#                service_data:
+#                  entity_id: scene.tv_audio
+#            - type: entity-button
+#              icon: mdi:arrow-up
+#              show_name: false
+#              entity: input_boolean.family_room_tv_volume_up
+#            - type: entity-button
+#              icon: mdi:arrow-down
+#              show_name: false
+#              entity: input_boolean.family_room_tv_volume_down
+#            - type: button
+#              entity: scene.tv_audio_off
+#              tap_action:
+#                action: call-service
+#                service: scene.turn_on
+#                service_data:
+#                  entity_id: scene.tv_audio_off
+#          - type: custom:my-slider-v2
+#            entity: input_number.family_room_tv_volume_knob
+#            mode: volume
+#            vertical: true
+#            step: "0.05"
+#            styles:
+#              card:
+#                height: 457px
+#                width: 150px
+#              progress:
+#                background: green
+#              thumb:
+#                background: white
+##            borderRadius: 12px
+##            faderTheme: modern
+##            faders:
+##              - entity_id: media_player.family_room_tv_audio
+##                value_entity_id: sensor.family_room_tv_volume
+##          - type: custom:custom-mixer-card
+##            faderWidth: 50px
+##            faderHeight: 217px
+##            borderRadius: 12px
+##            faderTheme: modern
+##            faders:
+##              - entity_id: media_player.family_room_tv_audio
+##                value_entity_id: sensor.family_room_tv_volume
+##      - type: custom:mini-media-player
+##        entity: media_player.xantech8_front
+##        max_volume: 100
+##        group: true
+##        hide:
+##          controls: true
+##      - type: custom:mini-media-player
+##        entity: media_player.xantech8_center
+##        max_volume: 100
+##        group: true
+##        hide:
+##          controls: true
+##      - type: custom:mini-media-player
+##        entity: media_player.xantech8_rear
+##        max_volume: 100
+##        group: true
+##        hide:
+##          controls: true
 #      - type: custom:mini-media-player
-#        entity: media_player.xantech8_front
+#        entity: media_player.xantech8_patio
 #        max_volume: 100
 #        group: true
 #        hide:
 #          controls: true
-#      - type: custom:mini-media-player
-#        entity: media_player.xantech8_center
-#        max_volume: 100
-#        group: true
-#        hide:
-#          controls: true
-#      - type: custom:mini-media-player
-#        entity: media_player.xantech8_rear
-#        max_volume: 100
-#        group: true
-#        hide:
-#          controls: true
-      - type: custom:mini-media-player
-        entity: media_player.xantech8_patio
-        max_volume: 100
-        group: true
-        hide:
-          controls: true
-      - type: horizontal-stack
-        title: Whole house channels
-        cards:
-          - type: button
-            entity: media_player.xantech8_front
-            icon: mdi:power
-            state_color: true
-            tap_action:
-              action: call-service
-              service: media_player.toggle
-              service_data:
-                entity_id: media_player.xantech8_front
-          - type: button
-            entity: media_player.xantech8_rear
-            icon: mdi:power
-            tap_action:
-              action: call-service
-              service: media_player.toggle
-              service_data:
-                entity_id: media_player.xantech8_rear
-          - type: button
-            entity: media_player.xantech8_center
-            icon: mdi:power
-            tap_action:
-              action: call-service
-              service: media_player.toggle
-              service_data:
-                entity_id: media_player.xantech8_center
-          - type: button
-            entity: media_player.xantech8_patio
-            icon: mdi:power
-            tap_action:
-              action: call-service
-              service: media_player.toggle
-              service_data:
-                entity_id: media_player.xantech8_patio
-#      - type: custom:mini-media-player
-#        # Family room
-#        entity: media_player.fire_tv_192_168_0_11
-#        artwork: cover
-#      - type: custom:mini-media-player
-#        # Loft
-#        entity: media_player.fire_tv_192_168_0_15
-#        artwork: cover
-#      - type: custom:mini-media-player
-#        # Patio
-#        entity: media_player.fire_tv_192_168_0_60
-#        artwork: cover
-      - type: horizontal-stack
-        title: Audio
-        cards:
-          - type: button
-            entity: scene.party_audio_on
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data:
-                entity_id: scene.party_audio_on
-          - type: button
-            entity: scene.patio_tv_audio_on
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data:
-                entity_id: scene.patio_tv_audio_on
-
-  - badges: []
-    title: EM
-    path: energy
-    visible:
-      user: eric
-    cards:
-      #
-      # slider controls
-      #
-      - type: vertical-stack
-        title: Climate/Energy Control
-        cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - input_boolean.summer_energy_mode
-              - input_boolean.summer_screen_mode
-              #- input_number.kwh_limit
-              #- input_number.demand_warning_level
-              #- input_number.precool_temp
-              #- input_number.hi_temp
-              #- input_number.wake_temp
-              #- input_number.target_temp
-              #- input_number.sleep_temp
-    #              - input_number.daytime_heat
-    #              - input_number.nighttime_heat
-          - type: horizontal-stack
-            cards:
-            - type: custom:numberbox-card
-              entity: input_number.precool_temp
-              name: false
-              icon: false
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"Precool";display:block!important}
-            - type: custom:numberbox-card
-              entity: input_number.hi_temp
-              name: false
-              icon: false
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"High Limit";display:block!important}
-          - type: horizontal-stack
-            cards:
-            - type: custom:numberbox-card
-              name: false
-              entity: input_number.sleep_temp
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"Wake";display:block!important}
-            - type: custom:numberbox-card
-              name: false
-              entity: input_number.wake_temp
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"Sleep";display:block!important}
-          - type: horizontal-stack
-            cards:
-            - type: custom:numberbox-card
-              entity: input_number.kwh_limit
-              name: false
-              icon: false
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"Demand Limit";display:block!important}
-            - type: custom:numberbox-card
-              entity: input_number.demand_warning_level
-              name: false
-              icon: false
-              card_mod:
-                  style: |
-                    .body{display:block!important}
-                    .body::after{text-align:center;font-size:10px;content:"Warn Level";display:block!important}
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - input_boolean.family_room_tv_volume_up
-              - input_boolean.family_room_tv_volume_down
+#      - type: horizontal-stack
+#        title: Whole house channels
+#        cards:
+#          - type: button
+#            entity: media_player.xantech8_front
+#            icon: mdi:power
+#            state_color: true
+#            tap_action:
+#              action: call-service
+#              service: media_player.toggle
+#              service_data:
+#                entity_id: media_player.xantech8_front
+#          - type: button
+#            entity: media_player.xantech8_rear
+#            icon: mdi:power
+#            tap_action:
+#              action: call-service
+#              service: media_player.toggle
+#              service_data:
+#                entity_id: media_player.xantech8_rear
+#          - type: button
+#            entity: media_player.xantech8_center
+#            icon: mdi:power
+#            tap_action:
+#              action: call-service
+#              service: media_player.toggle
+#              service_data:
+#                entity_id: media_player.xantech8_center
+#          - type: button
+#            entity: media_player.xantech8_patio
+#            icon: mdi:power
+#            tap_action:
+#              action: call-service
+#              service: media_player.toggle
+#              service_data:
+#                entity_id: media_player.xantech8_patio
+##      - type: custom:mini-media-player
+##        # Family room
+##        entity: media_player.fire_tv_192_168_0_11
+##        artwork: cover
+##      - type: custom:mini-media-player
+##        # Loft
+##        entity: media_player.fire_tv_192_168_0_15
+##        artwork: cover
+##      - type: custom:mini-media-player
+##        # Patio
+##        entity: media_player.fire_tv_192_168_0_60
+##        artwork: cover
+#      - type: horizontal-stack
+#        title: Audio
+#        cards:
+#          - type: button
+#            entity: scene.party_audio_on
+#            tap_action:
+#              action: call-service
+#              service: scene.turn_on
+#              service_data:
+#                entity_id: scene.party_audio_on
+#          - type: button
+#            entity: scene.patio_tv_audio_on
+#            tap_action:
+#              action: call-service
+#              service: scene.turn_on
+#              service_data:
+#                entity_id: scene.patio_tv_audio_on
+#
+#  - badges: []
+#    title: EM
+#    path: energy
+#    visible:
+#      user: eric
+#    cards:
+#      #
+#      # slider controls
+#      #
+#      - type: vertical-stack
+#        title: Climate/Energy Control
+#        cards:
+#          - type: entities
+#            show_header_toggle: false
+#            entities:
+#              - input_boolean.summer_energy_mode
+#              - input_boolean.summer_screen_mode
+#              #- input_number.kwh_limit
+#              #- input_number.demand_warning_level
+#              #- input_number.precool_temp
+#              #- input_number.hi_temp
+#              #- input_number.wake_temp
+#              #- input_number.target_temp
+#              #- input_number.sleep_temp
+#    #              - input_number.daytime_heat
+#    #              - input_number.nighttime_heat
+#          - type: horizontal-stack
+#            cards:
+#            - type: custom:numberbox-card
+#              entity: input_number.precool_temp
+#              name: false
+#              icon: false
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"Precool";display:block!important}
+#            - type: custom:numberbox-card
+#              entity: input_number.hi_temp
+#              name: false
+#              icon: false
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"High Limit";display:block!important}
+#          - type: horizontal-stack
+#            cards:
+#            - type: custom:numberbox-card
+#              name: false
+#              entity: input_number.sleep_temp
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"Wake";display:block!important}
+#            - type: custom:numberbox-card
+#              name: false
+#              entity: input_number.wake_temp
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"Sleep";display:block!important}
+#          - type: horizontal-stack
+#            cards:
+#            - type: custom:numberbox-card
+#              entity: input_number.kwh_limit
+#              name: false
+#              icon: false
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"Demand Limit";display:block!important}
+#            - type: custom:numberbox-card
+#              entity: input_number.demand_warning_level
+#              name: false
+#              icon: false
+#              card_mod:
+#                  style: |
+#                    .body{display:block!important}
+#                    .body::after{text-align:center;font-size:10px;content:"Warn Level";display:block!important}
+#          - type: entities
+#            show_header_toggle: false
+#            entities:
+#              - input_boolean.family_room_tv_volume_up
+#              - input_boolean.family_room_tv_volume_down
 
 # from ha-mobile-dashboard
-  - title: ''
-    path: home
-    icon: mdi:home
-    type: sections
-    max_columns: 1
-    sections:
-      - type: grid
-        cards:
-          - type: vertical-stack
-            cards:
-              - type: conditional
-                conditions:
-                  - condition: user
-                    users:
-                      - c115752b1aaa487484dc6ebda8b7dcf3 # Eric
-                card:
-                  type: custom:mushroom-title-card
-                  title: Hi, {{ user }}!
-                  subtitle: >
-                    You are currently at {{ states.person.eric_jones.state
-                    }}.
-                  alignment: center
-                  card_mod:
-                    style: |
-                      ha-card {
-                        font-family: Comfortaa !important;
-                        margin-bottom: -0px !important;
-                        margin-top: -1rem !important;
-                        margin-left: 10px !important;
-                      }
-                      .subtitle {
-                        color: var(--contrast13) !important;
-                      }
-          - type: custom:swipe-card
-            parameters:
-              spaceBetween: 7
-              slidesPerView: auto
-              centeredSlides: false
-              grabCursor: true
-            cards:
-              # Upstairs thermostat button
-              - type: custom:button-card
-                entity: climate.upstairs_trane_thermostat
-                name: Upstairs
-                show_name: false
-                show_icon: false
-                styles:
-                  card:
-                    - position: relative
-                    - height: 110px
-                    - width: 180px
-                    - border-radius: 25px
-                    - overflow: hidden
-                    - background: rgba(255, 255, 255, 0.2) !important;
-                    - backdrop-filter: blur(10px);
-                    - border-radius: px;
-                    - box-shadow: var(--ha-card-box-shadow);
-                    - background-size: cover
-                    - background-position: center
-                    - background-repeat: no-repeat
-                    - '--mdc-ripple-color': var(--primary-text-color)
-                    - '--mdc-ripple-press-opacity': 0.2
-                  custom_fields:
-                    status:
-                      - position: absolute
-                      - top: 35%
-                      - left: 50%
-                      - transform: translate(-50%, -150%)
-                      - font-size: 14px
-                      - font-family: Comfortaa
-                      - color: white
-                    temperature:
-                      - position: absolute
-                      - top: 50%
-                      - left: 50%
-                      - transform: translate(-50%, -50%)
-                      - font-size: 32px
-                      - font-family: Comfortaa
-                      - color: white
-                    set_temperatures:
-                      - position: absolute
-                      - top: 75%
-                      - left: 50%
-                      - transform: translate(-50%, 0)
-                      - font-size: 14px
-                      - font-family: Comfortaa
-                      - color: white
-                    circle_1:
-                      - position: absolute
-                      - bottom: '-58px'
-                      - left: 14px
-                      - transform: translate(0, 0)
-                      - font-size: 190px
-                      - font-family: Comfortaa
-                      - color: rgba(255, 255, 255, 0.3)
-                custom_fields:
-                  circle_1: |
-                    [[[
-                      return `<div>◯</div>`;
-                    ]]]
-                  status: |
-                    [[[
-                      return `<div>${entity.attributes.hvac_action || 'idle'}</div>`;
-                    ]]]
-                  temperature: |
-                    [[[
-                      return `<div>${entity.attributes.current_temperature}°F</div>`;
-                    ]]]
-                  set_temperatures: |
-                    [[[
-                      const hvacMode = entity.state;
-                      const targetTemp = entity.attributes.temperature;
-                      const targetTempHigh = entity.attributes.target_temp_high;
-                      const targetTempLow = entity.attributes.target_temp_low;
-                      
-                      if (hvacMode === 'cool') {
-                        return `
-                          <div>
-                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
-                          </div>
-                        `;
-                      } else if (hvacMode === 'heat') {
-                        return `
-                          <div>
-                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
-                          </div>
-                        `;
-                      } else {
-                        return `
-                          <div>
-                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTempHigh}°F &nbsp;&nbsp;&nbsp;
-                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTempLow}°F
-                          </div>
-                        `;
-                      }
-                    ]]]
-                tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/home#upstairs_thermostat
-          # Upstairs thermostat pop-up
-          - type: vertical-stack
-            cards:
-              - type: custom:bubble-card
-                card_type: pop-up
-                button_type: name
-                name: Upstairs Thermostat
-                icon: mdi:thermostat
-                scrolling_effect: true
-                show_icon: true
-                tap_action:
-                  action: none
-                hash: '#upstairs_thermostat'
-                show_name: true
-                styles: |2-
-                      .bubble-header {
-                        font-family: Comfortaa !important;
-                      }
-                      .bubble-button-background {
-                        background-color: var(--secondary-background-color) !important;
-                      }
-                      .bubble-close-button {
-                        background-color: var(--secondary-background-color) !important;
-                      }
-                sub_button:
-                  - entity: climate.upstairs_trane_thermostat
-                    show_state: true
-                    show_name: false
-                    show_icon: false
-                    show_background: false
-                    show_last_changed: false
-                    show_attribute: false
-                    attribute: current_temperature
-                double_tap_action:
-                  action: none
-                hold_action:
-                  action: none
-                bg_opacity: '0'
-                bg_color: '#000000'
-                shadow_opacity: '100'
-                hide_backdrop: true
-              - type: thermostat
-                entity: climate.upstairs_trane_thermostat
-                features:
-                  - type: climate-hvac-modes
-                  - style: icons
-                    type: climate-fan-modes
-                  - style: icons
-                    type: climate-preset-modes
-                  - type: custom:service-call
-                    entries:
-                      - type: button
-                        entity_id: sensor.downstairs_trane_temperature
-                        label: >-
-                          Downstairs: {{
-                          state_attr('climate.downstairs_trane_thermostat',
-                          'current_temperature') }} °F
-                        styles: |-
-                          :host {
-                            flex-basis: 100%;
-                            flex-flow: row;
-                          }
-                          .background {
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
-                            background: rgba(0, 255, 255, 0.3);
-                            {% endif %};
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
-                            background: rgba(127, 255, 0, 0.3);
-                            {% endif %};
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
-                            background: rgba(220, 20, 60, 0.3);
-                            {% endif %};
-                          }
-                          .icon {
-                            left: 10px;
-                          }
-                        tap_action:
-                          action: more-info
-                          target:
-                            entity_id: sensor.downstairs_trane_temperature
-                          data: {}
-                        icon: mdi:thermometer
-                      - type: button
-                        entity_id: sensor.loft_temperature_temperature
-                        label: >-
-                          Loft: {{ states('sensor.loft_temperature_temperature')
-                          | round(0) | int }} °F
-                        styles: |-
-                          :host {
-                            flex-basis: 100%;
-                            flex-flow: row;
-                          }
-                          .background {
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
-                            background: rgba(0, 255, 255, 0.3);
-                            {% endif %};
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
-                            background: rgba(127, 255, 0, 0.3);
-                            {% endif %};
-                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
-                            background: rgba(220, 20, 60, 0.3);
-                            {% endif %};
-                          }
-                          .icon {
-                            left: 10px;
-                            margin-right: -10px;
-                          }
-                        tap_action:
-                          action: more-info
-                          target:
-                            entity_id: sensor.loft_temperature_temperature
-                          data: {}
-                        icon: mdi:thermometer
-                  - type: custom:service-call
-                    entries:
-                      - type: button
-                        entity_id: sensor.dining_room_thermostat_humidity
-                        label: >-
-                          Downstairs: {{
-                          states('sensor.dining_room_thermostat_humidity') }} %
-                        icon: mdi:water-percent
-                        tap_action:
-                          action: more-info
-                          target:
-                            entity_id: sensor.dining_room_thermostat_humidity
-                          data: {}
-                        haptics: true
-                        styles: |-
-                          :host {
-                            flex-basis: 100%;
-                            flex-flow: row;
-                          }
-                          .background {
-                            {% if states('sensor.dining_room_thermostat_humidity') < 30 %}
-                            background: rgba(0, 255, 255, 0.3);
-                            {% endif %};
-                            {% if states('sensor.dining_room_thermostat_humidity') < 51 %}
-                            background: rgba(127, 255, 0, 0.3);
-                            {% endif %};
-                            {% if states('sensor.dining_room_thermostat_humidity') > 50 %}
-                            background: rgba(220, 20, 60, 0.3);
-                            {% endif %};
-                          }
-                          .icon {
-                            left: 10px;
-                          }
-                      - type: button
-                        entity_id: sensor.loft_temperature_humidity
-                        label: >-
-                          Loft: {{ states('sensor.loft_temperature_humidity') |
-                          round(0) | int  }} %
-                        icon: mdi:water-percent
-                        tap_action:
-                          action: more-info
-                          target:
-                            entity_id: sensor.dining_room_thermostat_humidity
-                          data: {}
-                        haptics: true
-                        styles: |-
-                          :host {
-                            flex-basis: 100%;
-                            flex-flow: row;
-                          }
-                          .background {
-                            {% if states('sensor.loft_temperature_humidity') < 30 %}
-                            background: rgba(0, 255, 255, 0.3);
-                            {% endif %};
-                            {% if states('sensor.loft_temperature_humidity') < 51 %}
-                            background: rgba(127, 255, 0, 0.3);
-                            {% endif %};
-                            {% if states('sensor.loft_temperature_humidity') > 50 %}
-                            background: rgba(220, 20, 60, 0.3);
-                            {% endif %};
-                          }
-                          .icon {
-                            left: 10px;
-                          }
-                grid_options:
-                  columns: 12
-                  rows: 8
-                show_current_as_primary: false
-                name: ' '
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: rgba(0, 0, 0, 0) !important;
-                      backdrop-filter: blur(10px);
-                      border-radius: 30px;
-                      box-shadow: var(--ha-card-box-shadow);
-                      font-family: Comfortaa !important;
-                    }
-                    .content {
-                      background: inherit !important;
-                    }
-              - type: custom:weather-card
-                entity: weather.pirateweather
-                hourly_forecast: false
-                current: true
-                details: true
-                forecast: false
-                card_mod:
-                  style: |
-                    ha-card {
-                      font-family: Comfortaa !important;
-                      background: transparent !important;
-                    }
-              - show_current: false
-                show_forecast: true
-                type: weather-forecast
-                forecast_type: daily
-                entity: weather.pirateweather
-                card_mod:
-                  style: |
-                    ha-card {
-                      font-family: Comfortaa !important;
-                      background: transparent !important;
-                      margin-top: -30px !important;
-                    }
+#  - title: ''
+#    path: home
+#    icon: mdi:home
+#    type: sections
+#    max_columns: 1
+#    sections:
+#      - type: grid
+#        cards:
+#          - type: vertical-stack
+#            cards:
+#              - type: conditional
+#                conditions:
+#                  - condition: user
+#                    users:
+#                      - c115752b1aaa487484dc6ebda8b7dcf3 # Eric
+#                card:
+#                  type: custom:mushroom-title-card
+#                  title: Hi, {{ user }}!
+#                  subtitle: >
+#                    You are currently at {{ states.person.eric_jones.state
+#                    }}.
+#                  alignment: center
+#                  card_mod:
+#                    style: |
+#                      ha-card {
+#                        font-family: Comfortaa !important;
+#                        margin-bottom: -0px !important;
+#                        margin-top: -1rem !important;
+#                        margin-left: 10px !important;
+#                      }
+#                      .subtitle {
+#                        color: var(--contrast13) !important;
+#                      }
+#          - type: custom:swipe-card
+#            parameters:
+#              spaceBetween: 7
+#              slidesPerView: auto
+#              centeredSlides: false
+#              grabCursor: true
+#            cards:
+#              # Upstairs thermostat button
+#              - type: custom:button-card
+#                entity: climate.upstairs_trane_thermostat
+#                name: Upstairs
+#                show_name: false
+#                show_icon: false
+#                styles:
+#                  card:
+#                    - position: relative
+#                    - height: 110px
+#                    - width: 180px
+#                    - border-radius: 25px
+#                    - overflow: hidden
+#                    - background: rgba(255, 255, 255, 0.2) !important;
+#                    - backdrop-filter: blur(10px);
+#                    - border-radius: px;
+#                    - box-shadow: var(--ha-card-box-shadow);
+#                    - background-size: cover
+#                    - background-position: center
+#                    - background-repeat: no-repeat
+#                    - '--mdc-ripple-color': var(--primary-text-color)
+#                    - '--mdc-ripple-press-opacity': 0.2
+#                  custom_fields:
+#                    status:
+#                      - position: absolute
+#                      - top: 35%
+#                      - left: 50%
+#                      - transform: translate(-50%, -150%)
+#                      - font-size: 14px
+#                      - font-family: Comfortaa
+#                      - color: white
+#                    temperature:
+#                      - position: absolute
+#                      - top: 50%
+#                      - left: 50%
+#                      - transform: translate(-50%, -50%)
+#                      - font-size: 32px
+#                      - font-family: Comfortaa
+#                      - color: white
+#                    set_temperatures:
+#                      - position: absolute
+#                      - top: 75%
+#                      - left: 50%
+#                      - transform: translate(-50%, 0)
+#                      - font-size: 14px
+#                      - font-family: Comfortaa
+#                      - color: white
+#                    circle_1:
+#                      - position: absolute
+#                      - bottom: '-58px'
+#                      - left: 14px
+#                      - transform: translate(0, 0)
+#                      - font-size: 190px
+#                      - font-family: Comfortaa
+#                      - color: rgba(255, 255, 255, 0.3)
+#                custom_fields:
+#                  circle_1: |
+#                    [[[
+#                      return `<div>◯</div>`;
+#                    ]]]
+#                  status: |
+#                    [[[
+#                      return `<div>${entity.attributes.hvac_action || 'idle'}</div>`;
+#                    ]]]
+#                  temperature: |
+#                    [[[
+#                      return `<div>${entity.attributes.current_temperature}°F</div>`;
+#                    ]]]
+#                  set_temperatures: |
+#                    [[[
+#                      const hvacMode = entity.state;
+#                      const targetTemp = entity.attributes.temperature;
+#                      const targetTempHigh = entity.attributes.target_temp_high;
+#                      const targetTempLow = entity.attributes.target_temp_low;
+#                      
+#                      if (hvacMode === 'cool') {
+#                        return `
+#                          <div>
+#                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
+#                          </div>
+#                        `;
+#                      } else if (hvacMode === 'heat') {
+#                        return `
+#                          <div>
+#                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTemp}°F
+#                          </div>
+#                        `;
+#                      } else {
+#                        return `
+#                          <div>
+#                            <ha-icon icon="mdi:fan" style="color: dodgerblue; width: 16px; height: 16px;"></ha-icon> ${targetTempHigh}°F &nbsp;&nbsp;&nbsp;
+#                            <ha-icon icon="mdi:radiator" style="color: tomato; width: 16px; height: 16px;"></ha-icon> ${targetTempLow}°F
+#                          </div>
+#                        `;
+#                      }
+#                    ]]]
+#                tap_action:
+#                  action: navigate
+#                  navigation_path: /lovelace/home#upstairs_thermostat
+#          # Upstairs thermostat pop-up
+#          - type: vertical-stack
+#            cards:
+#              - type: custom:bubble-card
+#                card_type: pop-up
+#                button_type: name
+#                name: Upstairs Thermostat
+#                icon: mdi:thermostat
+#                scrolling_effect: true
+#                show_icon: true
+#                tap_action:
+#                  action: none
+#                hash: '#upstairs_thermostat'
+#                show_name: true
+#                styles: |2-
+#                      .bubble-header {
+#                        font-family: Comfortaa !important;
+#                      }
+#                      .bubble-button-background {
+#                        background-color: var(--secondary-background-color) !important;
+#                      }
+#                      .bubble-close-button {
+#                        background-color: var(--secondary-background-color) !important;
+#                      }
+#                sub_button:
+#                  - entity: climate.upstairs_trane_thermostat
+#                    show_state: true
+#                    show_name: false
+#                    show_icon: false
+#                    show_background: false
+#                    show_last_changed: false
+#                    show_attribute: false
+#                    attribute: current_temperature
+#                double_tap_action:
+#                  action: none
+#                hold_action:
+#                  action: none
+#                bg_opacity: '0'
+#                bg_color: '#000000'
+#                shadow_opacity: '100'
+#                hide_backdrop: true
+#              - type: thermostat
+#                entity: climate.upstairs_trane_thermostat
+#                features:
+#                  - type: climate-hvac-modes
+#                  - style: icons
+#                    type: climate-fan-modes
+#                  - style: icons
+#                    type: climate-preset-modes
+#                  - type: custom:service-call
+#                    entries:
+#                      - type: button
+#                        entity_id: sensor.downstairs_trane_temperature
+#                        label: >-
+#                          Downstairs: {{
+#                          state_attr('climate.downstairs_trane_thermostat',
+#                          'current_temperature') }} °F
+#                        styles: |-
+#                          :host {
+#                            flex-basis: 100%;
+#                            flex-flow: row;
+#                          }
+#                          .background {
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
+#                            background: rgba(0, 255, 255, 0.3);
+#                            {% endif %};
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
+#                            background: rgba(127, 255, 0, 0.3);
+#                            {% endif %};
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
+#                            background: rgba(220, 20, 60, 0.3);
+#                            {% endif %};
+#                          }
+#                          .icon {
+#                            left: 10px;
+#                          }
+#                        tap_action:
+#                          action: more-info
+#                          target:
+#                            entity_id: sensor.downstairs_trane_temperature
+#                          data: {}
+#                        icon: mdi:thermometer
+#                      - type: button
+#                        entity_id: sensor.loft_temperature_temperature
+#                        label: >-
+#                          Loft: {{ states('sensor.loft_temperature_temperature')
+#                          | round(0) | int }} °F
+#                        styles: |-
+#                          :host {
+#                            flex-basis: 100%;
+#                            flex-flow: row;
+#                          }
+#                          .background {
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 68 %}
+#                            background: rgba(0, 255, 255, 0.3);
+#                            {% endif %};
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') < 74 %}
+#                            background: rgba(127, 255, 0, 0.3);
+#                            {% endif %};
+#                            {% if state_attr('climate.downstairs_trane_thermostat', 'current_temperature') > 74 %}
+#                            background: rgba(220, 20, 60, 0.3);
+#                            {% endif %};
+#                          }
+#                          .icon {
+#                            left: 10px;
+#                            margin-right: -10px;
+#                          }
+#                        tap_action:
+#                          action: more-info
+#                          target:
+#                            entity_id: sensor.loft_temperature_temperature
+#                          data: {}
+#                        icon: mdi:thermometer
+#                  - type: custom:service-call
+#                    entries:
+#                      - type: button
+#                        entity_id: sensor.dining_room_thermostat_humidity
+#                        label: >-
+#                          Downstairs: {{
+#                          states('sensor.dining_room_thermostat_humidity') }} %
+#                        icon: mdi:water-percent
+#                        tap_action:
+#                          action: more-info
+#                          target:
+#                            entity_id: sensor.dining_room_thermostat_humidity
+#                          data: {}
+#                        haptics: true
+#                        styles: |-
+#                          :host {
+#                            flex-basis: 100%;
+#                            flex-flow: row;
+#                          }
+#                          .background {
+#                            {% if states('sensor.dining_room_thermostat_humidity') < 30 %}
+#                            background: rgba(0, 255, 255, 0.3);
+#                            {% endif %};
+#                            {% if states('sensor.dining_room_thermostat_humidity') < 51 %}
+#                            background: rgba(127, 255, 0, 0.3);
+#                            {% endif %};
+#                            {% if states('sensor.dining_room_thermostat_humidity') > 50 %}
+#                            background: rgba(220, 20, 60, 0.3);
+#                            {% endif %};
+#                          }
+#                          .icon {
+#                            left: 10px;
+#                          }
+#                      - type: button
+#                        entity_id: sensor.loft_temperature_humidity
+#                        label: >-
+#                          Loft: {{ states('sensor.loft_temperature_humidity') |
+#                          round(0) | int  }} %
+#                        icon: mdi:water-percent
+#                        tap_action:
+#                          action: more-info
+#                          target:
+#                            entity_id: sensor.dining_room_thermostat_humidity
+#                          data: {}
+#                        haptics: true
+#                        styles: |-
+#                          :host {
+#                            flex-basis: 100%;
+#                            flex-flow: row;
+#                          }
+#                          .background {
+#                            {% if states('sensor.loft_temperature_humidity') < 30 %}
+#                            background: rgba(0, 255, 255, 0.3);
+#                            {% endif %};
+#                            {% if states('sensor.loft_temperature_humidity') < 51 %}
+#                            background: rgba(127, 255, 0, 0.3);
+#                            {% endif %};
+#                            {% if states('sensor.loft_temperature_humidity') > 50 %}
+#                            background: rgba(220, 20, 60, 0.3);
+#                            {% endif %};
+#                          }
+#                          .icon {
+#                            left: 10px;
+#                          }
+#                grid_options:
+#                  columns: 12
+#                  rows: 8
+#                show_current_as_primary: false
+#                name: ' '
+#                card_mod:
+#                  style: |
+#                    ha-card {
+#                      background: rgba(0, 0, 0, 0) !important;
+#                      backdrop-filter: blur(10px);
+#                      border-radius: 30px;
+#                      box-shadow: var(--ha-card-box-shadow);
+#                      font-family: Comfortaa !important;
+#                    }
+#                    .content {
+#                      background: inherit !important;
+#                    }
+#              - type: custom:weather-card
+#                entity: weather.pirateweather
+#                hourly_forecast: false
+#                current: true
+#                details: true
+#                forecast: false
+#                card_mod:
+#                  style: |
+#                    ha-card {
+#                      font-family: Comfortaa !important;
+#                      background: transparent !important;
+#                    }
+#              - show_current: false
+#                show_forecast: true
+#                type: weather-forecast
+#                forecast_type: daily
+#                entity: weather.pirateweather
+#                card_mod:
+#                  style: |
+#                    ha-card {
+#                      font-family: Comfortaa !important;
+#                      background: transparent !important;
+#                      margin-top: -30px !important;
+#                    }

@@ -75,9 +75,9 @@ sensor.yearly_production:
 # Pool
 light.pentair_fb_bb_80_pool_light:
   friendly_name: "Pool Light"
-switch.pentair_fb_bb_80_pool_light:
-  friendly_name: "Pool Lights"
-  icon: mdi:lightbulb
+#switch.pentair_fb_bb_80_pool_light:
+#  friendly_name: "Pool Lights"
+#  icon: mdi:lightbulb
 switch.pentair_fb_bb_80_water_feature:
   friendly_name: "Waterfalls"
   icon: mdi:waves

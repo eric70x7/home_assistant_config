@@ -219,18 +219,6 @@
     target:
       entity_id: media_player.unnamed_room_2
   mode: single
-- id: '1785889185581'
-  alias: Turn on sonos_patio
-  description: ''
-  triggers: []
-  conditions: []
-  actions:
-  - action: media_player.turn_on
-    metadata: {}
-    target:
-      entity_id: media_player.sonos_patio
-    data: {}
-  mode: single
 - id: '1787243361567'
   alias: 'Music: Stop playing'
   description: ''
