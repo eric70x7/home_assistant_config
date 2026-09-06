@@ -127,22 +127,6 @@
       device_id: 984c38439b259b91d4e2e830df6ec337
     data: {}
   mode: single
-- id: '1725747666470'
-  alias: 'Media: Turn on Patio Speakers when Patio TV turns on'
-  description: Turn on audio when TV turns on
-  trigger:
-  - platform: device
-    device_id: fec97e513df33ac2fb7a8799b5fa51d0
-    domain: media_player
-    entity_id: c39f118ecb466d2a324526ed24229a29
-    type: playing
-  condition: []
-  action:
-  - service: scene.turn_on
-    metadata: {}
-    target:
-      entity_id: scene.patio_tv_audio_on
-  mode: single
 - id: '1734192737016'
   alias: 'Keyfob: TV Volume Up'
   description: ''
@@ -225,20 +209,17 @@
   triggers: []
   conditions: []
   actions:
+  - action: input_select.select_option
+    metadata: {}
+    target:
+      entity_id: input_select.media_mode
+    data:
+      option: 'Off'
   - action: media_player.media_stop
     metadata: {}
     data: {}
     target:
       entity_id: media_player.ma_all_sonos
-  - action: media_player.turn_off
-    metadata: {}
-    target:
-      entity_id:
-      - media_player.xantech_dax88_front
-      - media_player.xantech_dax88_patio
-      - media_player.xantech_dax88_center
-      - media_player.xantech_dax88_rear
-    data: {}
   mode: single
 - id: '1787344122724'
   alias: 'Music: Play selected playlist'
@@ -249,6 +230,84 @@
       entity_id: input_select.playlists
     options: {}
   conditions: []
+  actions:
+  - action: input_select.select_option
+    metadata: {}
+    target:
+      entity_id: input_select.media_mode
+    data:
+      option: Music
+  - action: music_assistant.play_media
+    metadata: {}
+    data:
+      media_id: '{{ states(''input_select.playlists'') }}'
+      media_type: playlist
+      enqueue: replace
+    target:
+      entity_id: media_player.ma_all_sonos
+  - action: media_player.shuffle_set
+    metadata: {}
+    data:
+      shuffle: true
+    target:
+      entity_id: media_player.ma_all_sonos
+  mode: single
+- id: '1788645203794'
+  alias: 'Media: Set mode to Off when TV turned off'
+  description: ''
+  triggers:
+  - trigger: media_player.turned_off
+    target:
+      device_id: ba9913ecc8e7a11050ca5d064df0160a
+    options:
+      behavior: each
+  conditions: []
+  actions:
+  - action: input_select.select_option
+    metadata: {}
+    target:
+      entity_id: input_select.media_mode
+    data:
+      option: 'Off'
+  mode: single
+- id: '1788645517872'
+  alias: 'Media: Set Mode to TV when TV turned on'
+  description: ''
+  triggers:
+  - trigger: remote.turned_on
+    target:
+      entity_id: remote.family_room_tv
+    options:
+      behavior: each
+      for: 00:00:00
+  conditions: []
+  actions:
+  - action: input_select.select_option
+    metadata: {}
+    target:
+      entity_id: input_select.media_mode
+    data:
+      option: TV
+  - action: input_select.select_option
+    metadata: {}
+    target:
+      entity_id: input_select.tv_audio_mode
+    data:
+      option: Stereo
+  mode: single
+- id: '1788715465151'
+  alias: Setup speakers for music
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.media_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.media_mode
+    state:
+    - Music
   actions:
   - action: media_player.turn_on
     metadata: {}
@@ -265,18 +324,185 @@
       - media_player.xantech_dax88_patio
     data:
       source: Sonos
-  - action: music_assistant.play_media
+  - action: media_player.volume_set
     metadata: {}
-    data:
-      media_id: '{{ states(''input_select.playlists'') }}'
-      media_type: playlist
-      enqueue: replace
     target:
-      entity_id: media_player.ma_all_sonos
-  - action: media_player.shuffle_set
+      entity_id: media_player.sonos
+    data:
+      volume_level: 0.75
+  mode: single
+- id: '1788715831967'
+  alias: Turn off speakers
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.media_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.media_mode
+    state:
+    - 'Off'
+  actions:
+  - action: media_player.turn_off
     metadata: {}
-    data:
-      shuffle: true
     target:
-      entity_id: media_player.ma_all_sonos
+      entity_id:
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_center
+      - media_player.xantech_dax88_rear
+      - media_player.xantech_dax88_patio
+    data: {}
+  mode: single
+- id: '1788716741292'
+  alias: Handle media mode set to off
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.media_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.media_mode
+    state:
+    - 'Off'
+  actions:
+  - action: media_player.turn_off
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_center
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_patio
+      - media_player.xantech_dax88_rear
+    data: {}
+  mode: single
+- id: '1788717234981'
+  alias: Handle media mode set to TV
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.media_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.media_mode
+    state:
+    - TV
+  actions:
+  - action: media_player.turn_on
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_center
+      - media_player.xantech_dax88_rear
+    data: {}
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id: media_player.xantech_dax88_center
+    data:
+      source: Family Room TV
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id: media_player.xantech_dax88_front
+    data:
+      source: Family Room TV
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id: media_player.xantech_dax88_rear
+    data:
+      source: Family Room TV
+  mode: single
+- id: '1788720687669'
+  alias: Setup TV Surround Audio
+  description: ''
+  triggers: []
+  conditions: []
+  actions:
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id: media_player.xantech_dax88_center
+    data:
+      source: Center
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_front
+    data:
+      source: Front
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_rear
+    data:
+      source: Rear
+  mode: single
+- id: '1788720801483'
+  alias: Setup TV Audio Stereo
+  description: ''
+  triggers: []
+  conditions: []
+  actions:
+  - action: media_player.select_source
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.xantech_dax88_center
+      - media_player.xantech_dax88_front
+      - media_player.xantech_dax88_rear
+    data:
+      source: Family Room TV
+  mode: single
+- id: '1788720988215'
+  alias: Select TV Surround
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.tv_audio_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.tv_audio_mode
+    state:
+    - Surround
+  actions:
+  - action: automation.trigger
+    metadata: {}
+    target:
+      entity_id: automation.setup_tv_surround_audio
+    data:
+      skip_condition: true
+  mode: single
+- id: '1788721102273'
+  alias: Select TV Stereo
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.tv_audio_mode
+    options: {}
+  conditions:
+  - condition: state
+    entity_id: input_select.tv_audio_mode
+    state:
+    - Stereo
+  actions:
+  - action: automation.trigger
+    metadata: {}
+    target:
+      entity_id:
+      - automation.setup_tv_audio_stereo
+    data:
+      skip_condition: true
   mode: single
