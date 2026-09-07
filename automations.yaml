@@ -189,10 +189,10 @@
   - action: media_player.play_media
     data:
       media:
-        media_content_id: media-source://media_source/local/doorbell-223669.mp3
-        media_content_type: audio/mpeg
+        media_content_id: media-source://media_source/local/trimmed_doorbell.wav
+        media_content_type: audio/x-wav
         metadata:
-          title: doorbell-223669.mp3
+          title: trimmed_doorbell.wav
           thumbnail:
           media_class: music
           children_media_class:
@@ -200,6 +200,7 @@
           - {}
           - media_content_type: app
             media_content_id: media-source://media_source
+          browse_entity_id: media_player.unnamed_room_2
     target:
       entity_id: media_player.unnamed_room_2
   mode: single
@@ -505,4 +506,174 @@
       - automation.setup_tv_audio_stereo
     data:
       skip_condition: true
+  mode: single
+- id: '1788744201697'
+  alias: 'Screens: Raise back patio screens due to wind'
+  description: ''
+  triggers:
+  - entity_id: sensor.ambient_wind_gust
+    above: input_number.wind_threshold
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - entity_id: cover.back_patio_screens
+    action: cover.open_cover
+  mode: single
+- id: '1788744327330'
+  alias: 'Screens: Raise back patio screens at sunset'
+  description: ''
+  triggers:
+  - entity_id: sun.sun
+    attribute: elevation
+    below: 2
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - entity_id: cover.back_patio_screens
+    action: cover.open_cover
+  mode: single
+- id: '1788744438016'
+  alias: 'Screens: Lower east patio screen if the wind dies down'
+  description: ''
+  triggers:
+  - entity_id: sensor.peak_wind_gust
+    below: input_number.wind_threshold
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: azimuth
+      above: 235
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 26
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 2
+  actions:
+  - entity_id: cover.east_patio_screen
+    action: cover.close_cover
+  mode: single
+- id: '1788744454860'
+  alias: 'Screens: Lower east patio screen in the afternoon'
+  description: ''
+  triggers:
+  - entity_id: sun.sun
+    attribute: elevation
+    below: 26
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+    - condition: state
+      entity_id: timer.wind_watchdog
+      state: active
+  actions:
+  - entity_id: cover.east_patio_screen
+    action: cover.close_cover
+  mode: single
+- id: '1788744465885'
+  alias: 'Screens: Lower middle patio screen if the wind dies down'
+  description: ''
+  triggers:
+  - entity_id: sensor.peak_wind_gust
+    below: input_number.wind_threshold
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: azimuth
+      above: 235
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 2
+  actions:
+  - entity_id: cover.middle_patio_screen
+    action: cover.close_cover
+  mode: single
+- id: '1788744586113'
+  alias: 'Screens: Lower middle patio screen in the afternoon'
+  description: ''
+  triggers:
+  - entity_id: sun.sun
+    attribute: azimuth
+    above: 235
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+    - condition: state
+      entity_id: timer.wind_watchdog
+      state: active
+  actions:
+  - entity_id: cover.middle_patio_screen
+    action: cover.close_cover
+  mode: single
+- id: '1788744602982'
+  alias: 'Screens: Lower west patio screen in the afternoon'
+  description: ''
+  triggers:
+  - entity_id: sun.sun
+    attribute: azimuth
+    above: 156
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.peak_wind_gust
+      below: input_number.wind_threshold
+    - condition: state
+      entity_id: timer.wind_watchdog
+      state: active
+  actions:
+  - entity_id: cover.west_patio_screen
+    action: cover.close_cover
+  mode: single
+- id: '1788744643798'
+  alias: 'Screens: Lower west patio screen if the wind dies down'
+  description: ''
+  triggers:
+  - entity_id: sensor.peak_wind_gust
+    below: input_number.wind_threshold
+    trigger: numeric_state
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_screen_mode
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: azimuth
+      above: 156
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 2
+  actions:
+  - entity_id: cover.west_patio_screen
+    action: cover.close_cover
   mode: single

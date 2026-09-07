@@ -66,20 +66,6 @@
   - service: python_script.set_temp
     data_template:
       setpoint: '{{ states("input_number.target_temp") }}'
-#  - service: switch.turn_off
-#    entity_id: switch.downstairs_circulate
-#  - service: switch.turn_off
-#    entity_id: switch.upstairs_circulate
-# Changed this to happen at midnight for grafana compatibility
-#  - service: input_number.set_value
-#    target:
-#      entity_id: input_number.daily_demand
-#    data:
-#      value: 0.0
-#  - service: climate.set_temperature
-#    entity_id: climate.hot_tub
-#    data_template:
-#      temperature: '{{ states("input_number.hot_tub_rest_temp") }}'
 
 - id: end_peak_time
   alias: "Energy: end of peak time"
@@ -262,39 +248,6 @@
     data_template:
       setpoint: '{{ states("input_number.sleep_temp") }}'
 
-#- id: set_wake_temp
-#  alias: "Thermostat: Set wake temperature"
-#  trigger:
-#  - platform: time
-#    at: '05:00'
-#  action:
-#    service: python_script.set_temp
-#    data_template:
-#      setpoint: '{{ states("input_number.wake_temp") }}'
-
-#- id: set_nighttime_heat
-#  alias: "Thermostat: Set nighttime heat"
-#  trigger:
-#  - platform: time
-#    at: '14:00'
-#  condition:
-#  - condition: time
-#    weekday:
-#    - mon
-#    - tue
-#    - wed
-#    - thu
-#    - fri
-#    - sat
-#    - sun
-#  action:
-#    service: python_script.set_temp
-#    data_template:
-#      setpoint: '{{ states("input_number.nighttime_heat") }}'
-#      set_heat: 1
-#  mode: single
-
-
 #######################################################################
 # Lights
 #
@@ -442,9 +395,6 @@
     entity_id: switch.christmas_lights
 
 #######################################################################
-# Doggie door
-
-#######################################################################
 # ios actions for Apple watch
 - id: toggle_desk_light
   alias: "Lights: Toggle desk lights with watch"
@@ -471,171 +421,7 @@
       entity_id: switch.master_light
 
 #######################################################################
-# automations for backyard screens
-# WEST screen
-- id: lower_west_patio_screen_in_the_afternoon
-  alias: "Screens: Lower west patio screen in the afternoon"
-  trigger:
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 156
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sensor.peak_wind_gust
-        below: input_number.wind_threshold
-      - condition: state
-        entity_id: timer.wind_watchdog
-        state: 'active'
-  action:
-    - service: cover.close_cover
-      entity_id: cover.west_patio_screen
-
-- id: lower_west_patio_screen_if_the_wind_dies_down
-  alias: "Screens: Lower west patio screen if the wind dies down"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: azimuth
-        above: 156
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: elevation
-        above: 2
-  action:
-    - service: cover.close_cover
-      entity_id: cover.west_patio_screen
-
-# MIDDLE screen
-- id: lower_middle_patio_screen_in_the_afternoon
-  alias: "Screens: Lower middle patio screen in the afternoon"
-  trigger:
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 235
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sensor.peak_wind_gust
-        below: input_number.wind_threshold
-      - condition: state
-        entity_id: timer.wind_watchdog
-        state: 'active'
-  action:
-    - service: cover.close_cover
-      entity_id: cover.middle_patio_screen
-
-- id: lower_middle_patio_screen_if_the_wind_dies_down
-  alias: "Screens: Lower middle patio screen if the wind dies down"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: azimuth
-        above: 235
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: elevation
-        above: 2
-  action:
-    - service: cover.close_cover
-      entity_id: cover.middle_patio_screen
-
-# EAST screen
-- id: lower_east_patio_screen_in_the_afternoon
-  alias: "Screens: Lower east patio screen in the afternoon"
-  trigger:
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      below: 26
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sensor.peak_wind_gust
-        below: input_number.wind_threshold
-      - condition: state
-        entity_id: timer.wind_watchdog
-        state: 'active'
-  action:
-    - service: cover.close_cover
-      entity_id: cover.east_patio_screen
-
-- id: lower_east_patio_screen_if_the_wind_dies_down
-  alias: "Screens: Lower east patio screen if the wind dies down"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.peak_wind_gust
-      below: input_number.wind_threshold
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_screen_mode
-        state: 'on'
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: azimuth
-        above: 235
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: elevation
-        below: 26
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: elevation
-        above: 2
-  action:
-    - service: cover.close_cover
-      entity_id: cover.east_patio_screen
-
-# ALL screens
-- id: raise_back_patio_screens_at_sunset
-  alias: "Screens: Raise back patio screens at sunset"
-  trigger:
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      below: 2
-  action:
-    - service: cover.open_cover
-      entity_id: cover.back_patio_screens
-
-- id: raise_back_patio_screens_due_to_wind
-  alias: "Screens: Raise back patio screens due to wind"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.ambient_wind_gust
-      above: input_number.wind_threshold
-  action:
-    - service: cover.open_cover
-      entity_id: cover.back_patio_screens
-
+# Watchdogs
 - id: reset_wind_watchdog
   alias: "Watchdog: Reset watchdog timer when wind changes"
   trigger:
