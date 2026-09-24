@@ -45,28 +45,6 @@
     data_template:
       setpoint: '{{ states("input_number.precool_temp") }}'
 
-- id: start_peak_time
-  alias: "Energy: start peak time"
-  trigger:
-    platform: time
-    at: '16:00'
-  condition:
-    - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-  action:
-  - service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.target_temp") }}'
-
 - id: end_peak_time
   alias: "Energy: end of peak time"
   trigger:

@@ -225,11 +225,7 @@
 - id: '1787344122724'
   alias: 'Music: Play selected playlist'
   description: ''
-  triggers:
-  - trigger: select.selection_changed
-    target:
-      entity_id: input_select.playlists
-    options: {}
+  triggers: []
   conditions: []
   actions:
   - action: input_select.select_option
@@ -305,10 +301,16 @@
       entity_id: input_select.media_mode
     options: {}
   conditions:
-  - condition: state
-    entity_id: input_select.media_mode
-    state:
-    - Music
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_select.media_mode
+      state:
+      - Music
+    - condition: state
+      entity_id: input_select.media_mode
+      state:
+      - Airplay
   actions:
   - action: media_player.turn_on
     metadata: {}
@@ -331,6 +333,14 @@
       entity_id: media_player.sonos
     data:
       volume_level: 0.75
+  - action: media_player.volume_set
+    metadata: {}
+    target:
+      entity_id:
+      - media_player.thing_1
+      - media_player.unnamed_room_2
+    data:
+      volume_level: 0.25
   mode: single
 - id: '1788715831967'
   alias: Turn off speakers
@@ -676,4 +686,51 @@
   actions:
   - entity_id: cover.west_patio_screen
     action: cover.close_cover
+  mode: single
+- id: '1788795050227'
+  alias: Handle playlist selection change
+  description: ''
+  triggers:
+  - trigger: select.selection_changed
+    target:
+      entity_id: input_select.playlists
+    options: {}
+  conditions: []
+  actions:
+  - action: automation.trigger
+    metadata: {}
+    target:
+      entity_id: automation.music_play_selected_playlist
+    data:
+      skip_condition: true
+  mode: single
+- id: '1789519633757'
+  alias: 'Energy: start peak time'
+  description: ''
+  triggers:
+  - at: '16:00'
+    trigger: time
+  conditions:
+  - and:
+    - condition: state
+      entity_id: input_boolean.summer_energy_mode
+      state: 'on'
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  actions:
+  - data_template:
+      setpoint: '{{ states("input_number.target_temp") }}'
+    action: python_script.set_temp
+  - action: switch.turn_off
+    metadata: {}
+    target:
+      entity_id:
+      - switch.pentair_fb_bb_80_pool
+      - switch.pentair_fb_bb_80_high_speed
+    data: {}
   mode: single

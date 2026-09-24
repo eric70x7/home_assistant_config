@@ -1,31 +1,31 @@
-homeassistant:
-  # Name of the location where Home Assistant is running
-  name: !secret home_name
+#homeassistant:
+#  # Name of the location where Home Assistant is running
+#  name: !secret home_name
+#
+#  # Location required to calculate the time the sun rises and sets
+#  latitude: !secret home_latitude
+#  longitude: !secret home_longitude
 
-  # Location required to calculate the time the sun rises and sets
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
+#  # Impacts weather/sunrise data (altitude above sea level in meters)
+#  elevation: !secret home_elevation
 
-  # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: !secret home_elevation
+#  # metric for Metric, imperial for Imperial
+#  unit_system: us_customary
 
-  # metric for Metric, imperial for Imperial
-  unit_system: us_customary
+#  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#  time_zone: America/Phoenix
+#  country: US
+#  currency: USD
 
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: America/Phoenix
-  country: US
-  currency: USD
+#  # Customization file
+#  customize: !include customize.yaml
 
-  # Customization file
-  customize: !include customize.yaml
-
-  auth_providers:
-    - type: homeassistant
-      trusted_networks:
-        - 192.168.0.0/16      
-
-  external_url: https://eric70x7.duckdns.org
+#  auth_providers:
+#    - type: homeassistant
+#      trusted_networks:
+#        - 192.168.0.0/16      
+#
+#  external_url: https://eric70x7.duckdns.org
 
 # For doorbell live streaming
 ffmpeg:
