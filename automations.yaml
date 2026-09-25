@@ -178,6 +178,8 @@
   - trigger: state
     entity_id:
     - binary_sensor.front_door_button_pressed
+    to:
+    - 'on'
   conditions: []
   actions:
   - action: media_player.volume_set
