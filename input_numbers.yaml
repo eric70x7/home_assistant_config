@@ -54,18 +54,19 @@ precool_temp:
   max: 75
   step: 1
 
-upstairs_setpoint:
-  name: Saved US Setpoint
-  unit_of_measurement: '°F'
-  min: 65
-  max: 85
-  step: 1
-downstairs_setpoint:
-  name: Saved DS Setpoint
-  unit_of_measurement: '°F'
-  min: 65
-  max: 85
-  step: 1
+#upstairs_setpoint:
+#  name: Saved US Setpoint
+#  unit_of_measurement: '°F'
+#  min: 65
+#  max: 85
+#  step: 1
+#downstairs_setpoint:
+#  name: Saved DS Setpoint
+#  unit_of_measurement: '°F'
+#  min: 65
+#  max: 85
+#  step: 1
+
 #predicted_demand_50:
 #  name: Predicted 1 hr demand based on 1 hour usage
 #  unit_of_measurement: 'kWH'
