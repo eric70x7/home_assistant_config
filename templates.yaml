@@ -8,7 +8,7 @@
   - name: Upstairs Cool Setpoint
     unit_of_measurement: '°F'
     state: >
-      {% if state_attr('climate.upstairs_trane_thermostat.target_temp_high', 'target_temp_high') == None %}
+      {% if state_attr('climate.upstairs_trane_thermostat', 'target_temp_high') == None %}
         {{ state_attr('climate.upstairs_trane_thermostat', 'temperature') }}
       {% else %}
         {{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_high') }}
@@ -16,7 +16,7 @@
   - name: Upstairs Heat Setpoint
     unit_of_measurement: '°F'
     state: >
-      {% if state_attr('climate.upstairs_trane_thermostat.target_temp_high', 'target_temp_low') == None %}
+      {% if state_attr('climate.upstairs_trane_thermostat', 'target_temp_low') == None %}
         {{ state_attr('climate.upstairs_trane_thermostat', 'temperature') }}
       {% else %}
         {{ state_attr('climate.upstairs_trane_thermostat', 'target_temp_low') }}
@@ -39,7 +39,7 @@
   - name: Downstairs Cool Setpoint
     unit_of_measurement: '°F'
     state: >
-      {% if state_attr('climate.downstairs_trane_thermostat.target_temp_high', 'target_temp_high') == None %}
+      {% if state_attr('climate.downstairs_trane_thermostat', 'target_temp_high') == None %}
         {{ state_attr('climate.downstairs_trane_thermostat', 'temperature') }}
       {% else %}
         {{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_high') }}
@@ -47,7 +47,7 @@
   - name: Downstairs Heat Setpoint
     unit_of_measurement: '°F'
     state: >
-      {% if state_attr('climate.downstairs_trane_thermostat.target_temp_high', 'target_temp_low') == None %}
+      {% if state_attr('climate.downstairs_trane_thermostat', 'target_temp_low') == None %}
         {{ state_attr('climate.downstairs_trane_thermostat', 'temperature') }}
       {% else %}
         {{ state_attr('climate.downstairs_trane_thermostat', 'target_temp_low') }}
@@ -222,7 +222,7 @@
     turn_on: []
     turn_off: []
     set_level: []
-- number:
-  - name: Family room TV volume
-    state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
-    set_value: []
+#- number:
+#  - name: Family room TV volume
+#    state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
+#    set_value: []

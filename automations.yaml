@@ -406,6 +406,11 @@
     state:
     - TV
   actions:
+  - action: media_player.media_pause
+    metadata: {}
+    target:
+      entity_id: media_player.ma_all_sonos
+    data: {}
   - action: media_player.turn_on
     metadata: {}
     target:
@@ -520,7 +525,7 @@
       skip_condition: true
   mode: single
 - id: '1788744201697'
-  alias: 'Screens: Raise back patio screens due to wind'
+  alias: Raise back patio screens due to wind
   description: ''
   triggers:
   - entity_id: sensor.ambient_wind_gust
@@ -532,7 +537,7 @@
     action: cover.open_cover
   mode: single
 - id: '1788744327330'
-  alias: 'Screens: Raise back patio screens at sunset'
+  alias: Raise back patio screens at sunset
   description: ''
   triggers:
   - entity_id: sun.sun
@@ -545,7 +550,7 @@
     action: cover.open_cover
   mode: single
 - id: '1788744438016'
-  alias: 'Screens: Lower east patio screen if the wind dies down'
+  alias: Lower east patio screen if the wind dies down
   description: ''
   triggers:
   - entity_id: sensor.peak_wind_gust
@@ -573,7 +578,7 @@
     action: cover.close_cover
   mode: single
 - id: '1788744454860'
-  alias: 'Screens: Lower east patio screen in the afternoon'
+  alias: Lower east patio screen in the afternoon
   description: ''
   triggers:
   - entity_id: sun.sun
@@ -620,7 +625,7 @@
     action: cover.close_cover
   mode: single
 - id: '1788744586113'
-  alias: 'Screens: Lower middle patio screen in the afternoon'
+  alias: Lower middle patio screen in the afternoon
   description: ''
   triggers:
   - entity_id: sun.sun
@@ -643,7 +648,7 @@
     action: cover.close_cover
   mode: single
 - id: '1788744602982'
-  alias: 'Screens: Lower west patio screen in the afternoon'
+  alias: Lower west patio screen in the afternoon
   description: ''
   triggers:
   - entity_id: sun.sun
@@ -666,7 +671,7 @@
     action: cover.close_cover
   mode: single
 - id: '1788744643798'
-  alias: 'Screens: Lower west patio screen if the wind dies down'
+  alias: Lower west patio screen if the wind dies down
   description: ''
   triggers:
   - entity_id: sensor.peak_wind_gust

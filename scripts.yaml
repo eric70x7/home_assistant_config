@@ -69,4 +69,4 @@ fire_tv_decoder_audio_handshake_reset:
     action: androidtv.adb_command
     enabled: false
   mode: single
-  icon: mdi:volume-restore
+  icon: mdi:undo
