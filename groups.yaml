@@ -10,7 +10,6 @@ all_the_lights:
     - light.family_room
     - light.front_outside
     - light.front_room_lamp
-    - light.family_room_floor_lamp
     - light.loft_floor_lamp
     - light.master_floor_lamp
     - light.stairs
@@ -23,7 +22,6 @@ ambient_lights:
   entities:
     - light.loft_floor_lamp
     - light.front_room_lamp
-    - light.family_room_floor_lamp
     
 front_lights:
   name: Front Yard Lights

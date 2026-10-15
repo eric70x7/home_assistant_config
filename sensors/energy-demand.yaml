@@ -122,18 +122,18 @@
       window_size: 01:00
       precision: 2
 
-#- platform: template
-#  sensors:
-#    1_hr_peak_time_demand:
-#      friendly_name: 1 Hr Peak Time Demand
-#      unit_of_measurement: 'kWh'
-#      icon_template: "mdi:flash"
-#      value_template: >
-#        {% if is_state("binary_sensor.is_peak_time", "on") %}
-#          {{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}
-#        {% else %}
-#          {{ 0 | float }}
-#        {% endif %}
+- platform: template
+  sensors:
+    1_hr_peak_time_demand:
+      friendly_name: 1 Hr Peak Time Demand
+      unit_of_measurement: 'kWh'
+      icon_template: "mdi:flash"
+      value_template: >
+        {% if is_state("binary_sensor.is_peak_time", "on") %}
+          {{ ((states('sensor.1_hr_peak_time_usage') | float)/1000) }}
+        {% else %}
+          {{ 0 | float }}
+        {% endif %}
 
 # 55 minute
 - platform: filter

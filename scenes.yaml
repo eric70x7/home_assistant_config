@@ -77,14 +77,6 @@
       friendly_name: TV
       supported_features: 32
       state: 'on'
-    light.family_room_floor_lamp:
-      supported_color_modes:
-      - onoff
-      color_mode:
-      icon: mdi:floor-lamp
-      friendly_name: TV
-      supported_features: 0
-      state: 'off'
     light.under_cabinets:
       supported_color_modes:
       - brightness
@@ -101,8 +93,6 @@
     light.breakfast_area:
       entity_only: true
     light.family_room:
-      entity_only: true
-    light.family_room_floor_lamp:
       entity_only: true
     light.under_cabinets:
       entity_only: true
@@ -136,14 +126,6 @@
       friendly_name: Table
       supported_features: 32
       state: 'on'
-    light.family_room_floor_lamp:
-      supported_color_modes:
-      - onoff
-      color_mode: onoff
-      icon: mdi:floor-lamp
-      friendly_name: TV
-      supported_features: 0
-      state: 'on'
     light.under_cabinets:
       supported_color_modes:
       - brightness
@@ -160,8 +142,6 @@
     light.family_room:
       entity_only: true
     light.breakfast_area:
-      entity_only: true
-    light.family_room_floor_lamp:
       entity_only: true
     light.under_cabinets:
       entity_only: true
