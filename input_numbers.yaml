@@ -54,41 +54,18 @@ precool_temp:
   max: 75
   step: 1
 
-#upstairs_setpoint:
-#  name: Saved US Setpoint
-#  unit_of_measurement: '°F'
-#  min: 65
-#  max: 85
-#  step: 1
-#downstairs_setpoint:
-#  name: Saved DS Setpoint
-#  unit_of_measurement: '°F'
-#  min: 65
-#  max: 85
-#  step: 1
-
-#predicted_demand_50:
-#  name: Predicted 1 hr demand based on 1 hour usage
-#  unit_of_measurement: 'kWH'
-#  min: 0
-#  max: 30
-#  step: 0.01
-#predicted_demand_30:
-#  name: Predicted 30 min demand based on 30 min usage
-#  unit_of_measurement: 'kWH'
-#  min: 0
-#  max: 30
-#  step: 0.01
 wind_threshold:
   name: Wind threshold
   unit_of_measurement: 'mph'
   min: 4
   max: 16
+
 hot_tub_run_temp:
   name: Hot tub run temp
   unit_of_measurement: '°F'
   min: 80
   max: 104
+
 hot_tub_rest_temp:
   name: Hot tub rest temp
   unit_of_measurement: '°F'

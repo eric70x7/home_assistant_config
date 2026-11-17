@@ -180,7 +180,12 @@
     - binary_sensor.front_door_button_pressed
     to:
     - 'on'
-  conditions: []
+  conditions:
+  - condition: timer.is_idle
+    target:
+      entity_id: timer.doorbell_debounce_timer
+    options:
+      for: 00:00:00
   actions:
   - action: media_player.volume_set
     metadata: {}
@@ -205,6 +210,11 @@
           browse_entity_id: media_player.unnamed_room_2
     target:
       entity_id: media_player.unnamed_room_2
+  - action: timer.start
+    metadata: {}
+    target:
+      entity_id: timer.doorbell_debounce_timer
+    data: {}
   mode: single
 - id: '1787243361567'
   alias: 'Music: Stop playing'
