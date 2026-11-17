@@ -22,7 +22,7 @@ ambient_lights:
   entities:
     - light.loft_floor_lamp
     - light.front_room_lamp
-    
+
 front_lights:
   name: Front Yard Lights
   entities:
