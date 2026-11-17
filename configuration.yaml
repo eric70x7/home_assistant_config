@@ -17,7 +17,7 @@ conversation:
 # Log levels
 logger:
   default: info
-    
+
 # Text to speech
 tts:
   - platform: google_translate
