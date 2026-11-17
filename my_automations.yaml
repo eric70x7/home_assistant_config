@@ -5,18 +5,18 @@
     minutes: /5
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        after: '16:04:00'
-        before: '18:59:00'
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          after: '16:04:00'
+          before: '18:59:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
     service: python_script.simple_load_control
     data_template:
@@ -30,16 +30,16 @@
     at: '14:30'
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
     service: python_script.set_temp
     data_template:
@@ -52,16 +52,16 @@
       at: '19:00'
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
     - service: python_script.set_temp
       data_template:
