@@ -5,7 +5,7 @@ zone.home:
 # friendlier names
 
 # Switches - moved to switches.yaml
-  
+
 # Ambient sensors
 
 # Indoor Temperatures
@@ -57,8 +57,8 @@ sensor.ambient_wind_gust:
   friendly_name: Backyard
   icon: mdi:weather-windy
 sensor.ambient_uv:
-      friendly_name: Backyard
-      icon: mdi:weather-sunny
+  friendly_name: Backyard
+  icon: mdi:weather-sunny
 
 # We don't have solar
 sensor.energy_production:
@@ -107,7 +107,7 @@ cover.east_patio_screen:
   device_class: shade
   state_color: false
 
-# zwave - 
+# zwave -
 # rename the entity_id from the UI in configuration->entities
 # then add other customizations here
 
@@ -141,7 +141,6 @@ cover.east_patio_screen:
 #switch.back_tree_lights:
 #  friendly_name: "Back Tree Lights"
 #  icon: mdi:lightbulb
-
 
 # Front yard lights
 #switch.front_lights:
