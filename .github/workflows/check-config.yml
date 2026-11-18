@@ -1,0 +1,27 @@
+name: HA Config Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check_config:
+    name: Validate config with hass --script check_config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate dummy secrets.yaml
+        run: |
+          chmod +x ./scripts/gen_dummy_secrets.sh
+          ./scripts/gen_dummy_secrets.sh > secrets.yaml
+
+      - name: Run check_config in official HA container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/home-assistant/home-assistant:stable
+          options: -v ${{ github.workspace }}:/config
+          run: |
+            hass --script check_config --config /config
