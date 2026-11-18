@@ -19,6 +19,7 @@ rules:
   document-start: disable
   comments: disable
   comments-indentation: disable
+  trailing-spaces: disable
   indentation:
     indent-sequences: consistent
   empty-values: disable
