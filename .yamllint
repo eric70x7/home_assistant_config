@@ -1,0 +1,24 @@
+# yamllint configuration for the Home Assistant config repo.
+# Home Assistant YAML is not typical application YAML:
+# - Jinja templates can run arbitrarily long on one line
+# - unquoted 'on'/'off' are meaningful states, not booleans
+# - config files do not start with '---'
+# So the default pedantic rules are relaxed here. Syntax errors,
+# tabs, duplicate keys, and broken indentation still fail the build.
+extends: default
+
+ignore: |
+  bak/
+  www/
+
+rules:
+  line-length:
+    max: 1000
+    level: warning
+  truthy: disable
+  document-start: disable
+  comments: disable
+  comments-indentation: disable
+  indentation:
+    indent-sequences: consistent
+  empty-values: disable
