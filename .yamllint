@@ -1,33 +1,25 @@
-# TEMPORARY baseline yamllint config for the Home Assistant config repo.
-#
-# Phase 1 (this PR): green baseline with ZERO changes to existing YAML.
-#   Enforced now: parse errors (always), duplicate keys, Unix line endings.
-#   Legacy files violate many style rules (mixed sequence indentation,
-#   trailing spaces, missing final newlines, excess blank lines at EOF),
-#   so all style rules are off until the cleanup PR lands.
-#
-# Phase 2 (cleanup PR): fix the style violations in the YAML files with
-#   whitespace/indentation-only diffs, then restore the full default rule
-#   set (indentation, trailing-spaces, new-line-at-end-of-file,
-#   empty-lines, colons, hyphens, etc.) so cosmetic issues are enforced
-#   permanently.
-#
-# NOTE: no `extends: default` on purpose. Without it, any rule not
-# explicitly listed below is disabled.
+# yamllint configuration for the Home Assistant config repo.
+# Home Assistant YAML is not typical application YAML:
+# - Jinja templates can run arbitrarily long on one line
+# - unquoted 'on'/'off' are meaningful states, not booleans
+# - config files do not start with '---'
+# So those pedantic rules are relaxed here. Everything else in the
+# default rule set is enforced: indentation, trailing spaces, missing
+# final newlines, excess blank lines, duplicate keys, tabs, etc.
+extends: default
 
 ignore: |
   bak/
   www/
 
 rules:
-  # Real correctness errors — these fail the build.
-  key-duplicates: enable
-
-  # Line endings must be Unix.
-  new-lines:
-    type: unix
-
-  # Long Jinja template lines are tolerated (informational only).
   line-length:
     max: 1000
     level: warning
+  truthy: disable
+  document-start: disable
+  comments: disable
+  comments-indentation: disable
+  indentation:
+    indent-sequences: consistent
+  empty-values: disable

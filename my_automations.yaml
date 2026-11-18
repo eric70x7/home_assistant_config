@@ -5,18 +5,18 @@
     minutes: /5
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        after: '16:04:00'
-        before: '18:59:00'
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          after: '16:04:00'
+          before: '18:59:00'
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
     service: python_script.simple_load_control
     data_template:
@@ -30,16 +30,16 @@
     at: '14:30'
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
     service: python_script.set_temp
     data_template:
@@ -48,27 +48,27 @@
 - id: end_peak_time
   alias: "Energy: end of peak time"
   trigger:
-  - platform: time
-    at: '19:00'
+    - platform: time
+      at: '19:00'
   condition:
     - and:
-      - condition: state
-        entity_id: input_boolean.summer_energy_mode
-        state: 'on'
-      - condition: time
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+        - condition: state
+          entity_id: input_boolean.summer_energy_mode
+          state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
   action:
-  - service: python_script.set_temp
-    data_template:
-      setpoint: '{{ states("input_number.target_temp") }}'
-  - service: notify.mobile_app_jonesey
-    data:
-      message: "Peak electric demand today was {{ states.input_number.daily_demand.state_with_unit }}"
+    - service: python_script.set_temp
+      data_template:
+        setpoint: '{{ states("input_number.target_temp") }}'
+    - service: notify.mobile_app_jonesey
+      data:
+        message: "Peak electric demand today was {{ states.input_number.daily_demand.state_with_unit }}"
   mode: single
 
 - id: toggle_power_meter_tariff
@@ -110,51 +110,51 @@
   condition:
     condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
-  - service: climate.set_temperature
-    entity_id: climate.hot_tub
-    data_template:
-      temperature: '{{ states("input_number.hot_tub_rest_temp") }}'
+    - service: climate.set_temperature
+      entity_id: climate.hot_tub
+      data_template:
+        temperature: '{{ states("input_number.hot_tub_rest_temp") }}'
 
 - id: end_peak_time_hot_tub
   alias: "Energy: set hot tub run temp at end of peak time"
   trigger:
-  - platform: time
-    at: '19:00'
+    - platform: time
+      at: '19:00'
   condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
-  - service: climate.set_temperature
-    entity_id: climate.hot_tub
-    data_template:
-      temperature: '{{ states("input_number.hot_tub_run_temp") }}'
+    - service: climate.set_temperature
+      entity_id: climate.hot_tub
+      data_template:
+        temperature: '{{ states("input_number.hot_tub_run_temp") }}'
 
 - id: update_daily_peak_demand
   alias: "Energy: update daily peak demand"
-  trigger: 
-  - platform: state
-    entity_id: sensor.1_hr_peak_time_demand
+  trigger:
+    - platform: state
+      entity_id: sensor.1_hr_peak_time_demand
   condition:
-  - condition: numeric_state
-    entity_id: sensor.1_hr_peak_time_demand
-    above: input_number.daily_demand
+    - condition: numeric_state
+      entity_id: sensor.1_hr_peak_time_demand
+      above: input_number.daily_demand
   action:
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.daily_demand
-    data:
-      value: '{{ states("sensor.1_hr_peak_time_demand") }}'
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.daily_demand
+      data:
+        value: '{{ states("sensor.1_hr_peak_time_demand") }}'
 
 - id: reset_daily_peak_demand
   alias: "Energy: reset daily peak demand before tomorrow"
@@ -162,11 +162,11 @@
     platform: time
     at: '23:59'
   action:
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.daily_demand
-    data:
-      value: 0.0
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.daily_demand
+      data:
+        value: 0.0
 
 #######################################################################
 # Scheduled climate settings
@@ -179,11 +179,11 @@
   condition:
     condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: python_script.set_temp
     data_template:
@@ -198,8 +198,8 @@
   condition:
     condition: time
     weekday:
-    - sat
-    - sun
+      - sat
+      - sun
   action:
     service: python_script.set_temp
     data_template:
@@ -209,8 +209,8 @@
 - id: set_daytime_temp
   alias: "Thermostat: Set daytime temperature"
   trigger:
-  - platform: time
-    at: '08:00'
+    - platform: time
+      at: '08:00'
   action:
     service: python_script.set_temp
     data_template:
@@ -219,8 +219,8 @@
 - id: set_sleep_temp
   alias: "Thermostat: Set bedtime temperature"
   trigger:
-  - platform: time
-    at: '20:30'
+    - platform: time
+      at: '20:30'
   action:
     service: python_script.set_temp
     data_template:
@@ -232,45 +232,45 @@
 - id: front_lights_on
   alias: "Lights: Front yard lights on at sunset"
   trigger:
-  - platform: sun
-    event: sunset
+    - platform: sun
+      event: sunset
   condition: []
   action:
-  - service: switch.turn_on
-    entity_id: switch.front_lights
+    - service: switch.turn_on
+      entity_id: switch.front_lights
   mode: single
 
 - id: front_lights_off_weekday
   alias: "Lights: Front yard lights off for the night weekday"
   trigger:
-  - platform: time
-    at: '22:00'
+    - platform: time
+      at: '22:00'
   condition:
-  - condition: time
-    weekday:
-    - sun
-    - mon
-    - tue
-    - wed
-    - thu
+    - condition: time
+      weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
   action:
-  - service: switch.turn_off
-    entity_id: switch.front_lights
+    - service: switch.turn_off
+      entity_id: switch.front_lights
   mode: single
 
 - id: front_lights_off_weekend
   alias: "Lights: Front yard lights off for the night weekend"
   trigger:
-  - platform: time
-    at: '23:59'
+    - platform: time
+      at: '23:59'
   condition:
-  - condition: time
-    weekday:
-    - fri
-    - sat
+    - condition: time
+      weekday:
+        - fri
+        - sat
   action:
-  - service: switch.turn_off
-    entity_id: switch.front_lights
+    - service: switch.turn_off
+      entity_id: switch.front_lights
   mode: single
 
 - id: ambient_lights_sunset
@@ -281,18 +281,18 @@
     offset: -00:20:00
   condition: []
   action:
-  - service: homeassistant.turn_on
-    entity_id: group.ambient_lights
+    - service: homeassistant.turn_on
+      entity_id: group.ambient_lights
 
 - id: ambient_lights_off
   alias: "Lights: Ambient lights off at night"
   trigger:
-  - at: '22:00'
-    platform: time
+    - at: '22:00'
+      platform: time
   condition: []
   action:
-  - entity_id: group.ambient_lights
-    service: homeassistant.turn_off
+    - entity_id: group.ambient_lights
+      service: homeassistant.turn_off
 
 - id: ambient_lights_morning_on
   alias: "Lights: Ambient lights on in the morning"
@@ -302,11 +302,11 @@
   condition:
     condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: homeassistant.turn_on
     entity_id: group.ambient_lights
@@ -319,11 +319,11 @@
   condition:
     condition: time
     weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
     service: homeassistant.turn_off
     entity_id: group.ambient_lights
@@ -403,31 +403,31 @@
 - id: reset_wind_watchdog
   alias: "Watchdog: Reset watchdog timer when wind changes"
   trigger:
-  - platform: state
-    entity_id: sensor.ambient_wind_speed
+    - platform: state
+      entity_id: sensor.ambient_wind_speed
   action:
-  - service: timer.start
-    data_template:
-      entity_id: timer.wind_watchdog
-      # Use a shorter timeout if the wind is non-zero
-      # Need to handle error case
-      duration: >
-        {% set w = states('sensor.ambient_wind_speed') | float(-1) %}
-        {% if w < 0.0 %}   00:01:00 {# error #}
-        {% elif w > 0.0 %} 00:10:00 {# timeout for non-zero wind speed #}
-        {% else %}         02:00:00 {# timeout for zero wind speed #}
-        {% endif %}
+    - service: timer.start
+      data_template:
+        entity_id: timer.wind_watchdog
+        # Use a shorter timeout if the wind is non-zero
+        # Need to handle error case
+        duration: >
+          {% set w = states('sensor.ambient_wind_speed') | float(-1) %}
+          {% if w < 0.0 %}   00:01:00 {# error #}
+          {% elif w > 0.0 %} 00:10:00 {# timeout for non-zero wind speed #}
+          {% else %}         02:00:00 {# timeout for zero wind speed #}
+          {% endif %}
   mode: single
 
 - id: reset_energy_watchdog
   alias: "Watchdog: Reset watchdog timer when energy consumption changes"
   trigger:
-  - platform: state
-    entity_id: sensor.energy_usage
+    - platform: state
+      entity_id: sensor.energy_usage
   action:
-  - service: timer.start
-    data_template:
-      entity_id: timer.energy_watchdog
+    - service: timer.start
+      data_template:
+        entity_id: timer.energy_watchdog
   mode: single
 
 #######################################################################
