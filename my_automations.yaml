@@ -341,7 +341,7 @@
     entity_id: switch.christmas_lights
 
 - id: christmas_lights_off_evening
-  alias: "Lights: Christmans yard lights off for the night"
+  alias: "Lights: Christmas yard lights off for the night"
   trigger:
     platform: time
     at: '23:00'
@@ -362,7 +362,7 @@
     entity_id: switch.christmas_lights
 
 - id: christmas_lights_off_morning
-  alias: "Lights: Christmans yard lights off in the morning"
+  alias: "Lights: Christmas yard lights off in the morning"
   trigger:
     platform: sun
     event: sunrise
@@ -498,14 +498,11 @@
 
 #######################################################################
 # Backups
-- alias: "Backups: Backup Home Assistant every night at 3 AM"
+- id: '1763443200000'
+  alias: "Backups: Backup Home Assistant every night at 3 AM"
   trigger:
     platform: time
     at: "03:00:00"
   action:
     alias: "Create backup now"
     service: hassio.backup_full
-
-
-
-
