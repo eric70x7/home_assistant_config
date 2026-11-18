@@ -1,67 +1,23 @@
-#homeassistant:
-#  # Name of the location where Home Assistant is running
-#  name: !secret home_name
-#
-#  # Location required to calculate the time the sun rises and sets
-#  latitude: !secret home_latitude
-#  longitude: !secret home_longitude
-
-#  # Impacts weather/sunrise data (altitude above sea level in meters)
-#  elevation: !secret home_elevation
-
-#  # metric for Metric, imperial for Imperial
-#  unit_system: us_customary
-
-#  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-#  time_zone: America/Phoenix
-#  country: US
-#  currency: USD
-
-#  # Customization file
-#  customize: !include customize.yaml
-
-#  auth_providers:
-#    - type: homeassistant
-#      trusted_networks:
-#        - 192.168.0.0/16      
-#
-#  external_url: https://eric70x7.duckdns.org
-
 # For doorbell live streaming
 ffmpeg:
 
 # Enable the default set of integrations:
 default_config:
-  
+
 # Activate the configuration editor
 config:
 
-# Use lovelace YAML mode
-#lovelace:
-#  mode: storage
-#  dashboards:
-#    lovelace-yaml:
-#      mode: yaml
-#      title: Jones
-#      icon: mdi:script
-#      show_in_sidebar: true
-#      filename: lovelace.yaml
 frontend:
-  extra_module_url: 
+  extra_module_url:
     - /local/card-mod.js
-  
+
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
 # Log levels
 logger:
   default: info
-  # logs:
-    # homeassistant.components.python_script: info
-    # pybalboa: debug
-    # homeassistant.components.balboa: debug
-    # custom_components.pyscript: debug
-    
+
 # Text to speech
 tts:
   - platform: google_translate
@@ -76,11 +32,6 @@ ifttt:
 
 # Alexa
 alexa:
-
-# Ambient weather
-# ambient_station:
-#   api_key: !secret ambient_api_key
-#   app_key: !secret ambient_app_key
 
 # Turn on system health monitor
 system_health:
@@ -121,8 +72,6 @@ recorder: !include recorder.yaml
 input_number: !include input_numbers.yaml
 input_boolean: !include input_booleans.yaml
 sensor: !include_dir_merge_list sensors/
-# binary_sensor: !include_dir_merge_list binary_sensors/
-# switch: !include switches.yaml
 group: !include groups.yaml
 automation ui: !include automations.yaml
 automation mine: !include my_automations.yaml
@@ -147,7 +96,7 @@ utility_meter:
     source: sensor.energy_usage
     name: Daily Energy Meter
     # cycle: daily
-    # Hack: cycle 1 min before midnight to 
+    # Hack: cycle 1 min before midnight to
     # keep the timestamp on the current day
     cron: "59 23 * * *"
     tariffs:

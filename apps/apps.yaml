@@ -1,11 +1,4 @@
----
-#hello_world:
-#  module: hello
-#  class: HelloWorld
-
-# climate_controller:
-#   module: climate_controller
-#   class: ClimateController
+# apps.yaml
 
 volume_controller:
   module: volume_controller
@@ -15,15 +8,15 @@ volume_controller:
   up_trigger: input_boolean.family_room_tv_volume_up
   down_trigger: input_boolean.family_room_tv_volume_down
   source_map:
-    media_player.xantech_dax88_front:  
+    media_player.xantech_dax88_front:
       source: Front
-      scale:  0.8
-    media_player.xantech_dax88_center: 
+      scale: 0.8
+    media_player.xantech_dax88_center:
       source: Center
       scale: 1.0
-    media_player.xantech_dax88_rear:   
+    media_player.xantech_dax88_rear:
       source: Rear
-      scale:  0.8  
+      scale: 0.8
   volume_limit: 0.75
 
 energy_controller:
@@ -51,18 +44,3 @@ kitchen_log_light:
 cooling_logger:
   module: cooling_logger
   class: CoolingLogger
-
-# doorbell_entity_listener:
-#   module: entity_listener
-#   class: EntityListener
-#   substr: "front_door"
-
-# doorbell:
-#  module: doorbell
-#  class: Doorbell
-#  doorbell: binary_sensor.front_door_button_pressed
-#  chime: media-source://media_source/local/trimmed_doorbell.wav
-#  speakers: 
-#    - media_player.big_sonos
-#    - media_player.little_sonos
-
