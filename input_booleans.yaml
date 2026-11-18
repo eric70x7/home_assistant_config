@@ -1,6 +1,3 @@
-#peak_time:
-#  name: Is it peak time?
-
 summer_energy_mode:
   name: Summer energy control
 

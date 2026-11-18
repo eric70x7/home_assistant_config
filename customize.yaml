@@ -3,9 +3,6 @@ zone.home:
   latitude: !secret home_latitude
 
 # friendlier names
-
-# Switches - moved to switches.yaml
-
 # Ambient sensors
 
 # Indoor Temperatures
@@ -75,9 +72,6 @@ sensor.yearly_production:
 # Pool
 light.pentair_fb_bb_80_pool_light:
   friendly_name: "Pool Light"
-#switch.pentair_fb_bb_80_pool_light:
-#  friendly_name: "Pool Lights"
-#  icon: mdi:lightbulb
 switch.pentair_fb_bb_80_water_feature:
   friendly_name: "Waterfalls"
   icon: mdi:waves
@@ -106,51 +100,3 @@ cover.east_patio_screen:
   friendly_name: "East"
   device_class: shade
   state_color: false
-
-# zwave -
-# rename the entity_id from the UI in configuration->entities
-# then add other customizations here
-
-# Switched to using UI for these:
-
-# Inside lights
-#switch.family_room_light:
-#  friendly_name: "TV"
-#  icon: mdi:floor-lamp
-#switch.front_room_light:
-#  friendly_name: "Front"
-#  icon: mdi:floor-lamp
-#switch.loft_light:
-#  friendly_name: "Loft"
-#  icon: mdi:floor-lamp
-#switch.stair_lights:
-#  friendly_name: "Stairs"
-#  icon: mdi:wall-sconce-flat
-#switch.breakfast_area_light:
-#  friendly_name: "Breakfast Area"
-#  icon: mdi:light-recessed
-#switch.kitchen_lights:
-#  friendly_name: "Kitchen"
-#  icon: mdi:light-recessed
-#switch.desk_lights:
-#  friendly_name: "Desk"
-#  icon: mdi:lamp
-#switch.master_light:
-#  friendly_name: "Master"
-#  icon: mdi:floor-lamp
-#switch.back_tree_lights:
-#  friendly_name: "Back Tree Lights"
-#  icon: mdi:lightbulb
-
-# Front yard lights
-#switch.front_lights:
-#  friendly_name: "Front"
-#  icon: mdi:coach-lamp
-#switch.christmas_lights:
-#  friendly_name: "Christmas"
-#  icon: mdi:lightbulb
-
-# Back yard lights
-#switch.string_lights:
-#  friendly_name: "String"
-#  icon: mdi:string-lights

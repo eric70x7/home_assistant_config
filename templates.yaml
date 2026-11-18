@@ -1,6 +1,6 @@
 # template:
 - sensor:
-  # Upstairs climate
+# Upstairs climate
   - name: Upstairs Trane Temperature
     unit_of_measurement: '°F'
     state: >
@@ -222,7 +222,3 @@
     turn_on: []
     turn_off: []
     set_level: []
-#- number:
-#  - name: Family room TV volume
-#    state: "{{ (states('input_number.family_room_tv_volume') | float) | round(2) }}"
-#    set_value: []
