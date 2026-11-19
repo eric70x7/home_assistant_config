@@ -75,28 +75,31 @@
   - name: Rear Volume
     state: >
         {{ state_attr('media_player.xantech_dax88_rear', 'volume_level') | float(0) | round(2) }}
+  # Demand sensors: these are time-weighted averages of instantaneous power (W),
+  # so /1000 yields average kW, not kWh. Units corrected kWh -> kW (no window-hours
+  # division needed; time_simple_moving_average already accounts for the window).
   - name: 1 Hr Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ ((states('sensor.1_hr_usage') | float)/1000) | round(3) }}"
   - name: 50 Min Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ (states('sensor.50_min_usage') | float)/1000 }}"
   - name: 20 Min Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ (states('sensor.medium_usage') | float)/1000 }}"
   - name: 25 Min Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ (states('sensor.usage_25') | float)/1000 }}"
   - name: 40 Min Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ (states('sensor.medium_long_usage') | float)/1000 }}"
   - name: 10 Min Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: "{{ (states('sensor.fast_usage') | float)/1000 }}"
   - name: "Peak Time Usage"
@@ -108,7 +111,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 1 Hr Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -117,7 +120,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 55 Min Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -126,7 +129,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 50 Min Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -135,7 +138,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 25 Min Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -144,7 +147,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 15 Min Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -153,7 +156,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: 5 Min Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -162,7 +165,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: Medium Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -171,7 +174,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: Medium Long Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
@@ -180,7 +183,7 @@
         {{ 0 | float }}
       {% endif %}
   - name: Fast Peak Time Demand
-    unit_of_measurement: 'kWh'
+    unit_of_measurement: 'kW'
     icon: "mdi:flash"
     state: >
       {% if is_state("binary_sensor.is_peak_time", "on") %}
